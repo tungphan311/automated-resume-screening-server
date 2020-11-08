@@ -1,13 +1,13 @@
 import datetime
 
 from app.main import db
-from app.main.model.user import User
+from app.main.model.user_model import UserModel
 
 
-def save_new_user(data):
-    user = User.query.filter_by(email=data['email']).first()
+def insert_new_user(data):
+    user = UserModel.query.filter_by(email=data['email']).first()
     if not user:
-        new_user = User(
+        new_user = UserModel(
             # public_id=str(uuid.uuid4()),
             email=data['email'],
             username=data['username'],
@@ -29,11 +29,15 @@ def save_new_user(data):
 
 
 def get_all_users():
-    return User.query.all()
+    return UserModel.query.all()
 
 
-def get_a_user(id):
-    return User.query.filter_by(id=id).first()
+def get_a_user_by_email(email):
+    return UserModel.query.filter_by(email=email).first()
+
+
+def get_a_user_by_id(id):
+    return UserModel.query.filter_by(id=id).first()
 
 
 def save_changes(data):
