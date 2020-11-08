@@ -6,13 +6,15 @@ from flask_script import Manager
 
 from app import blueprint
 from app.main import create_app, db
-from app.main.model import user
+from app.main.model import user_model
+from flask_jwt_extended import JWTManager
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
 app.register_blueprint(blueprint)
-
+app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 app.app_context().push()
 
+jwt = JWTManager(app)
 manager = Manager(app)
 
 migrate = Migrate(app, db)
