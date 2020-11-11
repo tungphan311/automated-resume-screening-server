@@ -19,6 +19,10 @@ migrate = Migrate(app, db)
 
 manager.add_command('db', MigrateCommand)
 
+@app.route("/")
+def index():
+    return app.send_static_file('index.html')
+
 
 @manager.command
 def run():
