@@ -12,6 +12,7 @@ from flask_jwt_extended import JWTManager
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
 app.register_blueprint(blueprint)
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+app.config['PROPAGATE_EXCEPTIONS'] = True
 app.app_context().push()
 
 jwt = JWTManager(app)
