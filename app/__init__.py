@@ -10,4 +10,4 @@ api = Api(blueprint,
           version='1.0'
           )
 
-api.add_namespace(user_ns, path='/api/user')
+api.add_namespace(user_ns, path='/user')
