@@ -13,6 +13,8 @@ class UserModel(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
     access_token = db.Column(db.String(512), nullable=True)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed_on = db.Column(db.DateTime, nullable=True)
 
     @property
     def password(self):

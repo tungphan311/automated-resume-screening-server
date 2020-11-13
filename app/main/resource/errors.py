@@ -11,4 +11,4 @@ class EmailAlreadyExistsError(Exception):
 
 
 class UnauthorizedError(Exception):
-    message = "vãi"
+    pass

@@ -10,7 +10,7 @@ class UserDto:
         'password': fields.String(required=True, description='user password'),
         # 'public_id': fields.String(description='user Identifier')
     })
-    user_login = api.model('user', {
+    user_login = api.model('user_login', {
         'email': fields.String(required=True, description='user email address'),
         'password': fields.String(required=True, description='user password'),
         # 'public_id': fields.String(description='user Identifier')
