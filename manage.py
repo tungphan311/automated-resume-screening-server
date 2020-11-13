@@ -19,10 +19,18 @@ migrate = Migrate(app, db)
 
 manager.add_command('db', MigrateCommand)
 
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
+
 
 @manager.command
 def run():
-    app.run()
+    app.run(debug=True)
 
 
 @manager.command

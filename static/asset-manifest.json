@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9aa66012.chunk.css",
+    "main.js": "/static/js/main.55db57cc.chunk.js",
+    "main.js.map": "/static/js/main.55db57cc.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ceb30c6e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ceb30c6e.js.map",
+    "static/css/2.0eb9423d.chunk.css": "/static/css/2.0eb9423d.chunk.css",
+    "static/js/2.43ff9214.chunk.js": "/static/js/2.43ff9214.chunk.js",
+    "static/js/2.43ff9214.chunk.js.map": "/static/js/2.43ff9214.chunk.js.map",
+    "static/js/3.e0cd6e9e.chunk.js": "/static/js/3.e0cd6e9e.chunk.js",
+    "static/js/3.e0cd6e9e.chunk.js.map": "/static/js/3.e0cd6e9e.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0eb9423d.chunk.css.map": "/static/css/2.0eb9423d.chunk.css.map",
+    "static/css/main.9aa66012.chunk.css.map": "/static/css/main.9aa66012.chunk.css.map",
+    "static/js/2.43ff9214.chunk.js.LICENSE.txt": "/static/js/2.43ff9214.chunk.js.LICENSE.txt",
+    "static/media/Toaster.scss": "/static/media/Success.c183d98a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ceb30c6e.js",
+    "static/css/2.0eb9423d.chunk.css",
+    "static/js/2.43ff9214.chunk.js",
+    "static/css/main.9aa66012.chunk.css",
+    "static/js/main.55db57cc.chunk.js"
+  ]
+}
