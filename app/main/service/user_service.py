@@ -10,6 +10,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_jwt_extended.view_decorators import _decode_jwt_from_request
 from flask_jwt_extended.exceptions import NoAuthorizationError
 from flask_jwt_extended import decode_token
+from flask_jwt_extended import (create_access_token, create_refresh_token,
+                                jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
 
 def insert_new_user(data):
@@ -20,6 +22,7 @@ def insert_new_user(data):
             email=data['email'],
             username=data['username'],
             password=data['password'],
+            access_token=create_token(data['email'], 1),
             registered_on=datetime.datetime.utcnow()
         )
         save_changes(new_user)
@@ -59,6 +62,7 @@ def save_changes(data):
     db.session.add(data)
     db.session.commit()
 
+
 def set_token(email, token):
     user = get_a_user_by_email(email)
     user.access_token = token
@@ -66,15 +70,26 @@ def set_token(email, token):
     db.session.commit()
 
 
+def verify_account(email):
+    user = get_a_user_by_email(email)
+    user.confirmed = True
+    user.confirmed_on = datetime.datetime.utcnow()
+    db.session.add(user)
+    db.session.commit()
+
+
+def create_token(email, day=7):
+    expires = datetime.timedelta(day)
+    return create_access_token(email, expires_delta=expires)
+
+
 def custom_jwt_required(view_function):
-    @wraps(view_function)
+    @ wraps(view_function)
     def wrapper(*args, **kwargs):
         try:
             jwt_data = decode_token(request.headers['token'])
         except Exception:
             jwt_data = None
-
-        print(jwt_data)
 
         if jwt_data and ('identity' in jwt_data):
             if check_token(jwt_data['identity'], request.headers['token'] or None) and datetime.datetime.now().timestamp() < jwt_data['exp']:
