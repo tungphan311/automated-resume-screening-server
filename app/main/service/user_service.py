@@ -1,3 +1,4 @@
+from werkzeug.exceptions import ExpectationFailed
 from app.main.resource.errors import UnauthorizedError
 import datetime
 from functools import wraps
@@ -45,6 +46,10 @@ def get_all_users():
 
 def get_a_user_by_email(email):
     return UserModel.query.filter_by(email=email).first()
+
+
+def get_a_user_by_sername(username):
+    return UserModel.query.filter_by(username=username).first()
 
 
 def get_a_user_by_id(id):

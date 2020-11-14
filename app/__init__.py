@@ -4,12 +4,12 @@ from datetime import datetime
 from flask.globals import request
 from flask_restx import Api
 from flask import Blueprint
-from flask_restx import Api
+from flask_mail import Message
 
-from .main.controller.user_controller import api as user_ns
+from .main.controller.user_controller import UserList, UserVerify, api as user_ns
 from app.main.resource.errors import UnauthorizedError
 
-blueprint = Blueprint('api', __name__, url_prefix="/api")
+blueprint = Blueprint('api', __name__, url_prefix="/api", template_folder='templates')
 
 api = Api(blueprint,
           title='API DOCUMENT FOR AUTOMATED RESUME SCREENING',
