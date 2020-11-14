@@ -7,8 +7,26 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
+    #main
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
+    SSL_DISABLE = False
     DEBUG = False
+
+    # mail settings
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+
+    # # gmail authentication
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME', 'automated.resume.screening@gmail.com')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD', 'khoaluan')
+
+    # mail accounts
+    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
+    FLASKY_MAIL_SENDER = 'Flasky Admin automated.resume.screening@gmail.com'
+    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER','automated.resume.screening@gmail.com')
 
 
 class DevelopmentConfig(Config):

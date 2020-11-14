@@ -4,11 +4,12 @@ from datetime import datetime
 from flask.globals import request
 from flask_restx import Api
 from flask import Blueprint
+from flask_mail import Message
 
-from .main.controller.user_controller import api as user_ns
+from .main.controller.user_controller import UserList, UserVerify, api as user_ns
 from app.main.resource.errors import UnauthorizedError
 
-blueprint = Blueprint('api', __name__)
+blueprint = Blueprint('api', __name__,template_folder='templates')
 
 api = Api(blueprint,
           title='FLASK RESTX API BOILER-PLATE WITH JWT',
@@ -17,8 +18,6 @@ api = Api(blueprint,
           )
 
 api.add_namespace(user_ns, path='/api/user')
-
-
 
 # config error message
 @api.errorhandler(UnauthorizedError)

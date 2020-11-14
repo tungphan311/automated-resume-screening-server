@@ -1,5 +1,8 @@
+import pymysql
+from app.main import send_email
 import datetime
-from flask import request, jsonify
+
+from flask import request, jsonify, url_for, render_template
 from flask.wrappers import Response
 from flask_restx import Resource
 
@@ -8,7 +11,8 @@ from flask_jwt_extended import (
     jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt, decode_token)
 from app.main.model.user_model import UserModel
 from ..util.dto import UserDto
-from ..service.user_service import custom_jwt_required, insert_new_user, get_all_users, get_a_user_by_id, get_a_user_by_email, save_changes, set_token, create_token, verify_account
+from ..service.user_service import custom_jwt_required, get_a_user_by_sername, insert_new_user, get_all_users, get_a_user_by_id, get_a_user_by_email, save_changes, set_token, create_token, verify_account
+
 
 api = UserDto.api
 _user = UserDto.user
@@ -30,14 +34,32 @@ class UserList(Resource):
         '''register a new User '''
         data = register_parser.parse_args()
         user = get_a_user_by_email(data.email)
+
+        #if user with email not exist
         if not user:
+            
+            #if user with username not exist
+            username = get_a_user_by_sername(data.username)
+            if username:
+                return {
+                        'status': 'failure',
+                        'message': 'Username actually exists. Please choose another username'
+                    }, 409
+
             try:
                 # insert account to db
                 insert_new_user(data)
 
                 # if account insert successfully
-                if get_a_user_by_email(data.email):
+                user_inserted = get_a_user_by_email(data.email)
+                if user_inserted:
+
                     # send email here
+                    confirm_url = url_for('api.User_user_verify',token=user_inserted.access_token, _external=True)
+                    html = render_template('email.html', confirm_url = confirm_url)
+                    subject = "Please confirm your email"
+                    send_email(data.email, subject, html)
+
                     return {
                         'status': 'success',
                         'message': 'Successfully registered. Please check your email to Verify account.'
@@ -46,11 +68,12 @@ class UserList(Resource):
                     return {
                         'status': 'failure',
                         'message': 'Can not create this user with email: '+data.email,
-                    }, 409
-            except Exception:
+                    }, 409                
+            except Exception as e:
+                print(e.args)
                 return {
                     'status': 'failure',
-                    'message': 'Can not create this user with email: '+data.email,
+                    'message': 'Can not create this user with email: '+data.username,
                 }, 409
         else:
             # if exist account and verified
@@ -151,7 +174,7 @@ class UserLogin(Resource):
             if not user:
                 return {
                     'status': 'failure',
-                    'message': 'User {} doesn\'t exist'.format(data.username)
+                    'message': 'User doesn\'t exist'
                 }, 404
 
             # check password
@@ -190,7 +213,7 @@ class UserLogin(Resource):
                     'status': 'failure',
                     'message': 'Email or password invalid'
                 }, 401
-        except Exception as e:
+        except Exception:
             return{
                 'status': 'failure',
                 'message': 'Try again'
