@@ -1,13 +1,15 @@
-from os import error
 from datetime import datetime
+from os import error
 
-from flask.globals import request
-from flask_restx import Api
 from flask import Blueprint
+from flask.globals import request
 from flask_mail import Message
+from flask_restx import Api
 
-from .main.controller.user_controller import UserList, UserVerify, api as user_ns
 from app.main.resource.errors import UnauthorizedError
+
+from .main.controller.user_controller import UserList, UserVerify
+from .main.controller.user_controller import api as user_ns
 
 blueprint = Blueprint('api', __name__, url_prefix="/api", template_folder='templates')
 
