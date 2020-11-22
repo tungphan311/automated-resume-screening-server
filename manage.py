@@ -1,6 +1,7 @@
 import os
 import unittest
 
+from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail, Message
 from flask_migrate import Migrate, MigrateCommand
@@ -9,7 +10,6 @@ from flask_script import Manager
 from app import blueprint
 from app.main import create_app, db
 from app.main.model import user_model
-
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
 app.register_blueprint(blueprint)
@@ -22,6 +22,8 @@ jwt = JWTManager(app)
 manager = Manager(app)
 migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
+CORS(app, resources={r"/api/*": { "origins": "http://localhost:3000" }})
+
 
 @app.route('/')
 def index():
