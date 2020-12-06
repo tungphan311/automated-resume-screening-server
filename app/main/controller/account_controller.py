@@ -1,3 +1,4 @@
+from sys import stdout
 import pymysql
 from app.main import send_email
 import datetime
@@ -9,71 +10,78 @@ from flask_restx import Resource
 from app.main.resource.parser import register_parser, login_parser
 from flask_jwt_extended import (
     jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt, decode_token)
-from app.main.model.user_model import UserModel
-from ..util.dto import UserDto
-from ..service.user_service import custom_jwt_required, get_a_user_by_sername, insert_new_user, get_all_users, get_a_user_by_id, get_a_user_by_email, save_changes, set_token, create_token, verify_account
+from ..util.dto import AccountDto,CandidateDto
+from ..service.account_service import custom_jwt_required, delete_a_account_by_email, get_a_user_by_sername, get_all_users, get_a_user_by_id, get_a_user_by_email, save_changes, set_token, create_token, verify_account
+from app.main.service.recruiter_service import insert_new_user_recruiter
+from app.main.service.candidate_service import insert_new_user_candidate
+from app.main.model.candidate_model import CandidateModel
 
-
-api = UserDto.api
-_user = UserDto.user
-_user_login = UserDto.user_login
+api = AccountDto.api
+_candidate = CandidateDto.api
+_account = AccountDto.account
+_user_login = AccountDto.account_login
 
 
 @api.route('/register')
 class UserList(Resource):
-    @api.doc('get list user')
-    @api.marshal_list_with(_user, envelope='data')
-    def get(self):
-        '''List all registered users'''
-        return get_all_users()
+    #@api.doc('get list user')
+    # @api.marshal_list_with(_user, envelope='data')
+    # def get(self):
+    #     '''List all registered users'''
+    #     return get_all_users()
 
-    @api.response(201, 'User register successfully.')
+    @api.response(200, 'User register successfully.')
     @api.doc('register a new user')
-    @api.expect(_user, validate=True)
+    @api.expect(_account, validate=True)
     def post(self):
         '''register a new User '''
-        data = register_parser.parse_args()
-        user = get_a_user_by_email(data.email)
+        data = request.json
+        user = get_a_user_by_email(data['email'])
 
-        #if user with email not exist
+        # if user with email not exist
         if not user:
-            
-            #if user with username not exist
-            username = get_a_user_by_sername(data.username)
-            if username:
-                return {
+            try:
+                if data["type"] == 0 and data["candidate"]: #type 0 is candidate
+                    insert_new_user_candidate(data,data["candidate"])
+                elif data["type"] == 1 and data["company"]: #type 1 is candidate
+                    insert_new_user_recruiter(data,data["company"])
+                else:
+                    return {
                         'status': 'failure',
-                        'message': 'Username actually exists. Please choose another username'
+                        'message': 'Registation failed. Unknown type register.',
                     }, 409
 
-            try:
-                # insert account to db
-                insert_new_user(data)
-
                 # if account insert successfully
-                user_inserted = get_a_user_by_email(data.email)
-                if user_inserted:
+                user_inserted = get_a_user_by_email(data['email'])
 
+                if user_inserted:
                     # send email here
-                    confirm_url = url_for('api.User_user_verify',token=user_inserted.access_token, _external=True)
-                    html = render_template('email.html', confirm_url = confirm_url)
-                    subject = "Please confirm your email"
-                    send_email(data.email, subject, html)
+                    try:
+                        confirm_url = url_for('api.Account_user_verify',token=user_inserted.access_token, _external=True)
+                        html = render_template('email.html', confirm_url = confirm_url)
+                        subject = "Please confirm your email"
+                        send_email(data['email'], subject, html)
+                    except Exception as e: # delete account if send email error
+                        delete_a_account_by_email(data['email'])
+                        return {
+                            'status': 'failure',
+                            'message': 'Registation failed. Email not working.'
+                        }, 501
 
                     return {
                         'status': 'success',
                         'message': 'Successfully registered. Please check your email to Verify account.'
                     }, 200
-                else:
+                else:                    
                     return {
                         'status': 'failure',
-                        'message': 'Can not create this user with email: '+data.email,
-                    }, 409                
+                        'message': 'Registation failed. Server occur'
+                    }, 409
             except Exception as e:
                 print(e.args)
                 return {
                     'status': 'failure',
-                    'message': 'Can not create this user with email: '+data.username,
+                    'message': 'Registation failed. Server occur'
                 }, 409
         else:
             # if exist account and verified
@@ -88,7 +96,16 @@ class UserList(Resource):
                 if datetime.datetime.now().timestamp() > jwt_data['exp']:
                     access_token = create_token(email=user.email)
                     set_token(user.email, access_token)
-                    # send email here
+                    try:
+                        confirm_url = url_for('api.Account_user_verify',token=user.access_token, _external=True)
+                        html = render_template('email.html', confirm_url = confirm_url)
+                        subject = "Please confirm your email"
+                        send_email(data['email'], subject, html)
+                    except Exception as e: # delete account if send email error
+                        return {
+                            'status': 'failure',
+                            'message': 'Resend email failure. Email not working.'
+                        }, 501
                 return {
                     'status': 'failure',
                     'message': 'The account has been created but not verified, please check the email.',
@@ -144,7 +161,6 @@ class UserVerify(Resource):
 @ api.response(404, 'User not found.')
 class UserFind(Resource):
     @ api.doc('get a user')
-    @ api.marshal_with(_user)
     @custom_jwt_required
     def get(self, id):
         '''get a user given its identifier'''

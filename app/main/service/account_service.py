@@ -1,3 +1,5 @@
+from app.main.model.candidate_model import CandidateModel
+from app.main.util.dto import CandidateDto
 from werkzeug.exceptions import ExpectationFailed
 from app.main.resource.errors import UnauthorizedError
 import datetime
@@ -6,7 +8,7 @@ from flask import jsonify, abort
 from flask.globals import request
 
 from app.main import db
-from app.main.model.user_model import UserModel
+from app.main.model.account_model import AccountModel
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_jwt_extended.view_decorators import _decode_jwt_from_request
 from flask_jwt_extended.exceptions import NoAuthorizationError
@@ -15,18 +17,27 @@ from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
 
-def insert_new_user(data):
-    user = UserModel.query.filter_by(email=data['email']).first()
+def insert_new_user(account, candidate):
+    user = AccountModel.query.filter_by(email=account['email']).first()
     if not user:
-        new_user = UserModel(
+        new_user = AccountModel(
             # public_id=str(uuid.uuid4()),
-            email=data['email'],
-            username=data['username'],
-            password=data['password'],
-            access_token=create_token(data['email'], 1),
+            email=account['email'],
+            password=account['password'],
+            phone = account['phone'],
+            full_name = account['full_name'],
+            gender = account['gender'],
+            access_token=create_token(account['email'], 1),
             registered_on=datetime.datetime.utcnow()
         )
-        save_changes(new_user)
+        candidate = CandidateModel(
+            date_of_birth = candidate['date_of_birth'],
+            account = new_user
+        )
+        db.session.add(new_user)
+        db.session.add(candidate)
+        db.session.commit()
+        # save_changes(new_user)
         response_object = {
             'status': 'success',
             'message': 'Successfully registered.'
@@ -39,25 +50,27 @@ def insert_new_user(data):
         }
         return response_object, 409
 
+def delete_a_account_by_email(email):
+    return AccountModel.query.filter_by(email=email).first()
 
 def get_all_users():
-    return UserModel.query.all()
+    return AccountModel.query.all()
 
 
 def get_a_user_by_email(email):
-    return UserModel.query.filter_by(email=email).first()
+    return AccountModel.query.filter_by(email=email).first()
 
 
 def get_a_user_by_sername(username):
-    return UserModel.query.filter_by(username=username).first()
+    return AccountModel.query.filter_by(username=username).first()
 
 
 def get_a_user_by_id(id):
-    return UserModel.query.filter_by(id=id).first()
+    return AccountModel.query.filter_by(id=id).first()
 
 
 def check_token(email, token):
-    if(UserModel.query.filter_by(email=email, access_token=token).first()):
+    if(AccountModel.query.filter_by(email=email, access_token=token).first()):
         return True
     else:
         return False
