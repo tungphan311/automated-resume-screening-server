@@ -9,10 +9,11 @@ from flask_restx import Api
 
 from app.main.resource.errors import UnauthorizedError
 
-from .main.controller.email_controller import api as company_ns
+from .main.controller.company_controller import api as company_ns
 from .main.controller.account_controller import api as user_ns
 
 blueprint = Blueprint('api', __name__, url_prefix="/api", template_folder='templates')
+
 
 api = Api(blueprint,
           title='API DOCUMENT FOR AUTOMATED RESUME SCREENING',
@@ -20,7 +21,7 @@ api = Api(blueprint,
           )
 
 api.add_namespace(user_ns, path='/user')
-# api.add_namespace(company_ns, path='/company')
+api.add_namespace(company_ns, path='/company')
 
 @api.errorhandler(UnauthorizedError)
 def handle_custom_exception(error):

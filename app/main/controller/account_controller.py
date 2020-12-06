@@ -1,23 +1,21 @@
 from sys import stdout
 import pymysql
-from app.main import send_email
 import datetime
 
 from flask import request, jsonify, url_for, render_template
 from flask.wrappers import Response
 from flask_restx import Resource
 
+from app.main import insert_token_to_backlist, send_email
 from app.main.resource.parser import register_parser, login_parser
 from flask_jwt_extended import (
     jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt, decode_token)
 from ..util.dto import AccountDto,CandidateDto
-from ..service.account_service import custom_jwt_required, delete_a_account_by_email, get_a_account_by_sername, get_all_accounts, get_all_accounts, get_a_account_by_id, get_a_account_by_email, save_changes, set_token, create_token, verify_account
+from ..service.account_service import delete_a_account_by_email, get_a_account_by_sername, get_all_accounts, get_all_accounts, get_a_account_by_id, get_a_account_by_email, save_changes, set_token, create_token, verify_account
 from app.main.service.recruiter_service import insert_new_account_recruiter
 from app.main.service.candidate_service import insert_new_account_candidate
-from app.main.model.candidate_model import CandidateModel
 
 api = AccountDto.api
-_candidate = CandidateDto.api
 _account = AccountDto.account
 _account_login = AccountDto.account_login
 
@@ -40,16 +38,15 @@ class AccountList(Resource):
         # if account with email not exist
         if not account:
             try:
-                if data["type"] == 0 and data["candidate"]: #type 0 is candidate
+                if data["type"] == True and data["candidate"]: #type 0 is candidate
                     insert_new_account_candidate(data,data["candidate"])
-                elif data["type"] == 1 and data["company"]: #type 1 is candidate
+                elif data["type"] == False and data["company"]: #type 1 is candidate
                     insert_new_account_recruiter(data,data["company"])
                 else:
                     return {
                         'status': 'failure',
                         'message': 'Registation failed. Unknown type register.',
                     }, 409
-
                 # if account insert successfully
                 account_inserted = get_a_account_by_email(data['email'])
 
@@ -129,13 +126,15 @@ class AccountVerify(Resource):
                     if account.confirmed:
                         return{
                             'status': 'success',
-                            'message': 'Account already confirmed. Please login.'
+                            'message': 'Account already confirmed. Please login.',
+                            'auth_token': account.access_token
                         }, 200
                     else:
                         verify_account(account.email)
                         return{
                             'status': 'success',
-                            'message': 'You have confirmed your account. Thanks!'
+                            'message': 'You have confirmed your account. Thanks!',
+                
                         }, 200
                 else:
                     return {
@@ -159,7 +158,7 @@ class AccountVerify(Resource):
 @ api.response(404, 'Account not found.')
 class AccountFind(Resource):
     @ api.doc('get a Account')
-    @custom_jwt_required
+    @jwt_required
     def get(self, id):
         '''get a Account given its identifier'''
         account = get_a_account_by_id(id)
@@ -171,7 +170,7 @@ class AccountFind(Resource):
 
 @ api.route('/login')
 @ api.response(404, 'account not found.')
-@ api.expect(_account_login)
+@api.expect(_account_login, validate=True)
 class AccountLogin(Resource):
     @ api.doc('Login with email, password')
     def post(self):
@@ -188,7 +187,7 @@ class AccountLogin(Resource):
             if not account:
                 return {
                     'status': 'failure',
-                    'message': 'account doesn\'t exist'
+                    'message': 'Wrong email or password'
                 }, 404
 
             # check password
@@ -217,7 +216,8 @@ class AccountLogin(Resource):
                         'access_token': access_token,
                         'message': 'Login successfully with email: '+data.email,
                     }, 200
-                except Exception:
+                except Exception as e:
+                    print(e.args)
                     return{
                         'status': 'failure',
                         'message': 'Try again'
@@ -227,8 +227,19 @@ class AccountLogin(Resource):
                     'status': 'failure',
                     'message': 'Email or password invalid'
                 }, 401
-        except Exception:
+        except Exception as e:
+            print(e.args)
             return{
                 'status': 'failure',
                 'message': 'Try again'
             }, 500
+
+@ api.route('/logout')
+@ api.expect(_account_login)
+class AccountLogout(Resource):
+    @ api.doc('Logout this session')
+    @jwt_required
+    def delete(self):
+        jti = get_raw_jwt()['jti']
+        insert_token_to_backlist(jti)
+        return jsonify({"msg": "Successfully logged out"}), 200

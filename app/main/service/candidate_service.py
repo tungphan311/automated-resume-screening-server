@@ -16,7 +16,7 @@ def insert_new_account_candidate(account, candidate):
         phone = account['phone'],
         full_name = account['full_name'],
         gender = account['gender'],
-        access_token=create_token(account['email'], 1),
+        access_token=create_token(account['email'], 1/24),
         registered_on=datetime.datetime.utcnow()
     )
     new_candidate = CandidateModel(

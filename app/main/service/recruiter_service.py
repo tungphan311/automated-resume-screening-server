@@ -12,7 +12,7 @@ def get_all_recruiter():
 
 
 def insert_new_account_recruiter(account, company):
-    instance_company = get_a_company_by_name(company['name'])
+    instance_company = get_a_company_by_name(company['companyName'])
 
     if not instance_company:
         print("chưa có company")
@@ -22,17 +22,17 @@ def insert_new_account_recruiter(account, company):
             phone = account['phone'],
             full_name = account['full_name'],
             gender = account['gender'],
-            access_token=create_token(account['email'], 1),
+            access_token=create_token(account['email'], 1/24),
             registered_on=datetime.datetime.utcnow()
         )
         new_company = CompanyModel(
-            name = company['name'],
-            location = company['location'],
-            phone = company['phone'],
-            email = company['email'],
-            logo = company['logo'],
-            website = company['website'],
-            description = company['description'],
+            name = company['companyName'],
+            location = company['companyLocation'],
+            phone = company['companyPhone'],
+            email = company['companyEmail'],
+            logo = company['companyLogo'],
+            website = company['companyWebsite'],
+            description = company['companyDescription'],
         )
         new_recruiter = RecruiterModel(
             account=new_account,
@@ -49,7 +49,7 @@ def insert_new_account_recruiter(account, company):
             phone = account['phone'],
             full_name = account['full_name'],
             gender = account['gender'],
-            access_token=create_token(account['email'], 1),
+            access_token=create_token(account['email'], 1/24),
             registered_on=datetime.datetime.utcnow()
         )
         new_recruiter = RecruiterModel(

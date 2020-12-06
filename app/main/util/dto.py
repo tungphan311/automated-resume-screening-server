@@ -26,17 +26,17 @@ class AccountDto:
     api = Namespace(
         'Account', description='account related operations')
 
-    company = api.model('company', {
-        'name': fields.String(required=True, description='user email address'),
-        'location': fields.String(required=True, description='user email address'),
-        'phone': fields.String(required=True, description='user email address'),
-        'email': fields.String(required=True, description='user email address'),
-        'logo': fields.String(required=True, description='user email address'),
-        'website': fields.String(required=True, description='user email address'),
-        'description': fields.String(required=True, description='user email address'),
+    company = api.model('account_company', {
+        'companyName': fields.String(required=True, description='user email address'),
+        'companyLocation': fields.String(required=True, description='user email address'),
+        'companyPhone': fields.String(required=True, description='user email address'),
+        'companyEmail': fields.String(required=True, description='user email address'),
+        'companyLogo': fields.String(required=True, description='user email address'),
+        'companyWebsite': fields.String(required=True, description='user email address'),
+        'companyDescription': fields.String(required=True, description='user email address'),
     })
 
-    candidate = api.model('candidate', {
+    candidate = api.model('candidate_company', {
         'date_of_birth': fields.DateTime(required=True, description='candidate birthday'),
     })
 
@@ -46,7 +46,7 @@ class AccountDto:
         'full_name': fields.String(required=True, description='user full name'),
         'phone': fields.String(required=True, description='user phone'),
         'gender': fields.Boolean(required=True, description='user gender'),
-        'type': fields.Integer(required=True, description='0 is candidate, 1 is recruiter'),
+        'type': fields.Boolean(required=True, description='true is candidate, false is recruiter'),
         'company' : fields.Nested(company,allow_null=True),
         'candidate' : fields.Nested(candidate,allow_null=True),
     })

@@ -99,25 +99,26 @@ def create_token(email, day=7):
     return create_access_token(email, expires_delta=expires)
 
 
-def custom_jwt_required(view_function):
-    @ wraps(view_function)
-    def wrapper(*args, **kwargs):
-        try:
-            jwt_data = decode_token(request.headers['token'])
-        except Exception:
-            jwt_data = None
+# def custom_jwt_required(view_function):
+#     @ wraps(view_function)
+#     def wrapper(*args, **kwargs):
+#         try:
+#             jwt_data = decode_token(request.headers['token'])
+#         except Exception:
+#             jwt_data = None
+#         # auth_header = request.headers.get('Authorization')
 
-        if jwt_data and ('identity' in jwt_data):
-            if check_token(jwt_data['identity'], request.headers['token'] or None) and datetime.datetime.now().timestamp() < jwt_data['exp']:
-                authorized = True
-            else:
-                authorized = False
-        else:
-            authorized = False
+#         if jwt_data and ('identity' in jwt_data):
+#             if check_token(jwt_data['identity'], request.headers['token'] or None) and datetime.datetime.now().timestamp() < jwt_data['exp']:
+#                 authorized = True
+#             else:
+#                 authorized = False
+#         else:
+#             authorized = False
 
-        if not authorized:
-            raise UnauthorizedError
+#         if not authorized:
+#             raise UnauthorizedError
 
-        return view_function(*args, **kwargs)
+#         return view_function(*args, **kwargs)
 
-    return wrapper
+#     return wrapper
