@@ -11,7 +11,7 @@ def get_all_recruiter():
     return RecruiterModel.query.all()
 
 
-def insert_new_user_recruiter(account, company):
+def insert_new_account_recruiter(account, company):
     instance_company = get_a_company_by_name(company['name'])
 
     if not instance_company:

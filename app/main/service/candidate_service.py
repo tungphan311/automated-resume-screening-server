@@ -9,7 +9,7 @@ from app.main.model.candidate_model import CandidateModel
 def get_all_candidate():
     return CandidateModel.query.all()
 
-def insert_new_user_candidate(account, candidate):
+def insert_new_account_candidate(account, candidate):
     new_account = AccountModel(
         email=account['email'],
         password=account['password'],

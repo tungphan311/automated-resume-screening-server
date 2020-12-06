@@ -3,7 +3,7 @@ from .. import db, flask_bcrypt
 
 
 class CompanyModel(db.Model):
-    """ company Model for storing user related details """
+    """ company Model for storing account related details """
     __tablename__ = "company"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

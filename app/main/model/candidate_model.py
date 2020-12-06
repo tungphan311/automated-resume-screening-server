@@ -3,7 +3,7 @@ from .. import db, flask_bcrypt
 
 
 class CandidateModel(db.Model):
-    """ candidate Model for storing user related details """
+    """ candidate Model for storing account related details """
     __tablename__ = "candidate"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

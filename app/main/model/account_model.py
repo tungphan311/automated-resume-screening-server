@@ -1,11 +1,9 @@
-from collections import UserList
-
 from sqlalchemy.orm import backref
 from .. import db, flask_bcrypt
 
 
 class AccountModel(db.Model):
-    """ User Model for storing user related details """
+    """ account Model for storing account related details """
     __tablename__ = "account"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -36,4 +34,4 @@ class AccountModel(db.Model):
         return flask_bcrypt.check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return "<User '{}'>".format(self.email)
+        return "<Account '{}'>".format(self.email)

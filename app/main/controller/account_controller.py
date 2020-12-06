@@ -11,40 +11,39 @@ from app.main.resource.parser import register_parser, login_parser
 from flask_jwt_extended import (
     jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt, decode_token)
 from ..util.dto import AccountDto,CandidateDto
-from ..service.account_service import custom_jwt_required, delete_a_account_by_email, get_a_user_by_sername, get_all_users, get_a_user_by_id, get_a_user_by_email, save_changes, set_token, create_token, verify_account
-from app.main.service.recruiter_service import insert_new_user_recruiter
-from app.main.service.candidate_service import insert_new_user_candidate
+from ..service.account_service import custom_jwt_required, delete_a_account_by_email, get_a_account_by_sername, get_all_accounts, get_all_accounts, get_a_account_by_id, get_a_account_by_email, save_changes, set_token, create_token, verify_account
+from app.main.service.recruiter_service import insert_new_account_recruiter
+from app.main.service.candidate_service import insert_new_account_candidate
 from app.main.model.candidate_model import CandidateModel
 
 api = AccountDto.api
 _candidate = CandidateDto.api
 _account = AccountDto.account
-_user_login = AccountDto.account_login
+_account_login = AccountDto.account_login
 
 
 @api.route('/register')
-class UserList(Resource):
-    #@api.doc('get list user')
-    # @api.marshal_list_with(_user, envelope='data')
-    # def get(self):
-    #     '''List all registered users'''
-    #     return get_all_users()
+class AccountList(Resource):
+    @api.doc('get list account')
+    def get(self):
+        '''List all registered account'''
+        return get_all_accounts()
 
-    @api.response(200, 'User register successfully.')
-    @api.doc('register a new user')
+    @api.response(200, 'account register successfully.')
+    @api.doc('register a new account')
     @api.expect(_account, validate=True)
     def post(self):
-        '''register a new User '''
+        '''register a new account '''
         data = request.json
-        user = get_a_user_by_email(data['email'])
+        account = get_a_account_by_email(data['email'])
 
-        # if user with email not exist
-        if not user:
+        # if account with email not exist
+        if not account:
             try:
                 if data["type"] == 0 and data["candidate"]: #type 0 is candidate
-                    insert_new_user_candidate(data,data["candidate"])
+                    insert_new_account_candidate(data,data["candidate"])
                 elif data["type"] == 1 and data["company"]: #type 1 is candidate
-                    insert_new_user_recruiter(data,data["company"])
+                    insert_new_account_recruiter(data,data["company"])
                 else:
                     return {
                         'status': 'failure',
@@ -52,12 +51,12 @@ class UserList(Resource):
                     }, 409
 
                 # if account insert successfully
-                user_inserted = get_a_user_by_email(data['email'])
+                account_inserted = get_a_account_by_email(data['email'])
 
-                if user_inserted:
+                if account_inserted:
                     # send email here
                     try:
-                        confirm_url = url_for('api.Account_user_verify',token=user_inserted.access_token, _external=True)
+                        confirm_url = url_for('api.Account_account_verify',token=account_inserted.access_token, _external=True)
                         html = render_template('email.html', confirm_url = confirm_url)
                         subject = "Please confirm your email"
                         send_email(data['email'], subject, html)
@@ -85,19 +84,19 @@ class UserList(Resource):
                 }, 409
         else:
             # if exist account and verified
-            if user.confirmed:
+            if account.confirmed:
                 return {
                     'status': 'failure',
-                    'message': 'User already exists. Please Log in.',
+                    'message': 'account already exists. Please Log in.',
                 }, 409
             else:
                 # resend email if previously expired email
-                jwt_data = decode_token(user.access_token)
+                jwt_data = decode_token(account.access_token)
                 if datetime.datetime.now().timestamp() > jwt_data['exp']:
-                    access_token = create_token(email=user.email)
-                    set_token(user.email, access_token)
+                    access_token = create_token(email=account.email)
+                    set_token(account.email, access_token)
                     try:
-                        confirm_url = url_for('api.Account_user_verify',token=user.access_token, _external=True)
+                        confirm_url = url_for('api.Account_account_verify',token=account.access_token, _external=True)
                         html = render_template('email.html', confirm_url = confirm_url)
                         subject = "Please confirm your email"
                         send_email(data['email'], subject, html)
@@ -114,11 +113,10 @@ class UserList(Resource):
 
 @api.route('/confirm/<token>')
 @api.param('token', 'The token Verify')
-class UserVerify(Resource):
-    @api.doc('Verify user account')
-    # @api.marshal_with(_user)
+class AccountVerify(Resource):
+    @api.doc('Verify account account')
     def get(self, token):
-        '''Verify user account'''
+        '''Verify account account'''
         try:
             # decode token to json
             jwt_data = decode_token(token) or None
@@ -126,15 +124,15 @@ class UserVerify(Resource):
             # check token valid or expired
             if jwt_data and ('identity' in jwt_data) and datetime.datetime.now().timestamp() < jwt_data['exp']:
 
-                user = get_a_user_by_email(jwt_data['identity'])
-                if user and (user.access_token == token):
-                    if user.confirmed:
+                account = get_a_account_by_email(jwt_data['identity'])
+                if account and (account.access_token == token):
+                    if account.confirmed:
                         return{
                             'status': 'success',
                             'message': 'Account already confirmed. Please login.'
                         }, 200
                     else:
-                        verify_account(user.email)
+                        verify_account(account.email)
                         return{
                             'status': 'success',
                             'message': 'You have confirmed your account. Thanks!'
@@ -157,62 +155,62 @@ class UserVerify(Resource):
 
 
 @ api.route('/<id>')
-@ api.param('id', 'The User identifier')
-@ api.response(404, 'User not found.')
-class UserFind(Resource):
-    @ api.doc('get a user')
+@ api.param('id', 'The Account identifier')
+@ api.response(404, 'Account not found.')
+class AccountFind(Resource):
+    @ api.doc('get a Account')
     @custom_jwt_required
     def get(self, id):
-        '''get a user given its identifier'''
-        user = get_a_user_by_id(id)
-        if not user:
+        '''get a Account given its identifier'''
+        account = get_a_account_by_id(id)
+        if not account:
             api.abort(404)
         else:
-            return user, 200
+            return account, 200
 
 
 @ api.route('/login')
-@ api.response(404, 'User not found.')
-@ api.expect(_user_login)
-class UserLogin(Resource):
+@ api.response(404, 'account not found.')
+@ api.expect(_account_login)
+class AccountLogin(Resource):
     @ api.doc('Login with email, password')
     def post(self):
-        '''get a user given its identifier'''
+        '''get a account given its identifier'''
         data = login_parser.parse_args()
         try:
-            # find user with email
+            # find account with email
             try:
-                user = get_a_user_by_email(data['email'])
+                account = get_a_account_by_email(data['email'])
             except Exception:
-                user = None
+                account = None
 
             # if  account not exist
-            if not user:
+            if not account:
                 return {
                     'status': 'failure',
-                    'message': 'User doesn\'t exist'
+                    'message': 'account doesn\'t exist'
                 }, 404
 
             # check password
-            if user.check_password(data['password']):
+            if account.check_password(data['password']):
 
                 try:
                     # account have not been verified
-                    if not user.confirmed:
+                    if not account.confirmed:
 
                         # resend email if previously expired email
-                        jwt_data = decode_token(user.access_token)
+                        jwt_data = decode_token(account.access_token)
                         if datetime.datetime.now().timestamp() > jwt_data['exp']:
-                            access_token = create_token(email=user.email)
-                            set_token(user.email, access_token)
+                            access_token = create_token(email=account.email)
+                            set_token(account.email, access_token)
                             # send email here
                         return {
                             'status': 'failure',
                             'message': 'The account has been created but not verified, please check the email.',
                         }, 403
 
-                    access_token = create_token(email=user.email)
-                    set_token(user.email, access_token)
+                    access_token = create_token(email=account.email)
+                    set_token(account.email, access_token)
 
                     return {
                         'status': 'success',

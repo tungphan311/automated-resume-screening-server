@@ -3,7 +3,7 @@ from .. import db, flask_bcrypt
 
 
 class RecruiterModel(db.Model):
-    """ Recruiter Model for storing user related details """
+    """ Recruiter Model for storing account related details """
     __tablename__ = "recruiter"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

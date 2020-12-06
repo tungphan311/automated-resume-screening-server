@@ -17,11 +17,10 @@ from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
 
-def insert_new_user(account, candidate):
-    user = AccountModel.query.filter_by(email=account['email']).first()
-    if not user:
-        new_user = AccountModel(
-            # public_id=str(uuid.uuid4()),
+def insert_new_account(account, candidate):
+    account = AccountModel.query.filter_by(email=account['email']).first()
+    if not account:
+        new_account = AccountModel(
             email=account['email'],
             password=account['password'],
             phone = account['phone'],
@@ -32,12 +31,11 @@ def insert_new_user(account, candidate):
         )
         candidate = CandidateModel(
             date_of_birth = candidate['date_of_birth'],
-            account = new_user
+            account = new_account
         )
-        db.session.add(new_user)
+        db.session.add(new_account)
         db.session.add(candidate)
         db.session.commit()
-        # save_changes(new_user)
         response_object = {
             'status': 'success',
             'message': 'Successfully registered.'
@@ -46,26 +44,26 @@ def insert_new_user(account, candidate):
     else:
         response_object = {
             'status': 'fail',
-            'message': 'User already exists. Please Log in.',
+            'message': 'account already exists. Please Log in.',
         }
         return response_object, 409
 
 def delete_a_account_by_email(email):
     return AccountModel.query.filter_by(email=email).first()
 
-def get_all_users():
+def get_all_accounts():
     return AccountModel.query.all()
 
 
-def get_a_user_by_email(email):
+def get_a_account_by_email(email):
     return AccountModel.query.filter_by(email=email).first()
 
 
-def get_a_user_by_sername(username):
+def get_a_account_by_sername(username):
     return AccountModel.query.filter_by(username=username).first()
 
 
-def get_a_user_by_id(id):
+def get_a_account_by_id(id):
     return AccountModel.query.filter_by(id=id).first()
 
 
@@ -82,17 +80,17 @@ def save_changes(data):
 
 
 def set_token(email, token):
-    user = get_a_user_by_email(email)
-    user.access_token = token
-    db.session.add(user)
+    account = get_a_account_by_email(email)
+    account.access_token = token
+    db.session.add(account)
     db.session.commit()
 
 
 def verify_account(email):
-    user = get_a_user_by_email(email)
-    user.confirmed = True
-    user.confirmed_on = datetime.datetime.utcnow()
-    db.session.add(user)
+    account = get_a_account_by_email(email)
+    account.confirmed = True
+    account.confirmed_on = datetime.datetime.utcnow()
+    db.session.add(account)
     db.session.commit()
 
 
