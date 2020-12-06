@@ -7,4 +7,4 @@ def get_all_company():
     return CompanyModel.query.all()
 
 def get_a_company_by_name(name):
-    return CompanyModel.query.filter(CompanyModel.name.ilike(name)).first()
+    return CompanyModel.query.filter(CompanyModel.name.ilike(name))

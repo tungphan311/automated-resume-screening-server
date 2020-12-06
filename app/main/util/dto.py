@@ -19,7 +19,7 @@ class CandidateDto:
     api = Namespace(
         'Candidate', description='candidate related operations')
     candidate = api.model('candidate', {
-        'date_of_birth': fields.DateTime(required=True, description='candidate birthday'),
+        'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
     })
 
 class AccountDto:
@@ -37,13 +37,13 @@ class AccountDto:
     })
 
     candidate = api.model('candidate_company', {
-        'date_of_birth': fields.DateTime(required=True, description='candidate birthday'),
+        'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
     })
 
     account = api.model('account', {
         'email': fields.String(required=True, description='user email address'),
         'password': fields.String(required=True, description='user password'),
-        'full_name': fields.String(required=True, description='user full name'),
+        'fullName': fields.String(required=True, description='user full name'),
         'phone': fields.String(required=True, description='user phone'),
         'gender': fields.Boolean(required=True, description='user gender'),
         'type': fields.Boolean(required=True, description='true is candidate, false is recruiter'),

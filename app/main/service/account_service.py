@@ -24,13 +24,13 @@ def insert_new_account(account, candidate):
             email=account['email'],
             password=account['password'],
             phone = account['phone'],
-            full_name = account['full_name'],
+            full_name = account['fullName'],
             gender = account['gender'],
             access_token=create_token(account['email'], 1),
             registered_on=datetime.datetime.utcnow()
         )
         candidate = CandidateModel(
-            date_of_birth = candidate['date_of_birth'],
+            date_of_birth = candidate['dateOfBirth'],
             account = new_account
         )
         db.session.add(new_account)

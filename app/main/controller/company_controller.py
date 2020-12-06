@@ -14,11 +14,9 @@ class CompanyFind(Resource):
     def get(self,name):
         '''get list companies by name'''
         company = get_a_company_by_name(name)
-        print(company)
         if not company:
-            print("vào")
             return{
-
+                
             },400
         else:
-            return jsonify(company)
+            return jsonify(company),200

@@ -20,7 +20,7 @@ def insert_new_account_recruiter(account, company):
             email=account['email'],
             password=account['password'],
             phone = account['phone'],
-            full_name = account['full_name'],
+            full_name = account['fullName'],
             gender = account['gender'],
             access_token=create_token(account['email'], 1/24),
             registered_on=datetime.datetime.utcnow()
@@ -47,7 +47,7 @@ def insert_new_account_recruiter(account, company):
             email=account['email'],
             password=account['password'],
             phone = account['phone'],
-            full_name = account['full_name'],
+            full_name = account['fullName'],
             gender = account['gender'],
             access_token=create_token(account['email'], 1/24),
             registered_on=datetime.datetime.utcnow()
