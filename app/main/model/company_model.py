@@ -1,3 +1,4 @@
+
 from sqlalchemy.orm import backref
 from .. import db, flask_bcrypt
 
@@ -16,3 +17,27 @@ class CompanyModel(db.Model):
     description = db.Column(db.String(255))
 
     recruiter = db.relationship('RecruiterModel', backref=backref("company", uselist=False),uselist=False)
+
+    def __init__(self, name, location, phone, email, logo, website,description):
+        self.name = name
+        self.location = location
+        self.phone = phone
+        self.email = email
+        self.logo = logo
+        self.website = website
+        self.description = description
+
+    def __repr__(self):
+        return "<User '{}'>".format(self.name)
+
+    def to_json(self):
+        return {
+            "id": int(self.id),
+            "name": self.name,
+            "location": self.location,
+            "phone": self.phone,
+            "email": self.email,
+            "logo": self.logo,
+            "website": self.website,
+            "description": self.description,
+        }
