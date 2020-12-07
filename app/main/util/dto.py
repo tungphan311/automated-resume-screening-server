@@ -46,7 +46,7 @@ class AccountDto:
         'fullName': fields.String(required=True, description='user full name'),
         'phone': fields.String(required=True, description='user phone'),
         'gender': fields.Boolean(required=True, description='user gender'),
-        'type': fields.Boolean(required=True, description='true is candidate, false is recruiter'),
+        'isCandidate': fields.Boolean(required=True, description='true is candidate, false is recruiter'),
         'company' : fields.Nested(company,allow_null=True),
         'candidate' : fields.Nested(candidate,allow_null=True),
     })

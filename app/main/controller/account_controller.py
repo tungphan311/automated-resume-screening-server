@@ -38,9 +38,9 @@ class AccountList(Resource):
         # if account with email not exist
         if not account:
             try:
-                if data["type"] == True and data["candidate"]: #type 0 is candidate
+                if data["isCandidate"] == True and data["candidate"]: #type 0 is candidate
                     insert_new_account_candidate(data,data["candidate"])
-                elif data["type"] == False and data["company"]: #type 1 is candidate
+                elif data["isCandidate"] == False and data["company"]: #type 1 is candidate
                     insert_new_account_recruiter(data,data["company"])
                 else:
                     return {
