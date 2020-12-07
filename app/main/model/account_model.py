@@ -1,18 +1,23 @@
+from sqlalchemy.orm import backref
 from .. import db, flask_bcrypt
 
 
-class UserModel(db.Model):
-    """ User Model for storing user related details """
-    __tablename__ = "user"
+class AccountModel(db.Model):
+    """ account Model for storing account related details """
+    __tablename__ = "account"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
-    registered_on = db.Column(db.DateTime, nullable=False)
-    # admin = db.Column(db.Boolean, nullable=False, default=False)
-    # public_id = db.Column(db.String(100), unique=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
+    phone = db.Column(db.String(15), nullable=True) 
+    full_name = db.Column(db.String(80), nullable=True)
+    gender = db.Column(db.Boolean, nullable=False, default=False)
+
+    candidate = db.relationship('CandidateModel', cascade="all,delete",backref=backref("account",uselist=False),uselist=False)
+    recruiter = db.relationship('RecruiterModel', cascade="all,delete",backref=backref("account",uselist=False),uselist=False)
+    
     access_token = db.Column(db.String(512), nullable=True)
+    registered_on = db.Column(db.DateTime, nullable=False)
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
@@ -29,4 +34,4 @@ class UserModel(db.Model):
         return flask_bcrypt.check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return "<User '{}'>".format(self.username)
+        return "<Account '{}'>".format(self.email)

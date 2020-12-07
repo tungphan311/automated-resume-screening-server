@@ -1,17 +1,56 @@
 from flask_restx import Namespace, fields
 
+from app.main.model.company_model import CompanyModel
 
-class UserDto:
+class CompanyDto:
     api = Namespace(
-        'User', description='user related operations')
-    user = api.model('user', {
+        'Company', description='company related operations')
+    company = api.model('company', {
+        'name': fields.String(required=True, description='user email address'),
+        'location': fields.String(required=True, description='user email address'),
+        'phone': fields.String(required=True, description='user email address'),
         'email': fields.String(required=True, description='user email address'),
-        'username': fields.String(required=True, description='user username'),
-        'password': fields.String(required=True, description='user password'),
-        # 'public_id': fields.String(description='user Identifier')
+        'logo': fields.String(required=True, description='user email address'),
+        'website': fields.String(required=True, description='user email address'),
+        'description': fields.String(required=True, description='user email address'),
     })
-    user_login = api.model('user_login', {
+
+class CandidateDto:
+    api = Namespace(
+        'Candidate', description='candidate related operations')
+    candidate = api.model('candidate', {
+        'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
+    })
+
+class AccountDto:
+    api = Namespace(
+        'Account', description='account related operations')
+
+    company = api.model('account_company', {
+        'companyName': fields.String(required=True, description='user email address'),
+        'companyLocation': fields.String(required=True, description='user email address'),
+        'companyPhone': fields.String(required=True, description='user email address'),
+        'companyEmail': fields.String(required=True, description='user email address'),
+        'companyLogo': fields.String(required=True, description='user email address'),
+        'companyWebsite': fields.String(required=True, description='user email address'),
+        'companyDescription': fields.String(required=True, description='user email address'),
+    })
+
+    candidate = api.model('candidate_company', {
+        'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
+    })
+
+    account = api.model('account', {
         'email': fields.String(required=True, description='user email address'),
         'password': fields.String(required=True, description='user password'),
-        # 'public_id': fields.String(description='user Identifier')
+        'fullName': fields.String(required=True, description='user full name'),
+        'phone': fields.String(required=True, description='user phone'),
+        'gender': fields.Boolean(required=True, description='user gender'),
+        'isCandidate': fields.Boolean(required=True, description='true is candidate, false is recruiter'),
+        'company' : fields.Nested(company,allow_null=True),
+        'candidate' : fields.Nested(candidate,allow_null=True),
+    })
+    account_login = api.model('account_login', {
+        'email': fields.String(required=True, description='user email address'),
+        'password': fields.String(required=True, description='user password'),
     })
