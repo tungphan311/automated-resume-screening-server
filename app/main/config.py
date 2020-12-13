@@ -33,14 +33,14 @@ class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or "mysql+pymysql://thesis:tung3101@localhost/resume-screening"
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class TestingConfig(Config):
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or "mysql+pymysql://thesis:tung3101@localhost/resume-screening"
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     PRESERVE_CONTEXT_ON_EXCEPTION = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
