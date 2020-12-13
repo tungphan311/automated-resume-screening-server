@@ -5,10 +5,11 @@ from .. import db, flask_bcrypt
 
 class CompanyModel(db.Model):
     """ company Model for storing account related details """
-    __tablename__ = "company"
+    __tablename__ = "companies"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(80))
+    acronym = db.Column(db.String(80))
     location = db.Column(db.String(180))
     phone = db.Column(db.String(15))
     email = db.Column(db.String(255))
@@ -16,19 +17,10 @@ class CompanyModel(db.Model):
     website = db.Column(db.String(255))
     description = db.Column(db.String(255))
 
-    recruiter = db.relationship('RecruiterModel', backref=backref("company", uselist=False),uselist=False)
-
-    def __init__(self, name, location, phone, email, logo, website,description):
-        self.name = name
-        self.location = location
-        self.phone = phone
-        self.email = email
-        self.logo = logo
-        self.website = website
-        self.description = description
+    recruiters = db.relationship('RecruiterModel', backref=backref("companies", uselist=False),uselist=False)
 
     def __repr__(self):
-        return "<User '{}'>".format(self.name)
+        return "<Company '{}'>".format(self.name)
 
     def to_json(self):
         return {
