@@ -15,7 +15,7 @@ apiRecruiter = RecruiterDto.api
 _recruiter = RecruiterDto.recruiter
 _accountRecruiter = RecruiterDto.account
 
-@apiRecruiter.route('/register-recruiter')
+@apiRecruiter.route('/recruiter/register')
 class RegisterrecruiterList(Resource):
 
     @apiRecruiter.response(200, 'account register successfully.')
@@ -117,7 +117,7 @@ class RegisterrecruiterList(Resource):
                 }, 201
 
 
-@apiRecruiter.route('/confirm-recruiter/<token>')
+@apiRecruiter.route('/recruiter/confirm/<token>')
 @apiRecruiter.param('token', 'The token Verify')
 class RecruiterVerify(Resource):
     @apiRecruiter.doc('Verify account account recruiter')
@@ -165,7 +165,7 @@ class RecruiterVerify(Resource):
             }, 420
 
 
-@apiRecruiter.route('/login-recruiter')
+@apiRecruiter.route('/recruiter/login')
 @apiRecruiter.response(404, 'account not found.')
 class RecruiterLogin(Resource):
     @apiRecruiter.doc('Login recuiter with email, password')

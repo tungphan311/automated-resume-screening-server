@@ -14,7 +14,7 @@ from app.main.util.dto import CandidateDto
 apiCandidate = CandidateDto.api
 _candidate = CandidateDto.candidate
 _candidateAccount = CandidateDto.account
-@apiCandidate.route('/register-candidate')
+@apiCandidate.route('/candidate/register')
 class RegisterCandidateList(Resource):
 
     @apiCandidate.response(200, 'account register successfully.')
@@ -114,7 +114,7 @@ class RegisterCandidateList(Resource):
                     'type': 'candidate'
                 }, 201
 
-@apiCandidate.route('/confirm-candidate/<token>')
+@apiCandidate.route('/candidate/confirm/<token>')
 @apiCandidate.param('token', 'The token Verify')
 class CandidateVerify(Resource):
     @apiCandidate.doc('Verify account account candidate')
@@ -161,7 +161,7 @@ class CandidateVerify(Resource):
                 ,'type':"candidate"
             }, 420
 
-@apiCandidate.route('/login-candidate')
+@apiCandidate.route('/candidate/login')
 @apiCandidate.response(404, 'account not found.')
 @apiCandidate.expect(_candidateAccount, validate=True)
 class AccountLogin(Resource):
