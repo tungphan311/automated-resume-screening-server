@@ -64,14 +64,10 @@ def upgrade():
     sa.UniqueConstraint('company_id'),
     sa.UniqueConstraint('email')
     )
-    op.drop_index('account_id', table_name='recruiter')
-    op.drop_index('company_id', table_name='recruiter')
     op.drop_table('recruiter')
     op.drop_table('company')
-    op.drop_index('email', table_name='account')
-    op.drop_table('account')
-    op.drop_index('account_id', table_name='candidate')
     op.drop_table('candidate')
+    op.drop_table('account')
     # ### end Alembic commands ###
 
 
