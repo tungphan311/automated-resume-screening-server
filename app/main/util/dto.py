@@ -19,7 +19,31 @@ class CandidateDto:
     api = Namespace(
         'Candidate', description='candidate related operations')
     candidate = api.model('candidate', {
+        'email': fields.String(required=True, description='user email address'),
+        'password': fields.String(required=True, description='user password'),
+        'fullName': fields.String(required=True, description='user full name'),
+        'phone': fields.String(required=True, description='user phone'),
+        'gender': fields.Boolean(required=True, description='user gender'),
         'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
+    })
+    account = api.model('account', {
+        'email': fields.String(required=True, description='user email address'),
+        'password': fields.String(required=True, description='user password'),
+    })
+
+class RecruiterDto:
+    api = Namespace(
+        'Recruiter', description='Recruiter related operations')
+    recruiter = api.model('recruiter', {
+        'email': fields.String(required=True, description='user email address'),
+        'password': fields.String(required=True, description='user password'),
+        'fullName': fields.String(required=True, description='user full name'),
+        'phone': fields.String(required=True, description='user phone'),
+        'gender': fields.Boolean(required=True, description='user gender'),
+    })
+    account = api.model('account', {
+        'email': fields.String(required=True, description='user email address'),
+        'password': fields.String(required=True, description='user password'),
     })
 
 class AccountDto:
