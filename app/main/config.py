@@ -7,6 +7,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
+    BASE_URL_FE = "http://localhost:3000/"
+
     #main
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
     SSL_DISABLE = False
