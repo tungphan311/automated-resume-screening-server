@@ -1,3 +1,4 @@
+from app.main.service.account_service import get_url_verify_email
 import os
 import unittest
 

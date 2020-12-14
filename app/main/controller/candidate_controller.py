@@ -1,7 +1,7 @@
 from app.main.service.recruiter_service import get_a_account_recruiter_by_email
 from app.main import send_email
 from app.main.service.candidate_service import set_token_candidate,delete_a_candidate_by_id, get_a_account_candidate_by_email, insert_new_account_candidate, verify_account_candidate
-from app.main.service.account_service import create_token
+from app.main.service.account_service import create_token, get_url_verify_email
 from flask_jwt_extended import decode_token
 import pymysql
 import datetime
@@ -37,7 +37,7 @@ class RegisterCandidateList(Resource):
                 if account_inserted:
                     # send email here
                     try:
-                        confirm_url = url_for('api.Candidate_candidate_verify',token=account_inserted.access_token, _external=True)
+                        confirm_url = get_url_verify_email(account_inserted.access_token,"candidate")
                         html = render_template('email.html', confirm_url = confirm_url)
                         subject = "Please confirm your email"
                         send_email(data['email'], subject, html)
