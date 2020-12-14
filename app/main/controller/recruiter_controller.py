@@ -25,13 +25,6 @@ class RegisterrecruiterList(Resource):
         '''register a new account candiadate '''
         data = request.json
 
-        if get_a_account_candidate_by_email(data['email']):
-                return {
-                    'status': 'failure',
-                    'message': 'Email already exists.',
-                    'type': 'candidate',
-                }, 409
-
         account = get_a_account_recruiter_by_email(data['email'])
 
         # if account with email not exist
