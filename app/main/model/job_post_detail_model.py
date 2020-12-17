@@ -11,8 +11,8 @@ class JobPostDetailModel(db.Model):
     contract_type = db.Column(db.Integer, nullable=False)
     allow_remote = db.Column(db.Boolean, nullable=False)
 
-    min_salary = db.Column(db.Float, nullable=True)
-    max_salary = db.Column(db.Float, nullable=True)
+    min_salary = db.Column(db.Float, nullable=True, default=0)
+    max_salary = db.Column(db.Float, nullable=True, default=0)
 
     amount = db.Column(db.Integer, nullable=False)
     is_active = db.Column(db.Boolean, nullable=False, default=True)
@@ -20,7 +20,7 @@ class JobPostDetailModel(db.Model):
     deadline = db.Column(db.DateTime, nullable=False)
     posted_in = db.Column(db.DateTime, nullable=False, default=datetime.now)
     last_edit = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    closed_in = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    closed_in = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         return "<Job post detail: '{}'>".format(self.job_title)

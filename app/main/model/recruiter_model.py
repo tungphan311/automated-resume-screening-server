@@ -21,7 +21,7 @@ class RecruiterModel(db.Model):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
-    job_posts = db.relationship('JobPostModel', backref="recruiter", lazy=True)
+    job_posts = db.relationship('JobPostModel', backref=backref("recruiter", lazy='joined'), lazy=True)
 
     
     @property
