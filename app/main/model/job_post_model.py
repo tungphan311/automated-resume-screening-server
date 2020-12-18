@@ -31,7 +31,6 @@ class JobPostModel(db.Model):
             'requirement': self.requirement_text,
             'benefit': self.benefit_text,
             'contract': self.job_post_detail.contract_type,
-            'allow_remote': self.job_post_detail.allow_remote,
             'min_salary': self.job_post_detail.min_salary,
             'max_salary': self.job_post_detail.max_salary,
             'amount': self.job_post_detail.amount,  

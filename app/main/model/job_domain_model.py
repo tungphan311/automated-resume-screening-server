@@ -6,6 +6,7 @@ class JobDomainModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255), nullable=False)
+    alternative_name = db.Column(db.String(255), nullable=False)
 
     job_posts = db.relationship("JobPostModel", backref=backref("job_domain", lazy="joined"), lazy=True)
 

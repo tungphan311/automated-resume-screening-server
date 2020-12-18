@@ -13,7 +13,6 @@ class JobPostDto:
         'benefit_text': fields.String(required=True, description='benefit for candidate'),
         'job_title': fields.String(required=True, description='job title'),
         'contract_type': fields.Integer(required=True, description='type of contract'),
-        'allow_remote': fields.Boolean(required=True, description='does this postion allow remote'),
         'min_salary': NullableFloat(required=False, description='minimum salary'),
         'max_salary': NullableFloat(required=False, description='maximum salary'),
         'amount': fields.Integer(required=True, description='amount of candidates is recruiting'),

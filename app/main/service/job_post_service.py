@@ -19,7 +19,6 @@ def add_new_post(post):
     job_post_detail = JobPostDetailModel(
         job_title=post['job_title'],
         contract_type=post['contract_type'],
-        allow_remote=post['allow_remote'],
         min_salary=post['min_salary'],
         max_salary=post['max_salary'],
         amount=post['amount'],

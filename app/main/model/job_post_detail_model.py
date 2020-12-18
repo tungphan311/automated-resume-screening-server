@@ -9,7 +9,6 @@ class JobPostDetailModel(db.Model):
     
     job_title = db.Column(db.String(200), nullable=False)
     contract_type = db.Column(db.Integer, nullable=False)
-    allow_remote = db.Column(db.Boolean, nullable=False)
 
     min_salary = db.Column(db.Float, nullable=True)
     max_salary = db.Column(db.Float, nullable=True)
