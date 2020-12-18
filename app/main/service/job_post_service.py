@@ -39,3 +39,8 @@ def add_new_post(post):
     db.session.add(job_domain)
     db.session.add(new_post)
     db.session.commit()
+
+    return {
+        'message': 'Đăng tin tuyển dụng thành công',
+        'data': []
+    }, 200

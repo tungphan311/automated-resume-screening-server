@@ -11,8 +11,8 @@ class JobPostDetailModel(db.Model):
     contract_type = db.Column(db.Integer, nullable=False)
     allow_remote = db.Column(db.Boolean, nullable=False)
 
-    min_salary = db.Column(db.Float, nullable=True, default=0)
-    max_salary = db.Column(db.Float, nullable=True, default=0)
+    min_salary = db.Column(db.Float, nullable=True)
+    max_salary = db.Column(db.Float, nullable=True)
 
     amount = db.Column(db.Integer, nullable=False)
     is_active = db.Column(db.Boolean, nullable=False, default=True)

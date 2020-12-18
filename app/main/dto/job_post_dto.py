@@ -1,3 +1,4 @@
+from app.main.util.custom_fields import NullableFloat
 from flask.globals import request
 from flask_restx import Namespace, fields
 
@@ -13,8 +14,8 @@ class JobPostDto:
         'job_title': fields.String(required=True, description='job title'),
         'contract_type': fields.Integer(required=True, description='type of contract'),
         'allow_remote': fields.Boolean(required=True, description='does this postion allow remote'),
-        'min_salary': fields.Float(required=False, description='minimum salary'),
-        'max_salary': fields.Float(required=False, description='maximum salary'),
+        'min_salary': NullableFloat(required=False, description='minimum salary'),
+        'max_salary': NullableFloat(required=False, description='maximum salary'),
         'amount': fields.Integer(required=True, description='amount of candidates is recruiting'),
-        'deadline': fields.Integer(required=True, description='last day for candidate to apply'),
+        'deadline': fields.DateTime(required=True, description='last day for candidate to apply'),
     })

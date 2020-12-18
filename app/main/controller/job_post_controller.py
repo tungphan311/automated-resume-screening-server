@@ -11,7 +11,7 @@ _job_post = JobPostDto.job_post
 @api.route('')
 class JobPost(Resource):
     @api.doc('add a new job post')
-    @api.marshal_with(_job_post)
+    @api.expect(_job_post, validate=True)
     def post(self):
         data = request.json
-        add_new_post(data)
+        return add_new_post(data)
