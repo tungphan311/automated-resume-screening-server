@@ -9,6 +9,8 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 import jwt
 
+from app.main.model import job_post_model, job_post_detail_model, job_domain_model
+
 from app import blueprint
 from app.main import create_app, db
 
