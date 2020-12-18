@@ -186,7 +186,7 @@ class RecruiterLogin(Resource):
                         # resend email if previously expired email
                         jwt_data = decode_token(account.access_token)
                         if datetime.datetime.now().timestamp() > jwt_data['exp']:
-                            access_token = create_token(email=account.email)
+                            access_token = create_token(email=account.email, is_HR=True)
                             set_token_recruiter(account.email, access_token)
                             # send email here
                         return {
@@ -194,7 +194,7 @@ class RecruiterLogin(Resource):
                             'message': 'The account has been created but not verified, please check the email.',
                             'type':'recruiter'
                         }, 203
-                    access_token = create_token(email=account.email)
+                    access_token = create_token(email=account.email, is_HR=True)
 
                     print("333")
                     return {
