@@ -12,3 +12,10 @@ class JobDomainModel(db.Model):
 
     def __repr__(self):
         return "<Job domains: '{}'>".format(self.name)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'alternative_name': self.alternative_name
+        }

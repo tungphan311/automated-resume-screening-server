@@ -1,5 +1,4 @@
 from app.main.util.custom_fields import NullableFloat
-from flask.globals import request
 from flask_restx import Namespace, fields
 
 class JobPostDto:
