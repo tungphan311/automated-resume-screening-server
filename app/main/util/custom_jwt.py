@@ -1,3 +1,4 @@
+from app.main.util.response import response_object
 from functools import wraps
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended.utils import get_jwt_identity
@@ -10,7 +11,7 @@ def HR_only(func):
         is_HR = identity['is_HR']
 
         if not is_HR:
-            return {'massage': "Bạn không có quyền thực hiện chức năng này!"}, 403
+            return response_object(code=403, message="Bạn không có quyền thực hiện chức năng này!"), 403
         else:
             return func(*args, **kwargs)
         
@@ -24,7 +25,7 @@ def Candidate_only(func):
         is_HR = identity['is_HR']
 
         if is_HR:
-            return {'massage': "Bạn không có quyền thực hiện chức năng này!"}, 403
+            return response_object(code=403, message="Bạn không có quyền thực hiện chức năng này!"), 403
         else:
             return func(*args, **kwargs)
         

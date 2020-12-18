@@ -1,5 +1,6 @@
+from app.main.util.response import json_serial
+from flask import json
 from app.main.model.job_domain_model import JobDomainModel
-from sqlalchemy.orm import backref
 from .. import db
 
 class JobPostModel(db.Model):
@@ -20,3 +21,23 @@ class JobPostModel(db.Model):
 
     def __repr__(self):
         return "<Job post: '{}'>".format(self.id)
+
+    def to_json(self):
+        return {
+            'title': self.job_post_detail.job_title,
+            'recruiter': self.recruiter_id,
+            'job_domain': self.job_domain_id,
+            'description': self.description_text,
+            'requirement': self.requirement_text,
+            'benefit': self.benefit_text,
+            'contract': self.job_post_detail.contract_type,
+            'allow_remote': self.job_post_detail.allow_remote,
+            'min_salary': self.job_post_detail.min_salary,
+            'max_salary': self.job_post_detail.max_salary,
+            'amount': self.job_post_detail.amount,  
+            'is_active': self.job_post_detail.is_active,  
+            'deadline': json.dumps(self.job_post_detail.deadline, default=json_serial),
+            'posted_in': json.dumps(self.job_post_detail.posted_in, default=json_serial),
+            'last_edit': json.dumps(self.job_post_detail.last_edit, default=json_serial),
+            'closed_in': json.dumps(self.job_post_detail.closed_in, default=json_serial),
+        }

@@ -1,3 +1,5 @@
+from flask import json
+from app.main.util.response import response_object
 import dateutil.parser
 from app.main import db
 from app.main.model.job_post_model import JobPostModel
@@ -40,7 +42,4 @@ def add_new_post(post):
     db.session.add(new_post)
     db.session.commit()
 
-    return {
-        'message': 'Đăng tin tuyển dụng thành công',
-        'data': []
-    }, 200
+    return response_object(code=200, message="Đăng tin tuyển dụng thành công", data=new_post.to_json()), 200

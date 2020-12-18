@@ -1,4 +1,3 @@
-from app.main.util.constant import HR
 from app.main.util.custom_jwt import HR_only
 from flask import request
 
