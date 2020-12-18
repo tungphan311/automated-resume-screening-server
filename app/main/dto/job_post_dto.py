@@ -5,7 +5,7 @@ class JobPostDto:
     api = Namespace('Job Posts', description='job post related operation')
 
     job_post = api.model('job_post', {
-        'recruiter_id': fields.Integer(required=True, description='id of hr who post this job'),
+        'recruiter_email': fields.String(required=True, description='email of hr who post this job'),
         'job_domain_id': fields.Integer(required=True, description='id domain of this post'),
         'description_text': fields.String(required=True, description='job description'),
         'requirement_text': fields.String(required=True, description='job requirement'),

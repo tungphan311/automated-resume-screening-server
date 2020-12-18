@@ -1,4 +1,5 @@
 from flask import json
+from flask_restx.inputs import email
 from app.main.util.response import response_object
 import dateutil.parser
 from app.main import db
@@ -10,7 +11,7 @@ from app.main.model.job_domain_model import JobDomainModel
 def add_new_post(post):
     parse_deadline = dateutil.parser.isoparse(post['deadline'])
 
-    recruiter = RecruiterModel.query.get(post['recruiter_id'])
+    recruiter = RecruiterModel.query.filter_by(email=post['recruiter_email']).first()
     job_domain = JobDomainModel.query.get(post['job_domain_id'])
 
     if (not recruiter) | (not job_domain):
