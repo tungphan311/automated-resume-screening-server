@@ -30,6 +30,9 @@ class Config:
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER','automated.resume.screening@gmail.com')
 
+    DEFAULT_PAGE_SIZE = 10
+    DEFAULT_PAGE = 1
+
 
 class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
