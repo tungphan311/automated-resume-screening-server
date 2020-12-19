@@ -1,3 +1,4 @@
+from sqlalchemy.orm import backref
 from app.main.util.response import json_serial
 from flask import json
 from app.main.model.job_domain_model import JobDomainModel
@@ -18,6 +19,7 @@ class JobPostModel(db.Model):
     soft_skills = db.Column(db.String(500), nullable=True)
 
     job_post_detail = db.relationship("JobPostDetailModel", uselist=False, backref="job_post")
+    job_resume_submissions = db.relationship('JobResumeSubmissionModel', backref="job_post", lazy=True)
 
     def __repr__(self):
         return "<Job post: '{}'>".format(self.id)

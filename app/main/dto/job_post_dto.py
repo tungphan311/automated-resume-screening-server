@@ -17,3 +17,14 @@ class JobPostDto:
         'amount': fields.Integer(required=True, description='amount of candidates is recruiting'),
         'deadline': fields.DateTime(required=True, description='last day for candidate to apply'),
     })
+
+    job_list = api.model('job_list', {
+        'id': fields.Integer(description='id of job post'),
+        'job_title': fields.String(description='job title'),
+        'salary': fields.String(description='salary for candidate'),
+        'posted_in': fields.DateTime(description='when did this post?'),
+        'deadline': fields.DateTime(description='last day for candidate to apply'),
+        'total_apply': fields.Integer(description='nums of candidate who applied this post'),
+        'new_apply': fields.Integer(description='nums of candidate who applied this post recently'),
+        'total_view': fields.Integer(description='nums of candidate who viewed this post'),
+    })

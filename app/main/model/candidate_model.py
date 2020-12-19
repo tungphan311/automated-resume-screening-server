@@ -20,6 +20,8 @@ class CandidateModel(db.Model):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
+    resumes = db.relationship('ResumeModel', backref="candidate", lazy=True)
+
     @property
     def password(self):
         raise AttributeError('password: write-only field')

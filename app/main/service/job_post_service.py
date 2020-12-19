@@ -11,6 +11,7 @@ from app.main.model.recruiter_model import RecruiterModel
 from app.main.model.job_domain_model import JobDomainModel
 
 api = JobPostDto.api
+_job_list = JobPostDto.job_list
 
 def add_new_post(post):
     parse_deadline = dateutil.parser.isoparse(post['deadline'])
@@ -52,7 +53,6 @@ def add_new_post(post):
 def get_hr_posts(page, page_size):
     identity = get_jwt_identity()
     email = identity['email']
-
     hr = RecruiterModel.query.filter_by(email=email).first()
 
     posts = [ post.to_json() for post in hr.job_posts ]

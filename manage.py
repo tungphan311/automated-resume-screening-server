@@ -1,3 +1,4 @@
+from seeds.seed import seed_data
 from app.main.service.account_service import get_url_verify_email
 import os
 import unittest
@@ -9,7 +10,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 import jwt
 
-from app.main.model import job_post_model, job_post_detail_model, job_domain_model
+from app.main.model import job_post_model, recruiter_model, job_resume_submissions_model, candidate_model, activity_model
 
 from app import blueprint
 from app.main import create_app, db
@@ -36,6 +37,7 @@ def not_found(e):
 
 @manager.command
 def run():
+    seed_data(db)
     app.run(debug=True)
 
 
