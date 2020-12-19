@@ -18,6 +18,9 @@ class JobPostModel(db.Model):
     technical_skills = db.Column(db.String(500), nullable=True)
     soft_skills = db.Column(db.String(500), nullable=True)
 
+    total_views = db.Column(db.Integer, default=0)
+    total_saves = db.Column(db.Integer, default=0)
+
     job_post_detail = db.relationship("JobPostDetailModel", uselist=False, backref="job_post")
     job_resume_submissions = db.relationship('JobResumeSubmissionModel', backref="job_post", lazy=True)
 

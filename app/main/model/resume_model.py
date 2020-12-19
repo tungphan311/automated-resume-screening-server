@@ -22,3 +22,6 @@ class ResumeModel(db.Model):
     is_finding_job = db.Column(db.Boolean, default=False)
 
     job_resume_submission = db.relationship('JobResumeSubmissionModel', uselist=False, backref="resume")
+
+    total_views = db.Column(db.Integer, default=0)
+    total_saves = db.Column(db.Integer, default=0)
