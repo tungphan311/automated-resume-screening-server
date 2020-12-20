@@ -23,7 +23,6 @@ class RecruiterModel(db.Model):
 
     job_posts = db.relationship('JobPostModel', backref=backref("recruiter", lazy='joined'), lazy=True)
 
-    
     @property
     def password(self):
         raise AttributeError('password: write-only field')

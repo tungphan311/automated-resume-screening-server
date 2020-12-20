@@ -30,12 +30,15 @@ class Config:
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER','automated.resume.screening@gmail.com')
 
+    DEFAULT_PAGE_SIZE = 10
+    DEFAULT_PAGE = 1
+
 
 class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://thesis:tung3101@localhost/resume-screening"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

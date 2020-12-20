@@ -123,7 +123,7 @@ class RecruiterVerify(Resource):
             # check token valid or expired
             if jwt_data and ('identity' in jwt_data) and datetime.datetime.now().timestamp() < jwt_data['exp']:
 
-                account = get_a_account_recruiter_by_email(jwt_data['identity'])
+                account = get_a_account_recruiter_by_email(jwt_data['identity']['email'])
                 if account and (account.access_token == token):
                     if account.confirmed:
                         return{
