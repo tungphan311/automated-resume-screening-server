@@ -1,6 +1,6 @@
 
 import json
-from app.process_data.classifier.model import Model
+from app.main.process_data.classifier.model import Model
 
 
 class DomainCachedModel(Model):
@@ -10,9 +10,10 @@ class DomainCachedModel(Model):
     """
 
     def __init__(self, domain_model_pickle_path, domain_name):
-        super().__init__(self, load_model=False)
+        super().__init__(load_model=False)
         self.domain_model_pickle_path = domain_model_pickle_path
         self.domain_name = domain_name
+        self.load_cached_domain_model()
 
 
     def load_cached_domain_model(self):

@@ -1,4 +1,4 @@
-import classifier.classifier as classifier
+import app.main.process_data.classifier.classifier as classifier
 import json
 
 

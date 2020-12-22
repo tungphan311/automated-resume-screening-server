@@ -1,13 +1,11 @@
-from app.process_data.classify_wrapper.domain_cached_model import DomainCachedModel
-from app.process_data.classify_wrapper.domain_ontology import DomainOntology
-from app.process_data.classifier.ontology import Ontology
-from app.process_data.config import Config
-from app.process_data.classifier.paper import Paper
-from app.process_data.classifier.result import Result
-from app.process_data.classifier.semanticmodule import Semantic as SemanticModule
-from app.process_data.classifier.syntacticmodule import Syntactic as SyntacticModule
-
-
+from app.main.process_data.classify_wrapper.domain_cached_model import DomainCachedModel
+from app.main.process_data.classify_wrapper.domain_ontology import DomainOntology
+from app.main.process_data.classifier.ontology import Ontology
+from app.main.process_data.config import Config
+from app.main.process_data.classifier.paper import Paper
+from app.main.process_data.classifier.result import Result
+from app.main.process_data.classifier.semanticmodule import Semantic as SemanticModule
+from app.main.process_data.classifier.syntacticmodule import Syntactic as SyntacticModule
 
 
 class ClassifyManager:
@@ -22,14 +20,15 @@ class ClassifyManager:
         # A dictionary for classifier.
         self.model_dict = dict()
         self.config = Config()
+        self.supported_domains = self.config.get_supported_domains()
 
         # Todo: need optimize 
-        for d in self.config.get_supported_domains():
+        for d in self.supported_domains:
             o_path = self.config.get_ontology_path(d)
             m_path = self.config.get_model_path(d)
             o = DomainOntology(o_path, d)
             m = DomainCachedModel(m_path, d)
-            self.model_dictp[d] = (o, m)
+            self.model_dict[d] = (o, m)
 
 
     def get_domain_model(self, domain):
@@ -98,4 +97,4 @@ class ClassifyManager:
 
         result.set_enhanced(ontology.climb_ontology(getattr(result, "union"), enhancement))
 
-        return result.get_dict()
+        return result

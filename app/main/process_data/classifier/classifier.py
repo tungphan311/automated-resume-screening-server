@@ -2,14 +2,14 @@ import math
 from functools import partial
 from multiprocessing.pool import Pool
 
-from classifier import misc
-from classifier.semanticmodule import Semantic as sema
-from classifier.syntacticmodule import Syntactic as synt
-from classifier.ontology import Ontology as CSO
-from classifier.model import Model as MODEL
-from classifier.paper import Paper
-from classifier.result import Result
-from classifier.config import Config
+from app.main.process_data.classifier import misc
+from app.main.process_data.classifier.semanticmodule import Semantic as sema
+from app.main.process_data.classifier.syntacticmodule import Syntactic as synt
+from app.main.process_data.classifier.ontology import Ontology as CSO
+from app.main.process_data.classifier.model import Model as MODEL
+from app.main.process_data.classifier.paper import Paper
+from app.main.process_data.classifier.result import Result
+from app.main.process_data.classifier.config import Config
 
 
 def run_cso_classifier(paper, modules="both", enhancement="first", explanation=False):

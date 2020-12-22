@@ -5,9 +5,9 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
 
+from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
 
 from .config import config_by_name
-from app.process_data.classify_wrapper.classify_manager import ClassifyManager
 
 
 db = SQLAlchemy()
@@ -16,7 +16,7 @@ mail = Mail()
 app = Flask(__name__)
 jwt = JWTManager(app)
 blacklist = set()
-classifyManager = ClassifyManager()
+classify_manager = ClassifyManager()
 
 def create_app(config_name):
     app = Flask(__name__, static_folder='../../static', static_url_path='/')

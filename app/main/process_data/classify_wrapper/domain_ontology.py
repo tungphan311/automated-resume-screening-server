@@ -1,5 +1,5 @@
 import pickle
-from app.process_data.classifier.ontology import Ontology
+from app.main.process_data.classifier.ontology import Ontology
 
 
 class DomainOntology(Ontology):
@@ -9,9 +9,10 @@ class DomainOntology(Ontology):
     """
 
     def __init__(self, domain_ontology_pickle_path, domain_name):
-        super().__init__(ontology=False)
+        super().__init__(load_ontology=False)
         self.domain_ontology_pickle_path = domain_ontology_pickle_path
         self.domain_name = domain_name
+        self.load_domain_ontology()
 
     
     def load_domain_ontology(self):
