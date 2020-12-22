@@ -108,15 +108,15 @@ def process_raw_text(sentences):
 
     return sentences
 
-def get_topic(educations, experiences, skills, awards, cue_word):
+def get_topic(educations, experiences, skills, cue_word):
     if cue_word in educations:
         return "EDUCATION"
     elif cue_word in experiences:
         return "EXPERIENCE"
     elif cue_word in skills:
         return "SKILL"
-    elif cue_word in awards:
-        return "AWARD"
+    # elif cue_word in awards:
+    #     return "AWARD"
     # elif cue_word in certifications:
     #     return "CERTIFICATION"
     else:
@@ -131,7 +131,7 @@ def cv_segmentation():
         educations_cue = data["Education"]
         experiences_cue = data["Experience"]
         skills_cue = data["Skills"]
-        awards_cue = data["Awards"]
+        # awards_cue = data["Awards"]
         # certifications_cue = data["Certification"]
 
     index_sentences = [(sentences[i], i) for i in range(len(sentences))]
@@ -142,7 +142,7 @@ def cv_segmentation():
 
     for (sen, id) in index_sentences:
         if (len(sen.split()) == 1 and sen in cue_words) or (len(sen.split()) > 1 and sen in cue_phrases):
-            cur_topic = get_topic(educations_cue, experiences_cue, skills_cue, awards_cue, sen)
+            cur_topic = get_topic(educations_cue, experiences_cue, skills_cue, sen)
             topics.append((id,cur_topic))
         else:
             topics.append((id, cur_topic))
@@ -150,13 +150,13 @@ def cv_segmentation():
     educations = [sentences[topic[0]] for topic in topics if topic[1] == 'EDUCATION']
     experiences = [sentences[topic[0]] for topic in topics if topic[1] == 'EXPERIENCE']
     skills = [sentences[topic[0]] for topic in topics if topic[1] == 'SKILL']
-    awards = [sentences[topic[0]] for topic in topics if topic[1] == 'AWARD']
+    # awards = [sentences[topic[0]] for topic in topics if topic[1] == 'AWARD']
     # certifications = [sentences[topic[0]] for topic in topics if topic[1] == 'CERTIFICATION']
 
     return {
         'education': '\n'.join(educations),
         'experience': '\n'.join(experiences),
         'skill': '\n'.join(skills),
-        'award': '\n'.join(awards),
+        # 'award': '\n'.join(awards),
     }, 200
 
