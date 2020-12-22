@@ -4,3 +4,7 @@ venv
 env
 
 .vscode
+
+
+# not include sample data
+app/main/process_data/classifier/models/*
