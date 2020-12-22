@@ -71,19 +71,21 @@ def parse_pdf():
 
     for img in os.listdir(img_directory):
         img_name = os.fsdecode(img)
-        img_fname = os.path.join(img_directory, img_name)
 
-        image = cv2.imread(img_fname)
+        if img_name != '.gitignore':
+            img_fname = os.path.join(img_directory, img_name)
 
-        thresholds_image = pre_processing(image)
+            image = cv2.imread(img_fname)
 
-        parsed_data = parse_text(thresholds_image)
+            thresholds_image = pre_processing(image)
 
-        arranged_text = format_text(parsed_data)
-        arranged_text = [ sen for sen in arranged_text if len(sen) > 0 ]
+            parsed_data = parse_text(thresholds_image)
 
-        for sen in arranged_text:
-            sentences.append(' '.join(sen).strip())
+            arranged_text = format_text(parsed_data)
+            arranged_text = [ sen for sen in arranged_text if len(sen) > 0 ]
+
+            for sen in arranged_text:
+                sentences.append(' '.join(sen).strip())
 
     sentences = [re.sub(r"(protected data)|(protected@topcv.vn)", "", sen) for sen in sentences]
     sentences = [sen for sen in sentences if len(sen) > 0]
