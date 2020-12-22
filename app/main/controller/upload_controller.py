@@ -1,4 +1,4 @@
-from app.main.service.resume_service import parse_pdf, remove_temp_files
+from app.main.service.resume_service import cv_segmentation, remove_temp_files
 from flask.globals import request
 from flask_restx import Namespace
 from flask_restx import Resource
@@ -14,5 +14,5 @@ class CV(Resource):
         file = request.files['file']
         file.save(os.path.join("temp_pdf", "CV.pdf"))
 
-        print(parse_pdf())
+        return cv_segmentation()
         
