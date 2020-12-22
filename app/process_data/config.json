@@ -1,0 +1,15 @@
+{
+    "ontology_path": {
+        "backend": "ontology/pickle_backend_ontology.p",
+        "frontend": "ontology/pickle_frontend_ontology.p",
+        "data_engineer": "ontology/pickle_dataengineer_ontology.p",
+        "fullstack": "ontology/pickle_fullstack_ontology.p"
+    },
+
+    "cached_model_path": {
+        "backend": "cached_model/backend_cached_model.json",
+        "frontend": "cached_model/frontend_cached_model.json",
+        "data_engineer": "cached_model/dataengineer_cached_model.json",
+        "fullstack": "cached_model/fullstack_cached_model.json"
+    }
+}
