@@ -4,12 +4,26 @@ from flask_jwt_extended.utils import get_raw_jwt
 from flask_bcrypt import Bcrypt
 from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
+import pyrebase
 
 from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
 import os
 
 from .config import config_by_name
 
+firebaseConfig = {
+  'apiKey': "AIzaSyB4gngEoIkWnnqCyc7i6xu-v_fj_G6U1Ts",
+  'authDomain': "automated-resume-screeni-b6254.firebaseapp.com",
+  'databaseURL': "https://automated-resume-screeni-b6254.firebaseio.com",
+  'projectId': "automated-resume-screeni-b6254",
+  'storageBucket': "automated-resume-screeni-b6254.appspot.com",
+  'messagingSenderId': "934049368221",
+  'appId': "1:934049368221:web:e18d63bb8535d6f44f6c74",
+  'measurementId': "G-321Q382W61"
+};
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+storage = firebase.storage()
 
 db = SQLAlchemy()
 flask_bcrypt = Bcrypt()
@@ -20,10 +34,8 @@ blacklist = set()
 classify_manager = ClassifyManager()
 
 
-
-
 # Init Firebase
-from firebase_admin import credentials, initialize_app, storage
+from firebase_admin import credentials, initialize_app
 basedir = os.path.abspath(os.path.dirname(__file__))
 cred = credentials.Certificate(os.path.join(basedir, "firebase_cert.json"))
 initialize_app(cred, {'storageBucket': 'automated-resume-screeni-b6254.appspot.com'})
