@@ -6,13 +6,14 @@ class CompanyDto:
     api = Namespace(
         'Company', description='company related operations')
     company = api.model('company', {
-        'name': fields.String(required=True, description='user email address'),
-        'location': fields.String(required=True, description='user email address'),
-        'phone': fields.String(required=True, description='user email address'),
-        'email': fields.String(required=True, description='user email address'),
-        'logo': fields.String(required=True, description='user email address'),
-        'website': fields.String(required=True, description='user email address'),
-        'description': fields.String(required=True, description='user email address'),
+        'name': fields.String(required=True, description='company name'),
+        'location': fields.String(required=True, description='company location'),
+        'phone': fields.String(required=True, description='company phone number'),
+        'email': fields.String(required=True, description='company email'),
+        'logo': fields.String(required=False, description='company logo'),
+        'background': fields.String(required=False, description='company background'),
+        'website': fields.String(required=True, description='company website'),
+        'description': fields.String(required=True, description='company description'),
     })
 
 class CandidateDto:
