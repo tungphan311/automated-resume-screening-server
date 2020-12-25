@@ -1,9 +1,9 @@
+from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.response import response_object
 from app.main.util.custom_jwt import HR_only
 from flask.globals import request
-from app.main.service.company_service import add_new_company, get_a_company_by_name
-from flask_restx import Resource, fields
-from flask_jwt_extended import jwt_required
+from app.main.service.company_service import add_new_company, get_a_company_by_name, update_company
+from flask_restx import Resource
 from ..util.dto import CompanyDto
 
 api = CompanyDto.api
@@ -39,4 +39,18 @@ class Company(Resource):
         logo = files.get("logo", None)
         background = files.get("background", None)
 
-        return add_new_company(data, logo, background)
+        identity = get_jwt_identity()
+        email = identity['email']
+
+        return add_new_company(data, logo, background, email)
+
+
+@api.route('/<int:id>/update')
+class CompanyUpdate(Resource):
+    @api.doc("update HR company")
+    @HR_only
+    def put(self, id):
+        identity = get_jwt_identity()
+        email = identity['email']
+        
+        return update_company(id, email)

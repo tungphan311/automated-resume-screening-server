@@ -17,7 +17,7 @@ class CompanyModel(db.Model):
     website = db.Column(db.String(255))
     description = db.Column(db.String(255))
 
-    recruiters = db.relationship('RecruiterModel', backref=backref("companies", uselist=False),uselist=False)
+    recruiters = db.relationship('RecruiterModel', backref=backref("companies", lazy=True), lazy=True)
 
     def __repr__(self):
         return "<Company '{}'>".format(self.name)
