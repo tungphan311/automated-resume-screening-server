@@ -9,6 +9,7 @@ from app.main import db
 from app.main.model.job_post_model import JobPostModel
 from app.main.model.recruiter_model import RecruiterModel
 from app.main.model.job_domain_model import JobDomainModel
+from app.main.util.data_processing import get_technical_skills
 
 api = JobPostDto.api
 
@@ -21,6 +22,8 @@ def add_new_post(post):
     if (not recruiter) | (not job_domain):
         return "Error"
 
+    (skills, _) = get_technical_skills(job_domain, post['description_text'])
+
     new_post = JobPostModel(
         job_domain_id=post['job_domain_id'],
         description_text=post['description_text'],
@@ -31,6 +34,7 @@ def add_new_post(post):
         min_salary=post['min_salary'],
         max_salary=post['max_salary'],
         amount=post['amount'],
+        technical_skills=skills,
         deadline=parse_deadline
     )
 
@@ -42,7 +46,7 @@ def add_new_post(post):
 
     db.session.commit()
 
-    return response_object(code=200, message="Đăng tin tuyển dụng thành công", data=new_post.to_json()), 200
+    return response_object(code=200, message="Đăng tin tuyển dụng thành công.", data=new_post.to_json()), 200
 
 @HR_only
 def get_hr_posts(page, page_size, sort_values):
