@@ -5,7 +5,10 @@ from app.main import classify_manager as cm
 def get_technical_skills(domain, text):
     """
     Use classify_manager to extract skill from text.
-    Return: (skills, explanation)
+    Return: 
+        (skills, explanation)
+        skills: array.
+        explanation: dictionary.
     """
 
     if domain not in cm.supported_domains:

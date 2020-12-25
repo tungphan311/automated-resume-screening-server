@@ -3,13 +3,15 @@
         "backend": "models/ontology/pickle_backend_ontology.p",
         "frontend": "models/ontology/pickle_frontend_ontology.p",
         "data_engineer": "models/ontology/pickle_dataengineer_ontology.p",
-        "fullstack": "models/ontology/pickle_fullstack_ontology.p"
+        "fullstack": "models/ontology/pickle_fullstack_ontology.p",
+        "general": "models/ontology/pickle_frontend_ontology.p"
     },
 
     "cached_model_path": {
         "backend": "models/cached_model/backend_cached_model.json",
         "frontend": "models/cached_model/frontend_cached_model.json",
         "data_engineer": "models/cached_model/dataengineer_cached_model.json",
-        "fullstack": "models/cached_model/fullstack_cached_model.json"
+        "fullstack": "models/cached_model/fullstack_cached_model.json",
+        "general": "models/cached_model/frontend_cached_model.json"
     }
 }

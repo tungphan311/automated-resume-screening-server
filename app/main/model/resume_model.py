@@ -25,3 +25,5 @@ class ResumeModel(db.Model):
 
     total_views = db.Column(db.Integer, default=0)
     total_saves = db.Column(db.Integer, default=0)
+
+    
