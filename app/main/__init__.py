@@ -6,6 +6,7 @@ from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
 
 from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
+import os
 
 from .config import config_by_name
 
@@ -17,6 +18,16 @@ app = Flask(__name__)
 jwt = JWTManager(app)
 blacklist = set()
 classify_manager = ClassifyManager()
+
+
+
+
+# Init Firebase
+from firebase_admin import credentials, initialize_app, storage
+basedir = os.path.abspath(os.path.dirname(__file__))
+cred = credentials.Certificate(os.path.join(basedir, "firebase_cert.json"))
+initialize_app(cred, {'storageBucket': 'automated-resume-screeni-b6254.appspot.com'})
+
 
 def create_app(config_name):
     app = Flask(__name__, static_folder='../../static', static_url_path='/')

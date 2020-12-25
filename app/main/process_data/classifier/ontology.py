@@ -2,8 +2,8 @@ import pickle
 import os
 import csv as co
 
-from classifier.config import Config
-from classifier import misc
+from app.main.process_data.classifier.config import Config
+from app.main.process_data.classifier import misc
 
 
 class Ontology:
