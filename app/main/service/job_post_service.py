@@ -22,7 +22,7 @@ def add_new_post(post):
     if (not recruiter) | (not job_domain):
         return "Error"
 
-    (skills, _) = get_technical_skills(job_domain, post['description_text'])
+    (skills, _) = get_technical_skills(job_domain.alternative_name, post['description_text'])
 
     new_post = JobPostModel(
         job_domain_id=post['job_domain_id'],
@@ -34,7 +34,7 @@ def add_new_post(post):
         min_salary=post['min_salary'],
         max_salary=post['max_salary'],
         amount=post['amount'],
-        technical_skills=skills,
+        technical_skills='|'.join(skills),
         deadline=parse_deadline
     )
 
