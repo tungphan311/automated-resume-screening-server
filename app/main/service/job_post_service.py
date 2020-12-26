@@ -114,3 +114,26 @@ def sort_job_list(sort_values):
         res.append(JobPostModel.total_saves.asc())
 
     return res
+
+
+def count_jobs():
+    identity = get_jwt_identity()
+    email = identity['email']
+    hr = RecruiterModel.query.filter_by(email=email).first()
+
+    is_showing = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .count()
+
+    is_closed = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .count()
+
+    return response_object(code=200, message="", data={ "is_showing": is_showing, "is_closed": is_closed })
+
+
+@HR_only
+def hr_get_detail():
+    return "OK"
