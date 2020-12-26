@@ -1,3 +1,4 @@
+from app.main.util.format_text import format_contract
 from datetime import datetime
 from app.main.model.resume_model import ResumeModel
 from flask import json
@@ -14,6 +15,7 @@ from app.main.model.job_resume_submissions_model import JobResumeSubmissionModel
 from app.main.model.candidate_model import CandidateModel
 from app.main.model.job_domain_model import JobDomainModel
 from app.main.util.data_processing import get_technical_skills
+import datetime
 from flask_restx import abort
 
 api = JobPostDto.api
@@ -27,7 +29,9 @@ def add_new_post(post):
     if (not recruiter) | (not job_domain):
         return "Error"
 
-    (skills, _) = get_technical_skills(job_domain.alternative_name, post['description_text'])
+    (skills, _) = get_technical_skills(job_domain.alternative_name, post['requirement_text'])
+
+    print(skills)
 
     new_post = JobPostModel(
         job_domain_id=post['job_domain_id'],
@@ -54,12 +58,23 @@ def add_new_post(post):
     return response_object(code=200, message="Đăng tin tuyển dụng thành công.", data=new_post.to_json()), 200
 
 @HR_only
-def get_hr_posts(page, page_size, sort_values):
+def get_hr_posts(page, page_size, sort_values, is_showing):
     identity = get_jwt_identity()
     email = identity['email']
     hr = RecruiterModel.query.filter_by(email=email).first()
 
-    posts = JobPostModel.query.filter_by(recruiter_id=hr.id).order_by(*sort_job_list(sort_values)).paginate(page, page_size, error_out=False)
+    if is_showing: 
+        posts = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .order_by(*sort_job_list(sort_values))\
+            .paginate(page, page_size, error_out=False)
+    else:
+        posts = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .order_by(*sort_job_list(sort_values))\
+            .paginate(page, page_size, error_out=False)
 
     res = [{ 
         'id': post.id, 
@@ -121,6 +136,50 @@ def sort_job_list(sort_values):
     return res
 
 
+def count_jobs():
+    identity = get_jwt_identity()
+    email = identity['email']
+    hr = RecruiterModel.query.filter_by(email=email).first()
+
+    is_showing = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .count()
+
+    is_closed = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .count()
+
+    return response_object(code=200, message="", data={ "is_showing": is_showing, "is_closed": is_closed })
+
+
+@HR_only
+def hr_get_detail(id):
+    post = JobPostModel.query.get(id)
+
+    if not post:
+        return response_object(code=400, message="Thao tác không hợp lệ")
+
+    response = {
+        'id': post.id, 
+        'job_title': post.job_title, 
+        'job_domain': post.job_domain.name,
+        'salary': 'Thoả thuận', 
+        'posted_in': json.dumps(post.posted_in, default=json_serial),
+        'deadline': json.dumps(post.deadline, default=json_serial),
+        'contract_type': format_contract(post.contract_type),
+        'amount': post.amount,
+        'description': post.description_text,
+        'requirement': post.requirement_text,
+        'benefit': post.benefit_text,
+        'total_view': post.total_views,
+        'total_save': post.total_views,
+        'total_apply': post.total_applies,
+    }
+
+    return response_object(200, "Thành công.", response)
+    
 def apply_cv_to_jp(jp_id, args):
     resume_id = args['resume_id']
 

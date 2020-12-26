@@ -1,3 +1,4 @@
+from app.main.util.custom_jwt import Candidate_only
 from flask_restx.fields import String
 from app.main.service.resume_service import create_cv, update_cv
 from flask.globals import request
@@ -14,13 +15,13 @@ api = ResumeDTO.api
 # New resume parser
 create_resume_parser = api.parser()
 create_resume_parser.add_argument("file", type=FileStorage, location="files", required=True)
-create_resume_parser.add_argument("cand_id", type=int, location="form", required=True)
 
 @api.route("/")
 class CV(Resource):
     @api.doc('post a new resume')
     @api.expect(create_resume_parser)
     @api.marshal_with(ResumeDTO.create_success, code=200)
+    @Candidate_only
     def post(self):
         args = create_resume_parser.parse_args()
         file = args["file"]

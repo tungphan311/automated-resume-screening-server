@@ -9,15 +9,15 @@ class CompanyModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(80))
-    acronym = db.Column(db.String(80))
     location = db.Column(db.String(180))
     phone = db.Column(db.String(15))
     email = db.Column(db.String(255))
     logo = db.Column(db.String(255))
+    background = db.Column(db.String(255))
     website = db.Column(db.String(255))
     description = db.Column(db.String(255))
 
-    recruiters = db.relationship('RecruiterModel', backref=backref("companies", uselist=False),uselist=False)
+    recruiters = db.relationship('RecruiterModel', backref=backref("companies", lazy=True), lazy=True)
 
     def __repr__(self):
         return "<Company '{}'>".format(self.name)
