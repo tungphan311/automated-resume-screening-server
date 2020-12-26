@@ -11,7 +11,7 @@ from app.main.dto.resume_dto import ResumeDTO
 api = ResumeDTO.api
 
 # New resume parser
-create_resume_parser = ResumeDTO.api.parser()
+create_resume_parser = api.parser()
 create_resume_parser.add_argument("file", type=FileStorage, location="files", required=True)
 create_resume_parser.add_argument("cand_id", type=int, location="form", required=True)
 
@@ -27,6 +27,18 @@ class CV(Resource):
         file.save(filepath)
         data = create_cv(filepath, args)
         return response_object(data=data)
+
+
+
+
+# Update resume parser
+# update_cv_parser = api.parser()
+# update_cv_parser.add_argument("")
+
+# @api.route("/update")
+# class UpdateCV(Resource):
+#     @api.doc('Update Resume')
+#     def post(self):
 
 
 

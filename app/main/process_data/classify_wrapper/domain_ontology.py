@@ -2,6 +2,7 @@ import pickle
 from app.main.process_data.classifier.ontology import Ontology
 
 
+
 class DomainOntology(Ontology):
     """ 
     A simple subclass of Ontology.

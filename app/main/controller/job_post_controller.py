@@ -15,7 +15,8 @@ _job_post = JobPostDto.job_post
 class JobPost(Resource):
     @api.doc('add a new job post')
     @api.expect(_job_post, validate=True)
-    @HR_only
+    # TODO
+    # @HR_only
     def post(self):
         data = request.json
         return add_new_post(data)

@@ -19,10 +19,10 @@ def add_new_post(post):
     recruiter = RecruiterModel.query.filter_by(email=post['recruiter_email']).first()
     job_domain = JobDomainModel.query.get(post['job_domain_id'])
 
-    if (not recruiter) | (not job_domain):
-        return "Error"
+    # if (not recruiter) | (not job_domain):
+    #     return "Error"
 
-    (skills, _) = get_technical_skills(job_domain.alternative_name, post['description_text'])
+    (skills, _) = get_technical_skills("frontend", post['requirement_text'])
 
     new_post = JobPostModel(
         job_domain_id=post['job_domain_id'],
