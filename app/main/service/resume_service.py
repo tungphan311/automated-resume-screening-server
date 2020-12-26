@@ -1,3 +1,5 @@
+from app.main.model.candidate_model import CandidateModel
+from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.resume_extractor import ResumeExtractor
 from app.main.util.firebase import Firebase
 from app.main.util.thread_pool import ThreadPool
@@ -7,6 +9,11 @@ from app.main.model.resume_model import ResumeModel
 
 
 def create_cv(cv_local_path, args):
+    identity = get_jwt_identity()
+    email = identity['email']
+
+    candidate = CandidateModel.query.filter_by(email=email).first()
+    
     executor = ThreadPool.instance().executor
     info_res = executor.submit(ResumeExtractor(cv_local_path).extract)
     url_res = executor.submit(Firebase().upload, cv_local_path)
@@ -16,7 +23,7 @@ def create_cv(cv_local_path, args):
 
     resume = ResumeModel(
         months_of_experience=0,
-        cand_id=args['cand_id'],
+        cand_id=candidate.id,
         cand_linkedin=resume_info['linkedin'],
         cand_github=resume_info['github'],
         cand_facebook=resume_info['facebook'],
