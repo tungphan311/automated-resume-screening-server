@@ -13,12 +13,14 @@ class ResumeModel(db.Model):
     cand_twitter = db.Column(db.String(200), nullable=True)
     cand_mail = db.Column(db.String(200), nullable=True)
     cand_phone = db.Column(db.String(15), nullable=True)
-    soft_skills = db.Column(db.String(500), nullable=True)
-    technical_skills = db.Column(db.String(500), nullable=True)
+    soft_skills = db.Column(db.Text, nullable=True)
+    technical_skills = db.Column(db.Text, nullable=True)
     store_url =  db.Column(db.String(200), nullable=False)
     is_finding_job = db.Column(db.Boolean, default=False)
     job_resume_submission = db.relationship('JobResumeSubmissionModel', uselist=False, backref="resume")
     total_views = db.Column(db.Integer, default=0)
     total_saves = db.Column(db.Integer, default=0)
+    educations = db.Column(db.Text, nullable=True)
+    experiences = db.Column(db.Text, nullable=True)
 
     

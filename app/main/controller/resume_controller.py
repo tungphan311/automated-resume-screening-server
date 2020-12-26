@@ -1,4 +1,5 @@
-from app.main.service.resume_service import create_cv
+from flask_restx.fields import String
+from app.main.service.resume_service import create_cv, update_cv
 from flask.globals import request
 from flask_restx import Namespace
 from flask_restx import Resource
@@ -11,7 +12,7 @@ from app.main.dto.resume_dto import ResumeDTO
 api = ResumeDTO.api
 
 # New resume parser
-create_resume_parser = ResumeDTO.api.parser()
+create_resume_parser = api.parser()
 create_resume_parser.add_argument("file", type=FileStorage, location="files", required=True)
 create_resume_parser.add_argument("cand_id", type=int, location="form", required=True)
 
@@ -30,5 +31,21 @@ class CV(Resource):
 
 
 
-        
-             
+
+# Update resume parser
+update_cv_parser = api.parser()
+update_cv_parser.add_argument("resume_id", location="json", required=True)
+update_cv_parser.add_argument("educations", location="json", required=True)
+update_cv_parser.add_argument("experiences", location="json", required=True)
+update_cv_parser.add_argument("skills", location="json", required=True)
+update_cv_parser.add_argument("months_of_experience", type=int, location="json", required=True)
+
+@api.route("/update")
+class UpdateCV(Resource):
+    @api.doc('Update Resume')
+    @api.expect(update_cv_parser)
+    @api.marshal_with(ResumeDTO.update_success)
+    def post(self):
+        args = update_cv_parser.parse_args()
+        data = update_cv(args)
+        return response_object(data=data)

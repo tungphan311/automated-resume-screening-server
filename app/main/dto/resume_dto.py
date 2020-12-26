@@ -5,10 +5,12 @@ from app.main.dto.base_dto import base
 class ResumeDTO:
     api = Namespace('Resumes', description="Resume related operation.")
 
+    __base = api.model("base", base)
 
 
     # CREATE RESUME
-    create_data_success = api.inherit('create_data_success', {
+    cv_data_success = api.inherit('create_data_success', {
+        'id': fields.Integer,
         'months_of_experience': fields.Integer,
         'cand_id': fields.Integer,
         'cand_linkedin': fields.String,
@@ -23,7 +25,12 @@ class ResumeDTO:
         'is_finding_job': fields.Boolean,
         'total_views': fields.Integer,
         'total_saves': fields.Integer,
+        'experiences': fields.String,
+        'educations': fields.String,
     })
     create_success = api.inherit('create_success', base, {
-        "data": fields.Nested(create_data_success)
+        "data": fields.Nested(cv_data_success)
+    })
+    update_success = api.inherit('update_success', base, {
+        "data": fields.Nested(cv_data_success)
     })

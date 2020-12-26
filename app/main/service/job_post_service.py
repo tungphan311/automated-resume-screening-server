@@ -1,4 +1,6 @@
 from app.main.util.format_text import format_contract
+from datetime import datetime
+from app.main.model.resume_model import ResumeModel
 from flask import json
 from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.custom_jwt import HR_only
@@ -9,9 +11,12 @@ import dateutil.parser
 from app.main import db
 from app.main.model.job_post_model import JobPostModel
 from app.main.model.recruiter_model import RecruiterModel
+from app.main.model.job_resume_submissions_model import JobResumeSubmissionModel
+from app.main.model.candidate_model import CandidateModel
 from app.main.model.job_domain_model import JobDomainModel
 from app.main.util.data_processing import get_technical_skills
 import datetime
+from flask_restx import abort
 
 api = JobPostDto.api
 
@@ -174,3 +179,26 @@ def hr_get_detail(id):
     }
 
     return response_object(200, "Thành công.", response)
+    
+def apply_cv_to_jp(jp_id, args):
+    resume_id = args['resume_id']
+
+    if ResumeModel.query.get(resume_id) == None:
+        abort(400)
+
+    if JobPostModel.query.get(jp_id) == None:
+        abort(400)
+
+    submission = JobResumeSubmissionModel(
+        resume_id=resume_id,
+        job_post_id=jp_id,
+        submit_date=datetime.now,
+        score=0
+    )
+
+    db.session.add(submission)
+    db.session.commit()
+
+    return submission
+
+    

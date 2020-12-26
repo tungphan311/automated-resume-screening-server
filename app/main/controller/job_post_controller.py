@@ -1,9 +1,10 @@
+from app.main.util.response import response_object
 from app.main.util.custom_jwt import HR_only
 from flask import request
 
 from ..dto.job_post_dto import JobPostDto
 from flask_restx import Resource
-from ..service.job_post_service import add_new_post, candidate_get_job_posts, count_jobs, get_hr_posts, hr_get_detail
+from ..service.job_post_service import add_new_post, candidate_get_job_posts, count_jobs, get_hr_posts, hr_get_detail, apply_cv_to_jp
 
 from app.main.config import Config as config
 
@@ -56,3 +57,16 @@ class JobPostDetail(Resource):
 
         if is_hr:
             return hr_get_detail(id)
+
+
+apply_parser = api.parser()
+apply_parser.add_argument("resume_id", type=int, location="json", required=True)
+
+@api.route('/<int:jp_id>/apply')
+class SubmitResumeForJD(Resource):
+    @api.doc('Submit CV.')    
+    @api.expect(apply_parser)
+    def post(self, jp_id):
+        args = apply_parser.parse_args()
+        data = apply_cv_to_jp(jp_id, args)
+        return response_object(data=data)

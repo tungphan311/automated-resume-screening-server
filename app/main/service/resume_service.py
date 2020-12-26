@@ -29,11 +29,24 @@ def create_cv(cv_local_path, args):
         is_finding_job=False,
         total_views=0,
         total_saves=0,
+        educations=resume_info["educations"],
+        experiences=resume_info["experiences"],
     )
 
     db.session.add(resume)
     db.session.commit()
 
+    return resume
+
+
+def update_cv(args):
+    resume = ResumeModel.query.get(args['resume_id'])
+    resume.resume_id = args['resume_id']
+    resume.educations = args['educations']
+    resume.experiences = args['experiences']
+    resume.skills = args['skills']
+    resume.months_of_experience = args['months_of_experience']
+    db.session.commit()
     return resume
 
     
