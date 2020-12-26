@@ -10,6 +10,7 @@ from app.main.model.job_post_model import JobPostModel
 from app.main.model.recruiter_model import RecruiterModel
 from app.main.model.job_domain_model import JobDomainModel
 from app.main.util.data_processing import get_technical_skills
+import datetime
 
 api = JobPostDto.api
 
@@ -51,12 +52,23 @@ def add_new_post(post):
     return response_object(code=200, message="Đăng tin tuyển dụng thành công.", data=new_post.to_json()), 200
 
 @HR_only
-def get_hr_posts(page, page_size, sort_values):
+def get_hr_posts(page, page_size, sort_values, is_showing):
     identity = get_jwt_identity()
     email = identity['email']
     hr = RecruiterModel.query.filter_by(email=email).first()
 
-    posts = JobPostModel.query.filter_by(recruiter_id=hr.id).order_by(*sort_job_list(sort_values)).paginate(page, page_size, error_out=False)
+    if is_showing: 
+        posts = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .order_by(*sort_job_list(sort_values))\
+            .paginate(page, page_size, error_out=False)
+    else:
+        posts = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .order_by(*sort_job_list(sort_values))\
+            .paginate(page, page_size, error_out=False)
 
     res = [{ 
         'id': post.id, 

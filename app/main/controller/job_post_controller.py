@@ -32,10 +32,12 @@ class JobPost(Resource):
         apply = request.args.get('apply', 0, type=int)
         save = request.args.get('save', 0, type=int)
 
+        is_showing = request.args.get('is_showing') == 'true'
+
         sort_values = { 'posted_in': posted_in, 'deadline': deadline, 'view': view, 'apply': apply, 'save': save }
 
         if is_hr:
-            return get_hr_posts(page, page_size, sort_values)
+            return get_hr_posts(page, page_size, sort_values, is_showing)
         else:
             return candidate_get_job_posts()
 
