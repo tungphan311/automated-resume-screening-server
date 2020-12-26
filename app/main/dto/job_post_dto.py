@@ -1,5 +1,7 @@
 from app.main.util.custom_fields import NullableFloat
-from flask_restx import Namespace, fields
+from flask_restx import Namespace, fields, Model
+from app.main.dto.base_dto import base
+from app.main.util.format_text import format_contract
 
 class JobPostDto:
     api = Namespace('Job Posts', description='job post related operation')
@@ -27,4 +29,49 @@ class JobPostDto:
         'total_apply': fields.Integer(description='nums of candidate who applied this post'),
         'new_apply': fields.Integer(description='nums of candidate who applied this post recently'),
         'total_view': fields.Integer(description='nums of candidate who viewed this post'),
+    })
+
+
+
+    # Response job post for cand
+    job_post_for_cand_fields = api.model("job_post_for_cand_fields", {
+        'id': fields.Integer, 
+        'job_title': fields.String, 
+        'job_domain': fields.String(attribute='job_domain.name'),
+        'salary': fields.String, 
+        'posted_in': fields.DateTime(),
+        'deadline': fields.DateTime,
+        'contract_type': fields.String(attribute=format_contract),
+        'description': fields.String(attribute='description_text'),
+        'requirement': fields.String(attribute='requirement_text'),
+        'benefit': fields.String,
+        # 'amount': fields. post.amount,
+        # 'total_view': fields. post.total_views,
+        # 'total_save': fields. post.total_views,
+        # 'total_apply': fields. post.total_applies,
+    })
+    job_post_for_cand = api.inherit('job_post_for_cand', base, {
+        'data': fields.Nested(job_post_for_cand_fields)
+    })
+
+
+
+    # Response for search job post
+    single_job_post_in_search_fields = Model("single_job_post_in_search_fields", {
+        'job_title': fields.String,
+        'company_name': fields.String,
+        'last_edit': fields.DateTime(),
+        'salary': fields.String, # todod
+        'contact_type': fields.String(attribute=format_contract),
+        'province_id': fields.String,
+        'job_post_id': fields.String,
+        'job_description': fields.String,
+    })
+    pagination = api.model('pagination', {
+        'page': fields.Integer,
+        'total': fields.Integer,
+    })
+    job_post_in_search_cand_response = api.inherit('job_post_in_search_cand_response', base, {
+        'data': fields.List(fields.Nested(single_job_post_in_search_fields)),
+        'pagination': fields.Nested(pagination)
     })
