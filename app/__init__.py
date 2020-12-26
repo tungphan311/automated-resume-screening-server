@@ -5,7 +5,7 @@ from os import error
 from flask import Blueprint
 from flask.globals import request
 from flask_mail import Message
-from flask_restx import Api
+from flask_restx import Api, fields
 
 from app.main.resource.errors import UnauthorizedError
 

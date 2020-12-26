@@ -1,11 +1,29 @@
-from flask_restx import Namespace, fields
-
+from logging import StreamHandler
+from flask_restx import Namespace, Model, fields
+from app.main.dto.base_dto import base
 
 class ResumeDTO:
-    api = Namespace('Resume', description='The object representing resume.')
+    api = Namespace('Resumes', description="Resume related operation.")
 
-    new_resume = api.model('job_domain', {
-        'id': fields.Integer(required=True, description='id of job domain'),
-        'name': fields.String(required=True, description='name of job domain'),
-        'alternative_name': fields.String(required=True, description='alternative name of job domain')
+
+
+    # CREATE RESUME
+    create_data_success = api.inherit('create_data_success', {
+        'months_of_experience': fields.Integer,
+        'cand_id': fields.Integer,
+        'cand_linkedin': fields.String,
+        'cand_github': fields.String,
+        'cand_facebook': fields.String,
+        'cand_twitter': fields.String,
+        'cand_mail': fields.String,
+        'cand_phone': fields.String,
+        'soft_skills': fields.String,
+        'technical_skills': fields.String,
+        'store_url': fields.String,
+        'is_finding_job': fields.Boolean,
+        'total_views': fields.Integer,
+        'total_saves': fields.Integer,
+    })
+    create_success = api.inherit('create_success', base, {
+        "data": fields.Nested(create_data_success)
     })

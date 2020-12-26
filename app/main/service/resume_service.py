@@ -34,12 +34,6 @@ def create_cv(cv_local_path, args):
     db.session.add(resume)
     db.session.commit()
 
-    return {
-        "educations": resume_info['educations'],
-        "experiences": resume_info['experiences'],
-        "skills": resume_info['tech_skills'],
-        "skill_segmentation": resume_info['skill_segmentation'],
-        "cv_public_path": remote_path
-    }, 200
+    return resume
 
     

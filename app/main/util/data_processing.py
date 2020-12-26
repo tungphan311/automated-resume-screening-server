@@ -18,4 +18,8 @@ def get_technical_skills(domain, text):
     result_dict = cm.run_classifier(domain=domain, job_description=text, explanation=True).get_dict()
     skills = result_dict['union']
     explanation = result_dict['explanation']
+
+    # Convert to string
+    skills = [str(s) for s in skills]
+
     return (skills, explanation)
