@@ -114,3 +114,5 @@ def sort_job_list(sort_values):
         res.append(JobPostModel.total_saves.asc())
 
     return res
+
+
