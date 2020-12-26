@@ -51,8 +51,8 @@ class JobPostCount(Resource):
 @api.route('/<int:id>')
 class JobPostDetail(Resource):
     @api.doc('get detail of job post')
-    def get(self):
+    def get(self, id):
         is_hr = request.args.get('is_hr') == 'true'
 
         if is_hr:
-            return hr_get_detail()
+            return hr_get_detail(id)

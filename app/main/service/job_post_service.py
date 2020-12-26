@@ -1,3 +1,4 @@
+from app.main.util.format_text import format_contract
 from flask import json
 from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.custom_jwt import HR_only
@@ -149,5 +150,27 @@ def count_jobs():
 
 
 @HR_only
-def hr_get_detail():
-    return "OK"
+def hr_get_detail(id):
+    post = JobPostModel.query.get(id)
+
+    if not post:
+        return response_object(code=400, message="Thao tác không hợp lệ")
+
+    response = {
+        'id': post.id, 
+        'job_title': post.job_title, 
+        'job_domain': post.job_domain.name,
+        'salary': 'Thoả thuận', 
+        'posted_in': json.dumps(post.posted_in, default=json_serial),
+        'deadline': json.dumps(post.deadline, default=json_serial),
+        'contract_type': format_contract(post.contract_type),
+        'amount': post.amount,
+        'description': post.description_text,
+        'requirement': post.requirement_text,
+        'benefit': post.benefit_text,
+        'total_view': post.total_views,
+        'total_save': post.total_views,
+        'total_apply': post.total_applies,
+    }
+
+    return response_object(200, "Thành công.", response)
