@@ -1,4 +1,5 @@
 import cv2
+from nltk.corpus.reader import twitter
 from pdf2image import convert_from_path
 import pytesseract
 import os
@@ -7,6 +8,8 @@ import re
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 import json
+from app.main.util.data_processing import get_technical_skills
+from app.main.util.regex_helper import RegexHelper
 
 stop_words = set(stopwords.words('english'))
 
@@ -21,7 +24,7 @@ cue_phrases = [re.sub(r"\n", "", c) for c in cue_phrases]
 class ResumeExtractor:
 
     resume_local_path = None
-    resultDict = None 
+    result_dict = None 
 
     def __init__(self, resume_local_path):
         self.resume_local_path = resume_local_path
@@ -29,19 +32,14 @@ class ResumeExtractor:
 
 
     def extract(self):
-        self.resultDict = cv_segmentation(self.resume_local_path)
+        """
+        Return: the dictionary of result.
+        'experiences', 'educations', 'skills'
+        """
 
+        self.result_dict = cv_segmentation(self.resume_local_path)
+        return self.result_dict
 
-
-
-stop_words = set(stopwords.words('english'))
-
-cue_words = open("preprocess/cue_word.txt", "r").readlines()
-cue_words = [re.sub(r"\n", "", c) for c in cue_words]
-cue_words = set(cue_words)
-
-cue_phrases = open("preprocess/cue_phrases.txt", "r").readlines()
-cue_phrases = [re.sub(r"\n", "", c) for c in cue_phrases]
 
 def pre_processing(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -76,7 +74,9 @@ def format_text(details):
 def convert_pdf_to_jpg(filename):
     remove_temp_files('temp/*')
 
-    
+
+    # TODO - ERROR: Remove for running on window
+    # images = convert_from_path(filename, poppler_path="/usr/local/Cellar/poppler/20.12.1/bin")
     images = convert_from_path(filename, poppler_path="library/poppler-20.12.1/bin")
 
     for img in images:
@@ -149,6 +149,32 @@ def get_topic(educations, experiences, skills, cue_word):
     else:
         return ""
 
+def get_general_technical_skills(text):
+    # hardcode general domain for extracting as many skills as posible.
+    return get_technical_skills('general', text)
+
+
+def get_links(text):
+    """
+    Get links.
+    """
+    github = RegexHelper.find_github_link(text)
+    twitter = RegexHelper.find_twitter_link(text)
+    facebook = RegexHelper.find_fb_link(text)
+    linkedin = RegexHelper.find_linkedin_link(text)
+    phone = RegexHelper.find_phone_number(text)
+    email = RegexHelper.find_email(text)
+
+    return {
+        "github": github,
+        "twitter": twitter,
+        "facebook": facebook,
+        "linkedin": linkedin,
+        "phone": phone,
+        "email": email,
+    }
+
+
 def cv_segmentation(local_cv_path):
     sentences = parse_pdf(local_cv_path)
     educations_cue = experiences_cue = skills_cue = awards_cue = certifications_cue = []
@@ -180,9 +206,21 @@ def cv_segmentation(local_cv_path):
     # awards = [sentences[topic[0]] for topic in topics if topic[1] == 'AWARD']
     # certifications = [sentences[topic[0]] for topic in topics if topic[1] == 'CERTIFICATION']
 
+
+    (tech_skills, _) = get_general_technical_skills('\n'.join(sentences))
+
+    links = get_links('\n'.join(sentences))
+
     return {
-        'education': '\n'.join(educations),
-        'experience': '\n'.join(experiences),
-        'skill': '\n'.join(skills),
+        'educations': '\n'.join(educations),
+        'experiences': '\n'.join(experiences),
+        'tech_skills': tech_skills,
+        'skill_segmentation': '\n'.join(skills),
+        "github": links['github'],
+        "twitter": links['twitter'],
+        "facebook": links['facebook'],
+        "linkedin": links['linkedin'],
+        "email": links['email'],
+        "phone": links['phone'],
         # 'award': '\n'.join(awards),
     }
