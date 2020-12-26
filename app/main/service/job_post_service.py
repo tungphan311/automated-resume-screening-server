@@ -1,8 +1,10 @@
+import datetime
 from flask import json
 from flask_jwt_extended.utils import get_jwt_identity
+from sqlalchemy.sql.elements import Null
 from app.main.util.custom_jwt import HR_only
 from app.main.dto.job_post_dto import JobPostDto
-from flask_restx.inputs import email
+from flask_restx.inputs import date, email
 from app.main.util.response import json_serial, response_object
 import dateutil.parser
 from app.main import db
@@ -22,7 +24,9 @@ def add_new_post(post):
     if (not recruiter) | (not job_domain):
         return "Error"
 
-    (skills, _) = get_technical_skills(job_domain, post['description_text'])
+    (skills, _) = get_technical_skills(job_domain.alternative_name, post['description_text'])
+
+    print(skills)
 
     new_post = JobPostModel(
         job_domain_id=post['job_domain_id'],
@@ -34,7 +38,7 @@ def add_new_post(post):
         min_salary=post['min_salary'],
         max_salary=post['max_salary'],
         amount=post['amount'],
-        technical_skills=skills,
+        technical_skills='|'.join(skills),
         deadline=parse_deadline
     )
 
@@ -49,12 +53,23 @@ def add_new_post(post):
     return response_object(code=200, message="Đăng tin tuyển dụng thành công.", data=new_post.to_json()), 200
 
 @HR_only
-def get_hr_posts(page, page_size, sort_values):
+def get_hr_posts(page, page_size, sort_values, is_showing):
     identity = get_jwt_identity()
     email = identity['email']
     hr = RecruiterModel.query.filter_by(email=email).first()
 
-    posts = JobPostModel.query.filter_by(recruiter_id=hr.id).order_by(*sort_job_list(sort_values)).paginate(page, page_size, error_out=False)
+    if is_showing:
+        posts = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .order_by(*sort_job_list(sort_values))\
+            .paginate(page, page_size, error_out=False)
+    else:
+        posts = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .order_by(*sort_job_list(sort_values))\
+            .paginate(page, page_size, error_out=False)
 
     res = [{ 
         'id': post.id, 
@@ -114,3 +129,21 @@ def sort_job_list(sort_values):
         res.append(JobPostModel.total_saves.asc())
 
     return res
+
+
+def count_jobs():
+    identity = get_jwt_identity()
+    email = identity['email']
+    hr = RecruiterModel.query.filter_by(email=email).first()
+
+    is_showing = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .count()
+
+    is_closed = JobPostModel.query\
+            .filter(JobPostModel.recruiter_id == hr.id)\
+            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .count()
+
+    return response_object(code=200, message="", data={ "is_showing": is_showing, "is_closed": is_closed })

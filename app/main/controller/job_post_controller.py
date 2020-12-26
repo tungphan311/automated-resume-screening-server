@@ -3,7 +3,7 @@ from flask import request
 
 from ..dto.job_post_dto import JobPostDto
 from flask_restx import Resource
-from ..service.job_post_service import add_new_post, candidate_get_job_posts, get_hr_posts
+from ..service.job_post_service import add_new_post, candidate_get_job_posts, count_jobs, get_hr_posts
 
 from app.main.config import Config as config
 
@@ -31,10 +31,19 @@ class JobPost(Resource):
         view = request.args.get('view', 0, type=int)
         apply = request.args.get('apply', 0, type=int)
         save = request.args.get('save', 0, type=int)
+        is_showing = request.args.get('is_showing') == 'true'
 
         sort_values = { 'posted_in': posted_in, 'deadline': deadline, 'view': view, 'apply': apply, 'save': save }
 
         if is_hr:
-            return get_hr_posts(page, page_size, sort_values)
+            return get_hr_posts(page, page_size, sort_values, is_showing)
         else:
             return candidate_get_job_posts()
+
+
+@api.route('/count')
+class JobPostCount(Resource):
+    @api.doc('get count of job post is closed or not')
+    @HR_only
+    def get(self):
+        return count_jobs()
