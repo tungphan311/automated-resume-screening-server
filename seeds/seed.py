@@ -1,3 +1,4 @@
+from app.main.model.job_domain_model import JobDomainModel
 from app.main.model.activity_model import ActivityTypeModel, ActivityParameterModel
 import json
 
@@ -22,5 +23,16 @@ def seed_data(db):
             for param in data:
                 act_param = ActivityParameterModel(id=param['id'], name=param['name'])
                 db.session.add(act_param)
+
+        db.session.commit()
+
+    domains = JobDomainModel.query.all()
+    if (len(domains)) == 0:
+        with open('seeds/domains.json') as json_file:
+            data = json.load(json_file)
+
+            for domain in data:
+                d = JobDomainModel(id=domain['id'], name=domain['name'], alternative_name=domain['alternative_name'])
+                db.session.add(d)
 
         db.session.commit()

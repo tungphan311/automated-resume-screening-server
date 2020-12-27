@@ -86,14 +86,14 @@ class CandidateJP(Resource):
 cand_search_jp_parser = api.parser()
 
 # Today, 3 days, 7 days, ...
-cand_search_jp_parser.add_argument("posted_date", type=int, location="json", required=False)
+cand_search_jp_parser.add_argument("posted_date", type=int, location="args", required=False)
 # fulltime (0), parttime (1), internship (2)
-cand_search_jp_parser.add_argument("contract_type", type=int, location="json", required=False)
-cand_search_jp_parser.add_argument("max_salary", type=float, location="json", required=False)
-cand_search_jp_parser.add_argument("min_salary", type=float, location="json", required=False)
+cand_search_jp_parser.add_argument("contract_type", type=int, location="args", required=False)
+cand_search_jp_parser.add_argument("max_salary", type=float, location="args", required=False)
+cand_search_jp_parser.add_argument("min_salary", type=float, location="args", required=False)
 
 cand_search_jp_parser.add_argument("page", type=int, location="args", required=False, default=1)
-cand_search_jp_parser.add_argument("page-size", type=int, location="args", required=False, default=20)
+cand_search_jp_parser.add_argument("page-size", type=int, location="args", required=False, default=10)
 cand_search_jp_parser.add_argument("q", location="args", required=False)
 cand_search_jp_parser.add_argument("province_id", type=int, location="args", required=False)
 
