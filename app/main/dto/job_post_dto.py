@@ -57,7 +57,7 @@ class JobPostDto:
 
 
     # Response for search job post
-    single_job_post_in_search_fields = Model("single_job_post_in_search_fields", {
+    single_job_post_in_search_fields = api.model("single_job_post_in_search_fields", {
         'job_title': fields.String,
         'company_name': fields.String,
         'last_edit': fields.DateTime(),

@@ -1,3 +1,4 @@
+import sqlalchemy
 from app.main.util.format_text import format_contract
 from datetime import datetime
 from app.main.model.resume_model import ResumeModel
@@ -17,6 +18,8 @@ from app.main.model.job_domain_model import JobDomainModel
 from app.main.util.data_processing import get_technical_skills
 import datetime
 from flask_restx import abort
+from sqlalchemy import func
+from sqlalchemy import or_
 
 api = JobPostDto.api
 
@@ -211,8 +214,46 @@ def get_job_post_for_candidate(jp_id):
 
 
 def search_jd_for_cand(args):
-    all_post = JobPostModel.query.all()
-    return all_post, {
-        'total': len(all_post),
-        'page': 0
+    query = JobPostModel.query
+    posted_date = args.get('posted_date')
+    contract_type = args.get('contract_type')
+    min_salary = args.get('min_salary')
+    max_salary = args.get('max_salary')
+    page = args.get('page')
+    page_size = args.get('page-size')
+    keyword = args.get('q')
+    province_id = args.get('province_id')
+
+    if contract_type is not None:   
+        query = query.filter(JobPostModel.contract_type == contract_type)
+
+    if min_salary is not None:
+        query = query.filter(or_(\
+            JobPostModel.max_salary == None,\
+            JobPostModel.max_salary >= min_salary)\
+        )
+
+    if max_salary is not None:
+        query = query.filter(or_(\
+            JobPostModel.min_salary == None,\
+            JobPostModel.min_salary >= max_salary)\
+        )
+
+    if keyword is not None:
+        key = "%{word}%".format(word=keyword)
+        query = query.filter(JobPostModel.job_title.ilike(key))
+
+    # if not province_id:
+    #     query = query.filter(JobPostModel.province_id == province_id)
+
+    if posted_date is not None: 
+        query = query.filter((datetime.now() - JobPostModel.posted_in) > posted_date)
+
+    result = query\
+        .order_by(JobPostModel.last_edit)\
+        .paginate(page=page, per_page=page_size)
+    
+    return result.items, {
+        'total': result.total,
+        'page': result.page
     }
