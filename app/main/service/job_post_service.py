@@ -180,6 +180,7 @@ def hr_get_detail(id):
 
     return response_object(200, "Thành công.", response)
     
+
 def apply_cv_to_jp(jp_id, args):
     resume_id = args['resume_id']
 
@@ -202,3 +203,16 @@ def apply_cv_to_jp(jp_id, args):
     return submission
 
     
+def get_job_post_for_candidate(jp_id):
+    post = JobPostModel.query.get(jp_id)
+    if not post:
+        abort(400)
+    return post
+
+
+def search_jd_for_cand(args):
+    all_post = JobPostModel.query.all()
+    return all_post, {
+        'total': len(all_post),
+        'page': 0
+    }

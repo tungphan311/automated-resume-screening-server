@@ -4,7 +4,7 @@ from flask import request
 
 from ..dto.job_post_dto import JobPostDto
 from flask_restx import Resource
-from ..service.job_post_service import add_new_post, candidate_get_job_posts, count_jobs, get_hr_posts, hr_get_detail, apply_cv_to_jp
+from ..service.job_post_service import add_new_post, candidate_get_job_posts, count_jobs, get_hr_posts, hr_get_detail, apply_cv_to_jp, get_job_post_for_candidate, search_jd_for_cand
 
 from app.main.config import Config as config
 
@@ -70,3 +70,36 @@ class SubmitResumeForJD(Resource):
         args = apply_parser.parse_args()
         data = apply_cv_to_jp(jp_id, args)
         return response_object(data=data)
+
+@api.route('/<int:jp_id>/cand')
+class CandidateJP(Resource):
+    @api.doc('Get job post by id for candidate.')
+    @api.marshal_with(JobPostDto.job_post_for_cand, code=200)
+    def get(self, jp_id):
+        data = get_job_post_for_candidate(jp_id)
+        return response_object(data=data)
+
+
+
+# Search job post for candidate
+
+cand_search_jp_parser = api.parser()
+cand_search_jp_parser.add_argument("posted_date", type=int, location="json", required=False)
+cand_search_jp_parser.add_argument("contact_type", type=int, location="json", required=False)
+cand_search_jp_parser.add_argument("max_salary", type=float, location="json", required=False)
+cand_search_jp_parser.add_argument("min_salary", type=float, location="json", required=False)
+
+cand_search_jp_parser.add_argument("page", type=float, location="args", required=False, default=1)
+cand_search_jp_parser.add_argument("page-size", type=float, location="args", required=False, default=20)
+cand_search_jp_parser.add_argument("q", type=float, location="args", required=False)
+cand_search_jp_parser.add_argument("province_id", type=float, location="args", required=False)
+
+@api.route('/cand')
+class JobPostForCand(Resource):
+    @api.doc('Get job post by id for candidate.')
+    @api.expect(cand_search_jp_parser)
+    @api.marshal_with(JobPostDto.job_post_in_search_cand_response, code=200)
+    def post(self):
+        args = cand_search_jp_parser.parse_args()
+        (data, pagination) = search_jd_for_cand(args)
+        return response_object(data=data, pagination=pagination)

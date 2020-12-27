@@ -1,11 +1,11 @@
 from app.main.model.candidate_model import CandidateModel
 from flask_jwt_extended.utils import get_jwt_identity
-from app.main.util.resume_extractor import ResumeExtractor
+from app.main.util.resume_extractor import ResumeExtractor, remove_temp_files
 from app.main.util.firebase import Firebase
 from app.main.util.thread_pool import ThreadPool
 from app.main import db
 from app.main.model.resume_model import ResumeModel
-
+import os
 
 
 def create_cv(cv_local_path, args):
@@ -20,6 +20,9 @@ def create_cv(cv_local_path, args):
 
     resume_info = info_res.result()
     remote_path = url_res.result()
+
+    if os.path.exists(cv_local_path): 
+        os.remove(cv_local_path)
 
     resume = ResumeModel(
         months_of_experience=0,
