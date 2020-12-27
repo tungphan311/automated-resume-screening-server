@@ -245,7 +245,7 @@ def search_jd_for_cand(args):
     #     query = query.filter(JobPostModel.province_id == province_id)
 
     if posted_date is not None: 
-        query = query.filter((datetime.now() - JobPostModel.posted_in) > posted_date)
+        query = query.filter((datetime.datetime.now() - JobPostModel.posted_in) > posted_date)
 
     result = query\
         .order_by(JobPostModel.last_edit)\
