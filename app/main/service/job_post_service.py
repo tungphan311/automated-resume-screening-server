@@ -175,7 +175,7 @@ def hr_get_detail(id):
         'requirement': post.requirement_text,
         'benefit': post.benefit_text,
         'total_view': post.total_views,
-        'total_save': post.total_views,
+        'total_save': post.total_saves,
         'total_apply': post.total_applies,
     }
 
@@ -208,6 +208,12 @@ def get_job_post_for_candidate(jp_id):
     post = JobPostModel.query.get(jp_id)
     if not post:
         abort(400)
+
+    post.total_views += 1
+
+    db.session.add(post)
+    db.session.commit()
+
     return post
 
 
