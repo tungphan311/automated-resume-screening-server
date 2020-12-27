@@ -37,6 +37,9 @@ class JobPostModel(db.Model):
     total_saves = db.Column(db.Integer, default=0)
     total_applies = db.Column(db.Integer, default=0)
 
+    skill_graph = db.Column(db.Text, nullable=True)
+    domain_skill_graph = db.Column(db.Text, nullable=True)
+
     job_resume_submissions = db.relationship('JobResumeSubmissionModel', backref="job_post", lazy=True)
 
     def __repr__(self):

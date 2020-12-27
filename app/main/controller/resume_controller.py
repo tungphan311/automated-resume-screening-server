@@ -46,6 +46,7 @@ class UpdateCV(Resource):
     @api.doc('Update Resume')
     @api.expect(update_cv_parser)
     @api.marshal_with(ResumeDTO.update_success)
+    @Candidate_only
     def post(self):
         args = update_cv_parser.parse_args()
         data = update_cv(args)

@@ -1,5 +1,5 @@
 from app.main import classify_manager as cm
-
+import networkx as nx
 
 
 def get_technical_skills(domain, text):
@@ -15,7 +15,10 @@ def get_technical_skills(domain, text):
         print("Request to extract the unsupported domain.")
         raise ValueError("Unsupported domain.")
     
-    result_dict = cm.run_classifier(domain=domain, job_description=text, explanation=True).get_dict()
+    prepareText = {'keywords':"data mining, computer science"}
+    prepareText['abstract'] = text
+    
+    result_dict = cm.run_classifier(domain, prepareText, explanation=True).get_dict()
     skills = result_dict['union']
     explanation = result_dict['explanation']
 
@@ -23,3 +26,18 @@ def get_technical_skills(domain, text):
     skills = [str(s) for s in skills]
 
     return (skills, explanation)
+
+def generate_edges(graph):
+    edges = [] 
+    # for each node in graph 
+    for node in graph: 
+        # for each neighbour node of a single node 
+        for neighbour in graph[node]: 
+            # if edge exists then append 
+            edges.append((node, neighbour)) 
+    return edges
+
+def generate_skill_graph(edges):
+    G2 = nx.Graph()
+    G2.add_edges_from(edges)
+    return G2

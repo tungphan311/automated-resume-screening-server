@@ -1,5 +1,5 @@
-from sqlalchemy.orm import backref
 from .. import db
+from app.main.model.job_domain_model import JobDomainModel
 
 class ResumeModel(db.Model):
     __tablename__ = "resumes"
@@ -24,5 +24,7 @@ class ResumeModel(db.Model):
     
     educations = db.Column(db.Text, nullable=True)
     experiences = db.Column(db.Text, nullable=True)
+
+    job_domain_id = db.Column(db.Integer, db.ForeignKey(JobDomainModel.id), nullable=True)
 
     
