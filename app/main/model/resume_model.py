@@ -19,6 +19,9 @@ class ResumeModel(db.Model):
     is_finding_job = db.Column(db.Boolean, default=False)
     job_resume_submission = db.relationship('JobResumeSubmissionModel', uselist=False, backref="resume")
 
+    resume_filename = db.Column(db.String(100), nullable=False)
+    resume_file_extension = db.Column(db.String(10), nullable=False)
+
     total_views = db.Column(db.Integer, default=0)
     total_saves = db.Column(db.Integer, default=0)
     
