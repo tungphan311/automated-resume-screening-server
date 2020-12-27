@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Frontend Developer",
+    "alternative_name": "frontend"
+  },
+  {
+    "id": 2,
+    "name": "Backend Developer",
+    "alternative_name": "backend"
+  },
+  {
+    "id": 3,
+    "name": "Fullstack Developer",
+    "alternative_name": "fullstack"
+  },
+  {
+    "id": 4,
+    "name": "Data Engineer",
+    "alternative_name": "data_engineer"
+  }
+]

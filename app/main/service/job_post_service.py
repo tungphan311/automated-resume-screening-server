@@ -1,6 +1,6 @@
 import sqlalchemy
 from app.main.util.format_text import format_contract
-from datetime import datetime
+from datetime import datetime, timedelta
 from app.main.model.resume_model import ResumeModel
 from flask import json
 from flask_jwt_extended.utils import get_jwt_identity
@@ -175,7 +175,7 @@ def hr_get_detail(id):
         'requirement': post.requirement_text,
         'benefit': post.benefit_text,
         'total_view': post.total_views,
-        'total_save': post.total_views,
+        'total_save': post.total_saves,
         'total_apply': post.total_applies,
     }
 
@@ -208,6 +208,12 @@ def get_job_post_for_candidate(jp_id):
     post = JobPostModel.query.get(jp_id)
     if not post:
         abort(400)
+
+    post.total_views += 1
+
+    db.session.add(post)
+    db.session.commit()
+
     return post
 
 
@@ -245,7 +251,7 @@ def search_jd_for_cand(args):
     #     query = query.filter(JobPostModel.province_id == province_id)
 
     if posted_date is not None: 
-        query = query.filter((datetime.datetime.now() - JobPostModel.posted_in) > posted_date)
+        query = query.filter((datetime.datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)
 
     result = query\
         .order_by(JobPostModel.last_edit)\
