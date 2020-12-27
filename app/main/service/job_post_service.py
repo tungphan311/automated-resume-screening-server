@@ -31,8 +31,6 @@ def add_new_post(post):
 
     (skills, _) = get_technical_skills(job_domain.alternative_name, post['requirement_text'])
 
-    print(skills)
-
     new_post = JobPostModel(
         job_domain_id=post['job_domain_id'],
         description_text=post['description_text'],
