@@ -8,8 +8,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     BASE_URL_FE = "http://localhost:3000/"
-    
-    IMG_ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
     #main
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
@@ -40,7 +38,7 @@ class DevelopmentConfig(Config):
     # uncomment the line below to use postgres
     # SQLALCHEMY_DATABASE_URI = postgres_local_base
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://thesis:123123@localhost/thesis"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://thesis:123123@localhost/thesis" #os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
