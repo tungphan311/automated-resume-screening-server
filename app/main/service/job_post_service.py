@@ -1,6 +1,6 @@
 import sqlalchemy
 from app.main.util.format_text import format_contract
-from datetime import datetime
+from datetime import datetime, timedelta
 from app.main.model.resume_model import ResumeModel
 from flask import json
 from flask_jwt_extended.utils import get_jwt_identity
@@ -245,7 +245,7 @@ def search_jd_for_cand(args):
     #     query = query.filter(JobPostModel.province_id == province_id)
 
     if posted_date is not None: 
-        query = query.filter((datetime.datetime.now() - JobPostModel.posted_in) > posted_date)
+        query = query.filter((datetime.datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)
 
     result = query\
         .order_by(JobPostModel.last_edit)\
