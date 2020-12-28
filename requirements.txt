@@ -34,7 +34,6 @@ Flask-SQLAlchemy==2.4.4
 Flask-Testing==0.8.0
 gcloud==0.17.0
 gensim==3.8.3
-git+git://github.com/Jacobe2169/GMatch4py@master#egg=GMatch4py
 google-api-core==1.24.1
 google-api-python-client==1.12.8
 google-auth==1.24.0
@@ -118,3 +117,4 @@ urllib3==1.26.2
 wasabi==0.8.0
 Werkzeug==1.0.1
 wrapt==1.12.1
+git+git://github.com/Jacobe2169/GMatch4py@master#egg=GMatch4py
