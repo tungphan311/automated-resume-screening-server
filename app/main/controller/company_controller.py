@@ -19,8 +19,6 @@ class CompanyFind(Resource):
         page = request.args.get('page', 1, type=int)
 
         companies, has_next = get_a_company_by_name(name, page)
-           
-        print(companies)
 
         if not companies:
             return response_object()
