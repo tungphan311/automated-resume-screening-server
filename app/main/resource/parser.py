@@ -1,5 +1,5 @@
 from flask_restx import Resource
-from flask_restful import reqparse
+from flask_restx import reqparse
 
 register_parser = reqparse.RequestParser()
 register_parser.add_argument('email', help = 'Email cannot be blank', required = True )
