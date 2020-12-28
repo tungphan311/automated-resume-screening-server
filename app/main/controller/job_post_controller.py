@@ -47,6 +47,7 @@ class JobPost(Resource):
 
     @api.doc('delete job list with given id')
     @api.expect(delete_parser)
+    @HR_only
     def delete(self):
         args = delete_parser.parse_args()
         ids = args['ids']
