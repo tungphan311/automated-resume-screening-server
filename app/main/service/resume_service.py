@@ -8,7 +8,7 @@ from app.main.model.resume_model import ResumeModel
 import os
 
 
-def create_cv(cv_local_path, args):
+def create_cv(cv_local_path, args, filename, file_ext):
     identity = get_jwt_identity()
     email = identity['email']
 
@@ -41,6 +41,8 @@ def create_cv(cv_local_path, args):
         total_saves=0,
         educations=resume_info["educations"],
         experiences=resume_info["experiences"],
+        resume_filename=filename,
+        resume_file_extension=file_ext
     )
 
     db.session.add(resume)

@@ -1,7 +1,7 @@
 from app.main.util.custom_fields import NullableFloat
 from flask_restx import Namespace, fields, Model
 from app.main.dto.base_dto import base
-from app.main.util.format_text import format_contract
+from app.main.util.format_text import format_contract, format_salary
 
 class JobPostDto:
     api = Namespace('Job Posts', description='job post related operation')
@@ -38,14 +38,17 @@ class JobPostDto:
         'id': fields.Integer, 
         'job_title': fields.String, 
         'job_domain': fields.String(attribute='job_domain.name'),
-        'salary': fields.String, 
+        'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)), 
         'posted_in': fields.DateTime(),
         'deadline': fields.DateTime,
-        'contract_type': fields.String(attribute=format_contract),
+        'contract_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),
         'description': fields.String(attribute='description_text'),
         'requirement': fields.String(attribute='requirement_text'),
-        'benefit': fields.String,
-        # 'amount': fields. post.amount,
+        'benefit': fields.String(attribute='benefit_text'),
+        'amount': fields.Integer,
+        'company_name': fields.String(attribute=lambda x: x.recruiter.company.name),
+        'company_logo': fields.String(attribute=lambda x: x.recruiter.company.logo),
+        'company_background': fields.String(attribute=lambda x: x.recruiter.company.background),
         # 'total_view': fields. post.total_views,
         # 'total_save': fields. post.total_views,
         # 'total_apply': fields. post.total_applies,
@@ -59,13 +62,13 @@ class JobPostDto:
     # Response for search job post
     single_job_post_in_search_fields = api.model("single_job_post_in_search_fields", {
         'job_title': fields.String,
-        'company_name': fields.String,
+        'company_name': fields.String(attribute=lambda x: x.recruiter.company.name),
         'last_edit': fields.DateTime(),
-        'salary': fields.String, # todod
-        'contact_type': fields.String(attribute=format_contract),
+        'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)), # todod
+        'contact_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),
         'province_id': fields.String,
-        'job_post_id': fields.String,
-        'job_description': fields.String,
+        'job_post_id': fields.Integer(attribute=lambda x: x.id),
+        'job_description': fields.String(attribute=lambda x: x.description_text),
     })
     pagination = api.model('pagination', {
         'page': fields.Integer,
