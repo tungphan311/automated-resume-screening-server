@@ -24,7 +24,7 @@ class DomainCachedModel(Model):
         """
         with open(self.domain_model_pickle_path) as f:
            self.model = json.load(f)
-        print("Model {name} has bene loaded.".format(name=self.domain_name))
+        # print("Model {name} has bene loaded.".format(name=self.domain_name))
 
 
 

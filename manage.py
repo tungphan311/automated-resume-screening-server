@@ -35,6 +35,11 @@ def index():
 def not_found(e):
     return app.send_static_file('index.html')
 
+
+@app.errorhandler(400)
+def bad_request():
+    return { 'message': 'Thao tác không hợp lệ' }
+
 @manager.command
 def run():
     seed_data(db)

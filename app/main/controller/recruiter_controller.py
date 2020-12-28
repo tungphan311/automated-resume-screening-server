@@ -64,7 +64,7 @@ class RegisterrecruiterList(Resource):
                         'type':'recruiter'
                     }, 409
             except Exception as e:
-                print(e.args)
+                
                 return {
                     'status': 'failure',
                     'message': 'Registation failed. Server occur',
@@ -196,7 +196,6 @@ class RecruiterLogin(Resource):
                         }, 203
                     access_token = create_token(email=account.email, is_HR=True, company_id=account.company_id)
 
-                    print("333")
                     return {
                         'status': 'success',
                         'access_token': access_token,
@@ -204,7 +203,6 @@ class RecruiterLogin(Resource):
                         'type':'recruiter'
                     }, 200
                 except Exception as e:
-                    print(e.args)
                     return{
                         'status': 'failure',
                         'message': 'Try again',
@@ -217,7 +215,6 @@ class RecruiterLogin(Resource):
                     'type':'recruiter'
                 }, 401
         except Exception as e:
-            print(e.args)
             return{
                 'status': 'failure',
                 'message': 'Try again',

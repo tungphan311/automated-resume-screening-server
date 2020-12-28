@@ -4,14 +4,15 @@ from flask import request
 
 from ..dto.job_post_dto import JobPostDto
 from flask_restx import Resource
-from ..service.job_post_service import add_new_post, candidate_get_job_posts, count_jobs, get_hr_posts, hr_get_detail, apply_cv_to_jp, get_job_post_for_candidate, search_jd_for_cand
+from ..service.job_post_service import add_new_post, count_jobs, delete_job_post, get_hr_posts, hr_get_detail, apply_cv_to_jp, get_job_post_for_candidate, search_jd_for_cand
 
 from app.main.config import Config as config
 
 api = JobPostDto.api
 _job_post = JobPostDto.job_post
 
-
+delete_parser = api.parser()
+delete_parser.add_argument("ids", type=int, action="split", location="args", required=True)
 @api.route('')
 class JobPost(Resource):
     @api.doc('add a new job post')
@@ -41,6 +42,16 @@ class JobPost(Resource):
             return get_hr_posts(page, page_size, sort_values, is_showing)
         else:
             return candidate_get_job_posts()
+
+    
+
+    @api.doc('delete job list with given id')
+    @api.expect(delete_parser)
+    def delete(self):
+        args = delete_parser.parse_args()
+        ids = args['ids']
+        return delete_job_post(ids)
+
 
 @api.route('/count')
 class JobPostCount(Resource):

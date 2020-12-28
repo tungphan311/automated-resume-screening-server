@@ -4,7 +4,6 @@ sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server")
 from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
 
 mn = ClassifyManager()
-print("Load done.")
 
 jd = """
 Job Description
@@ -40,5 +39,3 @@ Company trip, team building, monthly party, etc.
 """
 
 result = mn.run_classifier("backend", jd, explanation=True)
-
-print(result)
