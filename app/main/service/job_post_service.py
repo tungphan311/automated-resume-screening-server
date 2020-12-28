@@ -95,11 +95,6 @@ def get_hr_posts(page, page_size, sort_values, is_showing):
 
     return response_object(code=200, message="Lấy danh sách thành công", data=res, pagination=pagination)
 
-
-def candidate_get_job_posts():
-    return "Can"
-
-
 def sort_job_list(sort_values):
     posted_in = sort_values['posted_in']
     deadline = sort_values['deadline']
@@ -261,3 +256,17 @@ def search_jd_for_cand(args):
         'total': result.total,
         'page': result.page
     }
+
+
+def delete_job_post(ids):
+    for id in ids:
+        job = JobPostModel.query.get(id)
+
+        if not job:
+            abort(400)
+
+        db.session.delete(job)
+
+    db.session.commit()
+
+    return response_object(message="Xoá tin tuyển dụng thành công")

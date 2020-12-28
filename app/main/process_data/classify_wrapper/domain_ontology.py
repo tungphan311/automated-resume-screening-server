@@ -21,4 +21,4 @@ class DomainOntology(Ontology):
         """
         ontology = pickle.load(open(self.domain_ontology_pickle_path, 'rb'))
         self.from_cso_to_single_items(ontology)
-        print("{domain_name} ontology has been loaded.".format(domain_name=self.domain_name))
+        # print("{domain_name} ontology has been loaded.".format(domain_name=self.domain_name))

@@ -48,7 +48,6 @@ class RegisterCandidateList(Resource):
                         }, 200
 
                     except Exception as e: # delete account if send email error
-                        print(e.args)
                         delete_a_candidate_by_id(account_inserted['id'])
                         return {
                             'status': 'failure',
@@ -62,7 +61,6 @@ class RegisterCandidateList(Resource):
                         'type':'candidate'
                     }, 409
             except Exception as e:
-                print(e.args)
                 return {
                     'status': 'failure',
                     'message': 'Registation failed. Server occur',
@@ -201,7 +199,6 @@ class AccountLogin(Resource):
                         'type':'candidate'
                     }, 200
                 except Exception as e:
-                    print(e.args)
                     return{
                         'status': 'failure',
                         'message': 'Try again',
@@ -214,7 +211,6 @@ class AccountLogin(Resource):
                     'type':'candidate'
                 }, 401
         except Exception as e:
-            print(e.args)
             return{
                 'status': 'failure',
                 'message': 'Try again',
