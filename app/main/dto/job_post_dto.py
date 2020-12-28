@@ -64,7 +64,7 @@ class JobPostDto:
         'job_title': fields.String,
         'company_name': fields.String(attribute=lambda x: x.recruiter.company.name),
         'last_edit': fields.DateTime(),
-        'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)), # todod
+        'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)),
         'contact_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),
         'province_id': fields.String,
         'job_post_id': fields.Integer(attribute=lambda x: x.id),
@@ -77,4 +77,27 @@ class JobPostDto:
     job_post_in_search_cand_response = api.inherit('job_post_in_search_cand_response', base, {
         'data': fields.List(fields.Nested(single_job_post_in_search_fields)),
         'pagination': fields.Nested(pagination)
+    })
+
+
+    #Response for update job post from HR
+    response_for_update_job_post_from_hr_fields = api.model("response_for_update_job_post_from_hr_fields", {
+        'id': fields.Integer,
+        'job_title': fields.String, 
+        'job_domain': fields.String(attribute="job_domain.name"),
+        'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)), 
+        'posted_in': fields.DateTime(),
+        'deadline': fields.DateTime(),
+        'last_edit': fields.DateTime(),
+        'contract_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),
+        'amount': fields.Integer,
+        'description': fields.String(attribute='description_text'),
+        'requirement': fields.String(attribute='requirement_text'),
+        'benefit': fields.String(attribute='benefit_text'),
+        'total_views': fields.Integer,
+        'total_saves': fields.Integer,
+        'total_applies': fields.Integer
+    })
+    response_for_update_job_post_from_hr = api.inherit('response_for_update_job_post_from_HR', base, {
+        'data': fields.List(fields.Nested(single_job_post_in_search_fields)),
     })

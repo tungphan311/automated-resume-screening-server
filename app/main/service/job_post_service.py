@@ -1,25 +1,27 @@
-import sqlalchemy
-from app.main.util.format_text import format_contract
+from app.main.controller import job_post_controller
+from sys import float_info
+from app.main.service.matching_service import OnetoOneMatching, jobPipeline
+import datetime
 from datetime import datetime, timedelta
-from app.main.model.resume_model import ResumeModel
-from flask import json
-from flask_jwt_extended.utils import get_jwt_identity
-from app.main.util.custom_jwt import HR_only
-from app.main.dto.job_post_dto import JobPostDto
-from flask_restx.inputs import email
-from app.main.util.response import json_serial, response_object
 import dateutil.parser
+from flask import json
 from app.main import db
+from app.main.dto.job_post_dto import JobPostDto
+from app.main.model.resume_model import ResumeModel
 from app.main.model.job_post_model import JobPostModel
 from app.main.model.recruiter_model import RecruiterModel
 from app.main.model.job_resume_submissions_model import JobResumeSubmissionModel
-from app.main.model.candidate_model import CandidateModel
 from app.main.model.job_domain_model import JobDomainModel
+
+from flask_jwt_extended.utils import get_jwt_identity
+from app.main.util.custom_jwt import HR_only
+from app.main.util.format_text import format_contract
+from app.main.util.response import json_serial, response_object
 from app.main.util.data_processing import get_technical_skills
-import datetime
 from flask_restx import abort
-from sqlalchemy import func
 from sqlalchemy import or_
+from app.main.business.matching import Matcher
+from app.main.util.thread_pool import ThreadPool
 
 api = JobPostDto.api
 
@@ -175,6 +177,60 @@ def hr_get_detail(id):
     }
 
     return response_object(200, "Thành công.", response)
+
+
+def update_jp(id, recruiter_email, args):
+    job_post = JobPostModel.query.get(id)
+    recruiter = RecruiterModel.query.filter_by(email=recruiter_email).first()
+    if job_post == None or\
+        recruiter == None or\
+        job_post.recruiter_id != recruiter.id:
+        abort(400)
+    
+    job_domain_id = args.get("job_domain_id", None)
+    description_text = args.get("description_text", None)
+    requirement_text = args.get("requirement_text", None)
+    benefit_text = args.get("benefit_text", None)
+    job_title = args.get("job_title", None)
+    contract_type = args.get("contract_type", None)
+    min_salary = args.get("min_salary", None)
+    max_salary = args.get("max_salary", None)
+    amount = args.get("amount", None)
+    is_active = args.get("is_active", None)
+    deadline = args.get("deadline", None)
+
+    if job_domain_id is None: job_post.job_domain_id = job_domain_id
+    if description_text is None: job_post.description_text = description_text
+    if requirement_text is None: job_post.requirement_text = requirement_text
+    if benefit_text is None: job_post.benefit_text = benefit_text
+    if job_title is None: job_post.job_title = job_title
+    if min_salary is None: job_post.min_salary = max(min_salary, 0)
+    if max_salary is None: job_post.max_salary = min(max_salary, float_info.max)
+    if amount is None: job_post.amount = amount
+    if is_active is None: job_post.is_active = is_active
+    if deadline is None: job_post.deadline = deadline
+    if contract_type is None and contract_type <= 2 and contract_type >= 0: 
+        job_post.contract_type = contract_type
+
+    job_post.last_edit = datetime.now
+    db.session.commit()
+    return job_post
+
+
+
+def close_jp(id, recruiter_email):
+    job_post = JobPostModel.query.get(id)
+    recruiter = RecruiterModel.query.filter_by(email=recruiter_email).first()
+    if job_post == None or\
+        recruiter == None or\
+        job_post.recruiter_id != recruiter.id:
+        abort(400)
+
+    job_post.is_active = False
+    job_post.closed_in = datetime.now
+    db.session.commit()
+    return job_post()
+
     
 
 def apply_cv_to_jp(jp_id, args):
@@ -196,7 +252,15 @@ def apply_cv_to_jp(jp_id, args):
     db.session.add(submission)
     db.session.commit()
 
+    # Start calculating scrore
+    ThreadPool.instance().executor.submit(__background_calculate_scrore, jp_id, resume_id)
+
     return submission
+
+def __background_calculate_scrore(job_post_id, resume_id):
+    score_dict = OnetoOneMatching(resume_id=resume_id, job_id=job_post_id)
+    print(score_dict)
+
 
     
 def get_job_post_for_candidate(jp_id):
@@ -270,3 +334,25 @@ def delete_job_post(ids):
     db.session.commit()
 
     return response_object(message="Xoá tin tuyển dụng thành công")
+
+
+def proceed_resume(id, recruiter_email, args):
+    submission_id = args['submission_id']
+    status = args['status']
+    job_post = JobPostModel.query.get(id)
+    recruiter = RecruiterModel.query.filter_by(email=recruiter_email).first()
+    submission = JobResumeSubmissionModel.query.get(submission_id)
+    
+    if job_post == None or\
+        recruiter == None or\
+        submission == None or\
+        job_post.recruiter_id != recruiter.id or\
+        submission.job_post_id != id:
+        abort(400)
+
+    if status != 0 or status != 1:
+        abort(400)
+
+    submission.process_status = status
+    db.session.commit()
+    return submission
