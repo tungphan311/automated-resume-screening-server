@@ -18,3 +18,5 @@ class JobResumeSubmissionModel(db.Model):
     process_status = db.Column(db.Boolean, nullable=True)
     score_array = db.Column(db.String(100), nullable=True)
     score_explanation_array = db.Column(db.String(100), nullable=True)
+
+    is_calculating = db.Column(db.Boolean, default=False)

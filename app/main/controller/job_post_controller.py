@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask.wrappers import Response
 from app.main.util.response import response_object
-from app.main.util.custom_jwt import HR_only
+from app.main.util.custom_jwt import Candidate_only, HR_only
 from flask_jwt_extended.utils import get_jwt_identity
 from flask import request
 
@@ -146,8 +146,10 @@ class CloseJobPost(Resource):
 class SubmitResumeForJD(Resource):
     apply_parser = api.parser()
     apply_parser.add_argument("resume_id", type=int, location="json", required=True)
+    apply_parser.add_argument("Authorization", location="headers", required=True)
     @api.doc('Submit CV.')    
     @api.expect(apply_parser)
+    # @Candidate_only
     def post(self, jp_id):
         args = self.apply_parser.parse_args()
         data = apply_cv_to_jp(jp_id, args)
@@ -206,7 +208,7 @@ proceed_resume_parser = api.parser()
 proceed_resume_parser.add_argument('status', type=int, required=True)
 proceed_resume_parser.add_argument('submission_id', type=int, required=True)
 @api.route('/<int:jp_id>/update')
-class ProcessResume(Response):
+class ProceedResume(Resource):
     @api.doc('Get job post by id for candidate.')
     @api.expect(proceed_resume_parser)
     @HR_only

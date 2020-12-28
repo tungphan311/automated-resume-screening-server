@@ -245,22 +245,40 @@ def apply_cv_to_jp(jp_id, args):
     submission = JobResumeSubmissionModel(
         resume_id=resume_id,
         job_post_id=jp_id,
-        submit_date=datetime.now,
-        score=0
+        is_calculating=True,
     )
 
     db.session.add(submission)
     db.session.commit()
 
-    # Start calculating scrore
-    ThreadPool.instance().executor.submit(__background_calculate_scrore, jp_id, resume_id)
+    # Start calculating score
+    __background_calculate_scrore(submission.id, jp_id, resume_id)
+    # res = ThreadPool.instance().executor.submit(__background_calculate_scrore, submission.id, jp_id, resume_id)
+    # _ = res.result()
+    
+    return {
+        "id": submission.id,
+        "resume_id": submission.resume_id,
+        "job_post_id": submission.job_post_id,
+        "is_calculating": submission.is_calculating
+    }
 
-    return submission
+def __background_calculate_scrore(submission_id, job_post_id, resume_id):
+    submission = JobResumeSubmissionModel.query.get(submission_id)
+    if submission == None: return
 
-def __background_calculate_scrore(job_post_id, resume_id):
     score_dict = OnetoOneMatching(resume_id=resume_id, job_id=job_post_id)
-    print(score_dict)
-
+    skill_score = score_dict['skill_match']
+    domain_skill_scrore = score_dict['domain_skill_match']
+    
+    score_explanation_array = '|'.join(['skill_match', 'domain_skill_match'])
+    score_array = '|'.join([skill_score, domain_skill_scrore])
+    submission.is_calculating = False
+    submission.score_array = score_array
+    submission.score_explanation_array = score_explanation_array
+    db.session.commmit()
+    return True
+    
 
     
 def get_job_post_for_candidate(jp_id):
@@ -342,7 +360,7 @@ def proceed_resume(id, recruiter_email, args):
     job_post = JobPostModel.query.get(id)
     recruiter = RecruiterModel.query.filter_by(email=recruiter_email).first()
     submission = JobResumeSubmissionModel.query.get(submission_id)
-    
+
     if job_post == None or\
         recruiter == None or\
         submission == None or\

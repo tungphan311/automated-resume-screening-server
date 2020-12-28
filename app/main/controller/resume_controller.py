@@ -15,6 +15,7 @@ api = ResumeDTO.api
 # New resume parser
 create_resume_parser = api.parser()
 create_resume_parser.add_argument("file", type=FileStorage, location="files", required=True)
+create_resume_parser.add_argument("Authorization", location="headers", required=True)
 
 @api.route("/")
 class CV(Resource):
