@@ -33,7 +33,7 @@ class CandidateDto:
         'phone': fields.String(required=True, description='user phone'),
         'gender': fields.Boolean(required=True, description='user gender'),
         'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
-        'provinceId': fields.Integer(required=False , description='province_id'),
+        'provinceId': fields.Integer(required=True , description='province_id'),
     })
     account = api.model('account', {
         'email': fields.String(required=True, description='user email address'),
