@@ -153,7 +153,7 @@ class SubmitResumeForJD(Resource):
     def post(self, jp_id):
         args = self.apply_parser.parse_args()
         data = apply_cv_to_jp(jp_id, args)
-        return response_object(data=data)
+        return response_object(data=data), 200
 
 
 

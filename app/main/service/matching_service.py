@@ -2,6 +2,7 @@
 from app.main.business.matching import Matcher
 from app.main.business.job_post import JobPostBusiness
 from app.main.business.candidate import CandidateBusiness
+import numpy as np
 
 
 def candidatePipeline(resume_id):
@@ -40,8 +41,9 @@ def OnetoOneMatching(resume_id, job_id):
     skill_match = matching.one2one_skill_match(candidate_skill_graph, job_skill_graph)
     domain_skill_match = matching.one2one_domain_skill_match(candidate_domain_skill_graph, job_domain_skill_graph) 
 
+    DECIMAL_LENGTH = 4
     return {
-        "skill_match": skill_match,
-        "domain_skill_match": domain_skill_match
+        "skill_match": np.round(skill_match, DECIMAL_LENGTH),
+        "domain_skill_match": np.round(domain_skill_match, DECIMAL_LENGTH)
     }
 

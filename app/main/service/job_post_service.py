@@ -22,6 +22,7 @@ from flask_restx import abort
 from sqlalchemy import or_
 from app.main.business.matching import Matcher
 from app.main.util.thread_pool import ThreadPool
+from numpy import round
 
 api = JobPostDto.api
 
@@ -248,36 +249,32 @@ def apply_cv_to_jp(jp_id, args):
         is_calculating=True,
     )
 
+    # todo
+    calculate_scrore(submission, jp_id, resume_id)
+
     db.session.add(submission)
     db.session.commit()
-
-    # Start calculating score
-    __background_calculate_scrore(submission.id, jp_id, resume_id)
-    # res = ThreadPool.instance().executor.submit(__background_calculate_scrore, submission.id, jp_id, resume_id)
-    # _ = res.result()
     
     return {
         "id": submission.id,
         "resume_id": submission.resume_id,
         "job_post_id": submission.job_post_id,
-        "is_calculating": submission.is_calculating
+        "score_array": submission.score_array,
+        "score_explanation_array": submission.score_explanation_array,
+        "is_calculating": False
     }
+    
 
-def __background_calculate_scrore(submission_id, job_post_id, resume_id):
-    submission = JobResumeSubmissionModel.query.get(submission_id)
-    if submission == None: return
-
+def calculate_scrore(submission, job_post_id, resume_id):
     score_dict = OnetoOneMatching(resume_id=resume_id, job_id=job_post_id)
     skill_score = score_dict['skill_match']
     domain_skill_scrore = score_dict['domain_skill_match']
     
     score_explanation_array = '|'.join(['skill_match', 'domain_skill_match'])
-    score_array = '|'.join([skill_score, domain_skill_scrore])
+    score_array = '|'.join([str(skill_score), str(domain_skill_scrore)])
     submission.is_calculating = False
     submission.score_array = score_array
     submission.score_explanation_array = score_explanation_array
-    db.session.commmit()
-    return True
     
 
     
