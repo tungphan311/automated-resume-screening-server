@@ -2,9 +2,13 @@ from app.main.util.response import response_object
 from app.main.util.custom_jwt import Candidate_only, HR_only
 from app.main.service.recruiter_service import get_a_account_recruiter_by_email
 from app.main import send_email
+from flask_jwt_extended.utils import get_jwt_identity
+from app.main.util.custom_jwt import Candidate_only
+from app.main.service.recruiter_service import get_a_account_recruiter_by_email
+from app.main import send_email
+from app.main.service.candidate_service import set_token_candidate,delete_a_candidate_by_id, get_a_account_candidate_by_email, insert_new_account_candidate, update_candidate_profile, verify_account_candidate
 from app.main.service.account_service import create_token, get_url_verify_email
 from flask_jwt_extended import decode_token
-import pymysql
 import datetime
 
 from app.main.service.candidate_service import get_candidate_by_id, get_candidate_resumes, set_token_candidate,delete_a_candidate_by_id, \
@@ -18,6 +22,7 @@ from app.main.util.custom_jwt import get_jwt_identity
 
 apiCandidate = CandidateDto.api
 _candidate = CandidateDto.candidate
+_candidateProfile = CandidateDto.profile
 _candidateAccount = CandidateDto.account
 @apiCandidate.route('/candidate/register')
 class RegisterCandidateList(Resource):
@@ -222,6 +227,85 @@ class AccountLogin(Resource):
                 'type':'candidate'
             }, 500
 
+@apiCandidate.route('/candidate/profile')
+@apiCandidate.response(404, 'Profile not found.')
+class CandidateFindProfile(Resource):
+    @apiCandidate.doc('Find list companies')
+    @Candidate_only
+    def get(self):
+        '''get profile by token'''
+        identity = get_jwt_identity()
+        email = identity['email']
+
+        profile = get_a_account_candidate_by_email(email)
+
+        if not profile:
+            return {
+                'status': 'failure',
+                'message': 'Profile not found',
+                'type' : 'candidate'
+            },400
+        else:
+            return {
+                'status': 'success',
+                'message': 'successfully',
+                'data' :{
+                    'profile':profile.to_json()
+                },
+                "error":None,
+                'type' : 'candidate'
+            },200
+
+@apiCandidate.route('/candidate/profile/update')
+@apiCandidate.response(404, 'Profile not found.')
+class CandidateUpdateProfile(Resource):
+
+    @apiCandidate.response(200, 'update profile successfully.')
+    @apiCandidate.doc('update a profile candidate')
+    @apiCandidate.expect(_candidateProfile, validate=True)
+    @Candidate_only
+    def post(self):
+        '''update a new profile candiadate '''
+        data = request.json
+
+        identity = get_jwt_identity()
+        email_in_token = identity['email']
+
+        if email_in_token != data['email']:
+            return {
+                'status': 'failure',
+                'message': 'Email does not match to data body email',
+                'type' : 'candidate'
+            }, 200
+
+        profile = get_a_account_candidate_by_email(email_in_token)
+
+        if not profile:
+            return {
+                'status': 'failure',
+                'message': 'Profile not found',
+                'type' : 'candidate'
+            },400
+
+        try:
+            update_candidate_profile(profile.id,data)
+
+            return {
+                'status': 'success',
+                'message': 'Update profile successfully',
+                'data' :{
+                    'profile':get_a_account_candidate_by_email(email_in_token).to_json()
+                },
+                "error": None,
+                'type' : 'candidate'
+            },200
+        except Exception as e:
+            print(e.args)
+            return {
+                'status': 'failure',
+                'message': 'Update profile failure',
+                'type' : 'candidate'
+            },400 
 
 
 #################################
