@@ -1,3 +1,6 @@
+from datetime import datetime
+from enum import auto
+from flask_restx.fields import Date, DateTime, String
 from sqlalchemy.orm import backref
 from .. import db, flask_bcrypt
 
@@ -37,4 +40,18 @@ class CandidateModel(db.Model):
 
     def __repr__(self):
         return "<Candidate '{}'>".format(self.email)
+
+    def to_json(self):
+        return {
+            "id": int(self.id),
+            "email": self.email,
+            "phone": self.phone,
+            "fullName": self.full_name,
+            "dateOfBirth": (self.date_of_birth).strftime("%Y/%m/%d, %H:%M:%S"),
+            "gender": self.gender,
+            "status": self.status,
+            "provinceId": self.province_id,
+            "registeredOn" : (self.registered_on).strftime("%Y/%m/%d, %H:%M:%S")
+        }
+
 

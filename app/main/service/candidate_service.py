@@ -40,3 +40,12 @@ def verify_account_candidate(email):
     account.confirmed_on = datetime.datetime.utcnow()
     db.session.add(account)
     db.session.commit()
+
+def update_candidate_profile(id,profile):
+    candidate = CandidateModel.query.get(id)
+    candidate.full_name = profile['fullName']
+    candidate.phone = profile['phone']
+    candidate.gender = profile['gender']
+    candidate.date_of_birth = profile['dateOfBirth']
+    candidate.province_id = profile['provinceId']
+    db.session.commit()
