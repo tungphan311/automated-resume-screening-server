@@ -28,7 +28,7 @@ def upgrade():
     sa.Column('not_allowed_skills', sa.String(length=300), nullable=True),
     sa.Column('min_year', sa.String(length=10), nullable=True),
     sa.Column('max_year', sa.String(length=10), nullable=True),
-    sa.Column('gender', sa.Integer(), nullable=True),
+    sa.Column('gender', sa.Boolean(), nullable=True),
     sa.Column('months_of_experience', sa.Integer(), nullable=True),
     sa.Column('last_edit', sa.DateTime(), nullable=False),
     sa.Column('recruiter_id', sa.Integer(), nullable=False),

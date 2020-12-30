@@ -13,7 +13,7 @@ class FilterCandidateModel(db.Model):
     not_allowed_skills = db.Column(db.String(300), nullable=True)
     min_year = db.Column(db.String(10), nullable=True)
     max_year = db.Column(db.String(10), nullable=True)
-    gender = db.Column(db.Integer, nullable=True)
+    gender = db.Column(db.Boolean, nullable=True)
     months_of_experience = db.Column(db.Integer, nullable=True)
     last_edit = db.Column(db.DateTime, nullable=False, default=datetime.now)
 

@@ -26,6 +26,23 @@ class FilterDto:
         'total': fields.Integer,
     })
 
+    filter_detail = api.model("filter_detail", {
+        "id": fields.Integer,
+        "name": fields.String,
+        "provinces": fields.String,
+        "atleast_skills": fields.String,
+        "required_skills": fields.String,
+        "not_allowed_skills": fields.String,
+        "min_year": fields.Integer,
+        "max_year": fields.Integer,
+        "gender": fields.Boolean,
+        "months_of_experience": fields.String,
+    })
+
+    filter_detail_response = api.inherit("filter_detail_response", base, {
+        'data': fields.Nested(filter_detail)
+    })
+
     filter_response_list = api.inherit("filter_response_list", base, {
         'data': fields.List(fields.Nested(single_filter_response)),
         'pagination': fields.Nested(pagination)
@@ -41,7 +58,7 @@ class FilterDto:
         "skills": fields.String(attribute=lambda x: format_skill(x))
     })
 
-    candidate_list = api.inherit("candidate_list", {
+    candidate_list = api.inherit("candidate_list", base, {
         'data': fields.List(fields.Nested(single_candidate_response)),
         'pagination': fields.Nested(pagination)
     })

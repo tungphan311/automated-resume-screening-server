@@ -39,12 +39,27 @@ def get_filter_list(args):
     page = args.get('page')
     page_size = args.get('page-size')
 
-    result = FilterCandidateModel.query.paginate(page, page_size, error_out=False)
+    identity = get_jwt_identity()
+    email = identity['email']
+
+    result = FilterCandidateModel.query\
+        .join(RecruiterModel, RecruiterModel.id == FilterCandidateModel.recruiter_id)\
+        .filter(RecruiterModel.email == email)\
+        .paginate(page, page_size, error_out=False)
 
     return result.items, {
         'total': result.total,
         'page': result.page
     }
+
+def get_filter_detail(id):
+    filter = FilterCandidateModel.query.get(id)
+
+    if not filter:
+        abort(400)
+
+    return filter
+
 
 def contain_skill(skills):
     res = []
