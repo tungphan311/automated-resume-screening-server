@@ -1,4 +1,4 @@
-from app.main.util.format_text import format_skill
+from app.main.util.format_text import format_domains, format_experience, format_provinces, format_skill
 from app.main.util.custom_fields import NullableString
 from flask_restx import Namespace, fields
 from app.main.dto.base_dto import base
@@ -29,10 +29,11 @@ class FilterDto:
     filter_detail = api.model("filter_detail", {
         "id": fields.Integer,
         "name": fields.String,
-        "provinces": fields.String,
-        "atleast_skills": fields.String,
-        "required_skills": fields.String,
-        "not_allowed_skills": fields.String,
+        "provinces": fields.List(fields.String, attribute=lambda x: format_provinces(x.provinces)),
+        "domains": fields.List(fields.Integer, attribute=lambda x: format_domains(x.job_domains)),
+        "atleast_skills": fields.List(fields.String, attribute=lambda x: x.atleast_skills.split(",") if x.atleast_skills else []),
+        "required_skills": fields.List(fields.String, attribute=lambda x: x.required_skills.split(",") if x.required_skills else []),
+        "not_allowed_skills": fields.List(fields.String, attribute=lambda x: x.not_allowed_skills.split(",") if x.not_allowed_skills else []),
         "min_year": fields.Integer,
         "max_year": fields.Integer,
         "gender": fields.Boolean,
@@ -54,7 +55,7 @@ class FilterDto:
         "total_views": fields.Integer,
         "job_domain": fields.String(attribute=lambda x: x.job_domain.name),
         "province_id": fields.Integer(attribute=lambda x: x.candidate.province_id),
-        # "experience": fields.String,
+        "experience": fields.String(attribute=lambda x: format_experience(x.months_of_experience)),
         "skills": fields.String(attribute=lambda x: format_skill(x))
     })
 

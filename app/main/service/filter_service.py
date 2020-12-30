@@ -64,8 +64,7 @@ def get_filter_detail(id):
 def contain_skill(skills):
     res = []
     for skill in skills:
-        res.append(ResumeModel.technical_skills.contains(skill))
-        res.append(ResumeModel.soft_skills.contains(skill))
+        res.append(or_(ResumeModel.technical_skills.contains(skill), ResumeModel.soft_skills.contains(skill)))
     return res
 
 def not_contain_skill(skills):
@@ -76,7 +75,7 @@ def not_contain_skill(skills):
     return res
 
 def find_candidates(args):
-    query = ResumeModel.query
+    query = ResumeModel.query.join(CandidateModel, CandidateModel.id == ResumeModel.cand_id)
 
     page = args.get('page')
     page_size = args.get('page_size')
@@ -96,8 +95,7 @@ def find_candidates(args):
     if provinces:
         province_ids = [int(id) for id in provinces]
 
-        query = query.join(CandidateModel, CandidateModel.id == ResumeModel.cand_id)\
-            .filter(CandidateModel.province_id.in_(province_ids))
+        query = query.filter(CandidateModel.province_id.in_(province_ids))
 
     if atleast_skills:
         query = query.filter(or_(*contain_skill(atleast_skills)))
@@ -109,17 +107,14 @@ def find_candidates(args):
         query = query.filter(and_(*not_contain_skill(not_allowed_skills)))
 
     if min_year:
-        query = query.join(CandidateModel, CandidateModel.id == ResumeModel.cand_id)\
-            .filter(extract('year', CandidateModel.date_of_birth) >= min_year)
+        query = query.filter(extract('year', CandidateModel.date_of_birth) >= min_year)
 
     if max_year:
-        query = query.join(CandidateModel, CandidateModel.id == ResumeModel.cand_id)\
-            .filter(extract('year', CandidateModel.date_of_birth) <= max_year)
+        query = query.filter(extract('year', CandidateModel.date_of_birth) <= max_year)
 
     if gender:
         gender = gender == 'true'
-        query = query.join(CandidateModel, CandidateModel.id == ResumeModel.cand_id)\
-            .filter(CandidateModel.gender == gender)
+        query = query.filter(CandidateModel.gender == gender)
 
     if months_of_experience:
         query = query.filter(ResumeModel.months_of_experience >= months_of_experience)

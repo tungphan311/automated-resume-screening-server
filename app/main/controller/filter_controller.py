@@ -37,6 +37,7 @@ class FilterCandidate(Resource):
 class FilterCandidateDetail(Resource):
     @api.doc('get filter with id')
     @api.marshal_with(FilterDto.filter_detail_response, code=200)
+    @HR_only
     def get(self, id):
         filter = get_filter_detail(id)
         return response_object(data=filter)

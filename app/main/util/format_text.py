@@ -1,5 +1,8 @@
 
 
+from app.main.model.job_domain_model import JobDomainModel
+
+
 def format_contract(id):
     if id == 0:
         return "Toàn thời gian"
@@ -26,3 +29,19 @@ def format_skill(resume):
     soft = resume.soft_skills.split("|")
 
     return ", ".join(tech + soft) 
+
+
+def format_domains(domains):
+    domains = domains.split(",")
+    domains = [ int(domain) for domain in domains ]
+
+    return domains
+
+def format_provinces(provinces):
+    return provinces.split(",")
+
+def format_experience(exp):
+    year = int(exp / 12)
+    month = exp % 12
+
+    return "{} năm {} tháng".format(year, month) if year > 0 else "{} tháng".format(month)
