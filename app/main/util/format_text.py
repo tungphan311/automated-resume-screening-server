@@ -19,3 +19,10 @@ def format_salary(min_salary, max_salary):
             return "Từ {} triệu đồng".format(min_salary)
         else:
             return "{} - {} triệu đồng".format(min_salary, max_salary)
+
+
+def format_skill(resume):
+    tech = resume.technical_skills.split("|")
+    soft = resume.soft_skills.split("|")
+
+    return ", ".join(tech + soft) 

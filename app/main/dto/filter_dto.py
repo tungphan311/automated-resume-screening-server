@@ -1,3 +1,4 @@
+from app.main.util.format_text import format_skill
 from app.main.util.custom_fields import NullableString
 from flask_restx import Namespace, fields
 from app.main.dto.base_dto import base
@@ -15,7 +16,7 @@ class FilterDto:
     })
 
     single_filter_response = api.model("single_filter_response", {
-        "id": fields.String,
+        "id": fields.Integer,
         "name": fields.String,
         "provinces": fields.String,
         "last_edit": fields.DateTime()
@@ -27,5 +28,20 @@ class FilterDto:
 
     filter_response_list = api.inherit("filter_response_list", base, {
         'data': fields.List(fields.Nested(single_filter_response)),
+        'pagination': fields.Nested(pagination)
+    })
+
+    single_candidate_response = api.model("single_candidate_response", {
+        "id": fields.Integer(attribute=lambda x: x.candidate.id),
+        "name": fields.String(attribute=lambda x: x.candidate.full_name),
+        "total_views": fields.Integer,
+        "job_domain": fields.String(attribute=lambda x: x.job_domain.name),
+        "province_id": fields.Integer(attribute=lambda x: x.candidate.province_id),
+        # "experience": fields.String,
+        "skills": fields.String(attribute=lambda x: format_skill(x))
+    })
+
+    candidate_list = api.inherit("candidate_list", {
+        'data': fields.List(fields.Nested(single_candidate_response)),
         'pagination': fields.Nested(pagination)
     })

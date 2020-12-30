@@ -1,3 +1,4 @@
+from sqlalchemy.ext.hybrid import hybrid_method
 from .. import db
 from app.main.model.job_domain_model import JobDomainModel
 
@@ -30,4 +31,9 @@ class ResumeModel(db.Model):
 
     job_domain_id = db.Column(db.Integer, db.ForeignKey(JobDomainModel.id), nullable=True)
 
-    
+    def __repr__(self):
+        return "<Resume '{}'>".format(self.id)
+
+    @hybrid_method
+    def contain_at_least_one(self, skills):
+        return any(skill in self.technical_skills for skill in skills)
