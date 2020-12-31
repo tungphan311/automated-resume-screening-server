@@ -32,13 +32,16 @@ def format_skill(resume):
 
 
 def format_domains(domains):
-    domains = domains.split(",")
-    domains = [ int(domain) for domain in domains ]
-
+    if domains:
+        domains = domains.split(",") 
+        domains = [ int(domain) for domain in domains ]
+    else:
+        domains = []
+        
     return domains
 
 def format_provinces(provinces):
-    return provinces.split(",")
+    return provinces.split(",") if provinces else []
 
 def format_experience(exp):
     year = int(exp / 12)
