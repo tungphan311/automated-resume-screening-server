@@ -3,9 +3,6 @@ services:
   resume-screening:
     container_name: resume-screening-service
     image: pttung/resume-screening
-    # build: ".."
     working_dir: /app
-    env_file:
-      - ../.env
     ports:
-      - 5000:5000
+      - 80:5000
