@@ -63,6 +63,20 @@ def update_filter(data, id):
     return response_object(message="Cập nhật bộ lọc thành công")
 
 
+def delete_filter(ids):
+    for id in ids:
+        filter = FilterCandidateModel.query.get(id)
+
+        if not filter:
+            abort(400)
+
+        db.session.delete(filter)
+
+    db.session.commit()
+
+    return response_object(message="Xoá bộ lọc thành công")
+
+
 def get_filter_list(args):
     page = args.get('page')
     page_size = args.get('page-size')
