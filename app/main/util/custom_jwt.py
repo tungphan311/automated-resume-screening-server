@@ -34,7 +34,8 @@ def Candidate_only(func):
         email = identity['email']
         is_HR = identity['is_HR']
 
-        if is_HR:
+        # must
+        if is_HR == True:
             return response_object(code=403, message="Bạn không có quyền thực hiện chức năng này!"), 403
         else:
             candidate = CandidateModel.query.filter_by(email=email).first()

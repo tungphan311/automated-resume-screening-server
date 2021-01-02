@@ -1,5 +1,5 @@
 from app.main.util.response import response_object
-from app.main.util.custom_jwt import HR_only
+from app.main.util.custom_jwt import Candidate_only, HR_only
 from app.main.service.recruiter_service import get_a_account_recruiter_by_email
 from app.main import send_email
 from app.main.service.account_service import create_token, get_url_verify_email
@@ -9,12 +9,13 @@ import datetime
 
 from app.main.service.candidate_service import get_candidate_by_id, set_token_candidate,delete_a_candidate_by_id, \
     get_a_account_candidate_by_email, insert_new_account_candidate, verify_account_candidate, \
-    get_candidate_by_id
+    get_candidate_by_id, alter_save_job
 
 from flask import request, jsonify, url_for, render_template
 from flask.wrappers import Response
 from flask_restx import Resource
 from app.main.util.dto import CandidateDto
+from app.main.util.custom_jwt import get_jwt_identity
 
 apiCandidate = CandidateDto.api
 _candidate = CandidateDto.candidate
@@ -239,4 +240,25 @@ class QueryCandidates(Resource):
     @HR_only
     def get(self, id): 
         data = get_candidate_by_id(id)
+        return response_object(data=data)
+
+
+
+###################
+# Save Job Post
+###################
+save_res_parser = apiCandidate.parser()
+save_res_parser.add_argument('Authorization', location='headers', required=True)
+save_res_parser.add_argument('job_post_id', type=int, location='json', required=True)
+save_res_parser.add_argument('status', type=int, location='json', required=True)
+@apiCandidate.route('/job-posts/save')
+class SaveResume(Resource):
+    @apiCandidate.doc("Save resumes.")
+    @apiCandidate.expect(save_res_parser)
+    @Candidate_only
+    def post(self):
+        identity = get_jwt_identity()
+        email = identity['email']
+        args = save_res_parser.parse_args()
+        data = alter_save_job(email, args)
         return response_object(data=data)

@@ -22,6 +22,7 @@ class RecruiterModel(db.Model):
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
     job_posts = db.relationship('JobPostModel', backref=backref("recruiter", lazy='joined'), lazy=True)
+    saved_resumes = db.relationship('RecruiterResumeSavesModel', uselist=True, backref="resume")
 
     @property
     def password(self):

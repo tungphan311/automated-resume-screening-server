@@ -1,7 +1,10 @@
+from sys import exec_prefix
 from app.main.service.candidate_service import get_a_account_candidate_by_email
 from app.main import send_email
-from app.main.service.recruiter_service import get_a_account_recruiter_by_email, set_token_recruiter,delete_a_recruiter_by_id,  insert_new_account_recruiter, verify_account_recruiter
+from app.main.service.recruiter_service import get_a_account_recruiter_by_email, set_token_recruiter,delete_a_recruiter_by_id, \
+    insert_new_account_recruiter, verify_account_recruiter, alter_save_resume
 from app.main.service.account_service import create_token, get_url_verify_email
+from flask_jwt_extended.utils import get_jwt_identity
 from flask_jwt_extended import decode_token
 import pymysql
 import datetime
@@ -10,6 +13,8 @@ from flask import request, jsonify, url_for, render_template
 from flask.wrappers import Response
 from flask_restx import Resource
 from app.main.util.dto import RecruiterDto
+from app.main.util.response import response_object
+from app.main.util.custom_jwt import HR_only
 
 apiRecruiter = RecruiterDto.api
 _recruiter = RecruiterDto.recruiter
@@ -220,3 +225,25 @@ class RecruiterLogin(Resource):
                 'message': 'Try again',
                 'type':'recruiter'
             }, 500
+
+
+
+
+###################
+# Save Resumes
+###################
+save_res_parser = apiRecruiter.parser()
+save_res_parser.add_argument('Authorization', location='headers', required=True)
+save_res_parser.add_argument('resume_id', type=int, location='json', required=True)
+save_res_parser.add_argument('status', type=int, location='json', required=True)
+@apiRecruiter.route('/recruiter/save-resumes')
+class SaveResume(Resource):
+    @apiRecruiter.doc("Save resumes.")
+    @apiRecruiter.expect(save_res_parser)
+    @HR_only
+    def post(self):
+        identity = get_jwt_identity()
+        email = identity['email']
+        args = save_res_parser.parse_args()
+        data = alter_save_resume(email, args)
+        return response_object(data=data)

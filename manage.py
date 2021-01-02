@@ -10,7 +10,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 import jwt
 
-from app.main.model import job_post_model, recruiter_model, job_resume_submissions_model, candidate_model, activity_model, company_model
+from app.main.model import job_post_model, recruiter_model, job_resume_submissions_model, candidate_model, activity_model, company_model, candidate_job_save_model, recruiter_resume_save_model
 
 from app import blueprint
 from app.main import create_app, db

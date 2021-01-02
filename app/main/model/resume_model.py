@@ -1,3 +1,4 @@
+from sqlalchemy.orm import backref
 from .. import db
 from app.main.model.job_domain_model import JobDomainModel
 
