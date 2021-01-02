@@ -1,6 +1,6 @@
 from flask_restx.fields import String
 from app.main.util.response import response_object
-from app.main.service.filter_service import add_new_filter, find_candidates, get_filter_detail, get_filter_list
+from app.main.service.filter_service import add_new_filter, find_candidates, get_filter_detail, get_filter_list, update_filter
 from app.main.util.custom_jwt import HR_only
 from app.main.dto.filter_dto import FilterDto
 from flask_restx import Resource
@@ -41,6 +41,13 @@ class FilterCandidateDetail(Resource):
     def get(self, id):
         filter = get_filter_detail(id)
         return response_object(data=filter)
+
+    @api.doc('update filter')
+    @api.expect(FilterDto.filter_update, validate=True)
+    @HR_only
+    def put(self, id):
+        data = request.json
+        return update_filter(data, id)
 
 
 find_candidates_parser = api.parser()
