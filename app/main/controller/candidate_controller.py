@@ -1,10 +1,15 @@
+from app.main.util.response import response_object
+from app.main.util.custom_jwt import HR_only
 from app.main.service.recruiter_service import get_a_account_recruiter_by_email
 from app.main import send_email
-from app.main.service.candidate_service import set_token_candidate,delete_a_candidate_by_id, get_a_account_candidate_by_email, insert_new_account_candidate, verify_account_candidate
 from app.main.service.account_service import create_token, get_url_verify_email
 from flask_jwt_extended import decode_token
 import pymysql
 import datetime
+
+from app.main.service.candidate_service import get_candidate_by_id, set_token_candidate,delete_a_candidate_by_id, \
+    get_a_account_candidate_by_email, insert_new_account_candidate, verify_account_candidate, \
+    get_candidate_by_id
 
 from flask import request, jsonify, url_for, render_template
 from flask.wrappers import Response
@@ -216,3 +221,22 @@ class AccountLogin(Resource):
                 'message': 'Try again',
                 'type':'candidate'
             }, 500
+
+
+
+#################################
+#
+# Query candidates by id
+#
+#################################
+candidates_by_id_parser = apiCandidate.parser()
+candidates_by_id_parser.add_argument("Authorization", location="headers", required=True)
+@apiCandidate.route("/candidates/<int:id>")
+class QueryCandidates(Resource):
+    @apiCandidate.doc("Get candidate by id")
+    @apiCandidate.marshal_with(CandidateDto.candidate_detail_response, code=200)
+    @apiCandidate.expect(candidates_by_id_parser)
+    @HR_only
+    def get(self, id): 
+        data = get_candidate_by_id(id)
+        return response_object(data=data)

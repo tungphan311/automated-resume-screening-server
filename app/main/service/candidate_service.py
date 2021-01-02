@@ -40,3 +40,7 @@ def verify_account_candidate(email):
     account.confirmed_on = datetime.datetime.utcnow()
     db.session.add(account)
     db.session.commit()
+
+def get_candidate_by_id(id):
+    cand = CandidateModel.query.get(id)
+    return cand

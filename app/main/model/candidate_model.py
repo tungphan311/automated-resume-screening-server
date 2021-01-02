@@ -1,5 +1,6 @@
 from sqlalchemy.orm import backref
 from .. import db, flask_bcrypt
+from app.main.dto.resume_dto import ResumeDTO
 
 
 class CandidateModel(db.Model):

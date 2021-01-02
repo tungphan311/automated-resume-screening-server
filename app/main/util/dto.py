@@ -1,6 +1,8 @@
 from flask_restx import Namespace, fields
 
 from app.main.model.company_model import CompanyModel
+from app.main.dto.base_dto import base
+from app.main.dto.resume_dto import ResumeDTO
 
 class CompanyDto:
     api = Namespace(
@@ -30,6 +32,29 @@ class CandidateDto:
     account = api.model('account', {
         'email': fields.String(required=True, description='user email address'),
         'password': fields.String(required=True, description='user password'),
+    })
+
+    ########################
+    # Candidate detail model
+    ########################
+    candidate_detail_fields = api.model('candidate_detail_fields', {
+        'id': fields.Integer,
+        'email': fields.String,
+        'password_hash': fields.String,
+        'phone': fields.String,
+        'full_name': fields.String,
+        'gender': fields.Boolean,
+        'date_of_birth': fields.DateTime(),
+        'status': fields.Integer,
+        'province_id': fields.Integer,
+        'access_token': fields.String,
+        'registered_on': fields.DateTime(),
+        'confirmed': fields.Boolean,
+        'confirmed_on': fields.DateTime(),
+        'resumes': fields.List(fields.Nested(ResumeDTO.resume_detail_fields))
+    })
+    candidate_detail_response = api.inherit('candidate_detail_response', base, {
+        'data': fields.Nested(candidate_detail_fields)
     })
 
 class RecruiterDto:
