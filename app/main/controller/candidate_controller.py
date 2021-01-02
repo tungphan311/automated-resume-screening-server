@@ -9,11 +9,11 @@ import datetime
 
 from app.main.service.candidate_service import get_candidate_by_id, set_token_candidate,delete_a_candidate_by_id, \
     get_a_account_candidate_by_email, insert_new_account_candidate, verify_account_candidate, \
-    get_candidate_by_id, alter_save_job
+    get_candidate_by_id, alter_save_job, get_saved_job_posts
 
 from flask import request, jsonify, url_for, render_template
 from flask.wrappers import Response
-from flask_restx import Resource
+from flask_restx import Resource, inputs
 from app.main.util.dto import CandidateDto
 from app.main.util.custom_jwt import get_jwt_identity
 
@@ -251,9 +251,17 @@ save_res_parser = apiCandidate.parser()
 save_res_parser.add_argument('Authorization', location='headers', required=True)
 save_res_parser.add_argument('job_post_id', type=int, location='json', required=True)
 save_res_parser.add_argument('status', type=int, location='json', required=True)
+
+get_res_parser = apiCandidate.parser()
+get_res_parser.add_argument("Authorization", location="headers", required=False)
+get_res_parser.add_argument("page", type=int, location="args", required=False, default=1)
+get_res_parser.add_argument("page-size", type=int, location="args", required=False, default=10)
+get_res_parser.add_argument("from-date", type=inputs.datetime_from_iso8601, location="args", required=False)
+get_res_parser.add_argument("to-date", type=inputs.datetime_from_iso8601, location="args", required=False)
+
 @apiCandidate.route('/job-posts/save')
 class SaveResume(Resource):
-    @apiCandidate.doc("Save resumes.")
+    @apiCandidate.doc("Save job post")
     @apiCandidate.expect(save_res_parser)
     @Candidate_only
     def post(self):
@@ -262,3 +270,14 @@ class SaveResume(Resource):
         args = save_res_parser.parse_args()
         data = alter_save_job(email, args)
         return response_object(data=data)
+
+    @apiCandidate.doc("Get saved job posts")
+    @apiCandidate.expect(get_res_parser)
+    @apiCandidate.marshal_with(CandidateDto.get_saved_job_post_list_response, code=200)
+    @Candidate_only
+    def get(self):
+        identity = get_jwt_identity()
+        email = identity['email']
+        args = get_res_parser.parse_args()
+        (data, pagination) = get_saved_job_posts(email, args)
+        return response_object(data=data, pagination=pagination)

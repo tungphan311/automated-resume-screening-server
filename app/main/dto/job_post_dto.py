@@ -46,9 +46,9 @@ class JobPostDto:
         'requirement': fields.String(attribute='requirement_text'),
         'benefit': fields.String(attribute='benefit_text'),
         'amount': fields.Integer,
-        'company_name': fields.String(attribute=lambda x: x.recruiter.company.name),
-        'company_logo': fields.String(attribute=lambda x: x.recruiter.company.logo),
-        'company_background': fields.String(attribute=lambda x: x.recruiter.company.background),
+        'company_name': fields.String(attribute=lambda x: x.recruiter.company.name if x.recruiter.company is not None else None),
+        'company_logo': fields.String(attribute=lambda x: x.recruiter.company.logo if x.recruiter.company is not None else None),
+        'company_background': fields.String(attribute=lambda x: x.recruiter.company.background if x.recruiter.company is not None else None),
         # 'total_view': fields. post.total_views,
         # 'total_save': fields. post.total_views,
         # 'total_apply': fields. post.total_applies,
@@ -62,7 +62,7 @@ class JobPostDto:
     # Response for search job post
     single_job_post_in_search_fields = api.model("single_job_post_in_search_fields", {
         'job_title': fields.String,
-        'company_name': fields.String(attribute=lambda x: x.recruiter.company.name),
+        'company_name': fields.String(attribute=lambda x: x.recruiter.company.name if x.recruiter.company is not None else None),
         'last_edit': fields.DateTime(),
         'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)),
         'contact_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),

@@ -101,6 +101,7 @@ def alter_save_resume(rec_email, args):
 def get_saved_resumes(email, args):
     # Check HR
     rec = RecruiterModel.query.filter_by(email=email).first()
+    if rec is None: abort(400)
     rec_id = rec.id
 
     query = RecruiterResumeSavesModel.query.filter(RecruiterResumeSavesModel.recruiter_id == rec_id)
@@ -118,7 +119,6 @@ def get_saved_resumes(email, args):
     result = query.paginate(page=page, per_page=page_size)
 
     # get related info
-    # Tên cand, resume_info (store_url, skills) + ngày thêm  
     final_res = []
     for item in result.items:
         i = {}

@@ -260,7 +260,7 @@ class SaveResume(Resource):
 
     @apiRecruiter.doc("Get resumes")
     @apiRecruiter.expect(get_res_parser)
-    @apiRecruiter.marshal_with(RecruiterDto.get_saved_resumes_response, code=200)
+    @apiRecruiter.marshal_with(RecruiterDto.get_saved_resume_list_response, code=200)
     @HR_only
     def get(self):
         identity = get_jwt_identity()
