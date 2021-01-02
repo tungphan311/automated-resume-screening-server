@@ -153,6 +153,13 @@ class SubmitResumeForJD(Resource):
     def post(self, jp_id):
         args = self.apply_parser.parse_args()
         data = apply_cv_to_jp(jp_id, args)
+
+        if data == 409:
+            return response_object(
+                code=409,
+                message="CV này đã gửi vào tin đăng này."
+            ), 409
+
         return response_object(data=data), 200
 
 

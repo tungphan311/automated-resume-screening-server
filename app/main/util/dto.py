@@ -79,6 +79,21 @@ class CandidateDto:
         'pagination': fields.Nested(pagination)
     })
 
+    ########################
+    # Get applied job posts
+    ########################
+    applied_job_post_fields = api.model("applied_job_post_fields", {
+        'id': fields.Integer,
+        'resume_id': fields.Integer,
+        'job_post_id': fields.Integer,
+        'submit_date': fields.DateTime(),
+        'job_post': fields.Nested(JobPostDto.job_post_for_cand_fields),
+    })
+    get_applied_job_post_list_response = api.inherit('get_applied_job_post_list_response', base, {
+        'data': fields.List(fields.Nested(applied_job_post_fields)),
+        'pagination': fields.Nested(pagination)
+    })
+
 
 class RecruiterDto:
     api = Namespace(

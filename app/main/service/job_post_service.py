@@ -243,6 +243,9 @@ def apply_cv_to_jp(jp_id, args):
     if JobPostModel.query.get(jp_id) == None:
         abort(400)
 
+    if JobResumeSubmissionModel.query.filter_by(resume_id=resume_id, job_post_id=jp_id).first() is not None:
+        return 409
+
     submission = JobResumeSubmissionModel(
         resume_id=resume_id,
         job_post_id=jp_id,
