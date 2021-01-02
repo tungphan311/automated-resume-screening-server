@@ -1,8 +1,11 @@
+from operator import truediv
 from sys import exec_prefix
+
+from flask_restx.fields import DateTime
 from app.main.service.candidate_service import get_a_account_candidate_by_email
 from app.main import send_email
 from app.main.service.recruiter_service import get_a_account_recruiter_by_email, set_token_recruiter,delete_a_recruiter_by_id, \
-    insert_new_account_recruiter, verify_account_recruiter, alter_save_resume
+    insert_new_account_recruiter, verify_account_recruiter, alter_save_resume, get_saved_resumes
 from app.main.service.account_service import create_token, get_url_verify_email
 from flask_jwt_extended.utils import get_jwt_identity
 from flask_jwt_extended import decode_token
@@ -10,8 +13,7 @@ import pymysql
 import datetime
 
 from flask import request, jsonify, url_for, render_template
-from flask.wrappers import Response
-from flask_restx import Resource
+from flask_restx import Resource, inputs
 from app.main.util.dto import RecruiterDto
 from app.main.util.response import response_object
 from app.main.util.custom_jwt import HR_only
@@ -236,9 +238,17 @@ save_res_parser = apiRecruiter.parser()
 save_res_parser.add_argument('Authorization', location='headers', required=True)
 save_res_parser.add_argument('resume_id', type=int, location='json', required=True)
 save_res_parser.add_argument('status', type=int, location='json', required=True)
+
+get_res_parser = apiRecruiter.parser()
+get_res_parser.add_argument("Authorization", location="headers", required=False)
+get_res_parser.add_argument("page", type=int, location="args", required=False, default=1)
+get_res_parser.add_argument("page-size", type=int, location="args", required=False, default=10)
+get_res_parser.add_argument("from-date", type=inputs.datetime_from_iso8601, location="args", required=False)
+get_res_parser.add_argument("to-date", type=inputs.datetime_from_iso8601, location="args", required=False)
+
 @apiRecruiter.route('/recruiter/save-resumes')
 class SaveResume(Resource):
-    @apiRecruiter.doc("Save resumes.")
+    @apiRecruiter.doc("Save resumes")
     @apiRecruiter.expect(save_res_parser)
     @HR_only
     def post(self):
@@ -247,3 +257,14 @@ class SaveResume(Resource):
         args = save_res_parser.parse_args()
         data = alter_save_resume(email, args)
         return response_object(data=data)
+
+    @apiRecruiter.doc("Get resumes")
+    @apiRecruiter.expect(get_res_parser)
+    @apiRecruiter.marshal_with(RecruiterDto.get_saved_resumes_response, code=200)
+    @HR_only
+    def get(self):
+        identity = get_jwt_identity()
+        email = identity['email']
+        args = get_res_parser.parse_args()
+        (data, pagination) = get_saved_resumes(email, args)
+        return response_object(data=data, pagination=pagination)

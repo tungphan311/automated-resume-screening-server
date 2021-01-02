@@ -8,3 +8,5 @@ class CandidateJobSavesModel(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cand_id = db.Column(db.Integer, db.ForeignKey(CandidateModel.id), nullable=False)
     job_post_id = db.Column(db.Integer, db.ForeignKey(JobPostModel.id), nullable=False)
+    created_on = db.Column(db.DateTime, default=db.func.now())
+    updated_on = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())

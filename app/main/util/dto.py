@@ -57,6 +57,7 @@ class CandidateDto:
         'data': fields.Nested(candidate_detail_fields)
     })
 
+
 class RecruiterDto:
     api = Namespace(
         'Recruiter', description='Recruiter related operations')
@@ -71,6 +72,53 @@ class RecruiterDto:
         'email': fields.String(required=True, description='user email address'),
         'password': fields.String(required=True, description='user password'),
     })
+
+    ####################
+    # Get saved resumes
+    ####################
+    resume_detail_fields = api.model("resume_detail_fields", {
+        'id': fields.Integer,
+        'months_of_experience': fields.Integer,
+        'cand_id': fields.Integer,
+        'cand_linkedin': fields.String,
+        'cand_github': fields.String,
+        'cand_facebook': fields.String,
+        'cand_twitter': fields.String,
+        'cand_mail': fields.String,
+        'cand_phone': fields.String,
+        'soft_skills': fields.String,
+        'technical_skills': fields.String,
+        'store_url': fields.String,
+        'is_finding_job': fields.Boolean,
+        'resume_filename': fields.String,
+        'resume_file_extension': fields.String,
+        'total_views': fields.Integer,
+        'total_saves': fields.Integer,
+        'educations': fields.String,
+        'experiences': fields.String,
+        'job_domain_id': fields.Integer,
+
+        'job_domain_name': fields.String(attribute='job_domain.name'),
+        'cand_name': fields.String(attribute='candidate.full_name'),
+        'cand_email': fields.String(attribute='candidate.email'),
+        'cand_phone_from_user_input': fields.String(attribute='candidate.phone'),
+    })
+    saved_resume_info_fields = api.model("saved_resume_info_fields", {
+        'id': fields.Integer, 
+        'recruiter_id': fields.Integer, 
+        'resume_id': fields.Integer, 
+        'created_on': fields.DateTime(),
+        'resume': fields.Nested(resume_detail_fields),
+    })
+    pagination = api.model('pagination', {
+        'page': fields.Integer,
+        'total': fields.Integer,
+    })
+    get_saved_resumes_response = api.inherit('get_saved_resumes_response', base, {
+        'data': fields.List(fields.Nested(saved_resume_info_fields)),
+        'pagination': fields.Nested(pagination)
+    })
+    
 
 class AccountDto:
     api = Namespace(

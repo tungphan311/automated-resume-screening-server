@@ -11,3 +11,5 @@ class RecruiterResumeSavesModel(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     recruiter_id = db.Column(db.Integer, db.ForeignKey(RecruiterModel.id), nullable=False)
     resume_id = db.Column(db.Integer, db.ForeignKey(ResumeModel.id), nullable=False)
+    created_on = db.Column(db.DateTime, default=db.func.now())
+    updated_on = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
