@@ -43,6 +43,10 @@ class CandidateModel(db.Model):
         return "<Candidate '{}'>".format(self.email)
 
     def to_json(self):
+        if self.resumes== None:
+            data = None
+        else:
+            data = self.resumes.to_json()
         return {
             "id": int(self.id),
             "email": self.email,
@@ -52,7 +56,8 @@ class CandidateModel(db.Model):
             "gender": self.gender,
             "status": self.status,
             "provinceId": self.province_id,
-            "registeredOn" : (self.registered_on).strftime("%Y/%m/%d, %H:%M:%S")
+            "registeredOn" : (self.registered_on).strftime("%Y/%m/%d, %H:%M:%S"),
+            "resumes": data          
         }
 
 
