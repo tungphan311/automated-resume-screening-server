@@ -10,7 +10,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 import jwt
 
-from app.main.model import job_post_model, recruiter_model, job_resume_submissions_model, candidate_model, activity_model, company_model
+from app.main.model import job_post_model, recruiter_model, job_resume_submissions_model, candidate_model, activity_model, company_model, filter_candidates
 
 from app import blueprint
 from app.main import create_app, db
@@ -19,6 +19,8 @@ app = create_app(os.getenv('BOILERPLATE_ENV') or 'dev')
 app.register_blueprint(blueprint)
 app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
 app.config['PROPAGATE_EXCEPTIONS'] = True
+app.config['SQLALCHEMY_POOL_SIZE'] = 100
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 280
 app.app_context().push()
 
 mail = Mail(app)
@@ -43,7 +45,7 @@ def bad_request():
 @manager.command
 def run():
     seed_data(db)
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
 
 @manager.command
