@@ -1,9 +1,13 @@
+from app.main.service.account_service import create_token
+from app.main.service.candidate_service import get_a_account_candidate_by_email
+from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.custom_jwt import Candidate_only
 from flask_restx.fields import String
-from app.main.service.resume_service import create_cv, update_cv
+from app.main.service.resume_service import create_cv, get_resume_by_candidate_id, get_resume_by_id, update_cv
 from flask.globals import request
 from flask_restx import Namespace
 from flask_restx import Resource
+from flask import jsonify
 import os
 import uuid
 from werkzeug.datastructures import FileStorage
@@ -54,3 +58,30 @@ class UpdateCV(Resource):
         args = update_cv_parser.parse_args()
         data = update_cv(args)
         return response_object(data=data)
+
+
+
+@api.route("/candidate-list-cv")
+class CV(Resource):
+    @api.doc('get list CV candidate by token')
+    @Candidate_only
+    def get(self):
+        identity = get_jwt_identity()
+        candidate = get_a_account_candidate_by_email(identity['email'])
+        resumes = get_resume_by_candidate_id(candidate.id)
+        if not resumes:
+            return response_object(data = None ,message ="Data null or empty"),200
+        return response_object(data = [resume.to_json() for resume in resumes],message ="successfully")
+
+@api.route("/findById")
+class CV(Resource):
+    @api.doc('get list CV candidate by token')
+    @api.param('id', 'id of resume')
+    def get(self):
+        resumeId = request.args.get('id')
+        if not resumeId:
+            return response_object(data=None, message = "Missing query id", code = 400), 400
+        resume = get_resume_by_id(resumeId)
+        if not resume:
+            return response_object(data=None, message = "failure"), 200
+        return response_object(data = resume.to_json(),message ="successfully")

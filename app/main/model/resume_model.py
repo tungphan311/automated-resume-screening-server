@@ -1,3 +1,5 @@
+from flask import json
+from sqlalchemy import inspection
 from .. import db
 from app.main.model.job_domain_model import JobDomainModel
 
@@ -30,4 +32,29 @@ class ResumeModel(db.Model):
 
     job_domain_id = db.Column(db.Integer, db.ForeignKey(JobDomainModel.id), nullable=True)
 
-    
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}   
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "months_of_experience": self.months_of_experience,
+            "candidate_profile": self.candidate.to_json(),
+            "cand_linkedin": self.cand_linkedin,
+            "cand_github": self.cand_github,
+            "cand_facebook": self.cand_facebook,
+            "cand_twitter": self.cand_twitter,
+            "cand_mail": self.cand_mail,
+            "cand_phone": self.cand_phone,
+            "soft_skills": self.soft_skills,
+            "technical_skills": self.technical_skills,
+            "store_url": self.store_url,
+            "is_finding_job": self.is_finding_job,
+            "resume_filename": self.resume_filename,
+            "resume_file_extension": self.resume_file_extension,
+            "total_views": self.total_views,
+            "total_saves": self.total_saves,
+            "educations": self.educations,
+            "experiences": self.experiences,
+            "job_domain": self.job_domain.to_json()
+        }

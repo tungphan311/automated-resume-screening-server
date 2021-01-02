@@ -61,4 +61,10 @@ def update_cv(args):
     db.session.commit()
     return resume
 
+def get_resume_by_candidate_id(cand_id):
+    return ResumeModel.query.filter_by(cand_id=cand_id)
+
+def get_resume_by_id(id):
+    return ResumeModel.query.get(id)
+
     
