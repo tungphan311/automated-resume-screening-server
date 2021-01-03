@@ -1,0 +1,8 @@
+version: "3"
+services:
+  resume-screening:
+    container_name: resume-screening-service
+    image: pttung/resume-screening
+    working_dir: /app
+    ports:
+      - 80:5000
