@@ -92,6 +92,19 @@ class CandidateDto:
         'pagination': fields.Nested(pagination)
     })
 
+    ########################
+    # Get uploaded resumes
+    ########################
+    single_resume = api.model("single_resume", {
+        'id': fields.Integer,
+        'resume_filename': fields.String,
+        'resume_file_extension': fields.String,
+        'store_url': fields.String
+    })
+    resume_list = api.inherit('resume_list', base, {
+        'data': fields.List(fields.Nested(single_resume)),
+    })
+
 
 class RecruiterDto:
     api = Namespace(

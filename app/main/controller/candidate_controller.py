@@ -7,12 +7,11 @@ from flask_jwt_extended import decode_token
 import pymysql
 import datetime
 
-from app.main.service.candidate_service import get_candidate_by_id, set_token_candidate,delete_a_candidate_by_id, \
+from app.main.service.candidate_service import get_candidate_by_id, get_candidate_resumes, set_token_candidate,delete_a_candidate_by_id, \
     get_a_account_candidate_by_email, insert_new_account_candidate, verify_account_candidate, \
     get_candidate_by_id, alter_save_job, get_saved_job_posts, get_applied_job_posts
 
 from flask import request, jsonify, url_for, render_template
-from flask.wrappers import Response
 from flask_restx import Resource, inputs
 from app.main.util.dto import CandidateDto
 from app.main.util.custom_jwt import get_jwt_identity
@@ -295,3 +294,16 @@ class GetAppliedJobs(Resource):
         args = get_res_parser.parse_args()
         (data, pagination) = get_applied_job_posts(email, args)
         return response_object(data=data, pagination=pagination)
+
+
+@apiCandidate.route('/candidates/resumes')
+class CandidateResumes(Resource):
+    @apiCandidate.doc("Get uploaded resumes")
+    @apiCandidate.marshal_with(CandidateDto.resume_list, code=200)
+    @Candidate_only
+    def get(self):
+        identity = get_jwt_identity()
+        email = identity['email']
+
+        data = get_candidate_resumes(email)
+        return response_object(data=data)

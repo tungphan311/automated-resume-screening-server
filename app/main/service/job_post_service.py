@@ -2,7 +2,6 @@ from app.main.controller import job_post_controller
 from sys import float_info
 from app.main.model import job_post_model
 from app.main.service.matching_service import OnetoOneMatching, jobPipeline
-import datetime
 from datetime import datetime, timedelta
 import dateutil.parser
 from flask import json
@@ -72,13 +71,13 @@ def get_hr_posts(page, page_size, sort_values, is_showing):
     if is_showing: 
         posts = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .filter((JobPostModel.deadline >= datetime.now()) & (JobPostModel.closed_in == None))\
             .order_by(*sort_job_list(sort_values))\
             .paginate(page, page_size, error_out=False)
     else:
         posts = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .filter((JobPostModel.deadline < datetime.now()) | (JobPostModel.closed_in != None))\
             .order_by(*sort_job_list(sort_values))\
             .paginate(page, page_size, error_out=False)
 
@@ -144,12 +143,12 @@ def count_jobs():
 
     is_showing = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .filter((JobPostModel.deadline >= datetime.now()) & (JobPostModel.closed_in == None))\
             .count()
 
     is_closed = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .filter((JobPostModel.deadline < datetime.now()) | (JobPostModel.closed_in != None))\
             .count()
 
     return response_object(code=200, message="", data={ "is_showing": is_showing, "is_closed": is_closed })
@@ -330,7 +329,7 @@ def search_jd_for_cand(args):
     #     query = query.filter(JobPostModel.province_id == province_id)
 
     if posted_date is not None: 
-        query = query.filter((datetime.datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)
+        query = query.filter((datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)
 
     result = query\
         .order_by(JobPostModel.last_edit)\

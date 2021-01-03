@@ -174,3 +174,8 @@ def get_applied_job_posts(email, args):
         'total': result.total,
         'page': result.page
     }
+
+def get_candidate_resumes(email):
+    hr = CandidateModel.query.filter_by(email=email).first()
+
+    return hr.resumes

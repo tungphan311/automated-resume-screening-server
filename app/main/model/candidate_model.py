@@ -21,7 +21,7 @@ class CandidateModel(db.Model):
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
-    resumes = db.relationship('ResumeModel', backref="candidate", uselist=False)
+    resumes = db.relationship('ResumeModel', backref=backref("candidate", lazy="joined"), lazy=True)
     saved_job_posts = db.relationship('CandidateJobSavesModel', uselist=True, backref="candidate")
 
     @property
