@@ -23,6 +23,7 @@ class RecruiterModel(db.Model):
 
     job_posts = db.relationship('JobPostModel', backref=backref("recruiter", lazy='joined'), lazy=True)
     fiter_candidates = db.relationship('FilterCandidateModel', backref=backref("recruiter", lazy='joined'), lazy=True)
+    saved_resumes = db.relationship('RecruiterResumeSavesModel', uselist=True, backref="resume")
 
     @property
     def password(self):

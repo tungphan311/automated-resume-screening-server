@@ -15,6 +15,7 @@ api = ResumeDTO.api
 # New resume parser
 create_resume_parser = api.parser()
 create_resume_parser.add_argument("file", type=FileStorage, location="files", required=True)
+create_resume_parser.add_argument("Authorization", location="headers", required=True)
 
 @api.route("/")
 class CV(Resource):
@@ -38,12 +39,13 @@ class CV(Resource):
 
 # Update resume parser
 update_cv_parser = api.parser()
-update_cv_parser.add_argument("resume_id", location="json", required=True)
+update_cv_parser.add_argument("resume_id", type=int, location="json", required=True)
 update_cv_parser.add_argument("educations", location="json", required=True)
 update_cv_parser.add_argument("experiences", location="json", required=True)
 update_cv_parser.add_argument("skills", location="json", required=True)
 update_cv_parser.add_argument("months_of_experience", type=int, location="json", required=True)
-
+update_cv_parser.add_argument("job_domain_id", type=int, location="json", required=True)
+update_cv_parser.add_argument("Authorization", location="headers", required=True)
 @api.route("/update")
 class UpdateCV(Resource):
     @api.doc('Update Resume')

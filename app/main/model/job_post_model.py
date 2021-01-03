@@ -1,3 +1,4 @@
+from app.main.model.recruiter_model import RecruiterModel
 from sqlalchemy.orm import backref
 from app.main.util.response import json_serial
 from flask import json
@@ -9,7 +10,7 @@ class JobPostModel(db.Model):
     __tablename__ = "job_posts"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    recruiter_id = db.Column(db.Integer, db.ForeignKey('recruiters.id'), nullable=False)
+    recruiter_id = db.Column(db.Integer, db.ForeignKey(RecruiterModel.id), nullable=False)
     job_domain_id = db.Column(db.Integer, db.ForeignKey(JobDomainModel.id), nullable=False)
 
     description_text = db.Column(db.Text, nullable=False)

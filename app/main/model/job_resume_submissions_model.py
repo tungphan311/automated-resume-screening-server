@@ -2,6 +2,10 @@ from app.main.model.job_post_model import JobPostModel
 from app.main.model.resume_model import ResumeModel
 from .. import db
 from datetime import datetime
+from sqlalchemy.ext.hybrid import hybrid_method, hybrid_property
+from sqlalchemy import funcfilter
+from sqlalchemy import func
+
 
 class JobResumeSubmissionModel(db.Model):
     __tablename__ = "job_resume_submissions"
@@ -14,3 +18,30 @@ class JobResumeSubmissionModel(db.Model):
 
     submit_date = db.Column(db.DateTime, default=datetime.now)
     score = db.Column(db.Float, nullable=True)
+
+    process_status = db.Column(db.Boolean, nullable=True)
+    score_array = db.Column(db.String(100), nullable=True)
+    score_explanation_array = db.Column(db.String(100), nullable=True)
+
+    is_calculating = db.Column(db.Boolean, default=False)
+
+    @hybrid_property
+    def score_dict(self):
+        exps = self.score_explanation_array.split('|')
+        scores = self.score_array.split('|')
+        d = dict()
+        for i, v in enumerate(exps):
+            d[v] = round(float(scores[i]), 3)
+        return d
+
+    @hybrid_method
+    def avg_score(self, skill_weight, domain_weight):
+        exps = self.score_explanation_array.split('|')
+        scores = self.score_array.split('|')
+        total = 0
+        for i, v in enumerate(exps):
+            weight = 0
+            if v == 'skill_match': weight = skill_weight
+            if v == 'domain_skill_match': weight = domain_weight
+            total += float(scores[i]) * weight
+        return round(total, 3)
