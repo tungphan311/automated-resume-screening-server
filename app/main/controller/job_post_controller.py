@@ -11,7 +11,8 @@ from flask_restx import Resource
 from ..service.job_post_service import add_new_post, count_jobs, \
         delete_job_post, get_hr_posts, hr_get_detail, apply_cv_to_jp,\
         get_job_post_for_candidate, search_jd_for_cand, \
-        update_jp, close_jp, proceed_resume
+        update_jp, close_jp, proceed_resume, get_matched_cand_info_with_job_post, \
+        get_matched_list_cand_info_with_job_post
 
 
 from app.main.config import Config as config
@@ -226,3 +227,48 @@ class ProceedResume(Resource):
         data = proceed_resume(jp_id, recruiter_email, args)
         return response_object(data=data)
 
+
+
+#################################################
+#
+# Get candidate info according to job post by id
+#
+#################################################
+get_cand_info_parser = api.parser()
+get_cand_info_parser.add_argument('Authorization', location='headers', required=True)
+@api.route('/job-posts/<int:job_id>/candidates/<int:cand_id>')
+class GetCandInfoForJobPostById(Resource):
+    @api.doc('Get applied candidate info by id.')
+    @api.expect(get_cand_info_parser)
+    @api.marshal_with(JobPostDto.get_cand_info_with_matched_job_post_response, code=200)
+    @HR_only
+    def get(self, job_id, cand_id):
+        identity = get_jwt_identity()
+        recruiter_email = identity['email']        
+        data = get_matched_cand_info_with_job_post(recruiter_email, job_id, cand_id)
+        return response_object(data=data)
+
+
+#################################################
+#
+# Get candidates info according to job post
+#
+#################################################
+get_list_cand_info_parser = api.parser()
+get_list_cand_info_parser.add_argument('Authorization', location='headers', required=True)
+get_list_cand_info_parser.add_argument("page", type=int, location="args", required=False, default=1)
+get_list_cand_info_parser.add_argument("page-size", type=int, location="args", required=False, default=20)
+get_list_cand_info_parser.add_argument("skill_weight", type=float, location="args", required=True)
+get_list_cand_info_parser.add_argument("domain_weight", type=float, location="args", required=True)
+@api.route('/job-posts/<int:job_id>/candidates')
+class GetListCandInfoForJobPost(Resource):
+    @api.doc('Get list applied candidate info by id.')
+    @api.expect(get_list_cand_info_parser)
+    @api.marshal_with(JobPostDto.applied_cand_list_response, code=200)    
+    @HR_only
+    def post(self, job_id):
+        args = get_list_cand_info_parser.parse_args()
+        identity = get_jwt_identity()
+        recruiter_email = identity['email']        
+        (data, pagination) = get_matched_list_cand_info_with_job_post(recruiter_email, job_id, args)
+        return response_object(data=data, pagination=pagination)

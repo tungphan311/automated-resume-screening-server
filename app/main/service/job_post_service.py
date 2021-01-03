@@ -1,5 +1,6 @@
 from app.main.controller import job_post_controller
 from sys import float_info
+from app.main.model import job_post_model
 from app.main.service.matching_service import OnetoOneMatching, jobPipeline
 import datetime
 from datetime import datetime, timedelta
@@ -10,6 +11,7 @@ from app.main.dto.job_post_dto import JobPostDto
 from app.main.model.resume_model import ResumeModel
 from app.main.model.job_post_model import JobPostModel
 from app.main.model.recruiter_model import RecruiterModel
+from app.main.model.candidate_model import CandidateModel
 from app.main.model.job_resume_submissions_model import JobResumeSubmissionModel
 from app.main.model.job_domain_model import JobDomainModel
 
@@ -374,3 +376,80 @@ def proceed_resume(id, recruiter_email, args):
     submission.process_status = status
     db.session.commit()
     return submission
+
+
+def get_matched_cand_info_with_job_post(rec_email, job_id, cand_id):
+    # Check existed rec
+    recruiter = RecruiterModel.query.filter_by(email=rec_email).first()
+    if recruiter is None: abort(400)
+
+    # Check job post
+    job = JobPostModel.query.get(job_id)
+    if job is None: abort(400)
+    if job.recruiter_id != recruiter.id: abort(400)
+
+    # Check cand
+    cand = CandidateModel.query.get(cand_id)
+    if cand is None: abort(400)
+    if cand.resumes is None: abort(400)
+
+    # Check submission
+    submission = JobResumeSubmissionModel.query \
+        .filter_by(resume_id=cand.resumes.id, job_post_id=job_id) \
+        .first()
+    if submission is None: abort(400)
+
+    return {
+        'submission': submission,
+        'candidate': cand,
+        'resume': cand.resumes,
+        'scores': submission.score_dict
+    }
+
+
+def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
+    # Check existed rec
+    recruiter = RecruiterModel.query.filter_by(email=rec_email).first()
+    if recruiter is None: abort(400)
+
+    # Check job post
+    job = JobPostModel.query.get(job_id)
+    if job is None: abort(400)
+    if job.recruiter_id != recruiter.id: abort(400)
+
+    skill_weight = args['skill_weight']
+    domain_weight = args['domain_weight']
+    page = args['page']
+    page_size = args['page-size']
+
+    if skill_weight + domain_weight != 1: abort(400)
+
+
+    # Filter 
+    all_items = JobResumeSubmissionModel.query \
+        .filter_by(job_post_id=job.id) \
+        .all()
+
+    all_items = sorted(all_items, key=lambda x: x.avg_score(skill_weight=skill_weight, domain_weight=domain_weight))
+    chunks = [all_items[i:i+4] for i in range(0, len(all_items), 4)]
+    items = []
+    if page > len(chunks): 
+        items = []
+    else: 
+        items = chunks[page - 1]
+
+    final_res = []
+    for submission in items:
+        resume = ResumeModel.query.get(submission.resume_id)
+        scores = submission.score_dict
+        scores['avg'] = submission.avg_score(skill_weight=skill_weight, domain_weight=domain_weight)
+        final_res.append({
+            'submission': submission,
+            'scores': scores,
+            'candidate': resume.candidate
+        })
+    
+    return final_res, {
+        'total': len(all_items),
+        'page': page
+    }

@@ -2,6 +2,7 @@ from app.main.util.custom_fields import NullableFloat
 from flask_restx import Namespace, fields, Model
 from app.main.dto.base_dto import base
 from app.main.util.format_text import format_contract, format_salary
+from app.main.dto.resume_dto import ResumeDTO
 
 class JobPostDto:
     api = Namespace('Job Posts', description='job post related operation')
@@ -100,4 +101,57 @@ class JobPostDto:
     })
     response_for_update_job_post_from_hr = api.inherit('response_for_update_job_post_from_HR', base, {
         'data': fields.List(fields.Nested(single_job_post_in_search_fields)),
+    })
+
+
+    ########################################
+    # Get matched cand info with job post
+    ########################################
+    candidate_detail_fields = api.model('candidate_detail_fields', {
+        'id': fields.Integer,
+        'email': fields.String,
+        'password_hash': fields.String,
+        'phone': fields.String,
+        'full_name': fields.String,
+        'gender': fields.Boolean,
+        'date_of_birth': fields.DateTime(),
+        'status': fields.Integer,
+        'province_id': fields.Integer,
+        'access_token': fields.String,
+        'registered_on': fields.DateTime(),
+        'confirmed': fields.Boolean,
+        'confirmed_on': fields.DateTime()
+    })
+    submission_fields = api.model('submission_fields', {
+        'id': fields.Integer,
+        'resume_id': fields.Integer,
+        'job_post_id': fields.Integer,
+        'submit_date': fields.DateTime(),
+        'score': fields.Float,
+        'process_status': fields.Boolean,
+        'score_array': fields.String,
+        'score_explanation_array': fields.String
+    })
+    submission_cand_info_fields = api.model('submission_cand_info_fields', {
+        'submission': fields.Nested(submission_fields),
+        'candidate': fields.Nested(candidate_detail_fields),
+        'resume': fields.Nested(ResumeDTO.resume_detail_fields),
+        'scores': fields.Raw
+    })
+    get_cand_info_with_matched_job_post_response = api.inherit('get_cand_info_with_matched_job_post_response', base, {
+        'data': fields.Nested(submission_cand_info_fields)
+    })
+
+
+    ###############################
+    # Get list applied candidates
+    ###############################
+    applied_cand_fields = api.model('applied_cand_fields', {
+        'submission': fields.Nested(submission_fields),
+        'candidate': fields.Nested(candidate_detail_fields),
+        'scores': fields.Raw
+    })
+    applied_cand_list_response = api.inherit('applied_cand_list_response', base, {
+        'data': fields.List(fields.Nested(applied_cand_fields)),
+        'pagination': fields.Nested(pagination)
     })

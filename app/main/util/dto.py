@@ -52,7 +52,7 @@ class CandidateDto:
         'registered_on': fields.DateTime(),
         'confirmed': fields.Boolean,
         'confirmed_on': fields.DateTime(),
-        'resumes': fields.List(fields.Nested(ResumeDTO.resume_detail_fields))
+        'resumes': fields.Nested(ResumeDTO.resume_detail_fields)
     })
     candidate_detail_response = api.inherit('candidate_detail_response', base, {
         'data': fields.Nested(candidate_detail_fields)
@@ -61,8 +61,6 @@ class CandidateDto:
     ####################
     # Get saved job posts
     ####################
-    # job_post_fields = api.model("job_post_fields", {
-    # })
     saved_job_post_fields = api.model("saved_job_post_fields", {
         'id': fields.Integer, 
         'recruiter_id': fields.Integer, 
