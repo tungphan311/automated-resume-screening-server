@@ -48,6 +48,9 @@ def add_new_post(post):
         min_salary=post['min_salary'],
         max_salary=post['max_salary'],
         amount=post['amount'],
+        education_level=post['education_level'],
+        majors=post['majors'],
+        province_id=post['province_id'],
         technical_skills='|'.join(skills),
         deadline=parse_deadline
     )
