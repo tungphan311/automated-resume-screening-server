@@ -16,7 +16,7 @@ from app.main.model.job_domain_model import JobDomainModel
 
 from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.custom_jwt import HR_only
-from app.main.util.format_text import format_contract
+from app.main.util.format_text import format_contract, format_education
 from app.main.util.response import json_serial, response_object
 from app.main.util.data_processing import get_technical_skills
 from flask_restx import abort
@@ -179,6 +179,8 @@ def hr_get_detail(id):
         'total_view': post.total_views,
         'total_save': post.total_saves,
         'total_apply': len(post.job_resume_submissions),
+        'provinces': post.province_id.split(","),
+        'education': format_education(post)
     }
 
     return response_object(200, "Thành công.", response)

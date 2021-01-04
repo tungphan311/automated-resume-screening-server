@@ -1,5 +1,6 @@
 
 
+from app.main.model.major_model import MajorModel
 from app.main.model.job_domain_model import JobDomainModel
 
 
@@ -48,3 +49,34 @@ def format_experience(exp):
     month = exp % 12
 
     return "{} năm {} tháng".format(year, month) if year > 0 else "{} tháng".format(month)
+
+
+def format_education(post):
+    if post.education_level == 0:
+        return "Không yêu cầu bằng cấp"
+    elif post.education_level:
+        return "Tốt nghiệp {} {}".format(format_education_level(post.education_level), format_majors(post.majors))
+
+def format_education_level(level):
+    if level == 1:
+        return "đại học/ cao đẳng"
+    elif level == 2:
+        return "thạc sĩ"
+    elif level == 3:
+        return "tiến sĩ"
+
+def format_majors(majors):
+    if majors == "0": 
+        return ""
+
+    majors = [int(major) for major in majors.split(",")]
+    res = ", chuyên ngành"
+
+    for index, id in enumerate(majors):
+        major = MajorModel.query.get(id)
+        res += major.name
+
+        if index < len(majors) - 1:
+            res += " hoặc "
+
+    return res
