@@ -24,6 +24,7 @@ def insert_new_account_candidate(account):
         gender = account['gender'],
         date_of_birth = account['dateOfBirth'],
         access_token=create_token(account['email'], 1/24),
+        province_id=int(account['province_id']),
         registered_on=datetime.datetime.utcnow()
     )
     db.session.add(new_account)

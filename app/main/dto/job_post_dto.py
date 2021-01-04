@@ -1,7 +1,7 @@
 from app.main.util.custom_fields import NullableFloat
 from flask_restx import Namespace, fields, Model
 from app.main.dto.base_dto import base
-from app.main.util.format_text import format_contract, format_salary
+from app.main.util.format_text import format_contract, format_education, format_provinces, format_salary
 from app.main.dto.resume_dto import ResumeDTO
 
 class JobPostDto:
@@ -53,9 +53,8 @@ class JobPostDto:
         'company_name': fields.String(attribute=lambda x: x.recruiter.company.name if x.recruiter.company is not None else None),
         'company_logo': fields.String(attribute=lambda x: x.recruiter.company.logo if x.recruiter.company is not None else None),
         'company_background': fields.String(attribute=lambda x: x.recruiter.company.background if x.recruiter.company is not None else None),
-        # 'total_view': fields. post.total_views,
-        # 'total_save': fields. post.total_views,
-        # 'total_apply': fields. post.total_applies,
+        'provinces': fields.List(fields.String, attribute=lambda x: format_provinces(x.province_id)),
+        'education': fields.String(attribute=lambda x: format_education(x))
     })
     job_post_for_cand = api.inherit('job_post_for_cand', base, {
         'data': fields.Nested(job_post_for_cand_fields)
