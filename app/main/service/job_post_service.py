@@ -175,7 +175,7 @@ def hr_get_detail(id):
         'benefit': post.benefit_text,
         'total_view': post.total_views,
         'total_save': post.total_saves,
-        'total_apply': post.total_applies,
+        'total_apply': len(post.job_resume_submissions),
     }
 
     return response_object(200, "Thành công.", response)
