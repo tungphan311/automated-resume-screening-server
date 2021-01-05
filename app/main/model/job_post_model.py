@@ -28,7 +28,6 @@ class JobPostModel(db.Model):
     max_salary = db.Column(db.Float, nullable=True)
 
     education_level = db.Column(db.Integer, nullable=False)
-    majors = db.Column(db.String(100), nullable=True)
 
     amount = db.Column(db.Integer, nullable=False)
     is_active = db.Column(db.Boolean, nullable=False, default=True)

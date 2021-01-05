@@ -19,7 +19,6 @@ class JobPostDto:
         'max_salary': NullableFloat(required=False, description='maximum salary'),
         'amount': fields.Integer(required=True, description='amount of candidates is recruiting'),
         'education_level': fields.Integer(required=True, description='education_level of candidates is recruiting'),
-        'majors': fields.String(required=True, description='majors of candidates is recruiting'),
         'province_id': fields.String(required=True, description='locations of candidates is recruiting'),
         'deadline': fields.DateTime(required=True, description='last day for candidate to apply'),
     })

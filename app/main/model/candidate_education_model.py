@@ -1,4 +1,3 @@
-from app.main.model.major_model import MajorModel
 from .. import db
 
 class CandidateEducationModel(db.Model):
@@ -9,6 +8,6 @@ class CandidateEducationModel(db.Model):
     from_date = db.Column(db.DateTime, nullable=False)
     to_date = db.Column(db.DateTime, nullable=True)
     degree_level = db.Column(db.Integer, nullable=False)
+    major = db.Column(db.String(255), nullable=False)
 
     resume_id = db.Column(db.Integer, db.ForeignKey("resumes.id"), nullable=False)
-    major_id = db.Column(db.Integer, db.ForeignKey(MajorModel.id), nullable=False)
