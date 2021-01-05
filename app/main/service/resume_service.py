@@ -14,10 +14,12 @@ def create_cv(cv_local_path, args, filename, file_ext):
     identity = get_jwt_identity()
     email = identity['email']
 
+    is_pdf = file_ext == 'pdf'
+
     candidate = CandidateModel.query.filter_by(email=email).first()
     
     executor = ThreadPool.instance().executor
-    info_res = executor.submit(ResumeExtractor(cv_local_path).extract)
+    info_res = executor.submit(ResumeExtractor(cv_local_path, is_pdf).extract)
     url_res = executor.submit(Firebase().upload, cv_local_path)
 
     resume_info = info_res.result()
