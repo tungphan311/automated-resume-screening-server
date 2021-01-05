@@ -1,5 +1,5 @@
 from app.main.util.format_text import format_domains, format_experience, format_provinces, format_skill
-from app.main.util.custom_fields import NullableString
+from app.main.util.custom_fields import NullableBoolean, NullableString, NullableInteger
 from flask_restx import Namespace, fields
 from app.main.dto.base_dto import base
 
@@ -13,6 +13,19 @@ class FilterDto:
         'atleast_skills': NullableString(required=False, description="list of needed skill"),
         'required_skills': NullableString(required=False, description="list of require skill"),
         'not_allowed_skills': NullableString(required=False, description="list of not allowed skill")
+    })
+
+    filter_update = api.model("update_filter", {
+        'name': fields.String(required=True, description="name of filter candidate"),
+        'job_domains': NullableString(required=False, description="list of job domain"),
+        'provinces': NullableString(required=False, description="list of province id"), 
+        'atleast_skills': NullableString(required=False, description="list of needed skill"),
+        'required_skills': NullableString(required=False, description="list of require skill"),
+        'not_allowed_skills': NullableString(required=False, description="list of not allowed skill"),
+        "min_year": NullableInteger(required=False, description="min year of candidate"),
+        "max_year": NullableInteger(required=False, description="max year of candidate"),
+        "gender": NullableBoolean(required=False, description="gender of candidate"),
+        "months_of_experience": NullableInteger(required=False, description="min experience of candidate"),
     })
 
     single_filter_response = api.model("single_filter_response", {

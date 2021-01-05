@@ -1,3 +1,4 @@
+from app.main.model.candidate_education_model import CandidateEducationModel
 from sqlalchemy.ext.hybrid import hybrid_method
 from sqlalchemy.orm import backref
 from .. import db
@@ -28,6 +29,7 @@ class ResumeModel(db.Model):
     total_saves = db.Column(db.Integer, default=0)
     
     educations = db.Column(db.Text, nullable=True)
+    highest_education = db.relationship('CandidateEducationModel', uselist=False, backref="resume")
     experiences = db.Column(db.Text, nullable=True)
 
     job_domain_id = db.Column(db.Integer, db.ForeignKey(JobDomainModel.id), nullable=True)

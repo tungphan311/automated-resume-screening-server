@@ -24,6 +24,7 @@ def insert_new_account_candidate(account):
         gender = account['gender'],
         date_of_birth = account['dateOfBirth'],
         access_token=create_token(account['email'], 1/24),
+        province_id=int(account['province_id']),
         registered_on=datetime.datetime.utcnow()
     )
     db.session.add(new_account)
@@ -174,3 +175,8 @@ def get_applied_job_posts(email, args):
         'total': result.total,
         'page': result.page
     }
+
+def get_candidate_resumes(email):
+    hr = CandidateModel.query.filter_by(email=email).first()
+
+    return hr.resumes

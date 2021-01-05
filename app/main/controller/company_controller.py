@@ -1,3 +1,6 @@
+import os
+import uuid
+from app.main.util.resume_extractor import remove_temp_files
 from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.response import response_object
 from app.main.util.custom_jwt import HR_only
@@ -34,13 +37,25 @@ class Company(Resource):
         files = request.files
         data = request.form
 
+        remove_temp_files('temp/*')
+
         logo = files.get("logo", None)
         background = files.get("background", None)
+
+        logo_file = background_file = None
+
+        if logo:
+            logo_file = os.path.join("temp", "{}_{}_logo.png").format(data['name'], str(uuid.uuid4().hex))
+            logo.save(logo_file)
+
+        if background:
+            background_file = os.path.join("temp", "{}_{}_background.png").format(data['name'], str(uuid.uuid4().hex)) 
+            background.save(background_file)
 
         identity = get_jwt_identity()
         email = identity['email']
 
-        return add_new_company(data, logo, background, email)
+        return add_new_company(data, logo_file, background_file, email)
 
 
 @api.route('/<int:id>/update')

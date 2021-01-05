@@ -29,6 +29,7 @@ class CandidateDto:
         'phone': fields.String(required=True, description='user phone'),
         'gender': fields.Boolean(required=True, description='user gender'),
         'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
+        'province_id': fields.String(required=True, description='candidate location'),
     })
     account = api.model('account', {
         'email': fields.String(required=True, description='user email address'),
@@ -90,6 +91,19 @@ class CandidateDto:
     get_applied_job_post_list_response = api.inherit('get_applied_job_post_list_response', base, {
         'data': fields.List(fields.Nested(applied_job_post_fields)),
         'pagination': fields.Nested(pagination)
+    })
+
+    ########################
+    # Get uploaded resumes
+    ########################
+    single_resume = api.model("single_resume", {
+        'id': fields.Integer,
+        'resume_filename': fields.String,
+        'resume_file_extension': fields.String,
+        'store_url': fields.String
+    })
+    resume_list = api.inherit('resume_list', base, {
+        'data': fields.List(fields.Nested(single_resume)),
     })
 
 

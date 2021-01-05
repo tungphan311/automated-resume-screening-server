@@ -35,6 +35,48 @@ def add_new_filter(data):
     return response_object(message="Tạo bộ lọc mới thành công", data=new_filter.id)
 
 
+def update_filter(data, id):
+    identity = get_jwt_identity()
+    email = identity['email']
+    hr = RecruiterModel.query.filter_by(email=email).first()
+
+    filter = FilterCandidateModel.query.get(id)
+
+    filter.name = data['name']
+    filter.job_domains = data['job_domains'] or None
+    filter.provinces = data['provinces'] or None
+    filter.atleast_skills = data['atleast_skills'] or None
+    filter.required_skills = data['required_skills'] or None
+    filter.not_allowed_skills = data['not_allowed_skills'] or None
+    filter.min_year = data['min_year'] or None
+    filter.max_year = data['max_year'] or None
+    filter.gender = data['gender'] or None
+    filter.months_of_experience = data['months_of_experience'] or None
+
+    try:
+        hr.fiter_candidates.append(filter)
+        db.session.add(hr)
+        db.session.commit()
+    except:
+        abort(400)
+
+    return response_object(message="Cập nhật bộ lọc thành công")
+
+
+def delete_filter(ids):
+    for id in ids:
+        filter = FilterCandidateModel.query.get(id)
+
+        if not filter:
+            abort(400)
+
+        db.session.delete(filter)
+
+    db.session.commit()
+
+    return response_object(message="Xoá bộ lọc thành công")
+
+
 def get_filter_list(args):
     page = args.get('page')
     page_size = args.get('page-size')
