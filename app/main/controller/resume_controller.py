@@ -29,7 +29,7 @@ class CV(Resource):
         filename = file.filename.split('.', 1)[0]
         file_ext = file.filename.split('.', 1)[1]
 
-        filepath = os.path.join("temp_pdf", "res_{uid}.pdf".format(uid=str(uuid.uuid4().hex)))
+        filepath = os.path.join("temp_pdf", "{name}_{uid}.{ext}".format(name=filename, uid=str(uuid.uuid4().hex), ext=file_ext))
         file.save(filepath)
         data = create_cv(filepath, args, filename, file_ext)
         return response_object(data=data)
