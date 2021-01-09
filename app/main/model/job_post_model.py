@@ -22,10 +22,12 @@ class JobPostModel(db.Model):
 
     job_title = db.Column(db.String(200), nullable=False)
     contract_type = db.Column(db.Integer, nullable=False)
-    province_id = db.Column(db.Integer, nullable=True)
+    province_id = db.Column(db.String(100), nullable=True)
 
     min_salary = db.Column(db.Float, nullable=True)
     max_salary = db.Column(db.Float, nullable=True)
+
+    education_level = db.Column(db.Integer, nullable=False)
 
     amount = db.Column(db.Integer, nullable=False)
     is_active = db.Column(db.Boolean, nullable=False, default=True)

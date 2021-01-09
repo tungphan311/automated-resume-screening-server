@@ -10,6 +10,9 @@ from nltk.corpus import stopwords
 import json
 from app.main.util.data_processing import get_technical_skills
 from app.main.util.regex_helper import RegexHelper
+import cloudmersive_convert_api_client as convert
+from cloudmersive_convert_api_client.rest import ApiException
+import base64
 
 stop_words = set(stopwords.words('english'))
 
@@ -20,14 +23,17 @@ cue_words = set(cue_words)
 cue_phrases = open("preprocess/cue_phrases.txt", "r").readlines()
 cue_phrases = [re.sub(r"\n", "", c) for c in cue_phrases]
 
+configuration = convert.Configuration()
+configuration.api_key['Apikey'] = '5cede973-e1ef-437c-a881-e72c52542b78'
 
 class ResumeExtractor:
 
     resume_local_path = None
     result_dict = None 
 
-    def __init__(self, resume_local_path):
+    def __init__(self, resume_local_path, is_pdf):
         self.resume_local_path = resume_local_path
+        self.is_pdf = is_pdf
         self.resultDict = dict()
 
 
@@ -37,7 +43,7 @@ class ResumeExtractor:
         'experiences', 'educations', 'skills'
         """
 
-        self.result_dict = cv_segmentation(self.resume_local_path)
+        self.result_dict = cv_segmentation(self.resume_local_path, self.is_pdf)
         return self.result_dict
 
 
@@ -76,22 +82,46 @@ def convert_pdf_to_jpg(filename):
 
 
     # TODO - ERROR: Remove for running on window
-    images = convert_from_path(filename, poppler_path="/usr/local/Cellar/poppler/20.12.1/bin")
-    # images = convert_from_path(filename, poppler_path="library/poppler-20.12.1/bin")
+    # images = convert_from_path(filename, poppler_path="/usr/local/Cellar/poppler/20.12.1/bin")
+    images = convert_from_path(filename, poppler_path="library/poppler-20.12.1/bin")
 
     for img in images:
         index = images.index(img)
 
         img.save('temp/CV_{}.jpg'.format(index), 'JPEG')
 
+def convert_word_to_jpg(filename):
+    remove_temp_files('temp/*')
 
-def parse_pdf(local_cv_path):
+    api_instance = convert.ConvertDocumentApi(convert.ApiClient(configuration))
+
+    try:
+        api_response = api_instance.convert_document_docx_to_jpg(filename)
+
+        images = api_response.jpg_result_pages
+
+        for image in images:
+            img = image.content
+            page = image.page_number
+
+            with open("temp/CV_{}.jpg".format(page), "wb") as fh:
+                fh.write(base64.decodebytes(bytes(img, encoding="utf8")))
+            fh.close()
+
+    except ApiException as e:
+        print("Exception: %s\n" %e)
+
+
+def parse_pdf(local_cv_path, is_pdf):
     remove_words = []
     with open("preprocess/REMOVE_WORD.txt", "r") as rm_file:
         remove_words = rm_file.readlines()
         remove_words = [ re.sub(r"\n", "", remove_word) for remove_word in remove_words ]
 
-    convert_pdf_to_jpg(local_cv_path)
+    if is_pdf:
+        convert_pdf_to_jpg(local_cv_path)
+    else:
+        convert_word_to_jpg(local_cv_path)
 
     img_directory = "temp"
     sentences = []
@@ -123,6 +153,7 @@ def parse_pdf(local_cv_path):
     rm_file.close()
 
     return sentences
+
 
 def process_raw_text(sentences):
     sentences = [ (sen.lower(), i) for (sen, i) in sentences ]
@@ -175,8 +206,8 @@ def get_links(text):
     }
 
 
-def cv_segmentation(local_cv_path):
-    sentences = parse_pdf(local_cv_path)
+def cv_segmentation(local_cv_path, is_pdf):
+    sentences = parse_pdf(local_cv_path, is_pdf)
     educations_cue = experiences_cue = skills_cue = awards_cue = certifications_cue = []
 
     with open('preprocess/topic.json') as json_file:

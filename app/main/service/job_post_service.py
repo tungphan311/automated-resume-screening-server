@@ -2,7 +2,6 @@ from app.main.controller import job_post_controller
 from sys import float_info
 from app.main.model import job_post_model
 from app.main.service.matching_service import OnetoOneMatching, jobPipeline
-import datetime
 from datetime import datetime, timedelta
 import dateutil.parser
 from flask import json
@@ -17,7 +16,7 @@ from app.main.model.job_domain_model import JobDomainModel
 
 from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.custom_jwt import HR_only
-from app.main.util.format_text import format_contract
+from app.main.util.format_text import format_contract, format_education
 from app.main.util.response import json_serial, response_object
 from app.main.util.data_processing import get_technical_skills
 from flask_restx import abort
@@ -49,6 +48,8 @@ def add_new_post(post):
         min_salary=post['min_salary'],
         max_salary=post['max_salary'],
         amount=post['amount'],
+        education_level=post['education_level'],
+        province_id=post['province_id'],
         technical_skills='|'.join(skills),
         deadline=parse_deadline
     )
@@ -72,13 +73,13 @@ def get_hr_posts(page, page_size, sort_values, is_showing):
     if is_showing: 
         posts = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .filter((JobPostModel.deadline >= datetime.now()) & (JobPostModel.closed_in == None))\
             .order_by(*sort_job_list(sort_values))\
             .paginate(page, page_size, error_out=False)
     else:
         posts = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .filter((JobPostModel.deadline < datetime.now()) | (JobPostModel.closed_in != None))\
             .order_by(*sort_job_list(sort_values))\
             .paginate(page, page_size, error_out=False)
 
@@ -144,12 +145,12 @@ def count_jobs():
 
     is_showing = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline >= datetime.datetime.now()) & (JobPostModel.closed_in == None))\
+            .filter((JobPostModel.deadline >= datetime.now()) & (JobPostModel.closed_in == None))\
             .count()
 
     is_closed = JobPostModel.query\
             .filter(JobPostModel.recruiter_id == hr.id)\
-            .filter((JobPostModel.deadline < datetime.datetime.now()) | (JobPostModel.closed_in != None))\
+            .filter((JobPostModel.deadline < datetime.now()) | (JobPostModel.closed_in != None))\
             .count()
 
     return response_object(code=200, message="", data={ "is_showing": is_showing, "is_closed": is_closed })
@@ -176,7 +177,9 @@ def hr_get_detail(id):
         'benefit': post.benefit_text,
         'total_view': post.total_views,
         'total_save': post.total_saves,
-        'total_apply': post.total_applies,
+        'total_apply': len(post.job_resume_submissions),
+        'provinces': post.province_id.split(","),
+        'education': format_education(post)
     }
 
     return response_object(200, "Thành công.", response)
@@ -330,7 +333,7 @@ def search_jd_for_cand(args):
     #     query = query.filter(JobPostModel.province_id == province_id)
 
     if posted_date is not None: 
-        query = query.filter((datetime.datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)
+        query = query.filter((datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)
 
     result = query\
         .order_by(JobPostModel.last_edit)\

@@ -1,3 +1,4 @@
+from app.main.util.firebase import Firebase
 from app.main.util.thread_pool import ThreadPool
 from app.main.service.account_service import create_token
 from os import name
@@ -5,7 +6,6 @@ from app.main import db
 from app.main.util.response import response_object
 from app.main.model.company_model import CompanyModel
 from app.main.model.recruiter_model import RecruiterModel
-# from app.main import storage
 
 
 def get_all_company():
@@ -19,20 +19,18 @@ def get_a_company_by_name(name, page, page_size=5):
 
     return companies, has_next
 
-# def upload_image(name, file):
-#     filename = name + "_" + file.filename.split('.', 1)[0]
-#     storage.child("images/company/{}.jpg".format(filename)).put(file)
-#     url = storage.child("images/company/{}.jpg".format(filename)).get_url(None)
-#     return url
 
-def add_new_company(data, logo, background, email):
-    # executor = ThreadPool.instance().executor
+def add_new_company(data, logo_file, background_file, email):
+    executor = ThreadPool.instance().executor
+    logo_url = background_url = None
 
-    # logo_res = executor.submit(upload_image, data['name'], logo)
-    # background_res = executor.submit(upload_image, data['name'], background)
+    if logo_file:
+        logo = executor.submit(Firebase().upload, logo_file)
+        logo_url = logo.result()
 
-    # logo_url = logo_res.result()
-    # background_url = background_res.result()
+    if background_file:
+        background = executor.submit(Firebase().upload, background_file)
+        background_url = background.result()
 
     company = CompanyModel(
         name=data['name'], 
@@ -41,8 +39,8 @@ def add_new_company(data, logo, background, email):
         email=data['email'],
         website=data['website'],
         description=data['description'],
-        # logo=logo_url,
-        # background=background_url
+        logo=logo_url,
+        background=background_url
     )
 
     recruiter = RecruiterModel.query.filter_by(email=email).first()

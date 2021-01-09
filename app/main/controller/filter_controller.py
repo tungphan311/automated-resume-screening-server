@@ -1,6 +1,6 @@
 from flask_restx.fields import String
 from app.main.util.response import response_object
-from app.main.service.filter_service import add_new_filter, find_candidates, get_filter_detail, get_filter_list
+from app.main.service.filter_service import add_new_filter, delete_filter, find_candidates, get_filter_detail, get_filter_list, update_filter
 from app.main.util.custom_jwt import HR_only
 from app.main.dto.filter_dto import FilterDto
 from flask_restx import Resource
@@ -12,6 +12,9 @@ _filter = FilterDto.filter
 get_list_filter_parser = api.parser()
 get_list_filter_parser.add_argument("page", type=int, location="args", required=False, default=1)
 get_list_filter_parser.add_argument("page-size", type=int, location="args", required=False, default=10)
+
+delete_parser = api.parser()
+delete_parser.add_argument("ids", type=int, action="split", location="args", required=True)
 
 @api.route('')
 class FilterCandidate(Resource):
@@ -32,6 +35,14 @@ class FilterCandidate(Resource):
 
         return response_object(data=data, pagination=pagination)
 
+    @api.doc('delete filter with given id')
+    @api.expect(delete_parser)
+    @HR_only
+    def delete(self):
+        args = delete_parser.parse_args()
+        ids = args['ids']
+        return delete_filter(ids)
+
 
 @api.route('/<int:id>')
 class FilterCandidateDetail(Resource):
@@ -41,6 +52,13 @@ class FilterCandidateDetail(Resource):
     def get(self, id):
         filter = get_filter_detail(id)
         return response_object(data=filter)
+
+    @api.doc('update filter')
+    @api.expect(FilterDto.filter_update, validate=True)
+    @HR_only
+    def put(self, id):
+        data = request.json
+        return update_filter(data, id)
 
 
 find_candidates_parser = api.parser()
