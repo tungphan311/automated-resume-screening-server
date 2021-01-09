@@ -1,19 +1,27 @@
 {
     "ontology_path": {
+        "ai_engineer": "models/ontology/pickle_ai_engineer_ontology.p",
+        "android": "models/ontology/pickle_android_ontology.p",
         "backend": "models/ontology/pickle_backend_ontology.p",
+        "data_science": "models/ontology/pickle_data_science_ontology.p",
+        "devops": "models/ontology/pickle_devops_ontology.p",
         "frontend": "models/ontology/pickle_frontend_ontology.p",
-        "data_engineer": "models/ontology/pickle_dataengineer_ontology.p",
         "fullstack": "models/ontology/pickle_fullstack_ontology.p",
-
-        "general": "models/ontology/pickle_frontend_ontology.p"
+        "ios": "models/ontology/pickle_ios_ontology.p",
+        "softskill": "models/ontology/pickle_softskill_ontology.p",
+        "general": "models/ontology/pickle_general_ontology.p"
     },
 
     "cached_model_path": {
+        "ai_engineer": "models/cached_model/ai_engineer_cached_model.json",
+        "android": "models/cached_model/android_cached_model.json",
         "backend": "models/cached_model/backend_cached_model.json",
+        "data_science": "models/cached_model/data_science_cached_model.json",
+        "devops": "models/cached_model/devops_cached_model.json",
         "frontend": "models/cached_model/frontend_cached_model.json",
-        "data_engineer": "models/cached_model/dataengineer_cached_model.json",
         "fullstack": "models/cached_model/fullstack_cached_model.json",
-        
-        "general": "models/cached_model/frontend_cached_model.json"
+        "ios": "models/cached_model/ios_cached_model.json",
+        "softskill": "models/cached_model/softskill_cached_model.json",
+        "general": "models/cached_model/general_cached_model.json"
     }
 }
