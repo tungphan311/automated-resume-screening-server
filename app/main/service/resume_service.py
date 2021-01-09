@@ -20,10 +20,10 @@ def create_cv(cv_local_path, args, filename, file_ext):
     
     executor = ThreadPool.instance().executor
     info_res = executor.submit(ResumeExtractor(cv_local_path, is_pdf).extract)
-    url_res = executor.submit(Firebase().upload, cv_local_path)
+    blob_res = executor.submit(Firebase().upload, cv_local_path)
 
     resume_info = info_res.result()
-    remote_path = url_res.result()
+    blob = blob_res.result()
 
     if os.path.exists(cv_local_path): 
         os.remove(cv_local_path)
@@ -39,7 +39,8 @@ def create_cv(cv_local_path, args, filename, file_ext):
         cand_phone=resume_info['phone'],
         soft_skills="",
         technical_skills="|".join(resume_info['tech_skills']),
-        store_url=remote_path,
+        store_url=blob.public_url,
+        download_url=blob.media_link,
         is_finding_job=False,
         total_views=0,
         total_saves=0,
