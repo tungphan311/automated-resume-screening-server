@@ -22,4 +22,5 @@ class Firebase:
         if remove_on_completion:
             os.remove(from_path)
 
-        return blob.public_url
+        # return blob.public_url, blob.media_link
+        return blob

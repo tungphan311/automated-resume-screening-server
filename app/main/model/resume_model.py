@@ -24,6 +24,7 @@ class ResumeModel(db.Model):
 
     resume_filename = db.Column(db.String(100), nullable=False)
     resume_file_extension = db.Column(db.String(10), nullable=False)
+    download_url = db.Column(db.String(255), nullable=False)
 
     total_views = db.Column(db.Integer, default=0)
     total_saves = db.Column(db.Integer, default=0)
