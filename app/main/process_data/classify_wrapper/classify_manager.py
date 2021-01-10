@@ -31,7 +31,7 @@ class ClassifyManager:
             self.model_dict[d] = (o, m)
 
 
-    def get_domain_model(self, domain):
+    def __get_domain_model(self, domain):
         # free to crash for debugging.
         return self.model_dict[domain]
 
@@ -78,7 +78,7 @@ class ClassifyManager:
 
 
         # Loading ontology and model
-        (ontology, cached_model) = self.get_domain_model(domain)
+        (ontology, cached_model) = self.__get_domain_model(domain)
         t_paper = Paper(job_description, modules)
         result = Result(explanation)
 
