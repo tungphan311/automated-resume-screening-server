@@ -24,3 +24,10 @@ class Firebase:
 
         # return blob.public_url, blob.media_link
         return blob
+
+    def delete(self, file_name):
+        """ 
+        Sync method delete file.
+        """
+        blob = self.bucket
+        return blob.delete_blob(Path(file_name).name)

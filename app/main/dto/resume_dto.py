@@ -62,3 +62,7 @@ class ResumeDTO:
         # Relations
         # 'job_resume_submission'
     })
+
+    delete_success = api.inherit('Delele cv successfullf', base,{
+        "data": fields.Nested(None)
+    })

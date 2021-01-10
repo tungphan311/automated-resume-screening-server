@@ -71,3 +71,12 @@ def update_cv(args):
     resume.job_domain_id = domain_id
     db.session.commit()
     return resume
+    
+def delete_cv_by_cand_id(id):
+    resume = ResumeModel.query.filter_by(cand_id=id).first()
+    urlCV = resume.store_url
+    db.session.delete(resume)
+    db.session.commit()
+
+    executor = ThreadPool.instance().executor
+    executor.submit(Firebase().delete, "CV-Huu-Loc.pdf")
