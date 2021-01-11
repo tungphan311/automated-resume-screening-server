@@ -1,105 +1,415 @@
 [
-    "Bao L.",
-    "lOS Developer",
-    "@  [] 9 Ho Chi Minh",
-    "ABOUT",
-    "Junior iOS developer with more than 1 year experience in developing iOS application. | do my work with",
-    "attitudes and always seek for better solutions in order to deliver the finest product. I'm looking for a",
-    "company where | can work in long term and contribute as much as | can.",
-    "EDUCATION",
-    "Hoa Sen University @ Major: Software Engineering",
-    "August 2016 - Now",
-    "WORK EXPERIENCE",
-    "EBIZWORLD \u00ae@ intern & Full-time iOS Developer",
-    "June 2019 - December 2019 Main responsibilities:",
-    "- Create Uls from our UI/UX team\u2019s designs",
-    "- Fix bugs",
-    "- Optimize code",
-    "- Maintain code",
-    "- Apply new features",
-    "Recognition and Gains:",
-    "- Got an official role in iOS team after finishing 2 months internship,",
-    "joined 2 projects, learned new technologies, improved company's",
-    "products and fixed bugs",
-    "TMA @ Full-time iOS Developer",
-    "Sept 2020 - Now Main responsibilities:",
-    "- Develop a new iOS application",
-    "- Analyze requirements and design architecture",
-    "- Implement features",
-    "- Learn Objective C to fix some bugs of an existing project",
-    "Recognition and Gains:",
-    "- Known how to analyze and design a product from scratch, learned",
-    "PROJECTS",
-    "DRAW, MARKUP, RULER",
-    "March 2019 - June 2019",
-    "HALP USER & DRIVER",
-    "Sept 2019 - Dec 2019",
-    "BIGCOSM",
-    "June 2019 - Sept 2019",
-    "PATITENT MANAGEMENT",
-    "APP",
-    "March 2019 - June 2019",
-    "new technologies and understood deeper about Swift language.",
-    "Familiar with Objective C and third party library.",
-    "TMA",
-    "- User can use this app to measure things from a picture. You can add a",
-    "ruler that can be moved, stretched, add multiple stretchabie middle",
-    "knot. It also allows you to add a pushpin to take note, add text, video,",
-    "audio as well.",
-    "- This app was mostly done by playing with CGPoint and Logic",
-    "- Technologies used: Swift, Xcode",
-    "EBIZWORLD",
-    "- These are booking car applications for both user and driver, they had",
-    "been published in Singapore when | joined. My role in the team was to",
-    "fix bugs, maintain and optimize codes and apply new features",
-    "- Technologies used: Swift, Firebase, Alamofire, Swifty JSON and",
-    "RESTful API",
-    "EBIZWORLD",
-    "- This is an e-wallet application, which was still in the first stage of",
-    "development. My role was to create Uls and applied some features",
-    "such as: Transaction history, catching notifications from Firebase, auto",
-    "logout, QR Scan",
-    "- Technologies used: Swift, Firebase, Moya, Swifty JSON and RESTful",
-    "API",
-    "School Project",
-    "- This application helps patients from a clinic to manage their",
-    "informations like appointment schedules, previous appointment,",
-    "bills, prescription and booking appointment.",
-    "- Technologies used: Swift, Xcode, Firebase Database",
-    "TECHNICAL SKILLS AND TOOLS",
-    "Swift",
-    "Objective C",
-    "C, C#",
-    "RESTful API",
-    "Push Notification",
-    "Core Data",
-    "Architecture Pattern",
-    "Experienced, know the fundamentals and used in school and company's",
-    "projects",
-    "Familiar",
-    "Experienced, know the fundamentals and used in school projects",
-    "Experienced in using RESTful API and handling JSON",
-    "Worked with Firebase push notification",
-    "Familiar",
-    "Experienced with MVP and familiar with MVVM's concept",
-    "Third party libraries",
-    "OOP",
-    "Firebase",
-    "SOFT SKILLS",
-    "Critical thinking",
-    "English",
-    "Adaptability",
-    "Problem Solving",
-    "Teamwork",
-    "Experienced with Swifty JSON, Moya, Alamofire",
-    "Experienced",
-    "Experienced",
-    "Having an the to think clearly and rationally, understanding the logical",
-    "connection between ideas",
-    "860 points in an internal TOEIC test. Able to write, read, listen and speak",
-    "at intermediate level",
-    "Having no problem with learning new things and get used to new working",
-    "environment",
-    "Having an ability to tackle unexpected problems and resolves conflicts",
-    "Worked effectively in a team"
+    {
+        "domain": "backend",
+        "post_index": 0,
+        "cv_index": 0,
+        "post_text": "TINYpulse makes truly unique software tools for businesses that treasure their most valued resource \u2014 their people. We believe happier employees result in stronger companies! We are seeking employees that are inspired by our goal to transform the manager-employee feedback loop. Together we can make stronger cultures.. . Over 1,000 companies from around the globe use TINYpulse to engage and develop high-performing teams, including Stitch Fix, HubSpot, Capital One, and Brooks Shoes & Apparel. We are also committed to giving back by donating 1% of our time to our local community, 1% of our product to non-profits, and 1% of our profits to non-profit organizations.. . We are looking for a Back end Developer who is able to build single page applications including implementing, testing, integrating and utilizing APIs with latest front-end web technologies.. . How do you know if this is the right role for you? If you:. . Enjoy a fast-paced entrepreneurial environment. Have strong analytical and problem-solving skills. Are coachable and personable, and, ideally, with a good sense of humour!. Are a team player, who is willing to disseminate knowledge to other team members. Are a passionate individual who is not afraid to ask questions and eager to learn. Maintain a high degree of knowledge of current technologies and tools. Make recommendations to improve effectiveness of the team. Have good communication skills, in both Vietnamese and English. Your Skills and Experience. What skill sets are we looking for from you?. . Languages: being efficient in any of the following languages: Ruby. Framework: strong experience in modern web technologies such as Ruby on Rails. Ability to build standalone Ruby gems. Third-party API Integration. Database: relevant experience with relational databases such as MySQL or PostgreSQL. Test coverage: competent skills in unit and integration tests (RSpec / Cucumber). Platform: adequate knowledge of Continuous Integration/Deployment, AWS and Docker. Be familiar with Microservices Architecture and Distributed System. Bonus:. . UI/UX knowledge. Experience with React.js. Familiarity with Reactive Programming or Functional Programming",
+        "cv_text": "Hieu G.. Ho Chi Minh, Vietnam. % [] S% protected@topcev.vn % []. EDUCATION. TON DUC THANG University June 2016. Major: Information System. WORK EXPERIENCE. HOVU CO., LTD. December 2017 - Present. Development Software Staff. Main responsibilities:. - Receive requests from customer, analyze and find that suitable solution (working with team or working. independently).. - Implement coding and deploy product.. - Maintenance, fixing bug if something goes wrong with customer.. - Add new features if customer have request.. Using technology: .Net WPF, Sqlite, NoSQL, Database Plugin.. Achievements and skills gained:. - Working in industrial production environment.. - Working with famous Vietnamese customers and foreign customer working in Vietnam.. Hardsoft Company February 2017 - December 2017. PHP Developer. -Building tools for the company.. - Building extracting data tool for customer of the company.. -Using Ms.SQL Server, PHP, HTML, JS, CSS, Bootstrap, JQuery, Winform.. Achievements and skills gained:. - [have understood how a technology service company operates.. - Working with foreign customers(Australia, New Zealand).. CERTIFICATIONS. Completed the university training program. 2016. SKILLS. Language English. Programming PHP, JavaScript, HTML, CSS, C#, SQL, MVC, OOP. Node.js, JSON, Restful API, NoSQL. Git, Git-Hub. Personal I can learn new technologies that can meet the needs of the company or the. customer. I can work in group or independence.. ADDITIONAL INFORMATION. I want to learn about e-commerce, how it woks and the services that revolve around it. thereby finding the right. technology to meet the needs of specific case.. I'm interested in a friendly and happy company environment.",
+        "domain_w": 3,
+        "general_w": 3,
+        "soft_w": 1,
+        "overall_score": 9.931000000000001,
+        "domain_score": 1.4147,
+        "soft_score": 1.4197,
+        "general_score": 1.4224,
+        "cv_domain_exp": {
+            "deploy": [
+                "git",
+                "deploy"
+            ],
+            ".net": [
+                ".net"
+            ],
+            "sqlite": [
+                "sqlite"
+            ],
+            "nosql": [
+                "restful",
+                "nosql"
+            ],
+            "databases": [
+                "restful",
+                "php",
+                "sql server",
+                "sqlite",
+                "data",
+                "sql",
+                "nosql",
+                "database"
+            ],
+            "php": [
+                "php",
+                "javascript",
+                "html"
+            ],
+            "tools": [
+                "tools",
+                "nosql"
+            ],
+            "javascript": [
+                "php",
+                "html",
+                "javascript",
+                "js",
+                "node.js",
+                "jquery",
+                "css"
+            ],
+            "c sharp": [
+                "c#"
+            ],
+            "sql": [
+                "sql",
+                "sql server",
+                "sqlite"
+            ],
+            "mvc": [
+                "mvc"
+            ],
+            "node": [
+                "node.js"
+            ],
+            "restful": [
+                "restful",
+                "restful api"
+            ],
+            "git": [
+                "git"
+            ],
+            "c": [
+                "c"
+            ],
+            "oop": [
+                "oop"
+            ],
+            "mysql": [
+                "sql",
+                "php",
+                "sql server",
+                "sqlite"
+            ],
+            "build": [
+                "building",
+                "environment",
+                "tool"
+            ],
+            "platform": [
+                "software",
+                "developer",
+                "api"
+            ],
+            "postgresql": [
+                "sql",
+                "sqlite"
+            ],
+            "programming language": [
+                "php",
+                "html",
+                "javascript",
+                "js",
+                "node.js",
+                "css",
+                "jquery",
+                "programming",
+                "c",
+                "c#",
+                "language"
+            ],
+            "codeigniter": [
+                "php"
+            ],
+            "cakephp": [
+                "php"
+            ],
+            "laravel": [
+                "php"
+            ],
+            "cassandra": [
+                "nosql"
+            ],
+            "elasticsearch": [
+                "nosql"
+            ],
+            "oracle": [
+                "sql"
+            ],
+            "spring boot": [
+                "restful api"
+            ],
+            "svn": [
+                "git"
+            ],
+            "bitbucket": [
+                "git"
+            ],
+            "sourcetree": [
+                "git"
+            ],
+            "github": [
+                "git"
+            ],
+            "mvvm": [
+                "wpf"
+            ],
+            "entity framework": [
+                "mvc"
+            ],
+            "ood": [
+                "oop"
+            ],
+            "j2ee": [
+                "restful"
+            ],
+            "framework": [
+                "restful",
+                "php",
+                "restful api",
+                "node.js"
+            ],
+            "backend developer": [
+                "javascript",
+                "node.js",
+                "deploy",
+                "nosql",
+                "programming",
+                "building",
+                "environment",
+                "language",
+                "restful",
+                "tools",
+                "php",
+                "sql server",
+                "c#",
+                "tool",
+                "sqlite",
+                "sql",
+                "html",
+                "data",
+                "js",
+                "jquery",
+                "database",
+                "c",
+                "css"
+            ],
+            "knowledge": [
+                "restful",
+                "php",
+                "oop",
+                "sql server",
+                "sqlite",
+                "sql",
+                "data",
+                "wpf",
+                "mvc",
+                "nosql",
+                "database",
+                "restful api"
+            ],
+            "source control": [
+                "git"
+            ],
+            "orm": [
+                "mvc"
+            ],
+            "hosting": [
+                "software",
+                "developer",
+                "api"
+            ]
+        },
+        "post_domain_exp": {
+            "tools": [
+                "tools"
+            ],
+            "build": [
+                "aws",
+                "environment",
+                "build",
+                "docker",
+                "continuous integration",
+                "platform"
+            ],
+            "testing": [
+                "test",
+                "rspec",
+                "testing",
+                "ruby",
+                "cucumber"
+            ],
+            "knowledge": [
+                "relational databases",
+                "relevant",
+                "mysql",
+                "react.js",
+                "relational",
+                "knowledge",
+                "problem",
+                "aws",
+                "database",
+                "postgresql.",
+                "databases",
+                "apis",
+                "postgresql",
+                "knowledge."
+            ],
+            "framework": [
+                "rails",
+                "architecture",
+                "react.js",
+                "framework"
+            ],
+            "databases": [
+                "mysql",
+                "relational",
+                "aws",
+                "database",
+                "postgresql.",
+                "databases",
+                "postgresql",
+                "relational databases"
+            ],
+            "mysql": [
+                "postgresql",
+                "mysql"
+            ],
+            "postgresql": [
+                "mysql",
+                "postgresql",
+                "postgresql."
+            ],
+            "rspec": [
+                "rspec",
+                "ruby"
+            ],
+            "cucumber": [
+                "cucumber"
+            ],
+            "platform": [
+                "api",
+                "framework",
+                "software",
+                "developer",
+                "apis",
+                "platform"
+            ],
+            "aws": [
+                "aws"
+            ],
+            "rails": [
+                "rails"
+            ],
+            "docker": [
+                "docker"
+            ],
+            "kubernetes": [
+                "docker",
+                "aws"
+            ],
+            "programming language": [
+                "mysql",
+                "programming",
+                "functional programming",
+                "ruby"
+            ],
+            "restful": [
+                "apis",
+                "react.js"
+            ],
+            "sql": [
+                "postgresql",
+                "mysql"
+            ],
+            "python": [
+                "ruby"
+            ],
+            "functional testing": [
+                "testing"
+            ],
+            "algorithms": [
+                "problem"
+            ],
+            "nosql": [
+                "relational"
+            ],
+            "php": [
+                "mysql"
+            ],
+            "mssql": [
+                "postgresql"
+            ],
+            "sqlite": [
+                "postgresql"
+            ],
+            "junit": [
+                "cucumber"
+            ],
+            "jasmine": [
+                "cucumber"
+            ],
+            "jenkins": [
+                "continuous integration"
+            ],
+            "deploy": [
+                "docker",
+                "deployment"
+            ],
+            "aws lambda": [
+                "aws"
+            ],
+            "ansible": [
+                "docker"
+            ],
+            "graphql": [
+                "react.js"
+            ],
+            "haskell": [
+                "functional programming"
+            ],
+            "concurrency": [
+                "functional programming"
+            ],
+            "backend developer": [
+                "relational databases",
+                "test",
+                "mysql",
+                "relational",
+                "continuous integration",
+                "build",
+                "cucumber",
+                "docker",
+                "programming",
+                "environment",
+                "testing",
+                "functional programming",
+                "databases",
+                "rspec",
+                "framework",
+                "tools",
+                "relevant",
+                "postgresql.",
+                "knowledge.",
+                "architecture",
+                "knowledge",
+                "aws",
+                "database",
+                "deployment",
+                "postgresql",
+                "ruby",
+                "platform"
+            ],
+            "hosting": [
+                "platform",
+                "api",
+                "aws",
+                "software",
+                "docker",
+                "developer",
+                "apis",
+                "framework"
+            ],
+            "operation system": [
+                "functional programming"
+            ]
+        }
+    }
 ]

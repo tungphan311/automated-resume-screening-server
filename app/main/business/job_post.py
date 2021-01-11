@@ -25,3 +25,5 @@ class JobPostBusiness:
     def get_job_skill_graph(self, job_skill_dict):
         skill_edges = generate_edges(job_skill_dict['explanation'])
         return generate_skill_graph(skill_edges)
+
+    

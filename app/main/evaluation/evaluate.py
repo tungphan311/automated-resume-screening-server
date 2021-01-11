@@ -1,79 +1,110 @@
 import sys
 
-from numpy.core.einsumfunc import _einsum_path_dispatcher
+from networkx.algorithms import matching
+
 sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server")
 sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server/app")
 sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server/app/main")
 
 from app.main.util.resume_extractor import ResumeExtractor, parse_pdf
-from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
+from app.main.util.data_processing import matching_score
+# from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
 import json
 import os
-
+import pandas as pd
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
+resumes_path = os.path.join(base_dir, 'data/resumes.csv')
+
+def posts_path(domain):
+    sub_path = "data/{domain}/{domain}_posts.csv".format(domain=domain)
+    return os.path.join(base_dir, sub_path)
 
 class Evaluation:
+    def __init__(self, domain, domain_w, general_w, soft_w):
+        self.domain = domain
+        self.resumes = self.get_domain_resume_texts()
+        self.posts = self.get_domain_job_posts()
 
-    def __init__(self):
-        self.classifier = ClassifyManager()
+        self.domain_w = domain_w
+        self.general_w = general_w
+        self.soft_w = soft_w
+
+        self.results = []
+
+    def get_domain_resume_texts(self):
+        df = pd.read_csv(resumes_path, delimiter="::delimiter::")
+        df = df[df.domain == self.domain]
+        return list(df['resume'])
+
+    def get_domain_job_posts(self):
+        df = pd.read_csv(posts_path(self.domain), delimiter="::delimiter::")
+        df = df[0:5]
+        return list(df['post'])
+
+    def print_result(self):
+        print("\n\n=Result for domain {domain}".format(domain=self.domain))
+        print()
+        for i in range(0, len(self.posts)):
+            label_post = "JD-{i}: ".format(i=i)
+            print("== List CV's score for {p} ==".format(p=label_post))
+
+            for j in range(0, len(self.resumes)):
+                label_cv = "CV-{j}".format(j=j)
+                p_text = self.posts[i]
+                cv_text = self.resumes[j]
+
+                domain_res = matching_score(post_text=p_text, cv_text=cv_text, domain=self.domain)
+                soft_res = matching_score(post_text=p_text, cv_text=cv_text, domain='softskill')
+                general_res = matching_score(post_text=p_text, cv_text=cv_text, domain='general')
+
+                overall = domain_res['score'] * self.domain_w \
+                    + soft_res['score'] * self.soft_w \
+                    + general_res['score'] * self.general_w
+
+                print("\t" + label_cv + ":")
+                print("\tDomain_matching_score: {score:.4f}".format(score=domain_res['score']))
+                print("\tSoft_matching_score: {score:.4f}".format(score=soft_res['score']))
+                print("\tGeneral_matching_score: {score:.4f}".format(score=general_res['score']))
+                print("\tOverall_matching_score: {score:.4f}".format(score=overall))
+                print()
+
+                res_dict = {
+                    "domain": self.domain,
+                    "post_index": i,
+                    "cv_index": j,
+                    "post_text": p_text,
+                    "cv_text": cv_text,
+
+                    "domain_w": self.domain_w,
+                    "general_w": self.general_w,
+                    "soft_w": self.soft_w, 
+                    "overall_score": overall,
+
+                    "domain_score": domain_res['score'],
+                    "soft_score": soft_res['score'],
+                    "general_score": general_res['score'],
+
+                    "cv_domain_exp": domain_res['cv_explanation'],
+                    # "cv_soft_exp": soft_res['cv_explanation'],
+                    # "cv_general_exp": general_res['cv_explanation'],
+
+                    "post_domain_exp": domain_res['post_explanation'],
+                    # "post_soft_exp": soft_res['post_explanation'],
+                    # "post_general_exp": general_res['post_explanation'],
+                }
+
+                self.results.append(res_dict)
+
+    def sort(self):
+        self.results.sort(key=lambda x: x.get('overall_score'), reverse=True)
 
 
-    ##################
-    # HELPERS
-    ##################
-    # dict_keys(['syntactic', 'semantic', 'union', 'enhanced', 'explanation'])
-    def extract(self, domain, doc):
-        domain_result = self.classifier.run_classifier(domain=domain, explanation=True, job_description=doc)
-        general_result = self.classifier.run_classifier(domain='general', explanation=True, job_description=doc)
-        softskill_result = self.classifier.run_classifier(domain='softskill', explanation=True, job_description=doc)
-        return {
-            'domain': self.parse_result(domain_result),
-            'general': self.parse_result(general_result),
-            'softskill': self.parse_result(softskill_result),
-        }
+for lb in ['backend', 'frontend', 'android', 'ios', 'fullstack']:
+    evaluation = Evaluation(lb, 3, 3, 1)
+    evaluation.print_result()
+    evaluation.sort()
 
-    def parse_result(self, result):
-        dict_result = result.get_dict()
-        all_skills = set(dict_result['union'])
-        explicit_skills = set(dict_result['syntactic'])
-        related_skills = all_skills.difference(explicit_skills)
-        return {
-            'explicit_skills': list(explicit_skills),
-            'related_skills': list(related_skills),
-            'all_skills': list(all_skills),
-            'explanation': dict_result['explanation']
-        }
+    with open(os.path.join(base_dir, '{domain}_evaluation_result.json'.format(domain=lb)), 'w') as f:
+        f.write(json.dumps(evaluation.results, indent=4))
 
-
-####################
-# Create resume csv
-####################
-
-def parse_cv(local_path):
-    "Return text."
-    result_dict = parse_pdf(local_path, True)
-    return result_dict
-
-PDF_PATH = 'data/{domain}/cv/{domain}/{domain}-{index}/{domain}-{index}.pdf'
-DELIMITER = '::delimiter::'
-
-with open(os.path.join(base_dir, 'resumes_3.csv'), 'w') as f:
-    f.write(DELIMITER.join(['index', 'domain', 'resume']))
-    f.write('\n')
-    j = 0
-    for domain in ['android', 'fullstack']:
-        for i in range(1, 11):
-            j += 1
-            print('parsing {domain}: {i}, index {j}'.format(domain=domain, i=i, j=j))
-            sub_path = PDF_PATH.format(domain=domain, index=i)
-            pdf_path = os.path.join(base_dir, sub_path)
-            sentences = parse_cv(pdf_path)
-            text = '. '.join(sentences).replace('\n', '. ')
-            f.write(DELIMITER.join([str(j), domain, text]))
-            f.write('\n')
-
-print("Done")
-# res = parse_cv(ios_path)
-# with open(os.path.join('app/main/evaluation/evaluation_result.json'), 'w') as f:
-#     f.write(json.dumps(res, indent=4))
