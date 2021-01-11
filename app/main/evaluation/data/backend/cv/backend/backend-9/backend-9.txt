@@ -1,0 +1,13 @@
+C#
+.NET Core
+XAML
+C++
+Javascript
+HTML
+CSS
+Python
+Batch
+AWS
+Ruby on Rails.
+.NET
+

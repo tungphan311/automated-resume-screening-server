@@ -1,0 +1,18 @@
+PHP
+NodeJS
+Ruby on Rails
+MySQL
+PostgreSQL
+HTML/CSS
+Javascript
+jQuery
+React
+Twitter Bootstrap
+Docker
+Vagrant
+Linux server
+Git
+AWS
+JIRA
+Pivotal Tracker
+Microservice

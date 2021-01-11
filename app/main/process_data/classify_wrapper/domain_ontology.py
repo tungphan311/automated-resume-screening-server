@@ -14,6 +14,17 @@ class DomainOntology(Ontology):
         self.domain_name = domain_name
         self.load_domain_ontology()
 
+        # Custom stems_topic for also counting alternative labels
+        self.topic_stems.clear()
+        allkeys = set(self.topics.keys())
+        for k in self.primary_labels.keys():
+            allkeys.add(k)
+
+        for topic in allkeys:
+            if topic[:4] not in self.topic_stems:
+                self.topic_stems[topic[:4]] = list()
+            self.topic_stems[topic[:4]].append(topic)
+
     
     def load_domain_ontology(self):
         """ Function that loads the domain ontology from the pickle file. 

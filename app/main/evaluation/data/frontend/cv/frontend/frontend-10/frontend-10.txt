@@ -1,0 +1,13 @@
+CSS
+React-Hooks
+HTML
+CSS
+JS
+React-redux
+HTML5/CSS3 (Responsive UI)
+Bootstrap
+JavaScript (ES6)
+Restful API
+Material UI
+ReactJS / Redux
+Git

@@ -1,0 +1,7 @@
+Android
+Kotlin and Java
+iOS
+Swift
+Payment Technology with POS(Point of Sale)
+MVP, MVVM paterns
+RESTful API.

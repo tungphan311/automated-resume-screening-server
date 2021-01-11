@@ -1,0 +1,17 @@
+Swift
+Objective C
+C, C#
+RESTful API
+Push Notification
+Core Data 
+Architecture Pattern 
+Third party libraries
+OOP 
+Firebase
+Teamwork
+Problem Solving
+Adaptability
+English
+Critical thinking 
+Alamofire
+Moya

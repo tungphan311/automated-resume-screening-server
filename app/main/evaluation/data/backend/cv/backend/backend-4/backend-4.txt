@@ -1,0 +1,9 @@
+PHP
+API
+Laravel
+Gitlab
+HTML
+CSS
+Mysql
+Bootstrap
+Photoshop

@@ -2,7 +2,7 @@ from app.main.process_data.classify_wrapper.domain_cached_model import DomainCac
 from app.main.process_data.classify_wrapper.domain_ontology import DomainOntology
 from app.main.process_data.classifier.ontology import Ontology
 from app.main.process_data.config import Config
-from app.main.process_data.classifier.paper import Paper
+from app.main.process_data.classify_wrapper.skill_paper import SkillPaper
 from app.main.process_data.classifier.result import Result
 from app.main.process_data.classifier.semanticmodule import Semantic as SemanticModule
 from app.main.process_data.classifier.syntacticmodule import Syntactic as SyntacticModule
@@ -29,6 +29,8 @@ class ClassifyManager:
             o = DomainOntology(o_path, d)
             m = DomainCachedModel(m_path, d)
             self.model_dict[d] = (o, m)
+
+        print("Loaded models.")
 
 
     def __get_domain_model(self, domain):
@@ -79,7 +81,7 @@ class ClassifyManager:
 
         # Loading ontology and model
         (ontology, cached_model) = self.__get_domain_model(domain)
-        t_paper = Paper(job_description, modules)
+        t_paper = SkillPaper(job_description, modules)
         result = Result(explanation)
 
 

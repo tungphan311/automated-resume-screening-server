@@ -1,0 +1,13 @@
+English
+C/C++
+Python
+Java
+Spring
+ReactJS
+MSSQL
+Oracle
+k-NN
+k-means
+Naive Bayes
+Decision Tree
+Logical and Creative Thinking

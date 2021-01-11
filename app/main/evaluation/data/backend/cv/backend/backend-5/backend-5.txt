@@ -1,0 +1,12 @@
+Java Core
+MongoDB
+Git
+Spring
+Docker
+Nginx
+Elasticsearch
+Redis
+Mysql
+Hibernate
+JPA Repository
+sqlite

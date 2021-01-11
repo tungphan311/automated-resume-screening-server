@@ -1,0 +1,14 @@
+HTML/CSS/JS
+ReactJS
+NodeJS
+C#
+.NET
+SQL server
+My SQL
+MongoDb
+OOP
+MVC
+API
+RESTFUL
+English
+reactjs-redux-saga

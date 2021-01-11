@@ -1,0 +1,16 @@
+Swift
+Teamwork
+Logical thinking and creative
+Present
+Jira
+SourceTree
+Scrum
+Git
+Moya
+Alamofire
+REST
+Authentication
+Firebase Notification
+WebSocket
+WebRTC, Tokbok
+Java

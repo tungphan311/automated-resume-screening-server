@@ -1,0 +1,10 @@
+GIT
+UI 
+Unit testing
+Jest Tesing
+Reactjs
+typescript,
+Redux-saga
+React native
+HTML/CSS/JS
+English

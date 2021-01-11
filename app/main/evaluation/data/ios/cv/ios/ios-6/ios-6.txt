@@ -1,0 +1,25 @@
+MVP
+Java
+RXjava
+realm
+FLUTTER
+REACT NATIVE
+Team leader
+php
+laravel 6.x
+redux
+redux sagas
+Kotlin
+MVVM
+koin
+RXjava
+socket io
+TypeScript
+MobX State Tree
+WebRTC
+Google Map API
+databinding
+Lifecycler aware
+html
+css
+Push notification with OneSignal

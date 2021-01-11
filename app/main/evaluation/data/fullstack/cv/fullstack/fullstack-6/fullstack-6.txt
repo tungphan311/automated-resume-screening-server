@@ -1,0 +1,24 @@
+C#
+Nodejs
+SQL Server, Oracle, MongoDB, MySQL,MariaDB
+Angularjs
+Reactjs
+React Native
+Flutter
+PHP
+Others: Git, Redis, RabbitMQ, Offices
+C# (DotNetNuke), MSSQL
+System integration with Sacombank
+ServiceStack
+Message ISO8583
+Research & apply technology about HSM-Thales
+Logstash
+Elastic
+Kibana
+Filebeat
+Angular 2
+Ads Google
+Node js
+MongoDB
+Flutter
+SQLite
