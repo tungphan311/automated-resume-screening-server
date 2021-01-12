@@ -61,7 +61,7 @@ def update_cv(args):
     resume.resume_id = args['resume_id']
     resume.educations = args['educations']
     resume.experiences = args['experiences']
-    resume.skills = args['skills']
+    resume.technical_skills = args['skills']
     resume.months_of_experience = args['months_of_experience']
 
     domain_id = args['job_domain_id']
