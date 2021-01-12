@@ -41,23 +41,3 @@ class CandidateModel(db.Model):
 
     def __repr__(self):
         return "<Candidate '{}'>".format(self.email)
-
-    def to_json(self):
-        if self.resumes== None:
-            data = None
-        else:
-            data = self.resumes.to_json()
-        return {
-            "id": int(self.id),
-            "email": self.email,
-            "phone": self.phone,
-            "fullName": self.full_name,
-            "dateOfBirth": (self.date_of_birth).strftime("%Y/%m/%d, %H:%M:%S"),
-            "gender": self.gender,
-            "status": self.status,
-            "provinceId": self.province_id,
-            "registeredOn" : (self.registered_on).strftime("%Y/%m/%d, %H:%M:%S"),
-            "resumes": data          
-        }
-
-

@@ -44,6 +44,37 @@ class CandidateDto:
         'password': fields.String(required=True, description='user password'),
     })
 
+    response_resume = api.model('response_resume', {
+        'id': fields.Integer,
+        'months_of_experience': fields.Integer,
+        'soft_skills': fields.String,
+        'technical_skills': fields.List(fields.String, attribute=lambda x: x.technical_skills.split("|")),
+        'store_url': fields.String,
+        'resume_filename': fields.String,
+        'resume_file_extension': fields.String,
+        'download_url': fields.String,
+        'educations': fields.String,
+        'experiences': fields.String,
+        'job_domain_id': fields.Integer
+    })
+
+    response_profile = api.model('response_profile', {
+        'id': fields.Integer,
+        'email': fields.String,
+        'phone': fields.String,
+        'fullName': fields.String(attribute='full_name'),
+        'dateOfBirth': fields.String(attribute=lambda x: x.date_of_birth.strftime("%d/%m/%Y")),
+        'gender': fields.Boolean,
+        'status': fields.Boolean,
+        'provinceId': fields.Integer(attribute='province_id'),
+        'registeredOn': fields.String(attribute=lambda x: x.registered_on.strftime("%H:%M - %d/%m/%Y")),
+        'resumes': fields.Nested(response_resume)
+    })
+
+    candidate_profile = api.inherit('candidate_profile', base, {
+        'data': fields.Nested(response_profile)
+    })
+
     ########################
     # Candidate detail model
     ########################

@@ -79,4 +79,4 @@ def delete_cv_by_cand_id(id):
     db.session.commit()
 
     executor = ThreadPool.instance().executor
-    executor.submit(Firebase().delete, "CV-Huu-Loc.pdf")
+    executor.submit(Firebase().delete, urlCV)
