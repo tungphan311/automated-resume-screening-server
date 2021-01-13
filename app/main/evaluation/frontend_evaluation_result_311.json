@@ -1,0 +1,3391 @@
+{
+    "JD-1: ": [
+        {
+            "domain": "frontend",
+            "post_index": 1,
+            "cv_index": 0,
+            "post_text": "Who we are looking for:. . The front-end software engineer to join a highly skilled and experienced team and do challenging tasks involving the latest technologies. . You will:. . Possibility to participate in international projects for world\u2019s leading companies. Solidify your expertise in your chosen area and be recognized as a community developer. Write \u201cclean\u201d, well-designed code to develop and deliver products in various types using HTML5, CSS3, and Javascript. Creating visually appealing web pages, mobile devices or any interfaces \u2013 collaborate with the usability and design teams to define prototypes of dynamic web pages and JavaScript components. Troubleshoot, test and maintain the core product software and databases to ensure strong optimization and functionality. Testing cross-browser, cross-platform, and/or cross-device compatibility for inconsistenciesInitiate automated solutions that enable better efficiency and process improvement. Contributes to continual improvement by suggesting improvements to user interface, software architecture or new technologies. Develop new solutions as well as fixing issues and errors with existing applications. Migrate the applications into the production environment, file management. Participate in code reviews, follow industry best practices and research new technologies. Your Skills and Experience. 2+ years experience in HTML5, CSS3, Javascript, Responsive Design. Working experience with API integration, can handle complex flow/logic. Experience with text/photo/video web editor. Develop nice and abstract web animation with high performance for user experience. Understand and know-how of user experience practice in website development. English communication is a big plus but not compulsory. Working experience with Git (can handle merge code, review code). Proactive, ability to analyze and solving problems skills",
+            "cv_text": "A. het mot ene ioe) eon. BB Aor, 25 1997. etait). & []. 8B . \\-amom@alm lin arm aciear lan). i []. OBJECTIVE. Motivative, teamwork,. research. Able to work to tight. dealine and keen on learning. and discovering new. technologies as well as new. programing languages.. 1d BES. ego syA ss. RRoreel iss. anyday. I. \u00b0o Movie. ane. eo EDUCATION. THE UNIVERSITY OF SIENCE. Major: Information Technology. 2015 - 2020. GPA: 7.6/10. MAR 2019 - APR. 2019. INTERN. Dwarves Foundation. Learning and working with Frontend knowledge, GIT, and more.... \u00a9 WORK EXPERIENCE. AHAROOMS MAR 19 - MAY 20. Manage hotel chain. Main responsibilities:. - Develop Ul and logic with design available. - Write Unit testing with Jest Tesing. - Fix bug external of old feature. Tech:. - Reactjs, typescript,. - Redux-saga, Jest Testing .... TIGERSPIKE JUN 2020 -. PRESENT. Manage mobile data. Main responsibilities:. - Develop Ul and logic with design available. - Fix bug. - Contact and discuss with client about new feature. Tech:. - React native. \u00a9 COMPANY. DWARVES FOUNDATION MAR 2019 -. PRESENT. Join as internship. Dill aeadiict far chart",
+            "domain_w": 3,
+            "general_w": 1,
+            "soft_w": 1,
+            "overall_score": 7.111,
+            "domain_score": 1.4142,
+            "soft_score": 1.4205,
+            "general_score": 1.4479,
+            "cv_domain_exp": {
+                "knowledge": [
+                    "client",
+                    "knowledge"
+                ],
+                "git": [
+                    "git"
+                ],
+                "jest": [
+                    "jest"
+                ],
+                "reacjs": [
+                    "reactjs"
+                ],
+                "typescript": [
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "redux",
+                    "typescript"
+                ],
+                "redux-saga": [
+                    "redux-saga"
+                ],
+                "testing": [
+                    "testing",
+                    "jest"
+                ],
+                "react native": [
+                    "react",
+                    "redux",
+                    "react native.",
+                    "react native"
+                ],
+                "redux": [
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "react native",
+                    "frontend",
+                    "redux"
+                ],
+                "angular": [
+                    "react",
+                    "typescript"
+                ],
+                "cypress": [
+                    "jest"
+                ],
+                "mocha": [
+                    "jest"
+                ],
+                "protractor": [
+                    "jest"
+                ],
+                "svn": [
+                    "git"
+                ],
+                "bitbucket": [
+                    "git"
+                ],
+                "sourcetree": [
+                    "git"
+                ],
+                "github": [
+                    "git"
+                ],
+                "http": [
+                    "client"
+                ],
+                "flutter": [
+                    "react native"
+                ],
+                "frontend developer": [
+                    "jest",
+                    "testing",
+                    "client",
+                    "knowledge"
+                ],
+                "framework": [
+                    "react native.",
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "redux-saga",
+                    "react native",
+                    "frontend",
+                    "redux",
+                    "typescript"
+                ],
+                "programming language": [
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "redux",
+                    "typescript"
+                ],
+                "source control": [
+                    "git"
+                ]
+            },
+            "cv_soft_exp": {
+                "teamwork": [
+                    "teamwork"
+                ],
+                "leadership": [
+                    "teamwork"
+                ],
+                "softskill": [
+                    "teamwork"
+                ]
+            },
+            "cv_general_exp": {
+                "lan": [
+                    "lan"
+                ],
+                "keen": [
+                    "keen"
+                ],
+                "information technology": [
+                    "information technology",
+                    "information technology.",
+                    "education"
+                ],
+                "education": [
+                    "information technology",
+                    "university",
+                    "education.",
+                    "research",
+                    "education"
+                ],
+                "university": [
+                    "research",
+                    "university"
+                ],
+                "core foundation": [
+                    "foundation.",
+                    "lan",
+                    "client",
+                    "foundation"
+                ],
+                "knowledge": [
+                    "data",
+                    "client",
+                    "knowledge"
+                ],
+                "git": [
+                    "git"
+                ],
+                "jest": [
+                    "jest"
+                ],
+                "reacjs": [
+                    "reactjs"
+                ],
+                "typescript": [
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "redux",
+                    "typescript"
+                ],
+                "redux-saga": [
+                    "redux-saga"
+                ],
+                "testing": [
+                    "testing",
+                    "jest"
+                ],
+                "react native": [
+                    "react",
+                    "redux",
+                    "react native.",
+                    "react native"
+                ],
+                "foundation": [
+                    "foundation"
+                ],
+                "redux": [
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "react native",
+                    "frontend",
+                    "redux"
+                ],
+                "project": [
+                    "research",
+                    "foundation"
+                ],
+                "node.js": [
+                    "reactjs",
+                    "typescript"
+                ],
+                "angular": [
+                    "react",
+                    "typescript"
+                ],
+                "cyber security": [
+                    "information technology"
+                ],
+                "reasoning": [
+                    "logic"
+                ],
+                "architecture": [
+                    "testing",
+                    "design"
+                ],
+                "build": [
+                    "design"
+                ],
+                "software": [
+                    "design"
+                ],
+                "cypress": [
+                    "jest"
+                ],
+                "mocha": [
+                    "jest"
+                ],
+                "jasmine": [
+                    "jest"
+                ],
+                "unit tests": [
+                    "jest"
+                ],
+                "protractor": [
+                    "jest"
+                ],
+                "local area networks": [
+                    "lan"
+                ],
+                "networking": [
+                    "client",
+                    "lan"
+                ],
+                "ethernet": [
+                    "lan"
+                ],
+                "port forwarding": [
+                    "lan"
+                ],
+                "firewall": [
+                    "lan"
+                ],
+                "firewalls": [
+                    "lan"
+                ],
+                "network": [
+                    "lan"
+                ],
+                "shortest path": [
+                    "o"
+                ],
+                "c": [
+                    "o"
+                ],
+                "curriculum": [
+                    "education"
+                ],
+                "information security": [
+                    "information technology"
+                ],
+                "engineering": [
+                    "information technology"
+                ],
+                "svn": [
+                    "git"
+                ],
+                "bitbucket": [
+                    "git"
+                ],
+                "sourcetree": [
+                    "git"
+                ],
+                "github": [
+                    "git"
+                ],
+                "service": [
+                    "manage"
+                ],
+                "resources": [
+                    "manage"
+                ],
+                "deploy": [
+                    "git",
+                    "manage"
+                ],
+                "regression testing": [
+                    "testing"
+                ],
+                "quality assurance": [
+                    "testing"
+                ],
+                "functional testing": [
+                    "testing"
+                ],
+                "mobile devices": [
+                    "mobile"
+                ],
+                "mobile device": [
+                    "mobile"
+                ],
+                "smart phone": [
+                    "mobile"
+                ],
+                "smartphone": [
+                    "mobile"
+                ],
+                "smartphones": [
+                    "mobile"
+                ],
+                "mobile phones": [
+                    "mobile"
+                ],
+                "mobile phone": [
+                    "mobile"
+                ],
+                "mobile applications": [
+                    "mobile"
+                ],
+                "mobile application": [
+                    "mobile"
+                ],
+                "android": [
+                    "mobile"
+                ],
+                "database": [
+                    "data"
+                ],
+                "databases": [
+                    "data"
+                ],
+                "protocols": [
+                    "client"
+                ],
+                "http": [
+                    "client"
+                ],
+                "flutter": [
+                    "react native"
+                ],
+                "xamarin": [
+                    "react native"
+                ],
+                "app components": [
+                    "manage"
+                ],
+                "framework": [
+                    "react native.",
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "redux-saga",
+                    "react native",
+                    "frontend",
+                    "redux",
+                    "typescript"
+                ],
+                "programming language": [
+                    "reactjs",
+                    "react",
+                    "jest",
+                    "redux",
+                    "typescript",
+                    "o"
+                ],
+                "fiber optic networks": [
+                    "lan"
+                ],
+                "bandwidth": [
+                    "lan"
+                ],
+                "instruments": [
+                    "lan"
+                ],
+                "computer hardware": [
+                    "mobile"
+                ],
+                "hardware": [
+                    "mobile"
+                ],
+                "computer crime": [
+                    "information technology"
+                ],
+                "computer system firewalls": [
+                    "lan"
+                ],
+                "security of data": [
+                    "information technology"
+                ],
+                "network security": [
+                    "information technology"
+                ],
+                "cocoa touch": [
+                    "foundation.",
+                    "client",
+                    "lan",
+                    "foundation"
+                ],
+                "frontend developer": [
+                    "testing",
+                    "jest",
+                    "knowledge"
+                ],
+                "backend developer": [
+                    "jest",
+                    "data",
+                    "testing",
+                    "design",
+                    "manage",
+                    "knowledge"
+                ],
+                "fullstack developer": [
+                    "jest",
+                    "data",
+                    "testing",
+                    "design",
+                    "manage",
+                    "knowledge"
+                ],
+                "devops": [
+                    "lan",
+                    "client",
+                    "jest",
+                    "data",
+                    "testing",
+                    "manage",
+                    "knowledge"
+                ],
+                "android developer": [
+                    "design"
+                ],
+                "mobile computing": [
+                    "mobile"
+                ],
+                "telephone sets": [
+                    "mobile"
+                ],
+                "mobile telecommunication systems": [
+                    "mobile"
+                ],
+                "servers": [
+                    "client"
+                ],
+                "client server computer systems": [
+                    "client"
+                ],
+                "internet protocol": [
+                    "client"
+                ],
+                "internet protocols": [
+                    "client"
+                ],
+                "user interface": [
+                    "manage"
+                ],
+                "ios developer": [
+                    "jest",
+                    "research",
+                    "testing",
+                    "foundation"
+                ],
+                "computer system": [
+                    "data"
+                ],
+                "computer systems": [
+                    "data"
+                ],
+                "computer science": [
+                    "information technology",
+                    "information technology.",
+                    "design",
+                    "education"
+                ],
+                "source control": [
+                    "git"
+                ],
+                "analytics": [
+                    "keen"
+                ],
+                "tests": [
+                    "jest"
+                ],
+                "wireless telecommunication systems": [
+                    "lan"
+                ],
+                "hybrid": [
+                    "react",
+                    "react native",
+                    "redux",
+                    "react native."
+                ],
+                "ontology": [
+                    "logic"
+                ],
+                "ontologies": [
+                    "logic"
+                ],
+                "formal languages": [
+                    "logic"
+                ],
+                "swift": [
+                    "client"
+                ],
+                "smart phones": [
+                    "mobile"
+                ],
+                "graph theory": [
+                    "o"
+                ],
+                "datascience": [
+                    "data"
+                ],
+                "ai engineer": [
+                    "data"
+                ],
+                "computer software maintenance": [
+                    "testing"
+                ],
+                "regression analysis": [
+                    "testing"
+                ],
+                "statistics": [
+                    "testing"
+                ],
+                "correlation analysis": [
+                    "testing"
+                ],
+                "statistical model": [
+                    "testing"
+                ],
+                "statistical analysis": [
+                    "testing"
+                ],
+                "tool": [
+                    "git"
+                ]
+            },
+            "post_domain_exp": {
+                "html": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "css": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5"
+                ],
+                "javascript": [
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "testing": [
+                    "testing",
+                    "test"
+                ],
+                "code review": [
+                    "code reviews"
+                ],
+                "responsive": [
+                    "responsive",
+                    "responsive design"
+                ],
+                "api": [
+                    "api",
+                    "developer"
+                ],
+                "git": [
+                    "git"
+                ],
+                "sass": [
+                    "responsive design",
+                    "css3"
+                ],
+                "knowledge": [
+                    "usability",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "developer",
+                    "code reviews",
+                    "practice"
+                ],
+                "jquery": [
+                    "javascript"
+                ],
+                "ajax": [
+                    "javascript"
+                ],
+                "modernizr": [
+                    "html5"
+                ],
+                "scss": [
+                    "css3"
+                ],
+                "wireframes": [
+                    "usability"
+                ],
+                "framework": [
+                    "javascript",
+                    "responsive",
+                    "architecture"
+                ],
+                "bootstrap": [
+                    "responsive"
+                ],
+                "svn": [
+                    "git"
+                ],
+                "bitbucket": [
+                    "git"
+                ],
+                "sourcetree": [
+                    "git"
+                ],
+                "github": [
+                    "git"
+                ],
+                "tools": [
+                    "html5"
+                ],
+                "frontend developer": [
+                    "test",
+                    "expertise",
+                    "testing",
+                    "javascript",
+                    "practice",
+                    "architecture"
+                ],
+                "css preprocessors": [
+                    "responsive design",
+                    "css3"
+                ],
+                "library": [
+                    "javascript"
+                ],
+                "programming language": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "text",
+                    "html5",
+                    "javascript."
+                ],
+                "source control": [
+                    "git"
+                ],
+                "css frameworks": [
+                    "responsive"
+                ]
+            },
+            "post_soft_exp": {
+                "troubleshoot": [
+                    "troubleshoot"
+                ],
+                "english": [
+                    "english"
+                ],
+                "communication": [
+                    "communication",
+                    "solving problems",
+                    "team"
+                ],
+                "solving problems": [
+                    "solving problems",
+                    "troubleshoot"
+                ],
+                "collaboration": [
+                    "team"
+                ],
+                "using foreign languages": [
+                    "english"
+                ],
+                "softskill": [
+                    "communication"
+                ]
+            },
+            "post_general_exp": {
+                "software": [
+                    "platform",
+                    "design",
+                    "environment",
+                    "development",
+                    "developer",
+                    "software",
+                    "product",
+                    "product software"
+                ],
+                "engineers": [
+                    "engineer"
+                ],
+                "tasks": [
+                    "tasks"
+                ],
+                "code": [
+                    "code"
+                ],
+                "html": [
+                    "css3",
+                    "responsive",
+                    "javascript",
+                    "text",
+                    "html5",
+                    "responsive design"
+                ],
+                "css": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5"
+                ],
+                "web page": [
+                    "web pages",
+                    "browser",
+                    "web"
+                ],
+                "web pages": [
+                    "web pages",
+                    "browser",
+                    "web"
+                ],
+                "javascript": [
+                    "responsive",
+                    "css3",
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "mobile device": [
+                    "usability",
+                    "best practices",
+                    "mobile",
+                    "mobile devices"
+                ],
+                "mobile devices": [
+                    "usability",
+                    "best practices",
+                    "mobile",
+                    "mobile devices"
+                ],
+                "tests": [
+                    "test"
+                ],
+                "databases": [
+                    "databases"
+                ],
+                "database": [
+                    "databases"
+                ],
+                "optimization": [
+                    "dynamic",
+                    "optimization"
+                ],
+                "testing": [
+                    "testing",
+                    "test"
+                ],
+                "user interface": [
+                    "usability",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "user interfaces": [
+                    "usability",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "software architecture": [
+                    "software architecture",
+                    "development",
+                    "software engineer",
+                    "developer"
+                ],
+                "environment": [
+                    "environment"
+                ],
+                "code review": [
+                    "code reviews"
+                ],
+                "responsive": [
+                    "responsive",
+                    "responsive design"
+                ],
+                "api": [
+                    "api",
+                    "developer"
+                ],
+                "animation": [
+                    "animation"
+                ],
+                "user experience": [
+                    "user experience.",
+                    "user experience"
+                ],
+                "communication": [
+                    "communication"
+                ],
+                "git": [
+                    "git"
+                ],
+                "html5": [
+                    "html5",
+                    "responsive design",
+                    "css3"
+                ],
+                "architecture": [
+                    "code",
+                    "test",
+                    "core",
+                    "design",
+                    "process improvement",
+                    "architecture"
+                ],
+                "build": [
+                    "platform",
+                    "design",
+                    "environment"
+                ],
+                "project": [
+                    "community",
+                    "development",
+                    "team"
+                ],
+                "hardware": [
+                    "software",
+                    "mobile",
+                    "device"
+                ],
+                "sass": [
+                    "responsive design",
+                    "css3"
+                ],
+                "software developer": [
+                    "developer",
+                    "software engineer"
+                ],
+                "software developers": [
+                    "developer",
+                    "software engineer"
+                ],
+                "software development": [
+                    "community",
+                    "development",
+                    "software engineer"
+                ],
+                "knowledge": [
+                    "usability",
+                    "expertise",
+                    "api",
+                    "responsive",
+                    "responsive design",
+                    "databases",
+                    "code reviews",
+                    "developer",
+                    "practice"
+                ],
+                "source codes": [
+                    "code",
+                    "community"
+                ],
+                "source code": [
+                    "code",
+                    "community"
+                ],
+                "web application": [
+                    "javascript",
+                    "web"
+                ],
+                "web applications": [
+                    "javascript",
+                    "web"
+                ],
+                "usability testing": [
+                    "usability",
+                    "best practices"
+                ],
+                "software design": [
+                    "software architecture",
+                    "best practices"
+                ],
+                "service": [
+                    "management",
+                    "communication"
+                ],
+                "tool": [
+                    "software",
+                    "git",
+                    "html5"
+                ],
+                "jquery": [
+                    "javascript"
+                ],
+                "php": [
+                    "javascript"
+                ],
+                "node.js": [
+                    "javascript"
+                ],
+                "ajax": [
+                    "javascript"
+                ],
+                "modernizr": [
+                    "html5"
+                ],
+                "scss": [
+                    "css3"
+                ],
+                "engineering": [
+                    "engineer"
+                ],
+                "open source projects": [
+                    "community"
+                ],
+                "smart phone": [
+                    "mobile"
+                ],
+                "smartphone": [
+                    "mobile"
+                ],
+                "smartphones": [
+                    "mobile"
+                ],
+                "mobile phones": [
+                    "mobile"
+                ],
+                "mobile phone": [
+                    "mobile"
+                ],
+                "mobile applications": [
+                    "mobile"
+                ],
+                "mobile application": [
+                    "mobile"
+                ],
+                "android": [
+                    "mobile"
+                ],
+                "accessiblility": [
+                    "usability"
+                ],
+                "wireframes": [
+                    "usability"
+                ],
+                "optimization problems": [
+                    "optimization"
+                ],
+                "business process": [
+                    "process improvement"
+                ],
+                "business processes": [
+                    "process improvement"
+                ],
+                "quality assurance": [
+                    "test",
+                    "process improvement"
+                ],
+                "framework": [
+                    "javascript",
+                    "responsive",
+                    "architecture"
+                ],
+                "system architectures": [
+                    "software architecture"
+                ],
+                "system architecture": [
+                    "software architecture"
+                ],
+                "filesystem": [
+                    "file"
+                ],
+                "file system": [
+                    "file"
+                ],
+                "interaction design": [
+                    "best practices"
+                ],
+                "interaction designs": [
+                    "best practices"
+                ],
+                "conceptual design": [
+                    "best practices"
+                ],
+                "bootstrap": [
+                    "responsive"
+                ],
+                "reasoning": [
+                    "logic"
+                ],
+                "camera": [
+                    "photo"
+                ],
+                "blog": [
+                    "website"
+                ],
+                "network": [
+                    "communication"
+                ],
+                "protocols": [
+                    "communication"
+                ],
+                "networking": [
+                    "communication"
+                ],
+                "communication protocols": [
+                    "communication"
+                ],
+                "communication protocol": [
+                    "communication"
+                ],
+                "internet": [
+                    "communication"
+                ],
+                "svn": [
+                    "git"
+                ],
+                "bitbucket": [
+                    "git"
+                ],
+                "sourcetree": [
+                    "git"
+                ],
+                "github": [
+                    "git"
+                ],
+                "tools": [
+                    "html5"
+                ],
+                "product design": [
+                    "best practices"
+                ],
+                "telephone sets": [
+                    "mobile"
+                ],
+                "mobile telecommunication systems": [
+                    "mobile"
+                ],
+                "software engineering": [
+                    "software architecture",
+                    "code",
+                    "best practices"
+                ],
+                "information systems": [
+                    "process improvement"
+                ],
+                "information system": [
+                    "process improvement"
+                ],
+                "source control": [
+                    "git"
+                ],
+                "deploy": [
+                    "git"
+                ],
+                "correlation analysis": [
+                    "optimization"
+                ],
+                "regression analysis": [
+                    "optimization"
+                ],
+                "statistical model": [
+                    "optimization"
+                ],
+                "statistical analysis": [
+                    "optimization"
+                ],
+                "statistics": [
+                    "optimization"
+                ],
+                "ontology": [
+                    "logic"
+                ],
+                "ontologies": [
+                    "logic"
+                ],
+                "formal languages": [
+                    "logic"
+                ],
+                "world wide web": [
+                    "website",
+                    "web pages",
+                    "browser",
+                    "javascript",
+                    "html5",
+                    "javascript.",
+                    "web"
+                ],
+                "computer operating systems": [
+                    "file"
+                ],
+                "operation system": [
+                    "file"
+                ],
+                "operating systems": [
+                    "file"
+                ],
+                "fullstack developer": [
+                    "usability",
+                    "platform",
+                    "git",
+                    "html5",
+                    "environment",
+                    "practice",
+                    "architecture",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "javascript",
+                    "databases",
+                    "design",
+                    "code reviews",
+                    "developer",
+                    "software",
+                    "testing"
+                ],
+                "scripting languages": [
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "programming language": [
+                    "responsive",
+                    "text",
+                    "css3",
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "ios developer": [
+                    "software architecture",
+                    "test",
+                    "development",
+                    "community",
+                    "testing",
+                    "team"
+                ],
+                "computer science": [
+                    "platform",
+                    "device",
+                    "design",
+                    "communication",
+                    "environment",
+                    "development",
+                    "developer",
+                    "software",
+                    "product",
+                    "product software"
+                ],
+                "css preprocessors": [
+                    "responsive design",
+                    "css3"
+                ],
+                "css frameworks": [
+                    "responsive"
+                ],
+                "software products": [
+                    "development",
+                    "software engineer"
+                ],
+                "software project": [
+                    "development",
+                    "software engineer"
+                ],
+                "software projects": [
+                    "development",
+                    "software engineer"
+                ],
+                "software process": [
+                    "development",
+                    "software engineer"
+                ],
+                "software processes": [
+                    "development",
+                    "software engineer"
+                ],
+                "app components": [
+                    "management",
+                    "communication"
+                ],
+                "math": [
+                    "dynamic",
+                    "optimization"
+                ],
+                "usability engineering": [
+                    "usability",
+                    "best practices"
+                ],
+                "human engineering": [
+                    "usability",
+                    "user experience.",
+                    "best practices",
+                    "user experience"
+                ],
+                "android developer": [
+                    "usability",
+                    "animation",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "design",
+                    "best practices",
+                    "core",
+                    "text",
+                    "user experience",
+                    "user interface",
+                    "architecture"
+                ],
+                "network protocols": [
+                    "communication"
+                ],
+                "library": [
+                    "javascript",
+                    "css3",
+                    "responsive design"
+                ],
+                "computer system": [
+                    "databases"
+                ],
+                "computer systems": [
+                    "databases"
+                ],
+                "sensors": [
+                    "software architecture",
+                    "photo",
+                    "environment"
+                ],
+                "swift": [
+                    "communication"
+                ],
+                "mobile computing": [
+                    "usability",
+                    "best practices",
+                    "mobile",
+                    "mobile devices"
+                ],
+                "instruments": [
+                    "communication"
+                ],
+                "computer hardware": [
+                    "mobile"
+                ],
+                "oop": [
+                    "software architecture"
+                ],
+                "network architecture": [
+                    "software architecture"
+                ],
+                "embedded system": [
+                    "software architecture"
+                ],
+                "embedded systems": [
+                    "software architecture"
+                ],
+                "sensor": [
+                    "software architecture"
+                ],
+                "frontend developer": [
+                    "usability",
+                    "practice",
+                    "architecture",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "javascript",
+                    "code reviews",
+                    "databases",
+                    "developer",
+                    "testing"
+                ],
+                "backend developer": [
+                    "usability",
+                    "platform",
+                    "environment",
+                    "practice",
+                    "architecture",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "javascript",
+                    "databases",
+                    "design",
+                    "code reviews",
+                    "developer",
+                    "testing"
+                ],
+                "devops": [
+                    "usability",
+                    "communication",
+                    "practice",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "databases",
+                    "code reviews",
+                    "developer",
+                    "testing"
+                ],
+                "web 2.0": [
+                    "javascript"
+                ],
+                "web2.0": [
+                    "javascript"
+                ],
+                "core foundation": [
+                    "communication"
+                ],
+                "xml": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "extensible markup language %28xml%29": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "extensible markup language": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "hypertext markup language": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5",
+                    "responsive design"
+                ],
+                "hypertext markup language %28html%29": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5",
+                    "responsive design"
+                ],
+                "human computer interaction": [
+                    "usability",
+                    "responsive",
+                    "css3",
+                    "responsive design",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "human-computer interaction": [
+                    "usability",
+                    "responsive",
+                    "css3",
+                    "responsive design",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "datascience": [
+                    "databases"
+                ],
+                "ai engineer": [
+                    "databases"
+                ],
+                "optical fibers": [
+                    "engineer"
+                ],
+                "optical fiber": [
+                    "engineer"
+                ],
+                "activity": [
+                    "tasks"
+                ],
+                "software development process": [
+                    "community"
+                ],
+                "open source software": [
+                    "community"
+                ],
+                "sdlc": [
+                    "community"
+                ],
+                "software development projects": [
+                    "community"
+                ],
+                "smart phones": [
+                    "mobile"
+                ]
+            }
+        },
+        {
+            "domain": "frontend",
+            "post_index": 1,
+            "cv_index": 9,
+            "post_text": "Who we are looking for:. . The front-end software engineer to join a highly skilled and experienced team and do challenging tasks involving the latest technologies. . You will:. . Possibility to participate in international projects for world\u2019s leading companies. Solidify your expertise in your chosen area and be recognized as a community developer. Write \u201cclean\u201d, well-designed code to develop and deliver products in various types using HTML5, CSS3, and Javascript. Creating visually appealing web pages, mobile devices or any interfaces \u2013 collaborate with the usability and design teams to define prototypes of dynamic web pages and JavaScript components. Troubleshoot, test and maintain the core product software and databases to ensure strong optimization and functionality. Testing cross-browser, cross-platform, and/or cross-device compatibility for inconsistenciesInitiate automated solutions that enable better efficiency and process improvement. Contributes to continual improvement by suggesting improvements to user interface, software architecture or new technologies. Develop new solutions as well as fixing issues and errors with existing applications. Migrate the applications into the production environment, file management. Participate in code reviews, follow industry best practices and research new technologies. Your Skills and Experience. 2+ years experience in HTML5, CSS3, Javascript, Responsive Design. Working experience with API integration, can handle complex flow/logic. Experience with text/photo/video web editor. Develop nice and abstract web animation with high performance for user experience. Understand and know-how of user experience practice in website development. English communication is a big plus but not compulsory. Working experience with Git (can handle merge code, review code). Proactive, ability to analyze and solving problems skills",
+            "cv_text": "INTERNSHIP/FRESHER FRONT END DEVELOPER. Objective. Apply skills to complete the assigned tasks. Desire to pursue web programming industry and. long term with the company. \u00a9 Education. BACH KHOA UNIVERSITY. DEPARTMENT OF TELECOMMUNICATIONS ENGINEERING. 9/2015 - 11/2019. CYBERSOFT ACADEMY. LEARN CODE FRONT END. 4/2020 - 10/2020. & Work Experience. THREE-MONTH WORKING AS INTERNSHIP IN VIIVUE COMPANY 8/2020 - 10/2020. Style layout with CSS for many projects, links as below:. - http://mijnsitebeheren.com/vernaet/. - http://twe.mochisandbox.com/fashionforum/. - http://twe.mochisandbox.com/bohez/. - http://mijnsitebeheren.com/silvertie/. ANTENNA PROJECT. The estimation technique is directed to the Massive MIMO system. - Learn smart antennas.. - Use Capon and MUSIC algorithm to estimate.. PET PROJECT FRONT END. - Searching films (use: React-Hooks). Link server: https://friendly-hypatia-40c51 f.netlify.app/. - My-Portfolio (use: HTML, CSS, JS). - Burger-Builder (use: React-Redux). Link server: https://react-my-burger-fff4d.web.app/. Link github: https://github.com/thanhhuyena6?tab=repositories/. \u00a9 Activities. VOLUNTEER CAMPAIGN. Relay national high school exams.. VOLUNTEER CAMPAIGN. Back to old school.. Certifications. CU Pas. & Male. & []. \u00a9 . CMe (OO ITMIAMNACSLCRT] AA. i []. 1.\u00a2[ 8S. oe HTMLS5/CSS3 (Responsive Ul). e Bootstrap. o JavaScript (ES6). e Restful API. o Material Ul. e ReactJS / Redux. Camelli. TOEIC Certificate with score 515",
+            "domain_w": 3,
+            "general_w": 1,
+            "soft_w": 1,
+            "overall_score": 5.725,
+            "domain_score": 1.4359,
+            "soft_score": 0.0,
+            "general_score": 1.4173,
+            "cv_domain_exp": {
+                "css": [
+                    "responsive",
+                    "css3",
+                    "css",
+                    "js",
+                    "javascript",
+                    "html",
+                    "bootstrap"
+                ],
+                "http": [
+                    "https",
+                    "http"
+                ],
+                "algorithms": [
+                    "technique",
+                    "algorithm"
+                ],
+                "https": [
+                    "https",
+                    "http"
+                ],
+                "html": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "html"
+                ],
+                "javascript": [
+                    "css",
+                    "js",
+                    "javascript",
+                    "html"
+                ],
+                "github": [
+                    "github"
+                ],
+                "responsive": [
+                    "responsive",
+                    "bootstrap"
+                ],
+                "bootstrap": [
+                    "bootstrap",
+                    "e bootstrap",
+                    "responsive",
+                    "css",
+                    "bootstrap."
+                ],
+                "es6": [
+                    "es6"
+                ],
+                "restful": [
+                    "restful",
+                    "restful api"
+                ],
+                "material design": [
+                    "material"
+                ],
+                "reacjs": [
+                    "reactjs"
+                ],
+                "api": [
+                    "api",
+                    "developer"
+                ],
+                "redux": [
+                    "reactjs",
+                    "react",
+                    "redux"
+                ],
+                "jquery": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "html",
+                    "bootstrap"
+                ],
+                "typescript": [
+                    "reactjs",
+                    "react",
+                    "redux",
+                    "es6"
+                ],
+                "react native": [
+                    "react",
+                    "redux"
+                ],
+                "angular": [
+                    "js",
+                    "react"
+                ],
+                "ajax": [
+                    "js",
+                    "javascript"
+                ],
+                "sass": [
+                    "bootstrap",
+                    "css3"
+                ],
+                "programming language": [
+                    "es6",
+                    "responsive",
+                    "css3",
+                    "css",
+                    "js",
+                    "javascript",
+                    "reactjs",
+                    "react",
+                    "programming",
+                    "redux",
+                    "html",
+                    "bootstrap"
+                ],
+                "knowledge": [
+                    "bootstrap",
+                    "responsive",
+                    "api",
+                    "algorithm",
+                    "https",
+                    "technique",
+                    "learn",
+                    "developer",
+                    "restful",
+                    "http"
+                ],
+                "bitbucket": [
+                    "github"
+                ],
+                "git": [
+                    "github"
+                ],
+                "gitlab": [
+                    "github"
+                ],
+                "sourcetree": [
+                    "github"
+                ],
+                "scss": [
+                    "css3"
+                ],
+                "eslint": [
+                    "es6"
+                ],
+                "soap": [
+                    "restful"
+                ],
+                "credentials": [
+                    "certificate"
+                ],
+                "css frameworks": [
+                    "bootstrap.",
+                    "e bootstrap",
+                    "responsive",
+                    "material",
+                    "css",
+                    "bootstrap"
+                ],
+                "frontend developer": [
+                    "es6",
+                    "css3",
+                    "css",
+                    "js",
+                    "technique",
+                    "react",
+                    "programming",
+                    "learn",
+                    "restful",
+                    "http",
+                    "responsive",
+                    "api",
+                    "https",
+                    "javascript",
+                    "reactjs",
+                    "developer",
+                    "algorithm",
+                    "redux",
+                    "html",
+                    "bootstrap"
+                ],
+                "library": [
+                    "js",
+                    "javascript",
+                    "es6"
+                ],
+                "framework": [
+                    "bootstrap.",
+                    "e bootstrap",
+                    "responsive",
+                    "css",
+                    "js",
+                    "javascript",
+                    "reactjs",
+                    "react",
+                    "redux",
+                    "html",
+                    "bootstrap"
+                ],
+                "source control": [
+                    "github"
+                ],
+                "css preprocessors": [
+                    "bootstrap",
+                    "css3"
+                ],
+                "pwa": [
+                    "certificate"
+                ],
+                "rest": [
+                    "restful",
+                    "restful api"
+                ]
+            },
+            "cv_soft_exp": {},
+            "cv_general_exp": {
+                "education": [
+                    "university",
+                    "education.",
+                    "school",
+                    "department",
+                    "education",
+                    "university."
+                ],
+                "university": [
+                    "university",
+                    "school",
+                    "department",
+                    "university."
+                ],
+                "engineering": [
+                    "engineering.",
+                    "engineering"
+                ],
+                "code": [
+                    "code"
+                ],
+                "layout": [
+                    "layout"
+                ],
+                "css": [
+                    "responsive",
+                    "css3",
+                    "css",
+                    "js",
+                    "javascript",
+                    "html",
+                    "bootstrap"
+                ],
+                "http": [
+                    "https",
+                    "http"
+                ],
+                "antenna": [
+                    "mimo",
+                    "antenna"
+                ],
+                "estimation": [
+                    "estimation"
+                ],
+                "mimo": [
+                    "mimo",
+                    "antenna"
+                ],
+                "music algorithm": [
+                    "music algorithm"
+                ],
+                "music algorithms": [
+                    "music algorithm"
+                ],
+                "project": [
+                    "project"
+                ],
+                "https": [
+                    "https",
+                    "http"
+                ],
+                "html": [
+                    "responsive",
+                    "css3",
+                    "css",
+                    "js",
+                    "javascript",
+                    "html",
+                    "bootstrap"
+                ],
+                "javascript": [
+                    "responsive",
+                    "css3",
+                    "css",
+                    "js",
+                    "javascript",
+                    "html",
+                    "bootstrap"
+                ],
+                "github": [
+                    "github"
+                ],
+                "responsive": [
+                    "responsive",
+                    "bootstrap"
+                ],
+                "bootstrap": [
+                    "bootstrap",
+                    "e bootstrap",
+                    "responsive",
+                    "css",
+                    "bootstrap."
+                ],
+                "es6": [
+                    "es6"
+                ],
+                "restful": [
+                    "restful",
+                    "restful api"
+                ],
+                "material design": [
+                    "material"
+                ],
+                "reacjs": [
+                    "reactjs"
+                ],
+                "api": [
+                    "api",
+                    "developer"
+                ],
+                "algorithms": [
+                    "technique",
+                    "algorithm"
+                ],
+                "antennas": [
+                    "antenna",
+                    "antennas"
+                ],
+                "redux": [
+                    "reactjs",
+                    "react",
+                    "redux"
+                ],
+                "jquery": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "html",
+                    "bootstrap"
+                ],
+                "typescript": [
+                    "reactjs",
+                    "react",
+                    "redux",
+                    "es6"
+                ],
+                "node.js": [
+                    "js",
+                    "javascript",
+                    "reactjs",
+                    "es6"
+                ],
+                "html5": [
+                    "css",
+                    "html",
+                    "css3"
+                ],
+                "react native": [
+                    "react",
+                    "redux"
+                ],
+                "ssl": [
+                    "certificate",
+                    "https"
+                ],
+                "angular": [
+                    "js",
+                    "react"
+                ],
+                "software": [
+                    "system",
+                    "developer"
+                ],
+                "web page": [
+                    "html",
+                    "web"
+                ],
+                "web pages": [
+                    "html",
+                    "web"
+                ],
+                "computer science": [
+                    "system",
+                    "engineering",
+                    "education",
+                    "github",
+                    "code",
+                    "programming",
+                    "developer"
+                ],
+                "information technology": [
+                    "engineering",
+                    "education"
+                ],
+                "source codes": [
+                    "github",
+                    "code"
+                ],
+                "source code": [
+                    "github",
+                    "code"
+                ],
+                "php": [
+                    "javascript",
+                    "html"
+                ],
+                "ajax": [
+                    "js",
+                    "javascript"
+                ],
+                "sass": [
+                    "bootstrap",
+                    "css3"
+                ],
+                "microservices": [
+                    "restful",
+                    "restful api"
+                ],
+                "network": [
+                    "link"
+                ],
+                "tls": [
+                    "https"
+                ],
+                "r": [
+                    "e"
+                ],
+                "spring boot": [
+                    "restful api"
+                ],
+                "software developer": [
+                    "developer"
+                ],
+                "software developers": [
+                    "developer"
+                ],
+                "web application": [
+                    "js",
+                    "javascript",
+                    "web"
+                ],
+                "web applications": [
+                    "js",
+                    "javascript",
+                    "web"
+                ],
+                "programming language": [
+                    "bootstrap",
+                    "responsive",
+                    "css3",
+                    "js",
+                    "css",
+                    "javascript",
+                    "e",
+                    "reactjs",
+                    "react",
+                    "programming",
+                    "redux",
+                    "o",
+                    "html",
+                    "es6"
+                ],
+                "programming languages": [
+                    "programming"
+                ],
+                "programming languagues": [
+                    "programming"
+                ],
+                "curriculum": [
+                    "education"
+                ],
+                "engineers": [
+                    "engineering"
+                ],
+                "software engineering": [
+                    "github",
+                    "code",
+                    "engineering"
+                ],
+                "knowledge": [
+                    "bootstrap",
+                    "restful api",
+                    "oo",
+                    "es6",
+                    "responsive",
+                    "api",
+                    "algorithm",
+                    "https",
+                    "technique",
+                    "learn",
+                    "developer",
+                    "restful",
+                    "http"
+                ],
+                "neural network": [
+                    "learn"
+                ],
+                "neural networks": [
+                    "learn"
+                ],
+                "training": [
+                    "learn"
+                ],
+                "frame layout": [
+                    "layout"
+                ],
+                "constraint layout": [
+                    "layout"
+                ],
+                "linear layout": [
+                    "layout"
+                ],
+                "transmitters": [
+                    "antenna"
+                ],
+                "denoising": [
+                    "estimation"
+                ],
+                "ofdm": [
+                    "mimo"
+                ],
+                "signal integrity": [
+                    "antennas"
+                ],
+                "investments": [
+                    "portfolio"
+                ],
+                "investment": [
+                    "portfolio"
+                ],
+                "hyperlinks": [
+                    "html"
+                ],
+                "hyperlink": [
+                    "html"
+                ],
+                "bitbucket": [
+                    "github"
+                ],
+                "git": [
+                    "github"
+                ],
+                "gitlab": [
+                    "github"
+                ],
+                "sourcetree": [
+                    "github"
+                ],
+                "object oriented": [
+                    "oo"
+                ],
+                "oop": [
+                    "oo"
+                ],
+                "scss": [
+                    "css3"
+                ],
+                "eslint": [
+                    "es6"
+                ],
+                "soap": [
+                    "restful"
+                ],
+                "j2ee": [
+                    "restful"
+                ],
+                "nosql": [
+                    "restful"
+                ],
+                "shortest path": [
+                    "o"
+                ],
+                "c": [
+                    "o"
+                ],
+                "public keys": [
+                    "certificate"
+                ],
+                "public key": [
+                    "certificate"
+                ],
+                "pki": [
+                    "certificate"
+                ],
+                "credentials": [
+                    "certificate"
+                ],
+                "orthogonal frequency division multiplexing": [
+                    "mimo",
+                    "antenna"
+                ],
+                "orthogonal frequency division multiplexing %28ofdm%29": [
+                    "mimo",
+                    "antenna"
+                ],
+                "orthogonal frequency-division multiplexing %28ofdm%29": [
+                    "mimo",
+                    "antenna"
+                ],
+                "wavelet analysis": [
+                    "music algorithm"
+                ],
+                "direction of arrival": [
+                    "music algorithm"
+                ],
+                "direction of arrival %28doa%29": [
+                    "music algorithm"
+                ],
+                "directions of arrival": [
+                    "music algorithm"
+                ],
+                "networking": [
+                    "certificate",
+                    "https",
+                    "http"
+                ],
+                "public key cryptography": [
+                    "certificate"
+                ],
+                "public-key cryptography": [
+                    "certificate"
+                ],
+                "ui layouts": [
+                    "layout"
+                ],
+                "framework": [
+                    "bootstrap",
+                    "restful api",
+                    "e bootstrap",
+                    "bootstrap.",
+                    "responsive",
+                    "js",
+                    "css",
+                    "javascript",
+                    "reactjs",
+                    "react",
+                    "restful",
+                    "redux",
+                    "html",
+                    "es6"
+                ],
+                "computer programming languages": [
+                    "bootstrap",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "react",
+                    "programming",
+                    "responsive",
+                    "javascript",
+                    "reactjs",
+                    "redux",
+                    "o",
+                    "html",
+                    "es6"
+                ],
+                "linguistics": [
+                    "bootstrap",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "react",
+                    "programming",
+                    "responsive",
+                    "javascript",
+                    "reactjs",
+                    "redux",
+                    "o",
+                    "html",
+                    "es6"
+                ],
+                "world wide web": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "web",
+                    "html"
+                ],
+                "scripting languages": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "html"
+                ],
+                "css preprocessors": [
+                    "bootstrap",
+                    "css3"
+                ],
+                "css frameworks": [
+                    "bootstrap.",
+                    "e bootstrap",
+                    "responsive",
+                    "material",
+                    "css",
+                    "bootstrap"
+                ],
+                "android jetpack": [
+                    "material"
+                ],
+                "machine-learning": [
+                    "learn"
+                ],
+                "machine learning": [
+                    "learn"
+                ],
+                "machine learning techniques": [
+                    "learn"
+                ],
+                "machine learning methods": [
+                    "learn"
+                ],
+                "machine learning algorithms": [
+                    "learn"
+                ],
+                "machine learnings": [
+                    "learn"
+                ],
+                "datascience": [
+                    "bootstrap",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "react",
+                    "programming",
+                    "learn",
+                    "responsive",
+                    "javascript",
+                    "reactjs",
+                    "redux",
+                    "o",
+                    "html",
+                    "es6"
+                ],
+                "ai engineer": [
+                    "bootstrap",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "react",
+                    "programming",
+                    "learn",
+                    "responsive",
+                    "javascript",
+                    "reactjs",
+                    "redux",
+                    "o",
+                    "html",
+                    "es6"
+                ],
+                "statistics": [
+                    "estimation"
+                ],
+                "software architecture": [
+                    "developer"
+                ],
+                "servers": [
+                    "https",
+                    "http"
+                ],
+                "client server computer systems": [
+                    "https",
+                    "http"
+                ],
+                "internet protocol": [
+                    "https",
+                    "http"
+                ],
+                "internet protocols": [
+                    "https",
+                    "http"
+                ],
+                "source control": [
+                    "github"
+                ],
+                "library": [
+                    "bootstrap",
+                    "css3",
+                    "js",
+                    "javascript",
+                    "es6"
+                ],
+                "wireless telecommunication systems": [
+                    "mimo",
+                    "antenna",
+                    "antennas"
+                ],
+                "fundamentals": [
+                    "estimation"
+                ],
+                "pwa": [
+                    "certificate"
+                ],
+                "hybrid": [
+                    "react",
+                    "redux"
+                ],
+                "rest": [
+                    "restful",
+                    "restful api"
+                ],
+                "ios developer": [
+                    "programming",
+                    "project"
+                ],
+                "architectural styles": [
+                    "restful",
+                    "restful api"
+                ],
+                "architectural pattern": [
+                    "restful",
+                    "restful api"
+                ],
+                "architectural patterns": [
+                    "restful",
+                    "restful api"
+                ],
+                "architectural style": [
+                    "restful",
+                    "restful api"
+                ],
+                "architecture types": [
+                    "restful",
+                    "restful api"
+                ],
+                "software architecture patterns": [
+                    "restful",
+                    "restful api"
+                ],
+                "economics": [
+                    "portfolio"
+                ],
+                "uikit": [
+                    "layout"
+                ],
+                "tool": [
+                    "github"
+                ],
+                "frontend developer": [
+                    "es6",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "technique",
+                    "react",
+                    "programming",
+                    "learn",
+                    "restful",
+                    "http",
+                    "restful api",
+                    "oo",
+                    "responsive",
+                    "api",
+                    "https",
+                    "javascript",
+                    "reactjs",
+                    "developer",
+                    "algorithm",
+                    "redux",
+                    "o",
+                    "html",
+                    "bootstrap"
+                ],
+                "backend developer": [
+                    "es6",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "technique",
+                    "react",
+                    "programming",
+                    "learn",
+                    "restful",
+                    "http",
+                    "restful api",
+                    "oo",
+                    "responsive",
+                    "api",
+                    "https",
+                    "javascript",
+                    "reactjs",
+                    "developer",
+                    "algorithm",
+                    "redux",
+                    "o",
+                    "html",
+                    "bootstrap"
+                ],
+                "fullstack developer": [
+                    "es6",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "technique",
+                    "react",
+                    "programming",
+                    "learn",
+                    "restful",
+                    "http",
+                    "restful api",
+                    "oo",
+                    "responsive",
+                    "api",
+                    "https",
+                    "javascript",
+                    "reactjs",
+                    "developer",
+                    "algorithm",
+                    "redux",
+                    "o",
+                    "html",
+                    "bootstrap"
+                ],
+                "devops": [
+                    "es6",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "technique",
+                    "react",
+                    "programming",
+                    "learn",
+                    "restful",
+                    "http",
+                    "restful api",
+                    "oo",
+                    "responsive",
+                    "api",
+                    "https",
+                    "javascript",
+                    "reactjs",
+                    "developer",
+                    "algorithm",
+                    "redux",
+                    "o",
+                    "html",
+                    "bootstrap"
+                ],
+                "android developer": [
+                    "bootstrap",
+                    "css3",
+                    "js",
+                    "css",
+                    "e",
+                    "react",
+                    "programming",
+                    "responsive",
+                    "javascript",
+                    "reactjs",
+                    "redux",
+                    "o",
+                    "html",
+                    "es6"
+                ],
+                "instruments": [
+                    "link"
+                ],
+                "hypertext systems": [
+                    "html"
+                ],
+                "web content": [
+                    "html"
+                ],
+                "web users": [
+                    "html"
+                ],
+                "web-page": [
+                    "html"
+                ],
+                "web contents": [
+                    "html"
+                ],
+                "web 2.0": [
+                    "js",
+                    "javascript"
+                ],
+                "web2.0": [
+                    "js",
+                    "javascript"
+                ],
+                "user interfaces": [
+                    "css",
+                    "js",
+                    "javascript",
+                    "html"
+                ],
+                "user interface": [
+                    "css",
+                    "js",
+                    "javascript",
+                    "html"
+                ],
+                "xml": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "html"
+                ],
+                "extensible markup language %28xml%29": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "html"
+                ],
+                "extensible markup language": [
+                    "css",
+                    "javascript",
+                    "js",
+                    "html"
+                ],
+                "big data": [
+                    "restful"
+                ],
+                "information management": [
+                    "restful"
+                ],
+                "databases": [
+                    "restful"
+                ],
+                "interconnection networks": [
+                    "antennas"
+                ],
+                "interconnection network": [
+                    "antennas"
+                ],
+                "hypertext markup language": [
+                    "responsive",
+                    "css3",
+                    "css",
+                    "js",
+                    "javascript",
+                    "html",
+                    "bootstrap"
+                ],
+                "hypertext markup language %28html%29": [
+                    "responsive",
+                    "css3",
+                    "css",
+                    "js",
+                    "javascript",
+                    "html",
+                    "bootstrap"
+                ],
+                "graph theory": [
+                    "o"
+                ],
+                "signal receivers": [
+                    "antenna"
+                ],
+                "optical fibers": [
+                    "engineering"
+                ],
+                "optical fiber": [
+                    "engineering"
+                ],
+                "architecture": [
+                    "code"
+                ]
+            },
+            "post_domain_exp": {
+                "html": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "css": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5"
+                ],
+                "javascript": [
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "testing": [
+                    "testing",
+                    "test"
+                ],
+                "code review": [
+                    "code reviews"
+                ],
+                "responsive": [
+                    "responsive",
+                    "responsive design"
+                ],
+                "api": [
+                    "api",
+                    "developer"
+                ],
+                "git": [
+                    "git"
+                ],
+                "sass": [
+                    "responsive design",
+                    "css3"
+                ],
+                "knowledge": [
+                    "usability",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "developer",
+                    "code reviews",
+                    "practice"
+                ],
+                "jquery": [
+                    "javascript"
+                ],
+                "ajax": [
+                    "javascript"
+                ],
+                "modernizr": [
+                    "html5"
+                ],
+                "scss": [
+                    "css3"
+                ],
+                "wireframes": [
+                    "usability"
+                ],
+                "framework": [
+                    "javascript",
+                    "responsive",
+                    "architecture"
+                ],
+                "bootstrap": [
+                    "responsive"
+                ],
+                "svn": [
+                    "git"
+                ],
+                "bitbucket": [
+                    "git"
+                ],
+                "sourcetree": [
+                    "git"
+                ],
+                "github": [
+                    "git"
+                ],
+                "tools": [
+                    "html5"
+                ],
+                "frontend developer": [
+                    "test",
+                    "expertise",
+                    "testing",
+                    "javascript",
+                    "practice",
+                    "architecture"
+                ],
+                "css preprocessors": [
+                    "responsive design",
+                    "css3"
+                ],
+                "library": [
+                    "javascript"
+                ],
+                "programming language": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "text",
+                    "html5",
+                    "javascript."
+                ],
+                "source control": [
+                    "git"
+                ],
+                "css frameworks": [
+                    "responsive"
+                ]
+            },
+            "post_soft_exp": {
+                "troubleshoot": [
+                    "troubleshoot"
+                ],
+                "english": [
+                    "english"
+                ],
+                "communication": [
+                    "communication",
+                    "solving problems",
+                    "team"
+                ],
+                "solving problems": [
+                    "solving problems",
+                    "troubleshoot"
+                ],
+                "collaboration": [
+                    "team"
+                ],
+                "using foreign languages": [
+                    "english"
+                ],
+                "softskill": [
+                    "communication"
+                ]
+            },
+            "post_general_exp": {
+                "software": [
+                    "platform",
+                    "design",
+                    "environment",
+                    "development",
+                    "developer",
+                    "software",
+                    "product",
+                    "product software"
+                ],
+                "engineers": [
+                    "engineer"
+                ],
+                "tasks": [
+                    "tasks"
+                ],
+                "code": [
+                    "code"
+                ],
+                "html": [
+                    "css3",
+                    "responsive",
+                    "javascript",
+                    "text",
+                    "html5",
+                    "responsive design"
+                ],
+                "css": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5"
+                ],
+                "web page": [
+                    "web pages",
+                    "browser",
+                    "web"
+                ],
+                "web pages": [
+                    "web pages",
+                    "browser",
+                    "web"
+                ],
+                "javascript": [
+                    "responsive",
+                    "css3",
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "mobile device": [
+                    "usability",
+                    "best practices",
+                    "mobile",
+                    "mobile devices"
+                ],
+                "mobile devices": [
+                    "usability",
+                    "best practices",
+                    "mobile",
+                    "mobile devices"
+                ],
+                "tests": [
+                    "test"
+                ],
+                "databases": [
+                    "databases"
+                ],
+                "database": [
+                    "databases"
+                ],
+                "optimization": [
+                    "dynamic",
+                    "optimization"
+                ],
+                "testing": [
+                    "testing",
+                    "test"
+                ],
+                "user interface": [
+                    "usability",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "user interfaces": [
+                    "usability",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "software architecture": [
+                    "software architecture",
+                    "development",
+                    "software engineer",
+                    "developer"
+                ],
+                "environment": [
+                    "environment"
+                ],
+                "code review": [
+                    "code reviews"
+                ],
+                "responsive": [
+                    "responsive",
+                    "responsive design"
+                ],
+                "api": [
+                    "api",
+                    "developer"
+                ],
+                "animation": [
+                    "animation"
+                ],
+                "user experience": [
+                    "user experience.",
+                    "user experience"
+                ],
+                "communication": [
+                    "communication"
+                ],
+                "git": [
+                    "git"
+                ],
+                "html5": [
+                    "html5",
+                    "responsive design",
+                    "css3"
+                ],
+                "architecture": [
+                    "code",
+                    "test",
+                    "core",
+                    "design",
+                    "process improvement",
+                    "architecture"
+                ],
+                "build": [
+                    "platform",
+                    "design",
+                    "environment"
+                ],
+                "project": [
+                    "community",
+                    "development",
+                    "team"
+                ],
+                "hardware": [
+                    "software",
+                    "mobile",
+                    "device"
+                ],
+                "sass": [
+                    "responsive design",
+                    "css3"
+                ],
+                "software developer": [
+                    "developer",
+                    "software engineer"
+                ],
+                "software developers": [
+                    "developer",
+                    "software engineer"
+                ],
+                "software development": [
+                    "community",
+                    "development",
+                    "software engineer"
+                ],
+                "knowledge": [
+                    "usability",
+                    "expertise",
+                    "api",
+                    "responsive",
+                    "responsive design",
+                    "databases",
+                    "code reviews",
+                    "developer",
+                    "practice"
+                ],
+                "source codes": [
+                    "code",
+                    "community"
+                ],
+                "source code": [
+                    "code",
+                    "community"
+                ],
+                "web application": [
+                    "javascript",
+                    "web"
+                ],
+                "web applications": [
+                    "javascript",
+                    "web"
+                ],
+                "usability testing": [
+                    "usability",
+                    "best practices"
+                ],
+                "software design": [
+                    "software architecture",
+                    "best practices"
+                ],
+                "service": [
+                    "management",
+                    "communication"
+                ],
+                "tool": [
+                    "software",
+                    "git",
+                    "html5"
+                ],
+                "jquery": [
+                    "javascript"
+                ],
+                "php": [
+                    "javascript"
+                ],
+                "node.js": [
+                    "javascript"
+                ],
+                "ajax": [
+                    "javascript"
+                ],
+                "modernizr": [
+                    "html5"
+                ],
+                "scss": [
+                    "css3"
+                ],
+                "engineering": [
+                    "engineer"
+                ],
+                "open source projects": [
+                    "community"
+                ],
+                "smart phone": [
+                    "mobile"
+                ],
+                "smartphone": [
+                    "mobile"
+                ],
+                "smartphones": [
+                    "mobile"
+                ],
+                "mobile phones": [
+                    "mobile"
+                ],
+                "mobile phone": [
+                    "mobile"
+                ],
+                "mobile applications": [
+                    "mobile"
+                ],
+                "mobile application": [
+                    "mobile"
+                ],
+                "android": [
+                    "mobile"
+                ],
+                "accessiblility": [
+                    "usability"
+                ],
+                "wireframes": [
+                    "usability"
+                ],
+                "optimization problems": [
+                    "optimization"
+                ],
+                "business process": [
+                    "process improvement"
+                ],
+                "business processes": [
+                    "process improvement"
+                ],
+                "quality assurance": [
+                    "test",
+                    "process improvement"
+                ],
+                "framework": [
+                    "javascript",
+                    "responsive",
+                    "architecture"
+                ],
+                "system architectures": [
+                    "software architecture"
+                ],
+                "system architecture": [
+                    "software architecture"
+                ],
+                "filesystem": [
+                    "file"
+                ],
+                "file system": [
+                    "file"
+                ],
+                "interaction design": [
+                    "best practices"
+                ],
+                "interaction designs": [
+                    "best practices"
+                ],
+                "conceptual design": [
+                    "best practices"
+                ],
+                "bootstrap": [
+                    "responsive"
+                ],
+                "reasoning": [
+                    "logic"
+                ],
+                "camera": [
+                    "photo"
+                ],
+                "blog": [
+                    "website"
+                ],
+                "network": [
+                    "communication"
+                ],
+                "protocols": [
+                    "communication"
+                ],
+                "networking": [
+                    "communication"
+                ],
+                "communication protocols": [
+                    "communication"
+                ],
+                "communication protocol": [
+                    "communication"
+                ],
+                "internet": [
+                    "communication"
+                ],
+                "svn": [
+                    "git"
+                ],
+                "bitbucket": [
+                    "git"
+                ],
+                "sourcetree": [
+                    "git"
+                ],
+                "github": [
+                    "git"
+                ],
+                "tools": [
+                    "html5"
+                ],
+                "product design": [
+                    "best practices"
+                ],
+                "telephone sets": [
+                    "mobile"
+                ],
+                "mobile telecommunication systems": [
+                    "mobile"
+                ],
+                "software engineering": [
+                    "software architecture",
+                    "code",
+                    "best practices"
+                ],
+                "information systems": [
+                    "process improvement"
+                ],
+                "information system": [
+                    "process improvement"
+                ],
+                "source control": [
+                    "git"
+                ],
+                "deploy": [
+                    "git"
+                ],
+                "correlation analysis": [
+                    "optimization"
+                ],
+                "regression analysis": [
+                    "optimization"
+                ],
+                "statistical model": [
+                    "optimization"
+                ],
+                "statistical analysis": [
+                    "optimization"
+                ],
+                "statistics": [
+                    "optimization"
+                ],
+                "ontology": [
+                    "logic"
+                ],
+                "ontologies": [
+                    "logic"
+                ],
+                "formal languages": [
+                    "logic"
+                ],
+                "world wide web": [
+                    "website",
+                    "web pages",
+                    "browser",
+                    "javascript",
+                    "html5",
+                    "javascript.",
+                    "web"
+                ],
+                "computer operating systems": [
+                    "file"
+                ],
+                "operation system": [
+                    "file"
+                ],
+                "operating systems": [
+                    "file"
+                ],
+                "fullstack developer": [
+                    "usability",
+                    "platform",
+                    "git",
+                    "html5",
+                    "environment",
+                    "practice",
+                    "architecture",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "javascript",
+                    "databases",
+                    "design",
+                    "code reviews",
+                    "developer",
+                    "software",
+                    "testing"
+                ],
+                "scripting languages": [
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "programming language": [
+                    "responsive",
+                    "text",
+                    "css3",
+                    "javascript",
+                    "javascript.",
+                    "html5"
+                ],
+                "ios developer": [
+                    "software architecture",
+                    "test",
+                    "development",
+                    "community",
+                    "testing",
+                    "team"
+                ],
+                "computer science": [
+                    "platform",
+                    "device",
+                    "design",
+                    "communication",
+                    "environment",
+                    "development",
+                    "developer",
+                    "software",
+                    "product",
+                    "product software"
+                ],
+                "css preprocessors": [
+                    "responsive design",
+                    "css3"
+                ],
+                "css frameworks": [
+                    "responsive"
+                ],
+                "software products": [
+                    "development",
+                    "software engineer"
+                ],
+                "software project": [
+                    "development",
+                    "software engineer"
+                ],
+                "software projects": [
+                    "development",
+                    "software engineer"
+                ],
+                "software process": [
+                    "development",
+                    "software engineer"
+                ],
+                "software processes": [
+                    "development",
+                    "software engineer"
+                ],
+                "app components": [
+                    "management",
+                    "communication"
+                ],
+                "math": [
+                    "dynamic",
+                    "optimization"
+                ],
+                "usability engineering": [
+                    "usability",
+                    "best practices"
+                ],
+                "human engineering": [
+                    "usability",
+                    "user experience.",
+                    "best practices",
+                    "user experience"
+                ],
+                "android developer": [
+                    "usability",
+                    "animation",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "design",
+                    "best practices",
+                    "core",
+                    "text",
+                    "user experience",
+                    "user interface",
+                    "architecture"
+                ],
+                "network protocols": [
+                    "communication"
+                ],
+                "library": [
+                    "javascript",
+                    "css3",
+                    "responsive design"
+                ],
+                "computer system": [
+                    "databases"
+                ],
+                "computer systems": [
+                    "databases"
+                ],
+                "sensors": [
+                    "software architecture",
+                    "photo",
+                    "environment"
+                ],
+                "swift": [
+                    "communication"
+                ],
+                "mobile computing": [
+                    "usability",
+                    "best practices",
+                    "mobile",
+                    "mobile devices"
+                ],
+                "instruments": [
+                    "communication"
+                ],
+                "computer hardware": [
+                    "mobile"
+                ],
+                "oop": [
+                    "software architecture"
+                ],
+                "network architecture": [
+                    "software architecture"
+                ],
+                "embedded system": [
+                    "software architecture"
+                ],
+                "embedded systems": [
+                    "software architecture"
+                ],
+                "sensor": [
+                    "software architecture"
+                ],
+                "frontend developer": [
+                    "usability",
+                    "practice",
+                    "architecture",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "javascript",
+                    "code reviews",
+                    "databases",
+                    "developer",
+                    "testing"
+                ],
+                "backend developer": [
+                    "usability",
+                    "platform",
+                    "environment",
+                    "practice",
+                    "architecture",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "javascript",
+                    "databases",
+                    "design",
+                    "code reviews",
+                    "developer",
+                    "testing"
+                ],
+                "devops": [
+                    "usability",
+                    "communication",
+                    "practice",
+                    "test",
+                    "expertise",
+                    "responsive",
+                    "api",
+                    "responsive design",
+                    "databases",
+                    "code reviews",
+                    "developer",
+                    "testing"
+                ],
+                "web 2.0": [
+                    "javascript"
+                ],
+                "web2.0": [
+                    "javascript"
+                ],
+                "core foundation": [
+                    "communication"
+                ],
+                "xml": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "extensible markup language %28xml%29": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "extensible markup language": [
+                    "html5",
+                    "javascript",
+                    "text"
+                ],
+                "hypertext markup language": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5",
+                    "responsive design"
+                ],
+                "hypertext markup language %28html%29": [
+                    "responsive",
+                    "javascript",
+                    "css3",
+                    "html5",
+                    "responsive design"
+                ],
+                "human computer interaction": [
+                    "usability",
+                    "responsive",
+                    "css3",
+                    "responsive design",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "human-computer interaction": [
+                    "usability",
+                    "responsive",
+                    "css3",
+                    "responsive design",
+                    "user experience.",
+                    "javascript",
+                    "html5",
+                    "best practices",
+                    "text",
+                    "user experience",
+                    "user interface"
+                ],
+                "datascience": [
+                    "databases"
+                ],
+                "ai engineer": [
+                    "databases"
+                ],
+                "optical fibers": [
+                    "engineer"
+                ],
+                "optical fiber": [
+                    "engineer"
+                ],
+                "activity": [
+                    "tasks"
+                ],
+                "software development process": [
+                    "community"
+                ],
+                "open source software": [
+                    "community"
+                ],
+                "sdlc": [
+                    "community"
+                ],
+                "software development projects": [
+                    "community"
+                ],
+                "smart phones": [
+                    "mobile"
+                ]
+            }
+        }
+    ]
+}

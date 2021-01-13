@@ -63,7 +63,7 @@ def matching_score(post_text, cv_text, domain):
     cv_graph = generate_skill_graph(generate_edges(cv_skills['explanation']))
 
     score = _matching(post_graph, cv_graph)
-    
+
     if not cv_skills['explanation'] or not post_skills['explanation']:
         score = 0
 
@@ -74,6 +74,9 @@ def matching_score(post_text, cv_text, domain):
         "post_explanation": post_skills['explanation'],
         "post_graph": post_graph,
         "cv_graph": cv_graph,
+        
+        "cv_skills": cv_skills,
+        "post_skills": post_skills,
     }
     
 
@@ -82,6 +85,8 @@ def __get_skills_by_classifier(text, domain):
     result = cm.run_classifier(domain, text, explanation=True).get_dict()
     generate_skill_link['union'] = result['union']
     generate_skill_link['explanation'] = result['explanation']
+    generate_skill_link['syntactic'] = result['syntactic']
+    generate_skill_link['semantic'] = result['semantic']
     return generate_skill_link
 
 def _matching(post_graph, cv_graph):
