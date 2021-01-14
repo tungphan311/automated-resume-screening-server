@@ -9,20 +9,19 @@
             "domain_w": 3,
             "general_w": 3,
             "soft_w": 1,
-            "overall_score": 10.0303,
-            "domain_score": 1.4143,
-            "soft_score": 1.4218,
-            "general_score": 1.4552,
+            "overall_score": 9.930700000000002,
+            "domain_score": 1.417,
+            "soft_score": 1.423,
+            "general_score": 1.4189,
             "cv_soft_skills": [
-                "teamwork",
-                "leadership"
+                "teamwork"
             ],
             "post_soft_skills": [
                 "english",
-                "collaboration",
                 "solving problems",
                 "communication",
-                "troubleshoot"
+                "troubleshoot",
+                "collaboration"
             ],
             "post_soft_explanation_skills": {
                 "troubleshoot": [
@@ -56,9 +55,6 @@
                 "teamwork": [
                     "teamwork"
                 ],
-                "leadership": [
-                    "teamwork"
-                ],
                 "softskill": [
                     "teamwork"
                 ]
@@ -73,22 +69,20 @@
             "domain_w": 3,
             "general_w": 3,
             "soft_w": 1,
-            "overall_score": 9.899999999999999,
+            "overall_score": 9.9087,
             "domain_score": 1.4144,
             "soft_score": 1.4142,
-            "general_score": 1.4142,
+            "general_score": 1.4171,
             "cv_soft_skills": [
                 "english",
-                "communication",
-                "collaboration",
-                "troubleshoot"
+                "communication"
             ],
             "post_soft_skills": [
                 "english",
-                "collaboration",
                 "solving problems",
                 "communication",
-                "troubleshoot"
+                "troubleshoot",
+                "collaboration"
             ],
             "post_soft_explanation_skills": {
                 "troubleshoot": [
@@ -123,31 +117,13 @@
                     "english"
                 ],
                 "communication": [
-                    "communication",
-                    "communication.",
-                    "network",
-                    "team",
-                    "service"
-                ],
-                "troubleshoot": [
-                    "troubleshooting",
-                    "troubleshooting home"
-                ],
-                "collaboration": [
-                    "team"
+                    "communication."
                 ],
                 "using foreign languages": [
                     "english"
                 ],
                 "softskill": [
-                    "communication",
-                    "communication.",
-                    "network",
-                    "service"
-                ],
-                "solving problems": [
-                    "troubleshooting",
-                    "troubleshooting home"
+                    "communication."
                 ]
             }
         }

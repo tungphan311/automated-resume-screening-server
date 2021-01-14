@@ -103,11 +103,11 @@ class Evaluation:
                     "general_score": float(general_res['score']),
 
                     # "cv_domain_skills": cv_domain_res['all_skills'],
-                    "cv_soft_skills": cv_soft_res['all_skills'],
+                    # "cv_soft_skills": cv_soft_res['all_skills'],
                     # "cv_general_skills": cv_general_res['all_skills'],
 
                     # "post_domain_skills": post_domain_res['all_skills'],
-                    "post_soft_skills": post_soft_res['all_skills'],
+                    # "post_soft_skills": post_soft_res['all_skills'],
                     # "post_general_skills": post_general_res['all_skills'],
                     "post_soft_explanation_skills": post_soft_res['explanation'],
                     "cv_soft_explanation_skills": cv_soft_res['explanation'],

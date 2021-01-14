@@ -33,6 +33,11 @@ class ClassifyManager:
         print("Loaded models.")
 
 
+    def get_ontology(self, domain):
+        (o, _) = self.model_dict[domain]
+        return o
+
+
     def __get_domain_model(self, domain):
         # free to crash for debugging.
         return self.model_dict[domain]

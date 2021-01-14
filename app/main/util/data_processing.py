@@ -1,9 +1,10 @@
+from networkx.algorithms.bipartite.basic import color
 from app.main import classify_manager as cm
 import networkx as nx
 import gmatch4py as gm
 from numpy import linalg as LA
 import numpy as np
-
+from app.main.util.draw_graph import radial_expansion_pos, draw
 
 def get_technical_skills(domain, text):
     """
@@ -57,12 +58,12 @@ def matching_score(post_text, cv_text, domain):
     
     """
     post_skills = __get_skills_by_classifier(post_text, domain)
-    cv_skills = __get_skills_by_classifier(cv_text, domain)
+    cv_skills = __get_skills_by_classifier(cv_text, domain, 'syntactic')
 
-    post_graph = generate_skill_graph(generate_edges(post_skills['explanation']))
-    cv_graph = generate_skill_graph(generate_edges(cv_skills['explanation']))
+    (post_graph, p_root) = __generate_graph_with(domain=domain, skills=post_skills['union'])
+    (cv_graph, cv_root) = __generate_graph_with(domain=domain, skills=cv_skills['union'])
 
-    score = _matching(post_graph, cv_graph)
+    score = __matching(post_graph, cv_graph)
 
     if not cv_skills['explanation'] or not post_skills['explanation']:
         score = 0
@@ -78,20 +79,29 @@ def matching_score(post_text, cv_text, domain):
         "cv_skills": cv_skills,
         "post_skills": post_skills,
     }
-    
 
-def __get_skills_by_classifier(text, domain):
-    generate_skill_link = {}
-    result = cm.run_classifier(domain, text, explanation=True).get_dict()
-    generate_skill_link['union'] = result['union']
-    generate_skill_link['explanation'] = result['explanation']
-    generate_skill_link['syntactic'] = result['syntactic']
-    generate_skill_link['semantic'] = result['semantic']
-    return generate_skill_link
 
-def _matching(post_graph, cv_graph):
+def __get_skills_by_classifier(text, domain, modules = 'both'):
+    return cm.run_classifier(domain, text, modules, explanation=True).get_dict()
+
+
+def __matching(post_graph, cv_graph):
         # all edit cost are equal to 1
         ged = gm.GraphEditDistance(1, 1, 1, 1)
         result = ged.compare([post_graph, cv_graph], None)
         # description how much score is and why it got matched
         return LA.norm(ged.similarity(result))
+
+def __generate_graph_with(domain, skills):
+    (data, root_label) = cm.get_ontology(domain).generate_graph_dict(skills)
+    G = nx.DiGraph()
+    keys = list(data.keys())
+    keys.sort()
+    # Add nodes
+    G.add_nodes_from([k for k in keys])
+    # Add edges
+    for k in data.keys():
+        for v in data[k]:
+            G.add_edge(k, v)
+    draw(G, root_label)
+    return (G, root_label)
