@@ -171,7 +171,7 @@ def hr_get_detail(id):
         'posted_in': json.dumps(post.posted_in, default=json_serial),
         'deadline': json.dumps(post.deadline, default=json_serial),
         'contract_type': format_contract(post.contract_type),
-        'amount': post.amount,
+        'amount': post.amount if post.amount > 0 else "Không giới hạn",
         'description': post.description_text,
         'requirement': post.requirement_text,
         'benefit': post.benefit_text,
