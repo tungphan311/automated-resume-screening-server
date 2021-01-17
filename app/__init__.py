@@ -18,6 +18,7 @@ from .main.controller.job_domain_controller import api as job_domain_ns
 # from .main.controller.upload_controller import api as upload_ns
 from .main.controller.resume_controller import api as resume_ns
 from .main.controller.filter_controller import api as filter_ns
+from .main.controller.test_controller import api as test_ns
 
 blueprint = Blueprint('api', __name__, url_prefix="/api", template_folder='templates')
 
@@ -27,6 +28,7 @@ api = Api(blueprint,
           version='1.0'
           )
 
+api.add_namespace(test_ns, path='/test')
 api.add_namespace(account_ns, path='/user')
 api.add_namespace(company_ns, path='/company')
 api.add_namespace(candidate_ns, path='/user')

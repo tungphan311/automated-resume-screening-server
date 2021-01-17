@@ -148,6 +148,7 @@ class Paper:
         """ Pre-processes the paper: identifies the parts of speech and then extracts chunks using a grammar
         """
         ##################### Tagger with spaCy.io
+        
         doc = self.tagger(self._text)
         
         # =============================================================================

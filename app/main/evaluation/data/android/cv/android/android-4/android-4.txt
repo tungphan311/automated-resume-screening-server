@@ -1,0 +1,11 @@
+Java
+Kotlin
+C++
+SQLite(Room)
+Firebase
+Gradle
+Git
+Gerrit
+Arduino
+Waterfall model
+Flutter

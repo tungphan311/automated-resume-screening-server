@@ -1,0 +1,13 @@
+Java 
+Kotlin
+Android 
+SQLite server
+nodejs API
+flask API
+Teamwork
+Sqlite
+Gson
+Retrofit
+RxJava
+LiveData
+English

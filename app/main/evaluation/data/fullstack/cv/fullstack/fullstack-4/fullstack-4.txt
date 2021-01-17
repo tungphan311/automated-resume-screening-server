@@ -1,0 +1,17 @@
+ReactJS
+RESTful API
+NodeJS
+API
+HTML
+CSS
+SASS
+JavaScript
+ES6
+Socket.io
+Redux
+Bootstrap4
+Thunk
+Ant Design
+Express
+MySQL
+MongoDB

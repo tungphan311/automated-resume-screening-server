@@ -1,0 +1,20 @@
+Java
+.NET
+.Python
+.Oracle
+Salesforce: CRM Software
+Spring Boot, Spring MVC
+RabbitMQ: send request and receive response faster
+Redis for cache query data.
+Microservice, API
+Docker for build application
+Apache Nifi: integrated data logistics platform for automating the
+movement of data between disparate systems
+Hibernate entity, JPA
+Mysql, Postgres sql
+Oracle sql: work with big data of insurance 
+jQuery- HTML + CSS
+Bootstrap
+Django REST framework
+Django CMS
+

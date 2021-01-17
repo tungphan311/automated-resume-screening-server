@@ -1,0 +1,24 @@
+IOS
+Android
+Nodejs
+Flutter
+Reacnative
+MongoDb
+Mysql
+Git
+Redmine
+PhotoShop
+Xcode
+Sketch
+Swift
+Android
+FacebookSDK
+Realm
+Kingfisher
+GoogleMaps
+Alamofire
+Kingfisher
+Alamofire
+ObjectMapper
+Good teamwork
+English

@@ -1,0 +1,7 @@
+Reactjs
+.NET Core
+Java
+English
+javascript
+Html
+Css,Scss

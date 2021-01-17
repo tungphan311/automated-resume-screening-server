@@ -1,0 +1,24 @@
+Javascript
+HTML/CSS
+Jade
+Pug
+Less
+Sass
+Bootstrap
+Foundation
+Responsive UI
+Javascript
+Jquery
+VueJs
+Photoshop
+AI
+WordPress
+Jquery
+Ajax/Json
+BEM
+Git
+Gitlab
+Axios
+Vuetify
+Teamwork
+English

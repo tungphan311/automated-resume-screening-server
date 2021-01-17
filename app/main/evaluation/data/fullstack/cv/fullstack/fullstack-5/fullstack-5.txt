@@ -1,0 +1,32 @@
+Javascript
+Typescript
+Golang
+Java
+NodeJS
+NestJS
+GraphQL
+Echo
+Spring Boot
+ReactJS
+VueJS
+MongoDB
+PostgreSQL
+Webpack
+Babel
+Gradle
+Maven
+CentOS 7
+AWS Beanstalk
+Git
+SVN
+English
+NodeJS
+GraphQL
+Webpack
+heroku
+Ubuntu
+CentOS
+Nagios
+Maven
+MySQL
+jQuery
