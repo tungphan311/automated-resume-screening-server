@@ -3,62 +3,16 @@
         {
             "domain": "frontend",
             "post_index": 1,
-            "cv_index": 0,
+            "cv_index": 2,
             "post_text": "Who we are looking for:. . The front-end software engineer to join a highly skilled and experienced team and do challenging tasks involving the latest technologies. . You will:. . Possibility to participate in international projects for world\u2019s leading companies. Solidify your expertise in your chosen area and be recognized as a community developer. Write \u201cclean\u201d, well-designed code to develop and deliver products in various types using HTML5, CSS3, and Javascript. Creating visually appealing web pages, mobile devices or any interfaces \u2013 collaborate with the usability and design teams to define prototypes of dynamic web pages and JavaScript components. Troubleshoot, test and maintain the core product software and databases to ensure strong optimization and functionality. Testing cross-browser, cross-platform, and/or cross-device compatibility for inconsistenciesInitiate automated solutions that enable better efficiency and process improvement. Contributes to continual improvement by suggesting improvements to user interface, software architecture or new technologies. Develop new solutions as well as fixing issues and errors with existing applications. Migrate the applications into the production environment, file management. Participate in code reviews, follow industry best practices and research new technologies. Your Skills and Experience. 2+ years experience in HTML5, CSS3, Javascript, Responsive Design. Working experience with API integration, can handle complex flow/logic. Experience with text/photo/video web editor. Develop nice and abstract web animation with high performance for user experience. Understand and know-how of user experience practice in website development. English communication is a big plus but not compulsory. Working experience with Git (can handle merge code, review code). Proactive, ability to analyze and solving problems skills",
-            "cv_text": "A. het mot ene ioe) eon. BB Aor, 25 1997. etait). & []. 8B . \\-amom@alm lin arm aciear lan). i []. OBJECTIVE. Motivative, teamwork,. research. Able to work to tight. dealine and keen on learning. and discovering new. technologies as well as new. programing languages.. 1d BES. ego syA ss. RRoreel iss. anyday. I. \u00b0o Movie. ane. eo EDUCATION. THE UNIVERSITY OF SIENCE. Major: Information Technology. 2015 - 2020. GPA: 7.6/10. MAR 2019 - APR. 2019. INTERN. Dwarves Foundation. Learning and working with Frontend knowledge, GIT, and more.... \u00a9 WORK EXPERIENCE. AHAROOMS MAR 19 - MAY 20. Manage hotel chain. Main responsibilities:. - Develop Ul and logic with design available. - Write Unit testing with Jest Tesing. - Fix bug external of old feature. Tech:. - Reactjs, typescript,. - Redux-saga, Jest Testing .... TIGERSPIKE JUN 2020 -. PRESENT. Manage mobile data. Main responsibilities:. - Develop Ul and logic with design available. - Fix bug. - Contact and discuss with client about new feature. Tech:. - React native. \u00a9 COMPANY. DWARVES FOUNDATION MAR 2019 -. PRESENT. Join as internship. Dill aeadiict far chart",
+            "cv_text": "June 27, 1999. Male. Truong N e []. # Internship - Fresher FRONT END . Da Nang, Vietnam. []. // OBJECTIVE. I want to be trained to work in a professional environment in the IT field and have the. opportunity to experience the practical projects thereby learning more exchanges and. accumulated professional experience while improving essential skills such as communication. problem but the only creative teamwork.. github: https://github.com/quantruong2706. // WORK EXPERIENCE. At SCHOOL Student. DEC 2019 - Present -Participate and completed 2 projects on front end and java. at school.. +Front end: - Interface Bakery shop Home.. - The number of members as the scheme is. five people.. - The programming language used is:. HTML,CSS,IS,Bootstrap.. Link: https://bakerydemohome. firebaseapp.com. t+Java: - Coffee management. - The number of members as the scheme is. three people.. - Database design created for sale and. revenue management of warehouses.. - The programming language used is Javag,. SQL server. The Subjects remaining in training programs at Aptech(ADSE). such as: C/C++, XML, C#,.NET and currently im studing ServJSP,. in the future: Spring FW and do finally Project to graduate.. At Home Student. Because of my passion for programming, i let myself learn and. learn more as follows:. +Front end: - I self-taught and practice. Html, css, B4 through making pet. project then deploy into firebase.. Reactjs with the latest feature ->. react hook. And. I am learning more about redux so t can. develop my skills.. +Backend: - Learn Nodejs + ExpressJs at home to. understand the backend works and. communicates with the client. // OTHER SKILLS // EDUCATION. Office, English Oct 2018 - OCT 2020. - Fluency tools Word, Excel, Power Center international programmers. Point SOFTECH APTECH. - I can communicate in English basic, reading Major: international programmer ADSE. comprehension and now studying Ielts in the Currently I'm the student. center to improve.. / / KNOWLEDGE. - I have knowledge about HTML, CSS,. JavaScript, OOP, basic knowledge of. algorithms and data structures.. - Git, UX/UI design basic with figma app,. Bootstrap4, Nodejs + expressjs basic,. Reactjs, Scss basic. -Deployment: firebase, heroku.",
             "domain_w": 3,
             "general_w": 3,
             "soft_w": 1,
-            "overall_score": 9.930700000000002,
-            "domain_score": 1.417,
-            "soft_score": 1.423,
-            "general_score": 1.4189,
-            "cv_soft_skills": [
-                "teamwork"
-            ],
-            "post_soft_skills": [
-                "english",
-                "solving problems",
-                "communication",
-                "troubleshoot",
-                "collaboration"
-            ],
-            "post_soft_explanation_skills": {
-                "troubleshoot": [
-                    "troubleshoot"
-                ],
-                "english": [
-                    "english"
-                ],
-                "communication": [
-                    "communication",
-                    "solving problems",
-                    "team"
-                ],
-                "solving problems": [
-                    "troubleshoot",
-                    "solving problems"
-                ],
-                "collaboration": [
-                    "team"
-                ],
-                "using foreign languages": [
-                    "english"
-                ],
-                "softskill": [
-                    "communication",
-                    "solving problems",
-                    "team"
-                ]
-            },
-            "cv_soft_explanation_skills": {
-                "teamwork": [
-                    "teamwork"
-                ],
-                "softskill": [
-                    "teamwork"
-                ]
-            }
+            "overall_score": 4.0783000000000005,
+            "domain_score": 0.6456,
+            "soft_score": 0.6316,
+            "general_score": 0.5033
         },
         {
             "domain": "frontend",
@@ -69,63 +23,10 @@
             "domain_w": 3,
             "general_w": 3,
             "soft_w": 1,
-            "overall_score": 9.9087,
-            "domain_score": 1.4144,
-            "soft_score": 1.4142,
-            "general_score": 1.4171,
-            "cv_soft_skills": [
-                "english",
-                "communication"
-            ],
-            "post_soft_skills": [
-                "english",
-                "solving problems",
-                "communication",
-                "troubleshoot",
-                "collaboration"
-            ],
-            "post_soft_explanation_skills": {
-                "troubleshoot": [
-                    "troubleshoot"
-                ],
-                "english": [
-                    "english"
-                ],
-                "communication": [
-                    "communication",
-                    "solving problems",
-                    "team"
-                ],
-                "solving problems": [
-                    "troubleshoot",
-                    "solving problems"
-                ],
-                "collaboration": [
-                    "team"
-                ],
-                "using foreign languages": [
-                    "english"
-                ],
-                "softskill": [
-                    "communication",
-                    "solving problems",
-                    "team"
-                ]
-            },
-            "cv_soft_explanation_skills": {
-                "english": [
-                    "english"
-                ],
-                "communication": [
-                    "communication."
-                ],
-                "using foreign languages": [
-                    "english"
-                ],
-                "softskill": [
-                    "communication."
-                ]
-            }
+            "overall_score": 3.9036,
+            "domain_score": 0.5942,
+            "soft_score": 0.6111,
+            "general_score": 0.5033
         }
     ]
 }

@@ -5,8 +5,16 @@ import math
 
 def draw(g, root, show=True):
     # nx.draw(g, hierarchy_pos(g, root), with_labels=True)
-    nx.draw(g, with_labels=True)
-    # plt.savefig("graph.png") # save as png
+    # nx.draw(g, with_labels=True)
+    # plt.savefig("jd.png") # save as png
+    color_map = []
+    for n in g:
+        if n == root:
+            color_map.append('red')
+        else: 
+            color_map.append('blue')
+    nx.draw(g, radial_expansion_pos(g, root), node_color=color_map, with_labels=True, alpha=0.8)
+    # nx.draw_networkx_labels(g, radial_expansion_pos(g, root))
     if show: plt.show()
 
 
@@ -75,6 +83,6 @@ def hierarchy_pos(G, root=None, width=1., vert_gap = 0.2, vert_loc = 0, xcenter 
     return _hierarchy_pos(G, root, width, vert_gap, vert_loc, xcenter)
 
 
-def radial_expansion_pos(G):
-    pos = hierarchy_pos(G, None, width = 2*math.pi, xcenter=0)
+def radial_expansion_pos(G, root):
+    pos = hierarchy_pos(G, root, width = 2*math.pi, xcenter=0)
     return {u:(r*math.cos(theta),r*math.sin(theta)) for u, (theta, r) in pos.items()}

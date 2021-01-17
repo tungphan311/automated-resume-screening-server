@@ -7,7 +7,7 @@ sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server/app")
 sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server/app/main")
 
 from app.main.util.resume_extractor import ResumeExtractor, parse_pdf
-from app.main.util.data_processing import matching_score
+from app.main.util.data_processing import matching_score, tree_matching_score
 from app.main.evaluation.prepare_data_evaluatation import parse_result
 # from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
 import json
@@ -58,31 +58,32 @@ class Evaluation:
             for j in range(0, len(self.resumes)):
 
                 # TODO
-                if j != 0 and j != 6: continue
+                # if j != 2 and j != 5: continue
+                if j != 2: continue
 
                 label_cv = "CV-{j}".format(j=j)
                 p_text = self.posts[i]
                 cv_text = self.resumes[j]
 
-                domain_res = matching_score(post_text=p_text, cv_text=cv_text, domain=self.domain)
-                soft_res = matching_score(post_text=p_text, cv_text=cv_text, domain='softskill')
-                general_res = matching_score(post_text=p_text, cv_text=cv_text, domain='general')
+                domain_res = tree_matching_score(post_text=p_text, cv_text=cv_text, domain=self.domain)
+                soft_res = tree_matching_score(post_text=p_text, cv_text=cv_text, domain='softskill')
+                # general_res = tree_matching_score(post_text=p_text, cv_text=cv_text, domain='general')
 
                 overall = domain_res['score'] * self.domain_w \
                     + soft_res['score'] * self.soft_w \
-                    + general_res['score'] * self.general_w
+                    # + general_res['score'] * self.general_w
 
                 print("\t" + label_cv + ":")
                 print("\tDomain_matching_score: {score:.4f}".format(score=domain_res['score']))
                 print("\tSoft_matching_score: {score:.4f}".format(score=soft_res['score']))
-                print("\tGeneral_matching_score: {score:.4f}".format(score=general_res['score']))
+                # print("\tGeneral_matching_score: {score:.4f}".format(score=general_res['score']))
                 print("\tOverall_matching_score: {score:.4f}".format(score=overall))
                 print()
 
                 cv_domain_res = parse_result(domain_res['cv_skills'])
                 post_domain_res = parse_result(domain_res['post_skills'])
-                cv_general_res = parse_result(general_res['cv_skills'])
-                post_general_res = parse_result(general_res['post_skills'])
+                # cv_general_res = parse_result(general_res['cv_skills'])
+                # post_general_res = parse_result(general_res['post_skills'])
                 cv_soft_res = parse_result(soft_res['cv_skills'])
                 post_soft_res = parse_result(soft_res['post_skills'])
 
@@ -100,7 +101,7 @@ class Evaluation:
 
                     "domain_score": float(domain_res['score']),
                     "soft_score": float(soft_res['score']),
-                    "general_score": float(general_res['score']),
+                    # "general_score": float(general_res['score']),
 
                     # "cv_domain_skills": cv_domain_res['all_skills'],
                     # "cv_soft_skills": cv_soft_res['all_skills'],
@@ -109,8 +110,8 @@ class Evaluation:
                     # "post_domain_skills": post_domain_res['all_skills'],
                     # "post_soft_skills": post_soft_res['all_skills'],
                     # "post_general_skills": post_general_res['all_skills'],
-                    "post_soft_explanation_skills": post_soft_res['explanation'],
-                    "cv_soft_explanation_skills": cv_soft_res['explanation'],
+                    # "post_soft_explanation_skills": post_soft_res['explanation'],
+                    # "cv_soft_explanation_skills": cv_soft_res['explanation'],
                 }
 
                 infos.append(res_dict)
@@ -129,6 +130,5 @@ for lb in ['frontend']:
     evaluation.print_result()
     evaluation.sort()
 
-    with open(os.path.join(base_dir, '{domain}_evaluation_result_CV0_CV6.json'.format(domain=lb)), 'w') as f:
+    with open(os.path.join(base_dir, '{domain}_evaluation_result.json'.format(domain=lb)), 'w') as f:
         f.write(json.dumps(evaluation.results, indent=4))
-
