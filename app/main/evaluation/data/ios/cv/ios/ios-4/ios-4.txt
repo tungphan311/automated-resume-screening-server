@@ -1,0 +1,10 @@
+Android
+React Native
+Logical thinking and creative
+English
+Webstorm
+Xcode
+firebase
+admob
+restfull api
+jest test

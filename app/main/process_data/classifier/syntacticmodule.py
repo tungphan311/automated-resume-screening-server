@@ -1,9 +1,7 @@
 from nltk import ngrams
 from nltk.tokenize import word_tokenize
 from Levenshtein.StringMatcher import StringMatcher
-
-
-
+from nltk.tokenize import RegexpTokenizer
 
 class Syntactic:
     """ A simple abstraction layer for using the Syntactic module of the CSO classifier """
@@ -126,6 +124,7 @@ class Syntactic:
                         found_topics[topic].append({'matched': gram, 'similarity': match_ratio})
                         # don't reprocess the current token
                         
+                        # Just for checking sanity
                         if size == 2: matched_bigrams.add(position)
                         elif size == 3: matched_trigrams.add(position)
                         
@@ -143,7 +142,10 @@ class Syntactic:
         """
         for n in range(3, 0, -1):
             pos = 0
-            for ng in ngrams(word_tokenize(concept, preserve_line=True), n):
+
+            # Use custom Tokenizer for some special language names.
+            # word_tokenize(concept, preserve_line=True)
+            for ng in ngrams(RegexpTokenizer(r'[\w\-\.+#]+').tokenize(concept), n):
                 yield {"position": pos, "size": n, "ngram": ng}
                 pos += 1
 

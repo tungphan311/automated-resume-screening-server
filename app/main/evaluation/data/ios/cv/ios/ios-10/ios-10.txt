@@ -1,0 +1,15 @@
+English
+C
+C++
+C# (WPF and Winform)
+Python
+JavaScript (React Native,NodeJS)
+TypeScript
+Redux
+Java
+REST API
+Google API
+Google API
+Facebook SDK
+
+

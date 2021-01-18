@@ -1,0 +1,8 @@
+HTML/CSS/Javascript
+Google Cloud Platform
+CMS Wordpress
+RabbitMQ
+Nodejs
+Rest API
+Office
+Java

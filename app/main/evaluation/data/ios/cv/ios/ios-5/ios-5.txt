@@ -1,0 +1,25 @@
+Be honest, proactive and enthusiastic at work
+Have a spirit of learning, quick absorption of new technologies
+Good teamwork skills, good interpersonal skills
+Git
+Bitbucket
+Swift
+Kotlin
+Sketch
+Nodejs
+Photoshop
+Word
+Excel
+Powerpoint
+English
+Kingfisher
+Alamofire
+SwiftJson
+GoogleMap
+SenBird
+RxSwift
+ObjectMapper
+FacebookSDK
+GoogleSDK
+Realm
+Flutter

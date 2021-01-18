@@ -1,0 +1,19 @@
+Python Django
+Flask
+Nodejs
+HTML/CSS
+Boostrap
+Angular 8
+Docker, Microservices
+Kafka,RabitMq,Grpc
+Database
+English Communication
+Aws,Pentaho
+Devops,Git,Kubernetes 
+Build Restfull API
+Docker
+PostgreSQL
+MQTT
+JWT/OAuth2
+MongoDb
+Google Firebase

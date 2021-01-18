@@ -1,0 +1,12 @@
+Django framework
+Python
+HTML
+CSS
+Javascript
+Bootstrap
+SQLite
+MySQL
+SQL Server
+C++
+C#
+Git

@@ -1,0 +1,25 @@
+Python
+XML
+C/C++
+C#
+Java
+HTML
+CSS
+.NET
+Qt framework
+ASP.NET
+ADO.NET
+ADO.NET
+Flask
+Adruino
+SQL Server
+My SQL
+Postgresql
+Github
+Gitlab
+English
+OOP
+AI
+Photoshop
+LightRoom
+Linux

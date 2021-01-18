@@ -1,0 +1,7 @@
+Java
+Kotlin
+design patterns
+MVC
+SQlite
+Git
+English

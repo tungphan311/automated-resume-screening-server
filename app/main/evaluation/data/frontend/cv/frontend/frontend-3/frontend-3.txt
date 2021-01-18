@@ -1,0 +1,22 @@
+HTML
+CSS
+JS
+Bootstrap
+Database
+Java8
+C/C++
+XML
+C#
+.NET
+ServJSP
+Reactjs
+Nodejs 
+ExpressJs 
+Office
+English
+Word
+Excel
+Power Point
+Scss
+firebase
+heroku

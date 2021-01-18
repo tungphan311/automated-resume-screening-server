@@ -1,0 +1,13 @@
+Swift
+Kotlin
+Java for Android
+Orange Pi
+Cloudinar
+Websocket
+adruino
+Inapp-purchase
+CloudKitStorage
+Objective-C
+Realm
+Google Map Platform
+team work

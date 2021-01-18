@@ -1,0 +1,18 @@
+.NET WPF
+Sqlite
+noSQL
+Database Plugin
+Ms.SQL Server
+Winform
+English
+PHP
+Javascript
+SQL
+C#
+MVC
+OOP
+Node,js
+JSON
+Restful API
+Git
+Git-Hub

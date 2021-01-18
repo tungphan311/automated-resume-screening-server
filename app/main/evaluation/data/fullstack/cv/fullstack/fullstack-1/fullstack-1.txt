@@ -1,0 +1,33 @@
+JavaScript
+Communication
+Teamwork
+Logical thinking and creative
+Time Management
+C#
+.NET Framework
+.NET Core
+MSSQL
+MySQL
+Jquery
+ReactJs
+Repository and Unit of work
+Singleton
+Mediatr
+Umbraco
+TeamCity
+HTML
+CSS
+SCSS
+Redis cache
+Net Core
+Entity Framework
+Linq
+MySQL
+IS4
+ReactJs
+AWS
+Jquery 
+Boostrap 
+SQL Server
+Oracle
+Telerik

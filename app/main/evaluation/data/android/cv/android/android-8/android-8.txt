@@ -1,0 +1,12 @@
+Java(Android)
+Kotlin
+React Native
+Swift
+Android Studio
+VS Code
+XCode
+Git
+Firebase
+Restful api
+Socket
+Realm DB
