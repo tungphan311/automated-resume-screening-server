@@ -1,8 +1,8 @@
-from app.main.model.candidate_education_model import CandidateEducationModel
 from sqlalchemy.ext.hybrid import hybrid_method
 from sqlalchemy.orm import backref
 from .. import db
 from app.main.model.job_domain_model import JobDomainModel
+from datetime import datetime
 
 class ResumeModel(db.Model):
     __tablename__ = "resumes"
@@ -32,6 +32,9 @@ class ResumeModel(db.Model):
     educations = db.Column(db.Text, nullable=True)
     highest_education = db.relationship('CandidateEducationModel', uselist=False, backref="resume")
     experiences = db.Column(db.Text, nullable=True)
+
+    created_on = db.Column(db.DateTime, default=datetime.now)
+    last_edit = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     job_domain_id = db.Column(db.Integer, db.ForeignKey(JobDomainModel.id), nullable=True)
 

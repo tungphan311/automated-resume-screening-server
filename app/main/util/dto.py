@@ -55,7 +55,8 @@ class CandidateDto:
         'download_url': fields.String,
         'educations': fields.String,
         'experiences': fields.String,
-        'job_domain_id': fields.Integer
+        'job_domain_id': fields.Integer,
+        'edit': fields.DateTime(attribute='last_edit')
     })
 
     response_profile = api.model('response_profile', {
