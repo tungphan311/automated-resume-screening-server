@@ -1,3 +1,4 @@
+from app.main.model.candidate_job_save_model import CandidateJobSavesModel
 from app.main.controller import job_post_controller
 from sys import float_info
 from app.main.model import job_post_model
@@ -286,7 +287,7 @@ def calculate_scrore(submission, job_post_id, resume_id):
     
 
     
-def get_job_post_for_candidate(jp_id):
+def get_job_post_for_candidate(jp_id, identity):
     post = JobPostModel.query.get(jp_id)
     if not post:
         abort(400)
@@ -300,7 +301,10 @@ def get_job_post_for_candidate(jp_id):
 
 
 def search_jd_for_cand(args):
-    query = JobPostModel.query
+    query = JobPostModel.query.filter(JobPostModel.closed_in is not None).filter(JobPostModel.deadline > datetime.now())
+
+    print(query.all())
+
     posted_date = args.get('posted_date')
     contract_type = args.get('contract_type')
     min_salary = args.get('min_salary')
