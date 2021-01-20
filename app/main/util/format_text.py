@@ -1,4 +1,4 @@
-from app.main.model.job_domain_model import JobDomainModel
+from datetime import datetime
 
 
 def format_contract(id):
@@ -62,3 +62,18 @@ def format_education_level(level):
     elif level == 3:
         return "tiến sĩ"
 
+def format_edit_time(x):
+    time_diff = datetime.now() - x.last_edit
+    days = time_diff.days
+    seconds = time_diff.seconds
+    hours = int(seconds / 3600)
+    minutes = int(seconds / 60)
+
+    if days > 0:
+        return "{} ngày trước".format(days)
+    elif hours > 0:
+        return "{} giờ trước".format(hours)
+    elif minutes > 0:
+        return "{} phút trước".format(minutes)
+    else:
+        return "{} giây trước".format(seconds)

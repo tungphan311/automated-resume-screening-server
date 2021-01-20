@@ -1,4 +1,4 @@
-from app.main.util.format_text import format_domains, format_experience, format_provinces, format_skill
+from app.main.util.format_text import format_domains, format_edit_time, format_experience, format_provinces, format_skill
 from app.main.util.custom_fields import NullableBoolean, NullableString, NullableInteger
 from flask_restx import Namespace, fields
 from app.main.dto.base_dto import base
@@ -69,7 +69,11 @@ class FilterDto:
         "job_domain": fields.String(attribute=lambda x: x.job_domain.name),
         "province_id": fields.Integer(attribute=lambda x: x.candidate.province_id),
         "experience": fields.String(attribute=lambda x: format_experience(x.months_of_experience)),
-        "skills": fields.String(attribute=lambda x: format_skill(x))
+        "skills": fields.String(attribute=lambda x: format_skill(x)),
+        "url": fields.String(attribute="store_url"),
+        "download_url": fields.String,
+        "view": fields.Integer(attribute="total_views"),
+        "last_edit": fields.String(attribute=lambda x: format_edit_time(x))
     })
 
     candidate_list = api.inherit("candidate_list", base, {
