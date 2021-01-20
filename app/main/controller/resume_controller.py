@@ -29,8 +29,8 @@ class CV(Resource):
     def post(self):
         args = create_resume_parser.parse_args()
         file = args["file"]
-        filename = file.filename.split('.', 1)[0]
-        file_ext = file.filename.split('.', 1)[1]
+        file_ext = file.filename.split('.')[-1]
+        filename = file.filename.replace(".{}".format(file_ext), "")
 
         filepath = os.path.join("temp_pdf", "{name}_{uid}.{ext}".format(name=filename, uid=str(uuid.uuid4().hex), ext=file_ext))
         file.save(filepath)
