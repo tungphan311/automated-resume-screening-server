@@ -287,7 +287,7 @@ def calculate_scrore(submission, job_post_id, resume_id):
     
 
     
-def get_job_post_for_candidate(jp_id, identity):
+def get_job_post_for_candidate(jp_id):
     post = JobPostModel.query.get(jp_id)
     if not post:
         abort(400)
