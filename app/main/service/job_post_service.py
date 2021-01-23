@@ -24,6 +24,7 @@ from sqlalchemy import or_
 from app.main.business.matching import Matcher
 from app.main.util.thread_pool import ThreadPool
 from numpy import round
+from app.main.util.data_processing import tree_matching_score
 
 api = JobPostDto.api
 
@@ -274,12 +275,28 @@ def apply_cv_to_jp(jp_id, args):
     
 
 def calculate_scrore(submission, job_post_id, resume_id):
-    score_dict = OnetoOneMatching(resume_id=resume_id, job_id=job_post_id)
-    skill_score = score_dict['skill_match']
-    domain_skill_scrore = score_dict['domain_skill_match']
+
+    # Get resume
+    job_post = JobPostModel.query.get(job_post_id)
+    resume = ResumeModel.query.get(resume_id)
+
+    job_post_text = job_post.description_text + " " + job_post.requirement_text
+    resume_text = " ".join([resume.educations, resume.experiences, resume.skills])
+
+
+    # Scores
+    domain_dict = tree_matching_score(job_post_text, resume_text, job_post.job_domain.alternative_name)
+    softskill_dict = tree_matching_score(job_post_text, resume_text, 'softskill')
+    general_dict = tree_matching_score(job_post_text, resume_text, 'general')
+
+    domain_score = domain_dict['score']
+    softskill_score = softskill_dict['score']
+    general_score = general_dict['score']
     
-    score_explanation_array = '|'.join(['skill_match', 'domain_skill_match'])
-    score_array = '|'.join([str(skill_score), str(domain_skill_scrore)])
+    score_explanation_array = '|'.join(['domain_score', 'general_score', 'softskill_score'])
+    score_array = '|'.join([str(domain_score), str(softskill_score), str(general_score)])
+
+    # Update 
     submission.is_calculating = False
     submission.score_array = score_array
     submission.score_explanation_array = score_explanation_array
