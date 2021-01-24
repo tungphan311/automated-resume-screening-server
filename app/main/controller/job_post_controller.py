@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from flask.wrappers import Response
+from numpy.core.numeric import identity
 from app.main.util.response import response_object
 from app.main.util.custom_jwt import Candidate_only, HR_only
 from flask_jwt_extended.utils import get_jwt_identity
@@ -170,12 +171,20 @@ class SubmitResumeForJD(Resource):
 # Get job post detail for candidate
 #
 #################################
+cand_get_job_detail_parser = api.parser() 
+cand_get_job_detail_parser.add_argument("Authorization", location="headers", required=False)
 @api.route('/<int:jp_id>/cand')
 class CandidateJP(Resource):
     @api.doc('Get job post by id for candidate.')
     @api.marshal_with(JobPostDto.job_post_for_cand, code=200)
+    @api.expect(cand_get_job_detail_parser)
     def get(self, jp_id):
-        data = get_job_post_for_candidate(jp_id)
+        identity = get_jwt_identity()
+        cand_email = None
+        if identity is not None:
+            cand_email = identity.get('email')
+
+        data = get_job_post_for_candidate(jp_id, cand_email)
         return response_object(data=data)
 
 
@@ -236,7 +245,8 @@ class ProceedResume(Resource):
 #################################################
 get_cand_info_parser = api.parser()
 get_cand_info_parser.add_argument('Authorization', location='headers', required=True)
-@api.route('/job-posts/<int:job_id>/candidates/<int:cand_id>')
+get_cand_info_parser.add_argument('resume_id', location='args', required=True)
+@api.route('/<int:job_id>/candidates/<int:cand_id>')
 class GetCandInfoForJobPostById(Resource):
     @api.doc('Get applied candidate info by id.')
     @api.expect(get_cand_info_parser)
@@ -245,7 +255,9 @@ class GetCandInfoForJobPostById(Resource):
     def get(self, job_id, cand_id):
         identity = get_jwt_identity()
         recruiter_email = identity['email']        
-        data = get_matched_cand_info_with_job_post(recruiter_email, job_id, cand_id)
+        args = get_cand_info_parser.parse_args()
+        resume_id = args["resume_id"]
+        data = get_matched_cand_info_with_job_post(recruiter_email, job_id, cand_id, resume_id)
         return response_object(data=data)
 
 
@@ -258,15 +270,16 @@ get_list_cand_info_parser = api.parser()
 get_list_cand_info_parser.add_argument('Authorization', location='headers', required=True)
 get_list_cand_info_parser.add_argument("page", type=int, location="args", required=False, default=1)
 get_list_cand_info_parser.add_argument("page-size", type=int, location="args", required=False, default=20)
-get_list_cand_info_parser.add_argument("skill_weight", type=float, location="args", required=True)
 get_list_cand_info_parser.add_argument("domain_weight", type=float, location="args", required=True)
-@api.route('/job-posts/<int:job_id>/candidates')
+get_list_cand_info_parser.add_argument("general_weight", type=float, location="args", required=True)
+get_list_cand_info_parser.add_argument("soft_weight", type=float, location="args", required=True)
+@api.route('/<int:job_id>/candidates')
 class GetListCandInfoForJobPost(Resource):
     @api.doc('Get list applied candidate info by id.')
     @api.expect(get_list_cand_info_parser)
     @api.marshal_with(JobPostDto.applied_cand_list_response, code=200)    
     @HR_only
-    def post(self, job_id):
+    def get(self, job_id):
         args = get_list_cand_info_parser.parse_args()
         identity = get_jwt_identity()
         recruiter_email = identity['email']        
