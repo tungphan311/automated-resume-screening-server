@@ -7,7 +7,7 @@ sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server/app")
 sys.path.append("/Users/vinhpham/Desktop/automated-resume-screening-server/app/main")
 
 from app.main.util.resume_extractor import ResumeExtractor, parse_pdf
-from app.main.util.data_processing import matching_score, tree_matching_score
+from app.main.util.data_processing import tree_matching_score
 from app.main.evaluation.prepare_data_evaluatation import parse_result
 # from app.main.process_data.classify_wrapper.classify_manager import ClassifyManager
 import json
