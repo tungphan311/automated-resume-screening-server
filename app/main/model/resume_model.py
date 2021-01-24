@@ -1,8 +1,8 @@
-from app.main.model.candidate_education_model import CandidateEducationModel
 from sqlalchemy.ext.hybrid import hybrid_method
 from sqlalchemy.orm import backref
 from .. import db
 from app.main.model.job_domain_model import JobDomainModel
+from datetime import datetime
 
 class ResumeModel(db.Model):
     __tablename__ = "resumes"
@@ -33,6 +33,9 @@ class ResumeModel(db.Model):
     highest_education = db.relationship('CandidateEducationModel', uselist=False, backref="resume")
     experiences = db.Column(db.Text, nullable=True)
 
+    created_on = db.Column(db.DateTime, default=datetime.now)
+    last_edit = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
     job_domain_id = db.Column(db.Integer, db.ForeignKey(JobDomainModel.id), nullable=True)
 
     def __repr__(self):
@@ -41,3 +44,26 @@ class ResumeModel(db.Model):
     @hybrid_method
     def contain_at_least_one(self, skills):
         return any(skill in self.technical_skills for skill in skills)
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "months_of_experience": self.months_of_experience,
+            "cand_linkedin": self.cand_linkedin,
+            "cand_github": self.cand_github,
+            "cand_facebook": self.cand_facebook,
+            "cand_twitter": self.cand_twitter,
+            "cand_mail": self.cand_mail,
+            "cand_phone": self.cand_phone,
+            "soft_skills": self.soft_skills,
+            "technical_skills": self.technical_skills.split("|"),
+            "store_url": self.store_url,
+            "is_finding_job": self.is_finding_job,
+            "resume_filename": self.resume_filename,
+            "resume_file_extension": self.resume_file_extension,
+            "total_views": self.total_views,
+            "total_saves": self.total_saves,
+            "educations": self.educations,
+            "experiences": self.experiences,
+            "job_domain": self.job_domain.to_json()
+        }

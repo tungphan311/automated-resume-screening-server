@@ -51,6 +51,16 @@ def get_candidate_by_id(id):
     return cand
 
 
+def update_candidate_profile(id,profile):
+    candidate = CandidateModel.query.get(id)
+    candidate.full_name = profile['fullName']
+    candidate.phone = profile['phone']
+    candidate.gender = profile['gender']
+    candidate.date_of_birth = profile['dateOfBirth']
+    candidate.province_id = profile['provinceId']
+    db.session.commit()
+
+
 def alter_save_job(cand_email, args):
     job_post_id = args['job_post_id']
     status = args['status']

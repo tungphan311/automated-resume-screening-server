@@ -39,8 +39,8 @@ def add_new_company(data, logo_file, background_file, email):
         email=data['email'],
         website=data['website'],
         description=data['description'],
-        logo=logo_url,
-        background=background_url
+        logo=logo_url.public_url,
+        background=background_url.public_url
     )
 
     recruiter = RecruiterModel.query.filter_by(email=email).first()

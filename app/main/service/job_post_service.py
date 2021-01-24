@@ -1,7 +1,4 @@
-from app.main.controller import job_post_controller
 from sys import float_info
-from app.main.model import job_post_model
-from app.main.service.matching_service import OnetoOneMatching, jobPipeline
 from datetime import datetime, timedelta
 import dateutil.parser
 from flask import json
@@ -21,9 +18,6 @@ from app.main.util.response import json_serial, response_object
 from app.main.util.data_processing import get_technical_skills
 from flask_restx import abort
 from sqlalchemy import or_
-from app.main.business.matching import Matcher
-from app.main.util.thread_pool import ThreadPool
-from numpy import round
 from app.main.util.data_processing import tree_matching_score
 
 api = JobPostDto.api
@@ -172,7 +166,7 @@ def hr_get_detail(id):
         'posted_in': json.dumps(post.posted_in, default=json_serial),
         'deadline': json.dumps(post.deadline, default=json_serial),
         'contract_type': format_contract(post.contract_type),
-        'amount': post.amount,
+        'amount': post.amount if post.amount > 0 else "Không giới hạn",
         'description': post.description_text,
         'requirement': post.requirement_text,
         'benefit': post.benefit_text,
@@ -317,7 +311,10 @@ def get_job_post_for_candidate(jp_id):
 
 
 def search_jd_for_cand(args):
-    query = JobPostModel.query
+    query = JobPostModel.query.filter(JobPostModel.closed_in is not None).filter(JobPostModel.deadline > datetime.now())
+
+    print(query.all())
+
     posted_date = args.get('posted_date')
     contract_type = args.get('contract_type')
     min_salary = args.get('min_salary')

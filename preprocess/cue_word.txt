@@ -121,3 +121,5 @@ award
 biographic
 project
 projects
+study
+knowledge

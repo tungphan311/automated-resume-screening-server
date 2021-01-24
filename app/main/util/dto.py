@@ -31,9 +31,49 @@ class CandidateDto:
         'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
         'province_id': fields.String(required=True, description='candidate location'),
     })
+    profile = api.model('candidate', {
+        'email': fields.String(required=True, description='user email address'),
+        'fullName': fields.String(required=True, description='user full name'),
+        'phone': fields.String(required=True, description='user phone'),
+        'gender': fields.Boolean(required=True, description='user gender'),
+        'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
+        'provinceId': fields.Integer(required=True , description='province_id'),
+    })
     account = api.model('account', {
         'email': fields.String(required=True, description='user email address'),
         'password': fields.String(required=True, description='user password'),
+    })
+
+    response_resume = api.model('response_resume', {
+        'id': fields.Integer,
+        'months_of_experience': fields.Integer,
+        'soft_skills': fields.String,
+        'technical_skills': fields.List(fields.String, attribute=lambda x: x.technical_skills.split("|")),
+        'store_url': fields.String,
+        'resume_filename': fields.String,
+        'resume_file_extension': fields.String,
+        'download_url': fields.String,
+        'educations': fields.String,
+        'experiences': fields.String,
+        'job_domain_id': fields.Integer,
+        'edit': fields.DateTime(attribute='last_edit')
+    })
+
+    response_profile = api.model('response_profile', {
+        'id': fields.Integer,
+        'email': fields.String,
+        'phone': fields.String,
+        'fullName': fields.String(attribute='full_name'),
+        'dateOfBirth': fields.String(attribute=lambda x: x.date_of_birth.strftime("%d/%m/%Y")),
+        'gender': fields.Boolean,
+        'status': fields.Boolean,
+        'provinceId': fields.Integer(attribute='province_id'),
+        'registeredOn': fields.String(attribute=lambda x: x.registered_on.strftime("%H:%M - %d/%m/%Y")),
+        'resumes': fields.Nested(response_resume)
+    })
+
+    candidate_profile = api.inherit('candidate_profile', base, {
+        'data': fields.Nested(response_profile)
     })
 
     ########################

@@ -2,9 +2,13 @@ from app.main.util.response import response_object
 from app.main.util.custom_jwt import Candidate_only, HR_only
 from app.main.service.recruiter_service import get_a_account_recruiter_by_email
 from app.main import send_email
+from flask_jwt_extended.utils import get_jwt_identity
+from app.main.util.custom_jwt import Candidate_only
+from app.main.service.recruiter_service import get_a_account_recruiter_by_email
+from app.main import send_email
+from app.main.service.candidate_service import set_token_candidate,delete_a_candidate_by_id, get_a_account_candidate_by_email, insert_new_account_candidate, update_candidate_profile, verify_account_candidate
 from app.main.service.account_service import create_token, get_url_verify_email
 from flask_jwt_extended import decode_token
-import pymysql
 import datetime
 
 from app.main.service.candidate_service import get_candidate_by_id, get_candidate_resumes, set_token_candidate,delete_a_candidate_by_id, \
@@ -18,6 +22,7 @@ from app.main.util.custom_jwt import get_jwt_identity
 
 apiCandidate = CandidateDto.api
 _candidate = CandidateDto.candidate
+_candidateProfile = CandidateDto.profile
 _candidateAccount = CandidateDto.account
 @apiCandidate.route('/candidate/register')
 class RegisterCandidateList(Resource):
@@ -48,7 +53,7 @@ class RegisterCandidateList(Resource):
                         send_email(data['email'], subject, html)
                         return {
                             'status': 'success',
-                            'message': 'Successfully registered. Please check your email to Verify account.',
+                            'message': 'Đăng ký tài khoản thành công',
                             'type':'candidate'
                         }, 200
 
@@ -56,19 +61,19 @@ class RegisterCandidateList(Resource):
                         delete_a_candidate_by_id(account_inserted['id'])
                         return {
                             'status': 'failure',
-                            'message': 'Registation failed. Email not working.',
+                            'message': 'Đăng ký thất bại. Email không tồn tại',
                             'type':'candidate'
                         }, 501
                 else:                    
                     return {
                         'status': 'failure',
-                        'message': 'Registation failed. Server occur',
+                        'message': 'Đăng ký không thành công',
                         'type':'candidate'
                     }, 409
             except Exception as e:
                 return {
                     'status': 'failure',
-                    'message': 'Registation failed. Server occur',
+                    'message': 'Đăng ký không thành công',
                     'type':'candidate'
                 }, 409
         else:
@@ -76,7 +81,7 @@ class RegisterCandidateList(Resource):
             if account.confirmed:
                 return {
                     'status': 'failure',
-                    'message': 'Account already exists. Please Log in.',
+                    'message': 'Tài khoản đã tồn tại. Vui lòng đăng nhập',
                     'type': 'candidate',
                 }, 409
             else:
@@ -93,19 +98,19 @@ class RegisterCandidateList(Resource):
 
                         return{
                             'status': 'success',
-                            'message': 'Resend email successful.',
+                            'message': 'Gửi lại email thành công',
                             'type':'candidate'
                         },200
 
                     except Exception as e: # delete account if send email error
                         return {
                             'status': 'failure',
-                            'message': 'Resend email failure. Email not working.',
+                            'message': 'Gửi lại email không thành công. Email không tồn tại',
                             'type':'candidate'
                         }, 500
                 return {
                     'status': 'failure',
-                    'message': 'The account has been created but not verified, please check the email.',
+                    'message': 'Tài khoản đã đăng ký thành công nhưng chưa được xác thực. Vui lòng kiểm tra email để xác thực tài khoản',
                     'type': 'candidate'
                 }, 201
 
@@ -127,32 +132,32 @@ class CandidateVerify(Resource):
                     if account.confirmed:
                         return{
                             'status': 'success',
-                            'message': 'Account already confirmed. Please login.',
+                            'message': 'Tài khoản đã xác thực. Vui lòng đăng nhập.',
                             'type':"candidate"
                         }, 200
                     else:
                         verify_account_candidate(account.email)
                         return{
                             'status': 'success',
-                            'message': 'You have confirmed your account. Thanks!',
+                            'message': 'Xác thực tài khoản thành công!',
                             'type':"candidate"
                         }, 200
                 else:
                     return {
                         'status': 'failure',
-                        'message': 'The confirmation link is not found.',
+                        'message': 'Đường dẫn không tồn tại',
                         'type':"candidate"
                     }, 404
             else:
                 return {
                     'status': 'failure',
-                    'message': 'The confirmation link is invalid or has expired.',
+                    'message': 'Đường dẫn không tồn tại hoặc đã hết hạn',
                     'type':"candidate"
                 }, 403
         except Exception:
             return{
                 'status': 'failure',
-                'message': 'Try again'
+                'message': 'Vui lòng thử lại'
                 ,'type':"candidate"
             }, 420
 
@@ -173,7 +178,7 @@ class AccountLogin(Resource):
             if not account:
                 return {
                     'status': 'failure',
-                    'message': 'Account not exist',
+                    'message': 'Tài khoản không tồn tại',
                     'type':'candidate'
                 }, 404
 
@@ -192,7 +197,7 @@ class AccountLogin(Resource):
                             # send email here
                         return {
                             'status': 'failure',
-                            'message': 'The account has been created but not verified, please check the email.',
+                            'message': 'Tài khoản đã đăng ký thành công nhưng chưa được xác thực. Vui lòng kiểm tra email để xác thực tài khoản',
                             'type':'candidate'
                         }, 403
 
@@ -200,28 +205,100 @@ class AccountLogin(Resource):
                     return {
                         'status': 'success',
                         'access_token': access_token,
-                        'message': 'Login successfully with email: '+data['email'],
+                        'message': 'Đăng nhập thành công',
                         'type':'candidate'
                     }, 200
                 except Exception as e:
                     return{
                         'status': 'failure',
-                        'message': 'Try again',
+                        'message': 'Vui lòng thử lại',
                         'type':'candidate'
                     }, 500
             else:
                 return {
                     'status': 'failure',
-                    'message': 'Email or password invalid',
+                    'message': 'Email hoặc mật khẩu không chính xác',
                     'type':'candidate'
                 }, 401
         except Exception as e:
             return{
                 'status': 'failure',
-                'message': 'Try again',
+                'message': 'Vui lòng thử lại',
                 'type':'candidate'
             }, 500
 
+@apiCandidate.route('/candidate/profile')
+@apiCandidate.response(404, 'Profile not found.')
+class CandidateFindProfile(Resource):
+    @apiCandidate.doc('Find list companies')
+    @apiCandidate.marshal_with(CandidateDto.candidate_profile, code=200)
+    @Candidate_only
+    def get(self):
+        '''get profile by token'''
+        identity = get_jwt_identity()
+        email = identity['email']
+
+        profile = get_a_account_candidate_by_email(email)
+
+        if not profile:
+            return {
+                'status': 'failure',
+                'message': 'Tài khoản không tồn tại',
+                'type' : 'candidate'
+            },400
+        else:
+            return response_object(data=profile)
+
+@apiCandidate.route('/candidate/profile/update')
+@apiCandidate.response(404, 'Profile not found.')
+class CandidateUpdateProfile(Resource):
+
+    @apiCandidate.response(200, 'update profile successfully.')
+    @apiCandidate.doc('update a profile candidate')
+    @apiCandidate.expect(_candidateProfile, validate=True)
+    @Candidate_only
+    def post(self):
+        '''update a new profile candiadate '''
+        data = request.json
+
+        identity = get_jwt_identity()
+        email_in_token = identity['email']
+
+        if email_in_token != data['email']:
+            return {
+                'status': 'failure',
+                'message': 'Email does not match to data body email',
+                'type' : 'candidate'
+            }, 200
+
+        profile = get_a_account_candidate_by_email(email_in_token)
+
+        if not profile:
+            return {
+                'status': 'failure',
+                'message': 'Profile not found',
+                'type' : 'candidate'
+            },400
+
+        try:
+            update_candidate_profile(profile.id,data)
+
+            return {
+                'status': 'success',
+                'message': 'Update profile successfully',
+                'data' :{
+                    'profile':get_a_account_candidate_by_email(email_in_token).to_json()
+                },
+                "error": None,
+                'type' : 'candidate'
+            },200
+        except Exception as e:
+            print(e.args)
+            return {
+                'status': 'failure',
+                'message': 'Update profile failure',
+                'type' : 'candidate'
+            },400 
 
 
 #################################

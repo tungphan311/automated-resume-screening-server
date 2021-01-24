@@ -61,7 +61,7 @@ def update_cv(args):
     resume.resume_id = args['resume_id']
     resume.educations = args['educations']
     resume.experiences = args['experiences']
-    resume.skills = args['skills']
+    resume.technical_skills = args['skills']
     resume.months_of_experience = args['months_of_experience']
 
     domain_id = args['job_domain_id']
@@ -69,5 +69,17 @@ def update_cv(args):
         abort(400)
 
     resume.job_domain_id = domain_id
+
+    db.session.add(resume)
     db.session.commit()
+
     return resume
+    
+def delete_cv_by_cand_id(id):
+    resume = ResumeModel.query.filter_by(cand_id=id).first()
+    urlCV = resume.store_url
+    db.session.delete(resume)
+    db.session.commit()
+
+    executor = ThreadPool.instance().executor
+    executor.submit(Firebase().delete, urlCV)

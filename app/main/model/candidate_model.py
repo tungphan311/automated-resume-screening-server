@@ -1,3 +1,6 @@
+from datetime import datetime
+from enum import auto
+from flask_restx.fields import Date, DateTime, String
 from sqlalchemy.orm import backref
 from .. import db, flask_bcrypt
 
@@ -38,4 +41,3 @@ class CandidateModel(db.Model):
 
     def __repr__(self):
         return "<Candidate '{}'>".format(self.email)
-
