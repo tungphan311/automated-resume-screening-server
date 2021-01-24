@@ -308,6 +308,7 @@ class CandidateUpdateProfile(Resource):
 #################################
 candidates_by_id_parser = apiCandidate.parser()
 candidates_by_id_parser.add_argument("Authorization", location="headers", required=True)
+candidates_by_id_parser.add_argument("resume_id", location="args", required=False)
 @apiCandidate.route("/candidates/<int:id>")
 class QueryCandidates(Resource):
     @apiCandidate.doc("Get candidate by id")
@@ -315,7 +316,11 @@ class QueryCandidates(Resource):
     @apiCandidate.expect(candidates_by_id_parser)
     @HR_only
     def get(self, id): 
-        data = get_candidate_by_id(id)
+        identity = get_jwt_identity()
+        rec_email = identity['email']
+        args = candidates_by_id_parser.parse_args()
+        resume_id = args.get("resume_id")
+        data = get_candidate_by_id(id, rec_email, resume_id)
         return response_object(data=data)
 
 
@@ -359,10 +364,18 @@ class SaveResume(Resource):
         return response_object(data=data, pagination=pagination)
 
 
+
+get_applied_jobs = apiCandidate.parser()
+get_applied_jobs.add_argument("Authorization", location="headers", required=False)
+get_applied_jobs.add_argument("page", type=int, location="args", required=False, default=1)
+get_applied_jobs.add_argument("page-size", type=int, location="args", required=False, default=10)
+get_applied_jobs.add_argument("from-date", type=inputs.datetime_from_iso8601, location="args", required=False)
+get_applied_jobs.add_argument("to-date", type=inputs.datetime_from_iso8601, location="args", required=False)
+get_applied_jobs.add_argument("to-date", type=int, location="args", required=True)
 @apiCandidate.route('/job-posts/apply')
 class GetAppliedJobs(Resource):
     @apiCandidate.doc("Get applied job posts")
-    @apiCandidate.expect(get_res_parser)
+    @apiCandidate.expect(get_applied_jobs)
     @apiCandidate.marshal_with(CandidateDto.get_applied_job_post_list_response, code=200)
     @Candidate_only
     def get(self):

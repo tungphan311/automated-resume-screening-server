@@ -277,8 +277,7 @@ def calculate_scrore(submission, job_post_id, resume_id):
     resume = ResumeModel.query.get(resume_id)
 
     job_post_text = job_post.description_text + " " + job_post.requirement_text
-    resume_text = " ".join([resume.educations, resume.experiences, resume.skills])
-
+    resume_text = " ".join([resume.educations, resume.experiences, resume.technical_skills, resume.soft_skills])
 
     # Scores
     domain_dict = tree_matching_score(job_post_text, resume_text, job_post.job_domain.alternative_name)
@@ -418,7 +417,7 @@ def proceed_resume(id, recruiter_email, args):
     return submission
 
 
-def get_matched_cand_info_with_job_post(rec_email, job_id, cand_id):
+def get_matched_cand_info_with_job_post(rec_email, job_id, cand_id, resume_id):
     # Check existed rec
     recruiter = RecruiterModel.query.filter_by(email=rec_email).first()
     if recruiter is None: abort(400)
@@ -431,41 +430,49 @@ def get_matched_cand_info_with_job_post(rec_email, job_id, cand_id):
     # Check cand
     cand = CandidateModel.query.get(cand_id)
     if cand is None: abort(400)
-    if cand.resumes is None: abort(400)
+
+    # Check resume existed
+    existed_resume = [re for re in cand.resumes if re.id == resume_id]
+    if len(existed_resume) == 0:
+        abort(400, "Candidate doesn't have this resume_id.")
 
     # Check submission
     submission = JobResumeSubmissionModel.query \
-        .filter_by(resume_id=cand.resumes.id, job_post_id=job_id) \
+        .filter_by(resume_id=resume_id, job_post_id=job_id) \
         .first()
     if submission is None: abort(400)
 
-
-    # TODO
-    # saved_date = None
-    # # Check save date
-    # save_record = RecruiterResumeSavesModel.query \
-    #     .filter_by(resume_id=cand.resumes.id)
+    # Check save date
+    saved_date = None
+    save_record = RecruiterResumeSavesModel.query \
+        .filter_by(resume_id=resume_id, recruiter_id=recruiter.id) \
+        .first()
+    if save_record is not None:
+        saved_date = save_record.created_on
 
     return {
         'submission': submission,
         'candidate': cand,
         'resume': cand.resumes,
-        'scores': submission.score_dict
+        'scores': submission.score_dict,
+        'saved_date': saved_date
     }
 
 
 def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
     # Check existed rec
     recruiter = RecruiterModel.query.filter_by(email=rec_email).first()
-    if recruiter is None: abort(400)
+    if recruiter is None: abort(400, "No recruiter found.")
 
     # Check job post
     job = JobPostModel.query.get(job_id)
-    if job is None: abort(400)
-    if job.recruiter_id != recruiter.id: abort(400)
+    if job is None: abort(400, "No job post found.")
+    if job.recruiter_id != recruiter.id: abort(400, "The job post is not belong to the recruiter.")
 
-    skill_weight = args['skill_weight']
     domain_weight = args['domain_weight']
+    general_weight = args['general_weight']
+    soft_weight = args['soft_weight']
+    
     page = args['page']
     page_size = args['page-size']
 
@@ -476,7 +483,9 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
         .filter_by(job_post_id=job.id) \
         .all()
 
-    all_items = sorted(all_items, key=lambda x: x.avg_score(skill_weight=skill_weight, domain_weight=domain_weight))
+    all_items = sorted(all_items, key=lambda x: x.avg_score(domain_weight=domain_weight, \
+                                        soft_weight=soft_weight, \
+                                        general_weight=general_weight))
     chunks = [all_items[i:i+4] for i in range(0, len(all_items), 4)]
     items = []
     if page > len(chunks): 
@@ -488,7 +497,9 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
     for submission in items:
         resume = ResumeModel.query.get(submission.resume_id)
         scores = submission.score_dict
-        scores['avg'] = submission.avg_score(skill_weight=skill_weight, domain_weight=domain_weight)
+        scores['avg'] = submission.avg_score(domain_weight=domain_weight, \
+                                        soft_weight=soft_weight, \
+                                        general_weight=general_weight)
         final_res.append({
             'submission': submission,
             'scores': scores,

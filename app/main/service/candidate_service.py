@@ -6,6 +6,8 @@ from app.main import db
 from app.main.model.candidate_model import CandidateModel
 from app.main.model.candidate_job_save_model import CandidateJobSavesModel
 from app.main.model.job_resume_submissions_model import JobResumeSubmissionModel
+from app.main.model.recruiter_model import RecruiterModel
+from app.main.model.recruiter_resume_save_model import RecruiterResumeSavesModel
 from flask_restx import abort
 
 
@@ -46,9 +48,26 @@ def verify_account_candidate(email):
     db.session.add(account)
     db.session.commit()
 
-def get_candidate_by_id(id):
+def get_candidate_by_id(id, rec_email, resume_id):
+
+    # Check existed rec
+    recruiter = RecruiterModel.query.filter_by(email=rec_email).first()
+    if recruiter is None: abort(400)
+
+    # Check save date
+    saved_date = None
+    if resume_id is not None:
+        save_record = RecruiterResumeSavesModel.query \
+            .filter_by(resume_id=resume_id, recruiter_id=recruiter.id) \
+            .first()
+        if save_record is not None:
+            saved_date = save_record.created_on
+
     cand = CandidateModel.query.get(id)
-    return cand
+    return {
+        "cand": cand,
+        "saved_date": saved_date
+    }
 
 
 def update_candidate_profile(id,profile):
@@ -151,10 +170,22 @@ def get_saved_job_posts(email, args):
 
 
 def get_applied_job_posts(email, args):
+    resume_id = args["resume_id"]
+
+
     # Check Cand
     cand = CandidateModel.query.filter_by(email=email).first()
     if cand is None: abort(400)
-    resume = cand.resumes
+
+    # Check resume
+    resume = None
+    for r in cand.resumes:
+        if r.id == resume_id:
+            resume = r
+    if resume is None:
+        abort(400, message="No resume with id=" + resume_id + " found.")
+    
+
     query = JobResumeSubmissionModel.query.filter(JobResumeSubmissionModel.resume_id == resume.id)
 
     from_date = args.get('from-date', None)

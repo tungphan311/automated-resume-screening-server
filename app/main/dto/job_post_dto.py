@@ -138,7 +138,8 @@ class JobPostDto:
         'submission': fields.Nested(submission_fields),
         'candidate': fields.Nested(candidate_detail_fields),
         'resume': fields.Nested(ResumeDTO.resume_detail_fields),
-        'scores': fields.Raw
+        'scores': fields.Raw,
+        'saved_date': fields.DateTime()
     })
     get_cand_info_with_matched_job_post_response = api.inherit('get_cand_info_with_matched_job_post_response', base, {
         'data': fields.Nested(submission_cand_info_fields)

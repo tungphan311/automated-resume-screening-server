@@ -35,13 +35,14 @@ class JobResumeSubmissionModel(db.Model):
         return d
 
     @hybrid_method
-    def avg_score(self, skill_weight, domain_weight):
+    def avg_score(self, domain_weight, general_weight, soft_weight):
         exps = self.score_explanation_array.split('|')
         scores = self.score_array.split('|')
         total = 0
         for i, v in enumerate(exps):
             weight = 0
-            if v == 'skill_match': weight = skill_weight
-            if v == 'domain_skill_match': weight = domain_weight
+            if v == 'general_score': weight = general_weight
+            if v == 'domain_score': weight = domain_weight
+            if v == 'soft_score': weight = soft_weight
             total += float(scores[i]) * weight
         return round(total, 3)

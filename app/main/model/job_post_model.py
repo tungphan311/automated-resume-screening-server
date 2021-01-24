@@ -17,8 +17,8 @@ class JobPostModel(db.Model):
     requirement_text = db.Column(db.Text, nullable=False)
     benefit_text = db.Column(db.Text, nullable=False)
 
-    technical_skills = db.Column(db.String(500), nullable=True)
-    soft_skills = db.Column(db.String(500), nullable=True)
+    technical_skills = db.Column(db.String(10000), nullable=True)
+    soft_skills = db.Column(db.String(10000), nullable=True)
 
     job_title = db.Column(db.String(200), nullable=False)
     contract_type = db.Column(db.Integer, nullable=False)
