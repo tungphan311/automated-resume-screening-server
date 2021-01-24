@@ -40,20 +40,21 @@ class JobPostDto:
     job_post_for_cand_fields = api.model("job_post_for_cand_fields", {
         'id': fields.Integer, 
         'job_title': fields.String, 
-        'job_domain': fields.String(attribute='job_domain.name'),
-        'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)), 
-        'posted_in': fields.DateTime(),
-        'deadline': fields.DateTime,
-        'contract_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),
-        'description': fields.String(attribute='description_text'),
-        'requirement': fields.String(attribute='requirement_text'),
-        'benefit': fields.String(attribute='benefit_text'),
-        'amount': fields.Integer,
-        'company_name': fields.String(attribute=lambda x: x.recruiter.company.name if x.recruiter.company is not None else None),
-        'company_logo': fields.String(attribute=lambda x: x.recruiter.company.logo if x.recruiter.company is not None else None),
-        'company_background': fields.String(attribute=lambda x: x.recruiter.company.background if x.recruiter.company is not None else None),
-        'provinces': fields.List(fields.String, attribute=lambda x: format_provinces(x.province_id)),
-        'education': fields.String(attribute=lambda x: format_education(x))
+        'job_domain': fields.String(attribute='post.job_domain.name'),
+        'salary': fields.String(attribute=lambda x: format_salary(x['post'].min_salary, x['post'].max_salary)), 
+        'posted_in': fields.DateTime(attribute='post.posted_in'),
+        'deadline': fields.DateTime(attribute='post.deadline'),
+        'contract_type': fields.String(attribute=lambda x: format_contract(x['post'].contract_type)),
+        'description': fields.String(attribute='post.description_text'),
+        'requirement': fields.String(attribute='post.requirement_text'),
+        'benefit': fields.String(attribute='post.benefit_text'),
+        'amount': fields.Integer(attribute='post.benefit'),
+        'company_name': fields.String(attribute=lambda x: x['post'].recruiter.company.name if x['post'].recruiter.company is not None else None),
+        'company_logo': fields.String(attribute=lambda x: x['post'].recruiter.company.logo if x['post'].recruiter.company is not None else None),
+        'company_background': fields.String(attribute=lambda x: x['post'].recruiter.company.background if x['post'].recruiter.company is not None else None),
+        'provinces': fields.List(fields.String, attribute=lambda x: format_provinces(x['post'].province_id)),
+        'education': fields.String(attribute=lambda x: format_education(x['post'])),
+        'saved_date': fields.String
     })
     job_post_for_cand = api.inherit('job_post_for_cand', base, {
         'data': fields.Nested(job_post_for_cand_fields)
