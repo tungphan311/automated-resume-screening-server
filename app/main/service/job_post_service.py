@@ -1,8 +1,4 @@
-from app.main.model.candidate_job_save_model import CandidateJobSavesModel
-from app.main.controller import job_post_controller
 from sys import float_info
-from app.main.model import job_post_model
-from app.main.service.matching_service import OnetoOneMatching, jobPipeline
 from datetime import datetime, timedelta
 import dateutil.parser
 from flask import json
@@ -22,9 +18,6 @@ from app.main.util.response import json_serial, response_object
 from app.main.util.data_processing import get_technical_skills
 from flask_restx import abort
 from sqlalchemy import or_
-from app.main.business.matching import Matcher
-from app.main.util.thread_pool import ThreadPool
-from numpy import round
 from app.main.util.data_processing import tree_matching_score
 
 api = JobPostDto.api
