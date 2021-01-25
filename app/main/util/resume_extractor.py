@@ -184,6 +184,9 @@ def get_general_technical_skills(text):
     # hardcode general domain for extracting as many skills as posible.
     return get_technical_skills('general', text)
 
+def get_soft_skills(text):
+    return get_technical_skills('softskill', text)
+
 
 def get_links(text):
     """
@@ -239,6 +242,7 @@ def cv_segmentation(local_cv_path, is_pdf):
 
 
     (tech_skills, _) = get_general_technical_skills('\n'.join(sentences))
+    (soft_skills, _) = get_soft_skills('\n'.join(sentences))
 
     links = get_links('\n'.join(sentences))
 
@@ -246,6 +250,7 @@ def cv_segmentation(local_cv_path, is_pdf):
         'educations': '\n'.join(educations),
         'experiences': '\n'.join(experiences),
         'tech_skills': tech_skills,
+        'soft_skills': soft_skills,
         'skill_segmentation': '\n'.join(skills),
         "github": links['github'],
         "twitter": links['twitter'],
