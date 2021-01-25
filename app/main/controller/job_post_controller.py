@@ -245,19 +245,17 @@ class ProceedResume(Resource):
 #################################################
 get_cand_info_parser = api.parser()
 get_cand_info_parser.add_argument('Authorization', location='headers', required=True)
-get_cand_info_parser.add_argument('resume_id', location='args', required=True)
-@api.route('/<int:job_id>/candidates/<int:cand_id>')
+@api.route('/<int:job_id>/candidates/<int:resume_id>')
 class GetCandInfoForJobPostById(Resource):
     @api.doc('Get applied candidate info by id.')
     @api.expect(get_cand_info_parser)
     @api.marshal_with(JobPostDto.get_cand_info_with_matched_job_post_response, code=200)
     @HR_only
-    def get(self, job_id, cand_id):
+    def get(self, job_id, resume_id):
         identity = get_jwt_identity()
         recruiter_email = identity['email']        
-        args = get_cand_info_parser.parse_args()
-        resume_id = args["resume_id"]
-        data = get_matched_cand_info_with_job_post(recruiter_email, job_id, cand_id, resume_id)
+        data = get_matched_cand_info_with_job_post(recruiter_email, job_id, resume_id)
+        print(resume_id)
         return response_object(data=data)
 
 
@@ -270,9 +268,9 @@ get_list_cand_info_parser = api.parser()
 get_list_cand_info_parser.add_argument('Authorization', location='headers', required=True)
 get_list_cand_info_parser.add_argument("page", type=int, location="args", required=False, default=1)
 get_list_cand_info_parser.add_argument("page-size", type=int, location="args", required=False, default=20)
-get_list_cand_info_parser.add_argument("domain_weight", type=float, location="args", required=True)
-get_list_cand_info_parser.add_argument("general_weight", type=float, location="args", required=True)
-get_list_cand_info_parser.add_argument("soft_weight", type=float, location="args", required=True)
+get_list_cand_info_parser.add_argument("domain_weight", type=int, location="args", required=True)
+get_list_cand_info_parser.add_argument("general_weight", type=int, location="args", required=True)
+get_list_cand_info_parser.add_argument("soft_weight", type=int, location="args", required=True)
 @api.route('/<int:job_id>/candidates')
 class GetListCandInfoForJobPost(Resource):
     @api.doc('Get list applied candidate info by id.')
