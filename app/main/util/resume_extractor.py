@@ -82,8 +82,8 @@ def convert_pdf_to_jpg(filename):
 
 
     # TODO - ERROR: Remove for running on window
-    images = convert_from_path(filename, poppler_path="/usr/local/Cellar/poppler/20.12.1/bin")
-    # images = convert_from_path(filename, poppler_path="library/poppler-20.12.1/bin")
+    # images = convert_from_path(filename, poppler_path="/usr/local/Cellar/poppler/20.12.1/bin")
+    images = convert_from_path(filename, poppler_path="library/poppler-20.12.1/bin")
 
     for img in images:
         index = images.index(img)
