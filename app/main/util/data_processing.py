@@ -168,7 +168,7 @@ def __tree_edit_distance(cv_graph, post_graph):
 def __generate_graph_tree_with(domain, skills): 
     (graph_data, root) = cm.get_ontology(domain).generate_graph_dict(skills)
 
-    (_, _) = __generate_graph_with(domain, skills)
+    # (_, _) = __generate_graph_with(domain, skills)
 
     graph_data = dict(graph_data)
 

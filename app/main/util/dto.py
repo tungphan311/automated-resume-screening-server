@@ -29,7 +29,7 @@ class CandidateDto:
         'phone': fields.String(required=True, description='user phone'),
         'gender': fields.Boolean(required=True, description='user gender'),
         'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
-        'province_id': fields.String(required=True, description='candidate location'),
+        'province_id': fields.Integer(required=True, description='candidate location'),
     })
     profile = api.model('candidate', {
         'email': fields.String(required=True, description='user email address'),
@@ -80,20 +80,21 @@ class CandidateDto:
     # Candidate detail model
     ########################
     candidate_detail_fields = api.model('candidate_detail_fields', {
-        'id': fields.Integer,
-        'email': fields.String,
-        'password_hash': fields.String,
-        'phone': fields.String,
-        'full_name': fields.String,
-        'gender': fields.Boolean,
-        'date_of_birth': fields.DateTime(),
-        'status': fields.Integer,
-        'province_id': fields.Integer,
-        'access_token': fields.String,
-        'registered_on': fields.DateTime(),
-        'confirmed': fields.Boolean,
-        'confirmed_on': fields.DateTime(),
-        'resumes': fields.Nested(ResumeDTO.resume_detail_fields)
+        'id': fields.Integer(attribute="cand.id"),
+        'email': fields.String(attribute="cand.email"),
+        'password_hash': fields.String(attribute="cand.password_hash"),
+        'phone': fields.String(attribute="cand.phone"),
+        'full_name': fields.String(attribute="cand.full_name"),
+        'gender': fields.Boolean(attribute="cand.gender"),
+        'date_of_birth': fields.DateTime(attribute="cand.date_of_birth"),
+        'status': fields.Integer(attribute="cand.status"),
+        'province_id': fields.Integer(attribute="cand.province_id"),
+        'access_token': fields.String(attribute="cand.access_token"),
+        'registered_on': fields.DateTime(attribute="cand.registered_on"),
+        'confirmed': fields.Boolean(attribute="cand.confirmed"),
+        'confirmed_on': fields.DateTime(attribute="cand.confirmed_on"),
+        'resumes': fields.List(fields.Nested(ResumeDTO.resume_detail_fields), attribute="cand.resumes"),
+        'saved_date': fields.DateTime()
     })
     candidate_detail_response = api.inherit('candidate_detail_response', base, {
         'data': fields.Nested(candidate_detail_fields)
