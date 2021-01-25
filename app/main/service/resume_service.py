@@ -37,7 +37,7 @@ def create_cv(cv_local_path, args, filename, file_ext):
         cand_twitter=resume_info['twitter'],
         cand_mail=resume_info['email'],
         cand_phone=resume_info['phone'],
-        soft_skills="",
+        soft_skills="|".join(resume_info['soft_skills']),
         technical_skills="|".join(resume_info['tech_skills']),
         store_url=blob.public_url,
         download_url=blob.media_link,
