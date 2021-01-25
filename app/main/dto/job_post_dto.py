@@ -149,6 +149,11 @@ class JobPostDto:
     ###############################
     # Get list applied candidates
     ###############################
+    statistics_fields = api.model('statistics_fields', {
+        'avg_soft_score': fields.Float,
+        'avg_domain_score': fields.Float,
+        'avg_general_score': fields.Float,
+    })
     applied_cand_fields = api.model('applied_cand_fields', {
         'submission': fields.Nested(submission_fields),
         'candidate': fields.Nested(candidate_detail_fields),
@@ -157,5 +162,6 @@ class JobPostDto:
     })
     applied_cand_list_response = api.inherit('applied_cand_list_response', base, {
         'data': fields.List(fields.Nested(applied_cand_fields)),
-        'pagination': fields.Nested(pagination)
+        'pagination': fields.Nested(pagination),
+        'statistics': fields.Nested(statistics_fields)
     })

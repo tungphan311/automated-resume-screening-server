@@ -1,5 +1,5 @@
 from app.main.model.recruiter_model import RecruiterModel
-from sqlalchemy.orm import backref
+from sqlalchemy.orm import backref, defaultload
 from app.main.util.response import json_serial
 from flask import json
 from app.main.model.job_domain_model import JobDomainModel
@@ -17,8 +17,9 @@ class JobPostModel(db.Model):
     requirement_text = db.Column(db.Text, nullable=False)
     benefit_text = db.Column(db.Text, nullable=False)
 
-    technical_skills = db.Column(db.String(10000), nullable=True)
-    soft_skills = db.Column(db.String(10000), nullable=True)
+    domain_skills = db.Column(db.Text, nullable=False, default="")
+    soft_skills = db.Column(db.Text, nullable=False, default="")
+    general_skills = db.Column(db.Text, nullable=False, default="")
 
     job_title = db.Column(db.String(200), nullable=False)
     contract_type = db.Column(db.Integer, nullable=False)

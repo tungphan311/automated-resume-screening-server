@@ -43,6 +43,6 @@ class JobResumeSubmissionModel(db.Model):
             weight = 0
             if v == 'general_score': weight = general_weight
             if v == 'domain_score': weight = domain_weight
-            if v == 'soft_score': weight = soft_weight
+            if v == 'softskill_score': weight = soft_weight
             total += float(scores[i]) * weight
         return round(total, 3)

@@ -281,5 +281,11 @@ class GetListCandInfoForJobPost(Resource):
         args = get_list_cand_info_parser.parse_args()
         identity = get_jwt_identity()
         recruiter_email = identity['email']        
-        (data, pagination) = get_matched_list_cand_info_with_job_post(recruiter_email, job_id, args)
-        return response_object(data=data, pagination=pagination)
+        (data, pagination, stats) = get_matched_list_cand_info_with_job_post(recruiter_email, job_id, args)
+        return {
+            'code': 200,
+            'message': "Thành công",
+            'data': data,
+            'pagination': pagination,
+            'statistics': stats
+        }
