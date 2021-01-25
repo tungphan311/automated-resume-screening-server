@@ -417,7 +417,7 @@ def proceed_resume(id, recruiter_email, args):
     return submission
 
 
-def get_matched_cand_info_with_job_post(rec_email, job_id, cand_id, resume_id):
+def get_matched_cand_info_with_job_post(rec_email, job_id, resume_id):
     # Check existed rec
     recruiter = RecruiterModel.query.filter_by(email=rec_email).first()
     if recruiter is None: abort(400)
@@ -427,14 +427,10 @@ def get_matched_cand_info_with_job_post(rec_email, job_id, cand_id, resume_id):
     if job is None: abort(400)
     if job.recruiter_id != recruiter.id: abort(400)
 
-    # Check cand
-    cand = CandidateModel.query.get(cand_id)
-    if cand is None: abort(400)
+    resume = ResumeModel.query.get(resume_id)
+    if resume is None: abort(400)
 
-    # Check resume existed
-    existed_resume = [re for re in cand.resumes if re.id == resume_id]
-    if len(existed_resume) == 0:
-        abort(400, "Candidate doesn't have this resume_id.")
+    cand = CandidateModel.query.get(resume.cand_id)
 
     # Check submission
     submission = JobResumeSubmissionModel.query \
@@ -453,7 +449,7 @@ def get_matched_cand_info_with_job_post(rec_email, job_id, cand_id, resume_id):
     return {
         'submission': submission,
         'candidate': cand,
-        'resume': cand.resumes,
+        'resume': resume,
         'scores': submission.score_dict,
         'saved_date': saved_date
     }
@@ -503,7 +499,8 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
         final_res.append({
             'submission': submission,
             'scores': scores,
-            'candidate': resume.candidate
+            'candidate': resume.candidate,
+            'resume': resume
         })
     
     return final_res, {
