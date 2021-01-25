@@ -1,3 +1,4 @@
+from sqlalchemy.sql.expression import true
 from app.main.model.recruiter_resume_save_model import RecruiterResumeSavesModel
 from sys import float_info
 from datetime import datetime, timedelta
@@ -12,6 +13,7 @@ from app.main.model.candidate_model import CandidateModel
 from app.main.model.job_resume_submissions_model import JobResumeSubmissionModel
 from app.main.model.job_domain_model import JobDomainModel
 from app.main.model.candidate_job_save_model import CandidateJobSavesModel
+from app.main.model.candidate_education_model import CandidateEducationModel
 
 from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.custom_jwt import HR_only
@@ -21,6 +23,7 @@ from app.main.util.data_processing import get_technical_skills
 from flask_restx import abort
 from sqlalchemy import or_
 from app.main.util.data_processing import tree_matching_score
+from app.main.util.thread_pool import ThreadPool
 
 api = JobPostDto.api
 
@@ -33,7 +36,20 @@ def add_new_post(post):
     if (not recruiter) | (not job_domain):
         return "Error"
 
-    (skills, _) = get_technical_skills(job_domain.alternative_name, post['requirement_text'])
+    txt = " ".join([post.get('requirement_text', ""), post.get('description_text', "")])
+
+    executor = ThreadPool.instance().executor
+    domain_skills_res = executor.submit(get_technical_skills, job_domain.alternative_name, txt)
+    general_skills_res = executor.submit(get_technical_skills, "general", txt)
+    soft_skills_res = executor.submit(get_technical_skills, "softskill", txt)
+
+    # (domain_skills, _) = get_technical_skills(job_domain.alternative_name, txt)
+    # (general_skills, _) = get_technical_skills("general", txt)
+    # (soft_skills, _) = get_technical_skills("softskill", txt)
+
+    (domain_skills, _) = domain_skills_res.result()
+    (general_skills, _)= general_skills_res.result()
+    (soft_skills, _)= soft_skills_res.result()
 
     new_post = JobPostModel(
         job_domain_id=post['job_domain_id'],
@@ -47,7 +63,9 @@ def add_new_post(post):
         amount=post['amount'],
         education_level=post['education_level'],
         province_id=post['province_id'],
-        technical_skills='|'.join(skills),
+        domain_skills='|'.join(domain_skills),
+        general_skills='|'.join(general_skills),
+        soft_skills='|'.join(soft_skills),
         deadline=parse_deadline
     )
 
@@ -446,7 +464,7 @@ def get_matched_cand_info_with_job_post(rec_email, job_id, resume_id):
     if save_record is not None:
         saved_date = save_record.created_on
 
-    return {
+    return {    
         'submission': submission,
         'candidate': cand,
         'resume': resume,
@@ -481,9 +499,11 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
 
     all_items = sorted(all_items, key=lambda x: x.avg_score(domain_weight=domain_weight, \
                                         soft_weight=soft_weight, \
-                                        general_weight=general_weight))
-    chunks = [all_items[i:i+4] for i in range(0, len(all_items), 4)]
+                                        general_weight=general_weight), reverse=true)
+
+    chunks = [all_items[i:i+page_size] for i in range(0, len(all_items), page_size)]
     items = []
+
     if page > len(chunks): 
         items = []
     else: 
@@ -502,8 +522,22 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
             'candidate': resume.candidate,
             'resume': resume
         })
+
+
+    avg_soft_score = 0
+    avg_domain_score = 0
+    avg_general_score = 0
+    if len(all_items) > 0:
+        scores = [sub.score_dict for sub in all_items]
+        avg_general_score = sum([s["general_score"] for s in scores]) / len(all_items)
+        avg_soft_score = sum([s["softskill_score"] for s in scores]) / len(all_items)
+        avg_domain_score = sum([s["domain_score"] for s in scores]) / len(all_items)
     
     return final_res, {
         'total': len(all_items),
         'page': page
+    }, {
+        'avg_soft_score': avg_soft_score,
+        'avg_domain_score': avg_domain_score,
+        'avg_general_score': avg_general_score
     }
