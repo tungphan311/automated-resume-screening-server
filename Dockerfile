@@ -12,5 +12,6 @@ RUN apt-get update ##[edited]
 RUN apt-get install ffmpeg libsm6 libxext6  -y
 
 RUN python -m nltk.downloader stopwords
+RUN python -m nltk.downloader punkt
 
 CMD ["python", "manage.py", "run" ]
