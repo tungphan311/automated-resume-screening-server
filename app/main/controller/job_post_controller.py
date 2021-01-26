@@ -17,6 +17,7 @@ from ..service.job_post_service import add_new_post, count_jobs, \
 
 
 from app.main.config import Config as config
+import jwt
 
 api = JobPostDto.api
 _job_post = JobPostDto.job_post
@@ -179,8 +180,16 @@ class CandidateJP(Resource):
     @api.marshal_with(JobPostDto.job_post_for_cand, code=200)
     @api.expect(cand_get_job_detail_parser)
     def get(self, jp_id):
-        identity = get_jwt_identity()
+        args = cand_get_job_detail_parser.parse_args()
+        token = args["Authorization"]
+        identity = None
+        if token:
+            token = token[7:]
+            decoded = jwt.decode(token, options={"verify_signature": False})
+            identity = decoded['identity']
+
         cand_email = None
+
         if identity is not None:
             cand_email = identity.get('email')
 

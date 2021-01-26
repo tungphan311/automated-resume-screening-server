@@ -329,6 +329,9 @@ def get_job_post_for_candidate(jp_id, cand_email):
     saved_date = None
     if save_record is not None:
          saved_date = save_record.created_on
+    print("Email: ", cand_email)
+    print("Cand: ", cand)
+    print("Record: ", save_record)
 
 
     post = JobPostModel.query.get(jp_id)

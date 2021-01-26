@@ -59,6 +59,7 @@ class ResumeDTO:
         'educations': fields.String,
         'experiences': fields.String,
         'job_domain_id': fields.Integer,
+        'download_url': fields.String
         # Relations
         # 'job_resume_submission'
     })
