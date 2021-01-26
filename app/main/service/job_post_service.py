@@ -43,10 +43,6 @@ def add_new_post(post):
     general_skills_res = executor.submit(get_technical_skills, "general", txt)
     soft_skills_res = executor.submit(get_technical_skills, "softskill", txt)
 
-    # (domain_skills, _) = get_technical_skills(job_domain.alternative_name, txt)
-    # (general_skills, _) = get_technical_skills("general", txt)
-    # (soft_skills, _) = get_technical_skills("softskill", txt)
-
     (domain_skills, _) = domain_skills_res.result()
     (general_skills, _)= general_skills_res.result()
     (soft_skills, _)= soft_skills_res.result()
@@ -499,7 +495,7 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
 
     all_items = sorted(all_items, key=lambda x: x.avg_score(domain_weight=domain_weight, \
                                         soft_weight=soft_weight, \
-                                        general_weight=general_weight), reverse=true)
+                                        general_weight=general_weight), reverse=True)
 
     chunks = [all_items[i:i+page_size] for i in range(0, len(all_items), page_size)]
     items = []

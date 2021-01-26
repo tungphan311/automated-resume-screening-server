@@ -1,4 +1,6 @@
 from logging import debug
+
+from sqlalchemy.sql.expression import desc
 from app.main.model.job_domain_model import JobDomainModel
 import json
 import sys
@@ -38,7 +40,11 @@ from app.main.service.job_post_service import add_new_post
 
 def seed_data(db):
 
-    # seed_domain("frontend", "/Users/vinhpham/Desktop/automated-resume-screening-server/seeds/jp_ios.json")
+    # seed_domain("ios", "/Users/vinhpham/Desktop/automated-resume-screening-server/seeds/jp_ios.json")
+    # seed_domain("android", "seeds/android.json")
+    # seed_domain("backend", "seeds/back-end.json")
+    # seed_domain("frontend", "seeds/front-end.json")
+    # seed_domain("fullstack", "seeds/fullstask.json")
 
     domains = JobDomainModel.query.all()
     if (len(domains)) == 0:
@@ -65,10 +71,26 @@ def seed_domain(domain_key, file):
         amount = randint(1, 3)
         education_level = randint(0, 2)
         benefit = rand_benefits()
+
+        min_salary = randint(8, 15)
+        max_salary = min_salary + randint(5, 21)
+
+        if min_salary == 8: min_salary = None
+        if max_salary == 36: max_salary = None
+
+        description_text = data["description_text"]
+        requirement_text = data["requirement_text"]
+
+        # dess = description_text.split("\n")
+        # description_text = "<ul>"+ "".join(["<li>"+d+"</li>" for d in dess]) +"</ul>"
+
+        # reqs = requirement_text.split("\n")
+        # requirement_text = "<ul>"+ "".join(["<li>"+d+"</li>" for d in reqs]) +"</ul>"
+
         post = {
             'job_domain_id': domain_id,
-            'description_text': data["description_text"],
-            'requirement_text': data["requirement_text"],
+            'description_text': description_text,
+            'requirement_text': requirement_text,
             'benefit_text': benefit,
             'job_title': data["job_title"],
             'contract_type': contract_type,
@@ -77,7 +99,9 @@ def seed_domain(domain_key, file):
             'province_id': 91,
             'recruiter_email': 'rec_email@gmail.com',
             'deadline': '2008-09-03T20:56:35.450686Z',
-            'recruiter_id': 3
+            'recruiter_id': 1,
+            'min_salary': min_salary,
+            'max_salary': max_salary
         }
         create_jp(post, domain_key)
 
@@ -122,4 +146,4 @@ def create_jp(post, domain):
 
     db.session.add(new_post)
     db.session.commit()
-    print("Done " + new_post.id)
+    print("Done " + str(new_post.id))
