@@ -1,4 +1,5 @@
 import datetime
+
 from app.main.service.account_service import create_token
 from app.main import db
 from app.main.model.recruiter_model import RecruiterModel
@@ -111,7 +112,7 @@ def get_saved_resumes(email, args):
         query.filter(RecruiterResumeSavesModel.created_on >= from_date)
 
     to_date = args.get('to-date', None)
-    if from_date is not None:
+    if to_date is not None:
         query.filter(RecruiterResumeSavesModel.created_on <= to_date)
 
     page = args.get('page')

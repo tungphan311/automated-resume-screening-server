@@ -1,3 +1,4 @@
+from app.main.util.format_text import format_edit_time
 from flask_restx import Namespace, fields
 
 from app.main.model.company_model import CompanyModel
@@ -179,6 +180,7 @@ class RecruiterDto:
         'soft_skills': fields.String,
         'technical_skills': fields.String,
         'store_url': fields.String,
+        'download_url': fields.String,
         'is_finding_job': fields.Boolean,
         'resume_filename': fields.String,
         'resume_file_extension': fields.String,
@@ -192,6 +194,8 @@ class RecruiterDto:
         'cand_name': fields.String(attribute='candidate.full_name'),
         'cand_email': fields.String(attribute='candidate.email'),
         'cand_phone_from_user_input': fields.String(attribute='candidate.phone'),
+        'province_id': fields.Integer(attribute='candidate.province_id'),
+        'last_edit': fields.String(attribute=lambda x: format_edit_time(x))
     })
     saved_resume_info_fields = api.model("saved_resume_info_fields", {
         'id': fields.Integer, 
