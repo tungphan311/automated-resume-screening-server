@@ -371,7 +371,7 @@ get_applied_jobs.add_argument("page", type=int, location="args", required=False,
 get_applied_jobs.add_argument("page-size", type=int, location="args", required=False, default=10)
 get_applied_jobs.add_argument("from-date", type=inputs.datetime_from_iso8601, location="args", required=False)
 get_applied_jobs.add_argument("to-date", type=inputs.datetime_from_iso8601, location="args", required=False)
-get_applied_jobs.add_argument("to-date", type=int, location="args", required=True)
+# get_applied_jobs.add_argument("to-date", type=int, location="args", required=True)
 @apiCandidate.route('/job-posts/apply')
 class GetAppliedJobs(Resource):
     @apiCandidate.doc("Get applied job posts")
