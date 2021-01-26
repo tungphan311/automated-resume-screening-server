@@ -9,6 +9,7 @@ from app.main.model.job_resume_submissions_model import JobResumeSubmissionModel
 from app.main.model.recruiter_model import RecruiterModel
 from app.main.model.recruiter_resume_save_model import RecruiterResumeSavesModel
 from flask_restx import abort
+from sqlalchemy import or_
 
 
 def get_a_account_candidate_by_email(email):
@@ -170,23 +171,26 @@ def get_saved_job_posts(email, args):
 
 
 def get_applied_job_posts(email, args):
-    resume_id = args["resume_id"]
+    # resume_id = args["resume_id"]
 
 
     # Check Cand
     cand = CandidateModel.query.filter_by(email=email).first()
     if cand is None: abort(400)
 
+    # Get resumes
+    resume_ids = [re.id for re in cand.resumes]
+
     # Check resume
-    resume = None
-    for r in cand.resumes:
-        if r.id == resume_id:
-            resume = r
-    if resume is None:
-        abort(400, message="No resume with id=" + resume_id + " found.")
+    # resume = None
+    # for r in cand.resumes:
+    #     if r.id == resume_id:
+    #         resume = r
+    # if resume is None:
+    #     abort(400, message="No resume with id=" + resume_id + " found.")
     
 
-    query = JobResumeSubmissionModel.query.filter(JobResumeSubmissionModel.resume_id == resume.id)
+    query = JobResumeSubmissionModel.query.filter(JobResumeSubmissionModel.resume_id.in_(resume_ids))
 
     from_date = args.get('from-date', None)
     if from_date is not None:
