@@ -41,10 +41,15 @@ from app.main.service.job_post_service import add_new_post
 def seed_data(db):
 
     # seed_domain("ios", "/Users/vinhpham/Desktop/automated-resume-screening-server/seeds/jp_ios.json")
-    # seed_domain("android", "seeds/android.json")
     # seed_domain("backend", "seeds/back-end.json")
     # seed_domain("frontend", "seeds/front-end.json")
     # seed_domain("fullstack", "seeds/fullstask.json")
+    # seed_domain("android", "seeds/android.json")
+    # seed_domain("ai_engineer", "seeds/ai-engineer.json")
+    # seed_domain("data_engineer", "seeds/data-engineer.json")
+    # seed_domain("devops", "seeds/devops-engineer.json")
+    
+    
 
     domains = JobDomainModel.query.all()
     if (len(domains)) == 0:
