@@ -60,6 +60,33 @@ class JobPostDto:
         'data': fields.Nested(job_post_for_cand_fields)
     })
 
+    job_post_for_edit = api.model("job_post_for_edit", {
+        'id': fields.Integer,
+        'job_title': fields.String,
+        'job_domain': fields.String(attribute='job_domain.name'),
+        'job_domain_id': fields.Integer,
+        'salary': fields.String(attribute=lambda x: format_salary(x.min_salary, x.max_salary)),
+        'min_salary': fields.Float,
+        'max_salary': fields.Float,
+        'posted_in': fields.DateTime,
+        'deadline': fields.DateTime,
+        'contract_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),
+        'contract_type_id': fields.Integer(attribute='contract_type'),
+        'amount': fields.String(attribute=lambda x: "Không giới hạn" if x.amount == 0 or x.amount is None else str(x.amount)),
+        'description': fields.String(attribute='description_text'),
+        'requirement': fields.String(attribute='requirement_text'),
+        'benefit': fields.String(attribute='benefit_text'),
+        'total_view': fields.Integer(attribute='total_views'),
+        'total_save': fields.Integer(attribute='total_saves'),
+        'total_apply': fields.Integer(attribute=lambda x: len(x.job_resume_submissions)),
+        'provinces': fields.List(fields.String, attribute=lambda x: x.province_id.split(",")),
+        'education': fields.String(attribute=lambda x: format_education(x)),
+        'education_level': fields.Integer
+    })
+
+    response_jp_for_edit = api.inherit('response_jp_for_edit', base, {
+        'data': fields.Nested(job_post_for_edit)
+    })
 
 
     # Response for search job post
@@ -93,7 +120,7 @@ class JobPostDto:
         'deadline': fields.DateTime(),
         'last_edit': fields.DateTime(),
         'contract_type': fields.String(attribute=lambda x: format_contract(x.contract_type)),
-        'amount': fields.Integer,
+        'amount': fields.String(attribute=lambda x: "Không giới hạn" if x.amount == 0 or x.amount is None else str(x.amount)),
         'description': fields.String(attribute='description_text'),
         'requirement': fields.String(attribute='requirement_text'),
         'benefit': fields.String(attribute='benefit_text'),

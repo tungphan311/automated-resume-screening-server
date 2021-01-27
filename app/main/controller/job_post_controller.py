@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from flask.wrappers import Response
+from flask_restx.inputs import datetime_from_iso8601
 from numpy.core.numeric import identity
 from app.main.util.response import response_object
 from app.main.util.custom_jwt import Candidate_only, HR_only
@@ -99,16 +100,17 @@ update_JP_parser.add_argument("min_salary", type=float, location="json")
 update_JP_parser.add_argument("max_salary", type=float, location="json")
 update_JP_parser.add_argument("amount", type=int, location="json")
 update_JP_parser.add_argument("is_active", type=bool, location="json")
-update_JP_parser.add_argument("deadline", type=datetime, location="json")
-update_JP_parser.add_argument("province_id", type=int, location="json")
+update_JP_parser.add_argument("deadline", type=str, location="json")
+update_JP_parser.add_argument("province_id", type=str, location="json")
 @api.route('/<int:id>')
 class JobPostDetail(Resource):
     @api.doc('get detail of job post')
+    @api.marshal_with(JobPostDto.response_jp_for_edit, code=200)
     def get(self, id):
-        is_hr = request.args.get('is_hr') == 'true'
 
-        if is_hr:
-            return hr_get_detail(id)
+        data = hr_get_detail(id)
+
+        return response_object(data=data)
 
     @api.doc('Update job post details.')
     @api.marshal_with(JobPostDto.response_for_update_job_post_from_hr, code=200)

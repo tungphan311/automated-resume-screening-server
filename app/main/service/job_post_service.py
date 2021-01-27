@@ -17,7 +17,7 @@ from app.main.model.candidate_education_model import CandidateEducationModel
 
 from flask_jwt_extended.utils import get_jwt_identity
 from app.main.util.custom_jwt import HR_only
-from app.main.util.format_text import format_contract, format_education
+from app.main.util.format_text import format_contract, format_education, format_salary
 from app.main.util.response import json_serial, response_object
 from app.main.util.data_processing import get_technical_skills
 from flask_restx import abort
@@ -174,26 +174,7 @@ def hr_get_detail(id):
     if not post:
         return response_object(code=400, message="Thao tác không hợp lệ")
 
-    response = {
-        'id': post.id, 
-        'job_title': post.job_title, 
-        'job_domain': post.job_domain.name,
-        'salary': 'Thoả thuận', 
-        'posted_in': json.dumps(post.posted_in, default=json_serial),
-        'deadline': json.dumps(post.deadline, default=json_serial),
-        'contract_type': format_contract(post.contract_type),
-        'amount': post.amount if post.amount > 0 else "Không giới hạn",
-        'description': post.description_text,
-        'requirement': post.requirement_text,
-        'benefit': post.benefit_text,
-        'total_view': post.total_views,
-        'total_save': post.total_saves,
-        'total_apply': len(post.job_resume_submissions),
-        'provinces': post.province_id.split(","),
-        'education': format_education(post)
-    }
-
-    return response_object(200, "Thành công.", response)
+    return post
 
 
 def update_jp(id, recruiter_email, args):
@@ -216,21 +197,23 @@ def update_jp(id, recruiter_email, args):
     is_active = args.get("is_active", None)
     deadline = args.get("deadline", None)
 
-    if job_domain_id is None: job_post.job_domain_id = job_domain_id
-    if description_text is None: job_post.description_text = description_text
-    if requirement_text is None: job_post.requirement_text = requirement_text
-    if benefit_text is None: job_post.benefit_text = benefit_text
-    if job_title is None: job_post.job_title = job_title
-    if min_salary is None: job_post.min_salary = max(min_salary, 0)
-    if max_salary is None: job_post.max_salary = min(max_salary, float_info.max)
-    if amount is None: job_post.amount = amount
-    if is_active is None: job_post.is_active = is_active
-    if deadline is None: job_post.deadline = deadline
-    if contract_type is None and contract_type <= 2 and contract_type >= 0: 
-        job_post.contract_type = contract_type
+    job_post.job_domain_id = job_domain_id
+    job_post.description_text = description_text
+    job_post.requirement_text = requirement_text
+    job_post.benefit_text = benefit_text
+    job_post.job_title = job_title
+    job_post.min_salary = min_salary
+    job_post.max_salary = max_salary
+    job_post.amount = amount
+    job_post.is_active = is_active
+    job_post.deadline = dateutil.parser.isoparse(deadline)
+    job_post.contract_type = contract_type
 
-    job_post.last_edit = datetime.now
+    job_post.last_edit = datetime.now()
+
+    db.session.add(job_post)
     db.session.commit()
+
     return job_post
 
 
