@@ -329,10 +329,6 @@ def get_job_post_for_candidate(jp_id, cand_email):
     saved_date = None
     if save_record is not None:
          saved_date = save_record.created_on
-    print("Email: ", cand_email)
-    print("Cand: ", cand)
-    print("Record: ", save_record)
-
 
     post = JobPostModel.query.get(jp_id)
     if not post:
@@ -352,7 +348,6 @@ def get_job_post_for_candidate(jp_id, cand_email):
 def search_jd_for_cand(args):
     query = JobPostModel.query.filter(JobPostModel.closed_in is not None).filter(JobPostModel.deadline > datetime.now())
 
-    print(query.all())
 
     posted_date = args.get('posted_date')
     contract_type = args.get('contract_type')
@@ -362,6 +357,7 @@ def search_jd_for_cand(args):
     page_size = args.get('page-size')
     keyword = args.get('q')
     province_id = args.get('province_id')
+    job_domain_id = args.get('job_domain_id')
 
     if contract_type is not None:   
         query = query.filter(JobPostModel.contract_type == contract_type)
@@ -382,8 +378,11 @@ def search_jd_for_cand(args):
         key = "%{word}%".format(word=keyword)
         query = query.filter(JobPostModel.job_title.ilike(key))
 
-    # if not province_id:
-    #     query = query.filter(JobPostModel.province_id == province_id)
+    if province_id:
+        query = query.filter(JobPostModel.province_id.contains(province_id))
+
+    if job_domain_id is not None:
+        query = query.filter(JobPostModel.job_domain_id.in_(job_domain_id))
 
     if posted_date is not None: 
         query = query.filter((datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)
@@ -515,11 +514,15 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
         scores['avg'] = submission.avg_score(domain_weight=domain_weight, \
                                         soft_weight=soft_weight, \
                                         general_weight=general_weight)
+
+        saved = RecruiterResumeSavesModel.query.filter_by(recruiter_id=recruiter.id, resume_id=resume.id).first()
+
         final_res.append({
             'submission': submission,
             'scores': scores,
             'candidate': resume.candidate,
-            'resume': resume
+            'resume': resume,
+            'saved': True if saved else False
         })
 
 

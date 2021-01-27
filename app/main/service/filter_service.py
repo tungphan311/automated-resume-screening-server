@@ -1,3 +1,4 @@
+from app.main.model.recruiter_resume_save_model import RecruiterResumeSavesModel
 from sqlalchemy import or_, and_, not_, extract
 from app.main.model.job_domain_model import JobDomainModel
 from app.main.model.resume_model import ResumeModel
@@ -116,7 +117,9 @@ def not_contain_skill(skills):
         res.append(not_(ResumeModel.soft_skills.contains(skill)))
     return res
 
-def find_candidates(args):
+def find_candidates(args, email):
+    recruiter = RecruiterModel.query.filter_by(email=email).first()
+
     query = ResumeModel.query.join(CandidateModel, CandidateModel.id == ResumeModel.cand_id)
 
     page = args.get('page')
@@ -165,7 +168,16 @@ def find_candidates(args):
         .order_by(ResumeModel.id.desc())\
         .paginate(page=page, per_page=page_size)
 
-    return result.items, {
+    final_res = []
+    for resume in result.items:
+        saved = RecruiterResumeSavesModel.query.filter_by(recruiter_id=recruiter.id, resume_id=resume.id).first()
+
+        final_res.append({
+            'resume': resume,
+            'saved': True if saved else False
+        })
+
+    return final_res, {
         'total': result.total,
         'page': result.page
     }

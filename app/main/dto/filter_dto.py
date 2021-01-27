@@ -73,10 +73,16 @@ class FilterDto:
         "url": fields.String(attribute="store_url"),
         "download_url": fields.String,
         "view": fields.Integer(attribute="total_views"),
-        "last_edit": fields.String(attribute=lambda x: format_edit_time(x))
+        "last_edit": fields.String(attribute=lambda x: format_edit_time(x)),
+        "resume_id": fields.Integer(attribute="id")
+    })
+
+    resume_with_saved = api.model("resume_with_saved", {
+        "resume": fields.Nested(single_candidate_response),
+        "saved": fields.Boolean
     })
 
     candidate_list = api.inherit("candidate_list", base, {
-        'data': fields.List(fields.Nested(single_candidate_response)),
+        'data': fields.List(fields.Nested(resume_with_saved)),
         'pagination': fields.Nested(pagination)
     })

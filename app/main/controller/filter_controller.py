@@ -1,3 +1,4 @@
+from flask_jwt_extended.utils import get_jwt_identity
 from flask_restx.fields import String
 from app.main.util.response import response_object
 from app.main.service.filter_service import add_new_filter, delete_filter, find_candidates, get_filter_detail, get_filter_list, update_filter
@@ -83,7 +84,10 @@ class FindCandidates(Resource):
     @api.marshal_with(FilterDto.candidate_list, code=200)
     @HR_only
     def get(self):
+        identity = get_jwt_identity()
+        email = identity['email']
+
         args = find_candidates_parser.parse_args()
-        data, pagination = find_candidates(args)
+        data, pagination = find_candidates(args, email)
 
         return response_object(data=data, pagination=pagination)

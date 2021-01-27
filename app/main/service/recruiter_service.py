@@ -1,4 +1,5 @@
 import datetime
+
 from app.main.service.account_service import create_token
 from app.main import db
 from app.main.model.recruiter_model import RecruiterModel
