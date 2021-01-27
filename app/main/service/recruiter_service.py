@@ -108,11 +108,11 @@ def get_saved_resumes(email, args):
 
     from_date = args.get('from-date', None)
     if from_date is not None:
-        query.filter(RecruiterResumeSavesModel.created_on >= from_date)
+        query = query.filter(RecruiterResumeSavesModel.created_on >= from_date)
 
     to_date = args.get('to-date', None)
-    if from_date is not None:
-        query.filter(RecruiterResumeSavesModel.created_on <= to_date)
+    if to_date is not None:
+        query = query.filter(RecruiterResumeSavesModel.created_on <= to_date)
 
     page = args.get('page')
     page_size = args.get('page-size')
