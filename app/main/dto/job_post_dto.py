@@ -158,7 +158,8 @@ class JobPostDto:
         'submission': fields.Nested(submission_fields),
         'candidate': fields.Nested(candidate_detail_fields),
         'resume': fields.Nested(ResumeDTO.resume_detail_fields),
-        'scores': fields.Raw
+        'scores': fields.Raw,
+        'saved': fields.Boolean
     })
     applied_cand_list_response = api.inherit('applied_cand_list_response', base, {
         'data': fields.List(fields.Nested(applied_cand_fields)),

@@ -514,11 +514,15 @@ def get_matched_list_cand_info_with_job_post(rec_email, job_id, args):
         scores['avg'] = submission.avg_score(domain_weight=domain_weight, \
                                         soft_weight=soft_weight, \
                                         general_weight=general_weight)
+
+        saved = RecruiterResumeSavesModel.query.filter_by(recruiter_id=recruiter.id, resume_id=resume.id).first()
+
         final_res.append({
             'submission': submission,
             'scores': scores,
             'candidate': resume.candidate,
-            'resume': resume
+            'resume': resume,
+            'saved': True if saved else False
         })
 
 
