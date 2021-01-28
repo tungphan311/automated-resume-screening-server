@@ -227,9 +227,11 @@ def close_jp(id, recruiter_email):
         abort(400)
 
     job_post.is_active = False
-    job_post.closed_in = datetime.now
+    job_post.closed_in = datetime.now()
+
+    db.session.add(job_post)
     db.session.commit()
-    return job_post()
+    return job_post
 
     
 
