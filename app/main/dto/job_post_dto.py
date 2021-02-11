@@ -56,8 +56,12 @@ class JobPostDto:
         'education': fields.String(attribute=lambda x: format_education(x)),
         'saved_date': fields.String
     })
+    job_post_response_for_cand_fields = api.model("job_post_response_for_cand_fields", {
+        'post': fields.Nested(job_post_for_cand_fields),
+        'save_date': fields.DateTime()
+    })
     job_post_for_cand = api.inherit('job_post_for_cand', base, {
-        'data': fields.Nested(job_post_for_cand_fields)
+        'data': fields.Nested(job_post_response_for_cand_fields)
     })
 
     job_post_for_edit = api.model("job_post_for_edit", {

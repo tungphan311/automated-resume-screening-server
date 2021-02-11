@@ -82,8 +82,8 @@ def convert_pdf_to_jpg(filename):
 
 
     # TODO - ERROR: Remove for running on window
-    # images = convert_from_path(filename, poppler_path="/usr/local/Cellar/poppler/20.12.1/bin")
-    images = convert_from_path(filename, poppler_path="library/poppler-20.12.1/bin")
+    images = convert_from_path(filename, poppler_path="/usr/local/Cellar/poppler/21.02.0/bin")
+    # images = convert_from_path(filename, poppler_path="/library/poppler-20.12.1/bin")
 
     for img in images:
         index = images.index(img)
@@ -114,6 +114,7 @@ def convert_word_to_jpg(filename):
 
 def parse_pdf(local_cv_path, is_pdf):
     remove_words = []
+    remove_keys = []
     with open("preprocess/REMOVE_WORD.txt", "r") as rm_file:
         remove_words = rm_file.readlines()
         remove_words = [ re.sub(r"\n", "", remove_word) for remove_word in remove_words ]
@@ -167,16 +168,22 @@ def process_raw_text(sentences):
     return sentences
 
 def get_topic(educations, experiences, skills, cue_word):
+    tmp = cue_word.split()
     if cue_word in educations:
         return "EDUCATION"
     elif cue_word in experiences:
         return "EXPERIENCE"
     elif cue_word in skills:
         return "SKILL"
-    # elif cue_word in awards:
-    #     return "AWARD"
-    # elif cue_word in certifications:
-    #     return "CERTIFICATION"
+    elif len(tmp) == 2:
+        if tmp[0] in educations or tmp[1] in educations:
+            return "EDUCATION"
+        elif tmp[0] in experiences or tmp[1] in experiences:
+            return "EXPERIENCE"
+        elif tmp[0] in skills or tmp[1] in skills:
+            return "SKILL"
+        else:
+            return ""
     else:
         return ""
 
@@ -211,6 +218,8 @@ def get_links(text):
 
 def cv_segmentation(local_cv_path, is_pdf):
     sentences = parse_pdf(local_cv_path, is_pdf)
+
+    print(sentences)
     educations_cue = experiences_cue = skills_cue = awards_cue = certifications_cue = []
 
     with open('preprocess/topic.json') as json_file:
@@ -228,7 +237,11 @@ def cv_segmentation(local_cv_path, is_pdf):
     cur_topic = ""
 
     for (sen, id) in index_sentences:
-        if (len(sen.split()) == 1 and sen in cue_words) or (len(sen.split()) > 1 and sen in cue_phrases):
+        tmp = sen.split()
+        length = len(tmp)
+        if (length == 1 and sen.lower() in cue_words) or \
+        (length == 2 and (tmp[0] in cue_words or tmp[1] in cue_words)) or \
+        (length > 1 and sen.lower() in cue_phrases):
             cur_topic = get_topic(educations_cue, experiences_cue, skills_cue, sen)
             topics.append((id,cur_topic))
         else:
