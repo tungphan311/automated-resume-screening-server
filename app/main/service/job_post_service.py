@@ -367,7 +367,7 @@ def search_jd_for_cand(args):
         query = query.filter(JobPostModel.province_id.contains(province_id))
 
     if job_domain_id is not None:
-        query = query.filter(JobPostModel.job_domain_id.in_(job_domain_id))
+        query = query.filter(JobPostModel.job_domain_id == job_domain_id)
 
     if posted_date is not None: 
         query = query.filter((datetime.now() - timedelta(days=posted_date)) < JobPostModel.posted_in)

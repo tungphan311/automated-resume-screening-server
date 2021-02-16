@@ -213,8 +213,8 @@ cand_search_jp_parser.add_argument("min_salary", type=float, location="args", re
 cand_search_jp_parser.add_argument("page", type=int, location="args", required=False, default=1)
 cand_search_jp_parser.add_argument("page-size", type=int, location="args", required=False, default=10)
 cand_search_jp_parser.add_argument("q", location="args", required=False)
-cand_search_jp_parser.add_argument("province_id", type=int, location="args", required=False)
-cand_search_jp_parser.add_argument("job_domain_id", type=int, action="split", location="args", required=False)
+cand_search_jp_parser.add_argument("province_id", type=str, location="args", required=False)
+cand_search_jp_parser.add_argument("job_domain_id", type=int, location="args", required=False)
 @api.route('/cand')
 class JobPostForCand(Resource):
     @api.doc('Get job post by id for candidate.')
