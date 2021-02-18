@@ -7,7 +7,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    BASE_URL_FE = "http://localhost:3000/"
+    BASE_URL_FE = "http://ec2-13-228-170-234.ap-southeast-1.compute.amazonaws.com/"
 
     #main
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')

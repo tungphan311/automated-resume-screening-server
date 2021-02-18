@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.951d81d0.chunk.css",
-    "main.js": "/static/js/main.2e5a0a6a.chunk.js",
-    "main.js.map": "/static/js/main.2e5a0a6a.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c20a077c.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c20a077c.js.map",
-    "static/css/2.dc79c3b1.chunk.css": "/static/css/2.dc79c3b1.chunk.css",
-    "static/js/2.9d835052.chunk.js": "/static/js/2.9d835052.chunk.js",
-    "static/js/2.9d835052.chunk.js.map": "/static/js/2.9d835052.chunk.js.map",
-    "static/js/3.1b23fe35.chunk.js": "/static/js/3.1b23fe35.chunk.js",
-    "static/js/3.1b23fe35.chunk.js.map": "/static/js/3.1b23fe35.chunk.js.map",
+    "main.css": "/static/css/main.a2e26f34.chunk.css",
+    "main.js": "/static/js/main.e2f6781d.chunk.js",
+    "main.js.map": "/static/js/main.e2f6781d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6b3ddb57.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6b3ddb57.js.map",
+    "static/css/2.84d10225.chunk.css": "/static/css/2.84d10225.chunk.css",
+    "static/js/2.0abbbe70.chunk.js": "/static/js/2.0abbbe70.chunk.js",
+    "static/js/2.0abbbe70.chunk.js.map": "/static/js/2.0abbbe70.chunk.js.map",
+    "static/js/3.39ec6c85.chunk.js": "/static/js/3.39ec6c85.chunk.js",
+    "static/js/3.39ec6c85.chunk.js.map": "/static/js/3.39ec6c85.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.dc79c3b1.chunk.css.map": "/static/css/2.dc79c3b1.chunk.css.map",
-    "static/css/main.951d81d0.chunk.css.map": "/static/css/main.951d81d0.chunk.css.map",
-    "static/js/2.9d835052.chunk.js.LICENSE.txt": "/static/js/2.9d835052.chunk.js.LICENSE.txt",
-    "static/media/Toaster.scss": "/static/media/Success.c183d98a.svg",
+    "static/css/2.84d10225.chunk.css.map": "/static/css/2.84d10225.chunk.css.map",
+    "static/css/main.a2e26f34.chunk.css.map": "/static/css/main.a2e26f34.chunk.css.map",
+    "static/js/2.0abbbe70.chunk.js.LICENSE.txt": "/static/js/2.0abbbe70.chunk.js.LICENSE.txt",
+    "static/media/Toaster.scss": "/static/media/Success.2fd7584d.svg",
     "static/media/ConfirmMail.scss": "/static/media/bg1.5419f1f8.jpg",
     "static/media/HRSignUp.scss": "/static/media/map.4c56a736.webp"
   },
   "entrypoints": [
-    "static/js/runtime-main.c20a077c.js",
-    "static/css/2.dc79c3b1.chunk.css",
-    "static/js/2.9d835052.chunk.js",
-    "static/css/main.951d81d0.chunk.css",
-    "static/js/main.2e5a0a6a.chunk.js"
+    "static/js/runtime-main.6b3ddb57.js",
+    "static/css/2.84d10225.chunk.css",
+    "static/js/2.0abbbe70.chunk.js",
+    "static/css/main.a2e26f34.chunk.css",
+    "static/js/main.e2f6781d.chunk.js"
   ]
 }
