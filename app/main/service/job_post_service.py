@@ -101,8 +101,8 @@ def get_hr_posts(page, page_size, sort_values, is_showing):
         'posted_in': json.dumps(post.posted_in, default=json_serial),
         'deadline': json.dumps(post.deadline, default=json_serial),
         'total_view': post.total_views,
-        'total_save': post.total_views,
-        'total_apply': post.total_applies
+        'total_save': post.total_saves,
+        'total_apply': len(post.job_resume_submissions)
     } for post in posts.items ]
 
     pagination = {
@@ -196,6 +196,7 @@ def update_jp(id, recruiter_email, args):
     amount = args.get("amount", None)
     is_active = args.get("is_active", None)
     deadline = args.get("deadline", None)
+    province_id = args.get("province_id", None)
 
     job_post.job_domain_id = job_domain_id
     job_post.description_text = description_text
@@ -208,6 +209,7 @@ def update_jp(id, recruiter_email, args):
     job_post.is_active = is_active
     job_post.deadline = dateutil.parser.isoparse(deadline)
     job_post.contract_type = contract_type
+    job_post.province_id = province_id
 
     job_post.last_edit = datetime.now()
 

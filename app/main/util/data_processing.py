@@ -11,7 +11,7 @@ from library.zss import Node
 # import zss
 # from zss import Node
 
-def get_technical_skills(domain, text):
+def get_technical_skills(domain, text, modules="both"):
     """
     Use classify_manager to extract skill from text.
     Return: 
@@ -27,7 +27,7 @@ def get_technical_skills(domain, text):
     prepare_text = {'keywords':"data mining, computer science"}
     prepare_text['abstract'] = text
     
-    result_dict = cm.run_classifier(domain, prepare_text, explanation=True).get_dict()
+    result_dict = cm.run_classifier(domain, prepare_text, modules=modules, explanation=True).get_dict()
     skills = result_dict['union']
     explanation = result_dict['explanation']
 

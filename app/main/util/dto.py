@@ -23,7 +23,7 @@ class CompanyDto:
 class CandidateDto:
     api = Namespace(
         'Candidate', description='candidate related operations')
-    candidate = api.model('candidate', {
+    candidate = api.model('candidate_register', {
         'email': fields.String(required=True, description='user email address'),
         'password': fields.String(required=True, description='user password'),
         'fullName': fields.String(required=True, description='user full name'),
@@ -32,7 +32,7 @@ class CandidateDto:
         'dateOfBirth': fields.DateTime(required=True, description='candidate birthday'),
         'province_id': fields.Integer(required=True, description='candidate location'),
     })
-    profile = api.model('candidate', {
+    profile = api.model('candidate_profile', {
         'email': fields.String(required=True, description='user email address'),
         'fullName': fields.String(required=True, description='user full name'),
         'phone': fields.String(required=True, description='user phone'),

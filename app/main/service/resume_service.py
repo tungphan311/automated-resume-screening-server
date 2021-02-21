@@ -64,12 +64,6 @@ def update_cv(args):
     resume.technical_skills = args['skills']
     resume.months_of_experience = args['months_of_experience']
 
-    domain_id = args['job_domain_id']
-    if JobDomainModel.query.get(domain_id) == None:
-        abort(400)
-
-    resume.job_domain_id = domain_id
-
     db.session.add(resume)
     db.session.commit()
 

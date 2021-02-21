@@ -189,7 +189,7 @@ def get_topic(educations, experiences, skills, cue_word):
 
 def get_general_technical_skills(text):
     # hardcode general domain for extracting as many skills as posible.
-    return get_technical_skills('general', text)
+    return get_technical_skills('general', text, modules="syntactic")
 
 def get_soft_skills(text):
     return get_technical_skills('softskill', text)
