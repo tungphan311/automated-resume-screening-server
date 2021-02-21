@@ -125,6 +125,9 @@ def tree_matching_score(post_text, cv_text, domain):
     post_skills = __get_skills_by_classifier(post_text, domain)
     cv_skills = __get_skills_by_classifier(cv_text, domain, 'syntactic')
 
+    print("\t= Job Post: {skills}".format(skills=post_skills['union']))
+    print("\t= CV: {skills}".format(skills=cv_skills['union']))
+
     (post_graph, post_node_count) = __generate_graph_tree_with(domain=domain, skills=post_skills['union'])
     (cv_graph, cv_node_count) = __generate_graph_tree_with(domain=domain, skills=cv_skills['union'])
 
@@ -168,7 +171,7 @@ def __tree_edit_distance(cv_graph, post_graph):
 def __generate_graph_tree_with(domain, skills): 
     (graph_data, root) = cm.get_ontology(domain).generate_graph_dict(skills)
 
-    # (_, _) = __generate_graph_with(domain, skills)
+    (_, _) = __generate_graph_with(domain, skills)
 
     graph_data = dict(graph_data)
 

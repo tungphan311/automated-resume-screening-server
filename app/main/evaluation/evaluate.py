@@ -53,39 +53,43 @@ class Evaluation:
 
             label_post = "JD-{i}: ".format(i=i)
             print("== List CV's score for {p} ==".format(p=label_post))
+            # print("== domain weight: {p} ==".format(p=self.domain_w))
+            # print("== general weight: {p} ==".format(p=self.general_w))
+            # print("== softskill weight: {p} ==".format(p=self.soft_w))
 
             infos = []
             for j in range(0, len(self.resumes)):
 
                 # TODO
-                # if j != 2 and j != 5: continue
-                if j != 2: continue
+                if j != 2 and j != 5: continue
+                # if j != 2: continue
 
                 label_cv = "CV-{j}".format(j=j)
                 p_text = self.posts[i]
                 cv_text = self.resumes[j]
 
+                print("\t" + label_cv + ":")
+                print("\t== Skill List ==")
                 domain_res = tree_matching_score(post_text=p_text, cv_text=cv_text, domain=self.domain)
-                soft_res = tree_matching_score(post_text=p_text, cv_text=cv_text, domain='softskill')
+                # soft_res = tree_matching_score(post_text=p_text, cv_text=cv_text, domain='softskill')
                 # general_res = tree_matching_score(post_text=p_text, cv_text=cv_text, domain='general')
 
                 overall = domain_res['score'] * self.domain_w \
-                    + soft_res['score'] * self.soft_w \
+                    # + soft_res['score'] * self.soft_w \
                     # + general_res['score'] * self.general_w
 
-                print("\t" + label_cv + ":")
                 print("\tDomain_matching_score: {score:.4f}".format(score=domain_res['score']))
-                print("\tSoft_matching_score: {score:.4f}".format(score=soft_res['score']))
+                # print("\tSoft_matching_score: {score:.4f}".format(score=soft_res['score']))
                 # print("\tGeneral_matching_score: {score:.4f}".format(score=general_res['score']))
-                print("\tOverall_matching_score: {score:.4f}".format(score=overall))
+                # print("\tOverall_matching_score: {score:.4f}".format(score=overall))
                 print()
 
                 cv_domain_res = parse_result(domain_res['cv_skills'])
                 post_domain_res = parse_result(domain_res['post_skills'])
                 # cv_general_res = parse_result(general_res['cv_skills'])
                 # post_general_res = parse_result(general_res['post_skills'])
-                cv_soft_res = parse_result(soft_res['cv_skills'])
-                post_soft_res = parse_result(soft_res['post_skills'])
+                # cv_soft_res = parse_result(soft_res['cv_skills'])
+                # post_soft_res = parse_result(soft_res['post_skills'])
 
                 res_dict = {
                     "domain": self.domain,
@@ -100,7 +104,7 @@ class Evaluation:
                     "overall_score": overall,
 
                     "domain_score": float(domain_res['score']),
-                    "soft_score": float(soft_res['score']),
+                    # "soft_score": float(soft_res['score']),
                     # "general_score": float(general_res['score']),
 
                     # "cv_domain_skills": cv_domain_res['all_skills'],
